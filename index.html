@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Website Sederhana</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    section {
+      margin: 20px;
+      text-align: center;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 2px;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Website Sederhana</h1>
+  </header>
+  <section>
+    <h2>Selamat datang di website sederhana!</h2>
+    <p>Klik tombol di bawah ini untuk melakukan tindakan.</p>
+    <button id="actionButton">Klik Saya!</button>
+    <p id="message"></p>
+  </section>
+  <footer>
+    <p>Hak Cipta &copy; 2023</p>
+  </footer>
+
+  <script>
+    const button = document.getElementById('actionButton');
+    const message = document.getElementById('message');
+
+    button.addEventListener('click', function() {
+      message.textContent = 'Tombol telah diklik!';
+    });
+  </script>
+</body>
+</html>
