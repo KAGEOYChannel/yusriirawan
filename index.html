@@ -1,67 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Website Sederhana</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Tanpa Navigasi</title>
   <style>
+    /* CSS untuk tampilan dan desain */
     body {
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
     }
-
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 10px;
+    
+    .content {
       text-align: center;
     }
-
-    section {
-      margin: 20px;
-      text-align: center;
+    
+    h1 {
+      font-size: 48px;
+      color: #333;
+      margin-bottom: 20px;
     }
-
-    button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
+    
+    p {
+      font-size: 24px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+    
+    .button {
       padding: 10px 20px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 10px 2px;
-      cursor: pointer;
-    }
-
-    footer {
-      background-color: #333;
+      background-color: #007bff;
       color: #fff;
-      padding: 10px;
-      text-align: center;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Website Sederhana</h1>
-  </header>
-  <section>
-    <h2>Selamat datang di website sederhana!</h2>
-    <p>Klik tombol di bawah ini untuk melakukan tindakan.</p>
-    <button id="actionButton">Klik Saya!</button>
-    <p id="message"></p>
-  </section>
-  <footer>
-    <p>Hak Cipta &copy; 2023</p>
-  </footer>
-
-  <script>
-    const button = document.getElementById('actionButton');
-    const message = document.getElementById('message');
-
-    button.addEventListener('click', function() {
-      message.textContent = 'Tombol telah diklik!';
-    });
-  </script>
+  <div class="content">
+    <h1>Selamat Datang di Website Tanpa Navigasi</h1>
+    <p>Website ini memiliki tampilan dan desain yang sangat bagus.</p>
+    <a href="#" class="button">Mulai</a>
+  </div>
 </body>
 </html>
