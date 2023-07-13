@@ -3,55 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Password dan Video</title>
+  <title>Video dengan Password</title>
   <style>
     /* CSS untuk tampilan dan desain */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    
     .video-container {
-      position: relative;
-      width: 100%;
-      padding-bottom: 177.77%; /* Perbandingan aspek video 9:16 */
-      overflow: hidden;
-      margin-bottom: 20px;
+      display: none;
+      max-width: 100%;
+      height: auto;
+      text-align: center;
     }
 
     .video-container video {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
-      height: 100%;
-    }
-
-    .password-container {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .password-input {
-      padding: 10px;
-      font-size: 16px;
+      height: auto;
     }
   </style>
 </head>
 <body>
-  <div class="password-container">
-    <input type="password" class="password-input" placeholder="Masukkan Password">
-    <button onclick="playVideo()">Play Video</button>
+  <div id="password-form">
+    <label for="password">Masukkan Password:</label>
+    <input type="password" id="password">
+    <button onclick="checkPassword()">Submit</button>
   </div>
 
-  <div class="video-container">
-    <video id="myVideo" src="./lv_7251064864179899649_20230713103327.mp4" controls></video>
+  <div id="video-container" class="video-container">
+    <video id="my-video" src="./lv_7251064864179899649_20230713103327.mp4" controls autoplay loop></video>
   </div>
 
   <script>
-    function playVideo() {
-      var passwordInput = document.querySelector('.password-input');
-      var video = document.getElementById('myVideo');
-
-      if (passwordInput.value === 'BINTANGKASIH') {
-        video.play();
+    function checkPassword() {
+      var passwordInput = document.getElementById("password").value;
+      if (passwordInput === "BINTANGKASIH") {
+        document.getElementById("password-form").style.display = "none";
+        document.getElementById("video-container").style.display = "block";
+        document.getElementById("my-video").play();
       } else {
-        alert('Password Salah!');
+        alert("Password salah!");
       }
     }
   </script>
