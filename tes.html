@@ -4,93 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tampilan Memasukkan Password</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
   <style>
     /* CSS untuk tampilan dan desain */
     body {
-      display: grid;
-      place-items: center;
-      height: 100vh;
-      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 100px;
+    }
+
+    h1 {
+      color: #e81d62;
     }
 
     .password-form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+      margin-top: 30px;
     }
 
-    .password-input {
-      width: 250px;
+    .password-form input[type="password"] {
       padding: 10px;
       font-size: 16px;
-      border: 1px solid #ccc;
       border-radius: 5px;
+      border: 1px solid #ccc;
       outline: none;
     }
 
-    .submit-button {
-      margin-top: 10px;
+    .password-form input[type="submit"] {
       padding: 10px 20px;
       font-size: 16px;
       border-radius: 5px;
-      background-color: #007bff;
+      background-color: #e81d62;
       color: #fff;
       border: none;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .submit-button:hover {
-      background-color: #0056b3;
-    }
-
-    .alert-message {
-      display: none;
-      margin-top: 10px;
-      padding: 10px;
-      background-color: #e81d62;
-      color: #fff;
-      border-radius: 5px;
-      animation: alert-fade 2s ease;
-    }
-
-    @keyframes alert-fade {
-      0% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-      }
     }
   </style>
+</head>
+<body>
+  <h1>Selamat datang di Halaman Rahasia!</h1>
+
+  <div id="password-form" class="password-form">
+    <input type="password" id="password" placeholder="Masukkan password">
+    <input type="submit" value="Submit" onclick="checkPassword()">
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
   <script>
     function checkPassword() {
-      var passwordInput = document.getElementById("password").value;
-      var alertMessage = document.getElementById("alert-message");
+      var password = document.getElementById("password").value;
 
-      if (passwordInput === "password123") {
-        // Redirect to another page
-        window.location.href = "halaman-lain.html";
+      // Ganti PASSWORD yang diinginkan dengan password yang benar
+      if (password === "PASSWORD") {
+        Swal.fire({
+          icon: 'success',
+          title: 'Sukses',
+          text: 'Password benar! Anda akan diarahkan ke halaman lain.',
+          showConfirmButton: false,
+          timer: 2000,
+          willClose: () => {
+            window.location.href = 'halaman-lain.html';
+          }
+        });
       } else {
-        // Show alert message
-        alertMessage.style.display = "block";
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Password salah!',
+          animation: false,
+          customClass: {
+            popup: 'animated tada'
+          }
+        });
       }
     }
   </script>
-</head>
-<body>
-  <div class="password-form">
-    <h1>Masukkan Password</h1>
-    <input type="password" id="password" class="password-input" placeholder="Password">
-    <button onclick="checkPassword()" class="submit-button">Submit</button>
-    <div id="alert-message" class="alert-message">Password salah!</div>
-  </div>
 </body>
 </html>
