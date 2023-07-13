@@ -3,91 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Halaman Memasukkan Password</title>
+  <title>Masukkan Password</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
   <style>
     /* CSS untuk tampilan dan desain */
     body {
       font-family: Arial, sans-serif;
       background-color: #f0f0f0;
       text-align: center;
-      padding-top: 100px;
-    }
-
-    h1 {
-      color: #e81d62;
-      margin-bottom: 20px;
+      padding: 20px;
     }
 
     .password-form {
-      max-width: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      max-width: 400px;
       margin: 0 auto;
     }
 
     .password-form input[type="password"] {
-      width: 100%;
       padding: 10px;
       font-size: 16px;
       border-radius: 5px;
       border: 1px solid #ccc;
       outline: none;
+      margin-bottom: 10px;
     }
 
-    .password-form input[type="submit"] {
-      width: 100%;
+    .password-form button {
       padding: 10px 20px;
       font-size: 16px;
       border-radius: 5px;
-      background-color: #e81d62;
+      background-color: #007bff;
       color: #fff;
       border: none;
       cursor: pointer;
     }
-
-    .message-container {
-      display: none;
-      max-width: 300px;
-      margin: 20px auto;
-      padding: 10px;
-      background-color: #e81d62;
-      color: #fff;
-      border-radius: 5px;
-      animation: fadeInOut 2s ease-in-out;
-    }
-
-    @keyframes fadeInOut {
-      0% { opacity: 0; }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; }
-    }
   </style>
+</head>
+<body>
+  <div class="password-form">
+    <h1>Masukkan Password</h1>
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkPassword()">Submit</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <script>
     function checkPassword() {
       var password = document.getElementById("password").value;
-      var messageContainer = document.getElementById("message-container");
 
       // Ganti PASSWORD yang diinginkan dengan password yang benar
       if (password === "PASSWORD") {
         window.location.href = "halaman-lain.html";
       } else {
-        messageContainer.style.display = "block";
-        setTimeout(function() {
-          messageContainer.style.display = "none";
-        }, 3000);
+        swal("Password Salah", "Silakan coba lagi!", "error");
       }
     }
   </script>
-</head>
-<body>
-  <h1>Selamat Datang</h1>
-
-  <div class="password-form">
-    <input type="password" id="password" placeholder="Masukkan password">
-    <input type="submit" value="Submit" onclick="checkPassword()">
-  </div>
-
-  <div id="message-container" class="message-container">
-    <p>Password salah!</p>
-  </div>
 </body>
 </html>
