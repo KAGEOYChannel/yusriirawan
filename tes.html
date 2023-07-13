@@ -3,25 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memasukkan Password</title>
+  <title>Halaman Memasukkan Password</title>
   <style>
     /* CSS untuk tampilan dan desain */
     body {
       font-family: Arial, sans-serif;
       background-color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      color: #e81d62;
+      margin-bottom: 20px;
     }
 
     .password-form {
-      width: 300px;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-      text-align: center;
+      max-width: 300px;
+      margin: 0 auto;
     }
 
     .password-form input[type="password"] {
@@ -30,7 +29,6 @@
       font-size: 16px;
       border-radius: 5px;
       border: 1px solid #ccc;
-      margin-bottom: 10px;
       outline: none;
     }
 
@@ -39,62 +37,57 @@
       padding: 10px 20px;
       font-size: 16px;
       border-radius: 5px;
-      background-color: #007bff;
+      background-color: #e81d62;
       color: #fff;
       border: none;
       cursor: pointer;
     }
 
-    .alert {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #f44336;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      animation: slideIn 0.5s ease;
+    .message-container {
       display: none;
+      max-width: 300px;
+      margin: 20px auto;
+      padding: 10px;
+      background-color: #e81d62;
+      color: #fff;
+      border-radius: 5px;
+      animation: fadeInOut 2s ease-in-out;
     }
 
-    @keyframes slideIn {
-      0% {
-        top: -50px;
-        opacity: 0;
-      }
-      100% {
-        top: 20px;
-        opacity: 1;
-      }
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; }
     }
   </style>
   <script>
     function checkPassword() {
       var password = document.getElementById("password").value;
-      var alertMessage = document.getElementById("alert-message");
+      var messageContainer = document.getElementById("message-container");
 
       // Ganti PASSWORD yang diinginkan dengan password yang benar
       if (password === "PASSWORD") {
         window.location.href = "halaman-lain.html";
       } else {
-        alertMessage.style.display = "block";
+        messageContainer.style.display = "block";
         setTimeout(function() {
-          alertMessage.style.display = "none";
+          messageContainer.style.display = "none";
         }, 3000);
       }
     }
   </script>
 </head>
 <body>
+  <h1>Selamat Datang</h1>
+
   <div class="password-form">
-    <h1>Memasukkan Password</h1>
     <input type="password" id="password" placeholder="Masukkan password">
     <input type="submit" value="Submit" onclick="checkPassword()">
   </div>
 
-  <div id="alert-message" class="alert">
-    Password salah! Silakan coba lagi.
+  <div id="message-container" class="message-container">
+    <p>Password salah!</p>
   </div>
 </body>
 </html>
