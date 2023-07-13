@@ -3,52 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video dengan Password</title>
+  <title>Halaman Website Romantis</title>
   <style>
     /* CSS untuk tampilan dan desain */
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: Arial, sans-serif;
       background-color: #f0f0f0;
-    }
-    
-    .video-container {
-      display: none;
-      max-width: 100%;
-      height: auto;
       text-align: center;
+      padding: 20px;
     }
 
-    .video-container video {
+    h1 {
+      color: #e81d62;
+    }
+
+    .video-container {
+      position: relative;
       width: 100%;
-      height: auto;
+      padding-bottom: 150%; /* Perbandingan aspek video potret 3:2 */
+      overflow: hidden;
+      margin-top: 30px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .password-form {
+      margin-top: 30px;
+    }
+
+    .password-form input[type="password"] {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    .password-form input[type="submit"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      background-color: #e81d62;
+      color: #fff;
+      border: none;
+      cursor: pointer;
     }
   </style>
-</head>
-<body>
-  <div id="password-form">
-    <label for="password">Masukkan Password:</label>
-    <input type="password" id="password">
-    <button onclick="checkPassword()">Submit</button>
-  </div>
-
-  <div id="video-container" class="video-container">
-    <video id="my-video" src="./lv_7251064864179899649_20230713103327.mp4" controls autoplay loop></video>
-  </div>
-
   <script>
-    function checkPassword() {
-      var passwordInput = document.getElementById("password").value;
-      if (passwordInput === "BINTANGKASIH") {
-        document.getElementById("password-form").style.display = "none";
-        document.getElementById("video-container").style.display = "block";
-        document.getElementById("my-video").play();
+    function showVideo() {
+      var password = document.getElementById("password").value;
+      var videoContainer = document.getElementById("video-container");
+      var passwordForm = document.getElementById("password-form");
+
+      // Ganti PASSWORD yang diinginkan dengan password yang benar
+      if (password === "BINTANGKASIH") {
+        videoContainer.style.display = "block";
+        passwordForm.style.display = "none";
       } else {
         alert("Password salah!");
       }
     }
   </script>
+</head>
+<body>
+  <h1>Hello !!!</h1>
+
+  <div id="video-container" class="video-container" style="display: none;">
+    <iframe src="./lv_7251064864179899649_20230713103327.mp4" allowfullscreen></iframe>
+  </div>
+
+  <div id="password-form" class="password-form">
+    <input type="password" id="password" placeholder="Masukkan password">
+    <input type="submit" value="Submit" onclick="showVideo()">
+  </div>
 </body>
 </html>
