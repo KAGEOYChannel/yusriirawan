@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
   <title>AWAN</title>
   <style>
   
@@ -172,28 +173,22 @@
     </div>
   <div class="password-form">
     <input type="password" class="password-input" placeholder="Masukkan Password">
-    <button class="submit-button">Submit</button>
+    <button onclick="checkPassword()" class="submit-button">Submit</button>
   </div>
  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <script>
-    // JavaScript untuk memeriksa password dan mengarahkan ke halaman lain
-    const passwordInput = document.querySelector('.password-input');
-    const submitButton = document.querySelector('.submit-button');
+    function checkPassword() {
+      var password = document.getElementById("password").value;
 
-    submitButton.addEventListener('click', () => {
-      const enteredPassword = passwordInput.value;
-
-      // Ganti 'passwordku' dengan password yang Anda inginkan
-      const correctPassword = '15februari';
-
-      if (enteredPassword === correctPassword) {
-        // Ganti 'halaman-lain.html' dengan halaman yang ingin Anda tuju setelah password benar
-        window.location.href = 'rahasia.html';
+      // Ganti PASSWORD yang diinginkan dengan password yang benar
+      if (password === "15februari") {
+        window.location.href = "rahasia.html";
       } else {
-        alert('Password yang Anda masukkan salah!');
+        swal("Password Salah", "Silakan coba lagi!", "error");
       }
-    });
-      </script>
+    }
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 </html>
