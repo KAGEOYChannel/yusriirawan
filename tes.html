@@ -3,84 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tampilan Pesan Alert Keren</title>
+  <title>Tampilan Memasukkan Password</title>
   <style>
     /* CSS untuk tampilan dan desain */
-    .alert-container {
-      display: grid;
-      place-items: center;
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
-      background-color: rgba(0, 0, 0, 0.5);
-      transition: opacity 0.3s ease;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    .alert-container.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .alert-box {
-      position: relative;
-      max-width: 400px;
-      padding: 20px;
+      font-family: Arial, sans-serif;
       background-color: #f0f0f0;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      background-color: #fff;
+      padding: 20px;
       border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .container h1 {
       text-align: center;
-      transform: translateY(-50%);
-      transition: transform 0.3s ease;
-      animation: slide-in 0.5s forwards;
+      margin: 0;
+      font-size: 24px;
+      color: #333;
     }
 
-    .alert-box h2 {
-      margin-top: 0;
-      color: #e81d62;
+    .password-input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .alert-box p {
-      margin-bottom: 0;
+    .password-input input[type="password"] {
+      width: 200px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      outline: none;
     }
 
-    .alert-box .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      color: #999;
-      font-size: 18px;
+    .password-input button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
       cursor: pointer;
     }
 
-    @keyframes slide-in {
+    @keyframes fadeIn {
       0% {
-        transform: translateY(-100%);
+        opacity: 0;
+        transform: translateY(-20px);
       }
       100% {
-        transform: translateY(-50%);
+        opacity: 1;
+        transform: translateY(0);
       }
+    }
+
+    @keyframes shake {
+      0% {
+        transform: translateX(0);
+      }
+      20% {
+        transform: translateX(-10px);
+      }
+      40% {
+        transform: translateX(10px);
+      }
+      60% {
+        transform: translateX(-10px);
+      }
+      80% {
+        transform: translateX(10px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .alert {
+      display: none;
+      color: #fff;
+      background-color: #e81d62;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      animation: shake 0.5s ease;
+    }
+
+    .alert.show {
+      display: block;
     }
   </style>
   <script>
-    function showAlert() {
-      var alertContainer = document.querySelector('.alert-container');
-      alertContainer.classList.add('show');
-    }
+    function checkPassword() {
+      var passwordInput = document.getElementById("password").value;
 
-    function closeAlert() {
-      var alertContainer = document.querySelector('.alert-container');
-      alertContainer.classList.remove('show');
+      // Ganti PASSWORD yang diinginkan dengan password yang benar
+      if (passwordInput === "PASSWORD") {
+        alert("Password benar!");
+      } else {
+        var alertBox = document.getElementById("alert-box");
+        alertBox.classList.add("show");
+        setTimeout(function() {
+          alertBox.classList.remove("show");
+        }, 3000);
+      }
     }
   </script>
 </head>
 <body>
-  <button onclick="showAlert()">Tampilkan Pesan Alert</button>
-
-  <div class="alert-container">
-    <div class="alert-box">
-      <h2>Pesan Alert Keren</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <span class="close-btn" onclick="closeAlert()">&times;</span>
+  <div class="container">
+    <h1>Masukkan Password</h1>
+    <div class="password-input">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="checkPassword()">Submit</button>
+    </div>
+    <div id="alert-box" class="alert">
+      Password salah! Silakan coba lagi.
     </div>
   </div>
 </body>
