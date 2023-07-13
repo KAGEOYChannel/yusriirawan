@@ -105,13 +105,24 @@
       text-align: center;
     }
     
-    .password-input {
+    .password-form input[type="password"] {
       padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
+      font-size: 16px;
       border-radius: 5px;
+      border: 1px solid #ccc;
+      outline: none;
+      margin-bottom: 10px;
     }
-    
+
+    .password-form button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
     .submit-button {
       padding: 10px 20px;
       background-color: #007bff;
@@ -172,7 +183,7 @@
     <h2>Masukan password untuk menjelajahi</h2>
     </div>
   <div class="password-form">
-    <input type="password" class="password-input" placeholder="Masukkan Password">
+    <input nput type="password" id="password" placeholder="Masukkan Password">
     <button onclick="checkPassword()" class="submit-button">Submit</button>
   </div>
  </div>
