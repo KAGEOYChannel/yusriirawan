@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contoh Tampilan Pesan Alert</title>
+  <style>
+    /* CSS untuk tampilan dan desain */
+    .alert {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 18px;
+      border-radius: 5px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <button onclick="showAlert()">Tampilkan Pesan Alert</button>
+
+  <script>
+    function showAlert() {
+      var alertDiv = document.createElement("div");
+      alertDiv.classList.add("alert");
+      alertDiv.textContent = "Ini adalah pesan alert yang keren!";
+
+      document.body.appendChild(alertDiv);
+
+      // Menghilangkan pesan alert setelah beberapa detik (opsional)
+      setTimeout(function() {
+        alertDiv.remove();
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
