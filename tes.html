@@ -7,49 +7,33 @@
   <style>
     /* CSS untuk tampilan dan desain */
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: grid;
+      place-items: center;
       height: 100vh;
-      font-family: Arial, sans-serif;
       background-color: #f0f0f0;
     }
 
-    .container {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      background-color: #fff;
+    .password-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 20px;
+      background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-      animation: fadeIn 0.5s ease;
-    }
-
-    .container h1 {
-      text-align: center;
-      margin: 0;
-      font-size: 24px;
-      color: #333;
     }
 
     .password-input {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .password-input input[type="password"] {
-      width: 200px;
+      width: 250px;
       padding: 10px;
       font-size: 16px;
-      border-radius: 5px;
       border: 1px solid #ccc;
+      border-radius: 5px;
       outline: none;
     }
 
-    .password-input button {
-      margin-left: 10px;
+    .submit-button {
+      margin-top: 10px;
       padding: 10px 20px;
       font-size: 16px;
       border-radius: 5px;
@@ -57,81 +41,56 @@
       color: #fff;
       border: none;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .submit-button:hover {
+      background-color: #0056b3;
     }
 
-    @keyframes shake {
-      0% {
-        transform: translateX(0);
-      }
-      20% {
-        transform: translateX(-10px);
-      }
-      40% {
-        transform: translateX(10px);
-      }
-      60% {
-        transform: translateX(-10px);
-      }
-      80% {
-        transform: translateX(10px);
-      }
-      100% {
-        transform: translateX(0);
-      }
-    }
-
-    .alert {
+    .alert-message {
       display: none;
-      color: #fff;
-      background-color: #e81d62;
-      padding: 10px;
-      border-radius: 5px;
       margin-top: 10px;
-      animation: shake 0.5s ease;
+      padding: 10px;
+      background-color: #e81d62;
+      color: #fff;
+      border-radius: 5px;
+      animation: alert-fade 2s ease;
     }
 
-    .alert.show {
-      display: block;
+    @keyframes alert-fade {
+      0% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
     }
   </style>
   <script>
     function checkPassword() {
       var passwordInput = document.getElementById("password").value;
+      var alertMessage = document.getElementById("alert-message");
 
-      // Ganti PASSWORD yang diinginkan dengan password yang benar
-      if (passwordInput === "PASSWORD") {
-        alert("Password benar!");
+      if (passwordInput === "password123") {
+        // Redirect to another page
+        window.location.href = "halaman-lain.html";
       } else {
-        var alertBox = document.getElementById("alert-box");
-        alertBox.classList.add("show");
-        setTimeout(function() {
-          alertBox.classList.remove("show");
-        }, 3000);
+        // Show alert message
+        alertMessage.style.display = "block";
       }
     }
   </script>
 </head>
 <body>
-  <div class="container">
+  <div class="password-form">
     <h1>Masukkan Password</h1>
-    <div class="password-input">
-      <input type="password" id="password" placeholder="Password">
-      <button onclick="checkPassword()">Submit</button>
-    </div>
-    <div id="alert-box" class="alert">
-      Password salah! Silakan coba lagi.
-    </div>
+    <input type="password" id="password" class="password-input" placeholder="Password">
+    <button onclick="checkPassword()" class="submit-button">Submit</button>
+    <div id="alert-message" class="alert-message">Password salah!</div>
   </div>
 </body>
 </html>
