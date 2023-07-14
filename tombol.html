@@ -1,30 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Decrypt and Run Encrypted JavaScript</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
-    <script src="./tes.js"></script>
-  <script>
-    // Fungsi dekripsi dengan AES
-    function decryptAES(encryptedData, key) {
-      var decrypted = CryptoJS.AES.decrypt(encryptedData, key);
-      return decrypted.toString(CryptoJS.enc.Utf8);
+    <title>Halaman Enkripsi</title>
+    <script type="text/javascript">
+eval(function(p, a, c, k, e, d) {
+    e = function(c) {
+        return c.toString(36)
+    };
+    if (!''.replace(/^/, String)) {
+        while (c--) {
+            d[c.toString(a)] = k[c] || c.toString(a)
+        }
+        k = [function(e) {
+            return d[e]
+        }];
+        e = function() {
+            return '\\w+'
+        };
+        c = 1
+    };
+    while (c--) {
+        if (k[c]) {
+            p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c])
+        }
     }
-
-    // Kode JavaScript yang telah dienkripsi
-    var encryptedCode = 'U2FsdGVkX19y4tUd7sNt2z3BICv11k3E/RZ6wjFwDRrVKaBWIclpMi3KpUBP8FwR';
-
-    // Kunci untuk dekripsi
-    var decryptionKey = "MySecretKey";
-
-    // Mendekripsi dan menjalankan kode JavaScript
-    function runDecryptedCode() {
-      var decryptedCode = decryptAES(encryptedCode, decryptionKey);
-      eval(decryptedCode);
-    }
-  </script>
+    return p
+}('0 1() {      2 3 = 4.5("6").7;      8("9" === 3) {        a.b.c = "d.e";      } else {        f("g h", "i j!", "k");      }    }', 19, 19, 'var|checkPassword|password|document|getElementById|value|password|window|if|password|15februari|href|rahasia|html|else|swal|Salah|Silakan|coba|lagi'.split('|'), 0, {}))
+    </script>
 </head>
 <body>
-  <button onclick="runDecryptedCode()">Jalankan Kode Terenkripsi</button>
+    <!-- konten halaman web Anda -->
+    <input type="password" id="password" />
+    <button onclick="checkPassword()">Submit</button>
+
+    <!-- tempatkan tag swal.js atau file JavaScript yang diperlukan di sini -->
+    <!-- ... -->
+
 </body>
 </html>
