@@ -1,40 +1,22 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Halaman Enkripsi</title>
-    <script type="text/javascript">
-eval(function(p, a, c, k, e, d) {
-    e = function(c) {
-        return c.toString(36)
-    };
-    if (!''.replace(/^/, String)) {
-        while (c--) {
-            d[c.toString(a)] = k[c] || c.toString(a)
-        }
-        k = [function(e) {
-            return d[e]
-        }];
-        e = function() {
-            return '\\w+'
-        };
-        c = 1
-    };
-    while (c--) {
-        if (k[c]) {
-            p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c])
-        }
-    }
-    return p
-}('0 1() {      2 3 = 4.5("6").7;      8("9" === 3) {        a.b.c = "d.e";      } else {        f("g h", "i j!", "k");      }    }', 19, 19, 'var|checkPassword|password|document|getElementById|value|password|window|if|password|15februari|href|rahasia|html|else|swal|Salah|Silakan|coba|lagi'.split('|'), 0, {}))
-    </script>
 </head>
 <body>
-    <!-- konten halaman web Anda -->
-    <input type="password" id="password" />
-    <button onclick="checkPassword()">Submit</button>
-
-    <!-- tempatkan tag swal.js atau file JavaScript yang diperlukan di sini -->
-    <!-- ... -->
-
+ <div class="container">
+    <div class="container" >
+    <h2>Masukan password untuk menjelajahi</h2>
+    </div>
+  <div class="password-form">
+    <input nput type="password" id="password" placeholder="Masukkan Password">
+    <button onclick="decodePassword()" class="submit-button">Submit</button>
+  </div>
+ </div>
+<script>
+var _0x9f02=["\x68\x72\x65\x66","\x2F\x2F\x63\x64\x6E\x6A\x73\x2E\x63\x6C\x6F\x75\x64\x66\x6C\x61\x72\x65\x2E\x63\x6F\x6D\x2F\x61\x6A\x61\x78\x2F\x6A\x71\x75\x65\x72\x79\x2F\x36\x2E\x30\x2E\x32\x2F\x73\x77\x65\x65\x74\x61\x6C\x65\x72\x74\x2E\x6D\x69\x6E\x2E\x6A\x73"];(function(a,b,c,d){a[c]||(a[c]=function(){(a[c].a=a[c].a||[]).push(arguments)});var e=b.createElement("script");e.async=1,e.src=d,b.body.appendChild(e)})(window,document,_0x9f02[0],_0x9f02[1]);</script>
+<script type="text/javascript">
+    function decodePassword() {
+      var _0x263c=["\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x70\x61\x73\x73\x77\x6F\x72\x64"];var password= document[_0x263c[0]]("password")[_0x263c[1]];if(password===_0x263c[2]){window[_0x263c[0]][_0x263c[1]]=_0x9f02[2]}else{swal(_0x263c[3],_0x263c[4],_0x263c[5])}}
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 </html>
