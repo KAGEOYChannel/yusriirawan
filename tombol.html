@@ -1,22 +1,206 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+  <title>AWAN</title>
+  <style>
+      
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    
+.content {
+      max-width: 100%;
+      padding: 20px;
+      font-size: 18px;
+      line-height: 1.5;
+      background-color: #f0f0f0;
+    }
+    
+    @media only screen and (max-width: 600px) {
+      .text-container {
+        font-size: 14px;
+      }
+    }
+
+    .container1 {
+      max-width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    @media only screen and (max-width: 768px) {
+      .container {
+        max-width: 90%;
+      }
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 0;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+        h2 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 12px;
+        }
+    
+    p {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+    }
+    
+    .social-icon {
+      margin: 10px;
+      margin-buttom: 40px;
+      font-size: 24px;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      color: #007bff;
+    }
+
+.image-container {
+      max-width: 100%;
+      height: auto;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .password-form {
+      max-width: 960px;
+      margin: 0 0;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .password-form input[type="password"] {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    .password-form button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .submit-button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .submit-button:hover {
+      background-color: #0056b3;
+    }
+    
+    .hidden {
+      display: none;
+      }
+  </style>
 </head>
 <body>
+<div class="container1">
+  <div class="container">
+    <h1>Hello, I'm Yusri Irawan</h1>
+  </div>
+  <div class="image-container" >
+    <img src="./awan.png" width="300" height="300" alt="LOGO"/>  
+  </div>
+  <div class="content">
+    <p>Blockchain technology enthusiast. A Profesional Community Support Manager. Involved in Promotion, Community Moderation and Management. Support all new projects in blockchain development.</p>
+  </div>
+ <div class="social-icons">
+    <a href="https://twitter.com/yusriirawan44" class="social-icon"><i class="fab fa-twitter"></i></a>
+    <a href="https://instagram.com/yusriirawan44" class="social-icon"><i class="fab fa-instagram"></i></a>
+    <a href="mailto:email@yusriirawan.my.id" class="social-icon"><i class="fas fa-envelope"></i></a>
+    <a href="https://discordapp.com/users/685240966575292424" class="social-icon"><i class="fab fa-discord"></i></a>
+ </div>
+</div>
+
+<div class="container1">
+    <div class="container">
+    <h1>- LIVE MODERATION -</h1>
+    </div>
+  <div class="image-container">
+    <img src="./pf_logo2.png" alt="Puzzle Fantasy"/>
+  </div>
+  <div class="content">
+    <p>Puzzle Fantasy is a P2E game provided on the BISKIT platform. Puzzle Fantasy introduces the P2E System, so players enjoy the game while receiving Token mining and rewards. </p>
+  </div>
+ <div class="social-icons">
+    <a href="https://twitter.com/BISKIT_TOKEN" class="social-icon"><i class="fab fa-twitter"></i></a>
+    <a href="https://discord.gg/jJMYcv5qMQ" class="social-icon"><i class="fab fa-discord"></i></a
+  </div>
+</div>
+
  <div class="container">
     <div class="container" >
     <h2>Masukan password untuk menjelajahi</h2>
     </div>
   <div class="password-form">
     <input nput type="password" id="password" placeholder="Masukkan Password">
-    <button onclick="decodePassword()" class="submit-button">Submit</button>
+    <button onclick="decodeAndCheckPassword()" class="submit-button">Submit</button>
   </div>
  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <script>
-var _0x9f02=["\x68\x72\x65\x66","\x2F\x2F\x63\x64\x6E\x6A\x73\x2E\x63\x6C\x6F\x75\x64\x66\x6C\x61\x72\x65\x2E\x63\x6F\x6D\x2F\x61\x6A\x61\x78\x2F\x6A\x71\x75\x65\x72\x79\x2F\x36\x2E\x30\x2E\x32\x2F\x73\x77\x65\x65\x74\x61\x6C\x65\x72\x74\x2E\x6D\x69\x6E\x2E\x6A\x73"];(function(a,b,c,d){a[c]||(a[c]=function(){(a[c].a=a[c].a||[]).push(arguments)});var e=b.createElement("script");e.async=1,e.src=d,b.body.appendChild(e)})(window,document,_0x9f02[0],_0x9f02[1]);</script>
-<script type="text/javascript">
-    function decodePassword() {
-      var _0x263c=["\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x70\x61\x73\x73\x77\x6F\x72\x64"];var password= document[_0x263c[0]]("password")[_0x263c[1]];if(password===_0x263c[2]){window[_0x263c[0]][_0x263c[1]]=_0x9f02[2]}else{swal(_0x263c[3],_0x263c[4],_0x263c[5])}}
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  function decodeAndCheckPassword() {
+    var encodedPassword = "MTVmZWZ1YXRlcg=="; // Password yang telah dienkripsi (15februari)
+
+    var input = document.getElementById("password").value;
+    var decodedInput = window.atob(input);
+
+    if (decodedInput === window.atob(encodedPassword)) {
+      window.location.href = "rahasia.html";
+    } else {
+      swal("Password Salah", "Silakan coba lagi!", "error");
+    }
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
 </body>
 </html>
