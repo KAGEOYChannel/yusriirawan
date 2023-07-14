@@ -61,8 +61,16 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <script>
-    /* Tambahkan kode JavaScript di sini */
-    /* ... */
+    function checkPassword() {
+      var password = document.getElementById("password").value;
+
+      // Ganti PASSWORD yang diinginkan dengan password yang benar
+      if (password === "15februari") {
+        window.location.href = "rahasia.html";
+      } else {
+        swal("Password Salah", "Silakan coba lagi!", "error");
+      }
+    }
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
   <script>
