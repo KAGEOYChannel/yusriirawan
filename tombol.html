@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Decrypt and Run Encrypted JavaScript</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+  <script>
+    // Fungsi dekripsi dengan AES
+    function decryptAES(encryptedData, key) {
+      var decrypted = CryptoJS.AES.decrypt(encryptedData, key);
+      return decrypted.toString(CryptoJS.enc.Utf8);
+    }
+
+    // Kode JavaScript yang telah dienkripsi
+    var encryptedCode = 'U2FsdGVkX19y4tUd7sNt2z3BICv11k3E/RZ6wjFwDRrVKaBWIclpMi3KpUBP8FwR';
+
+    // Kunci untuk dekripsi
+    var decryptionKey = "MySecretKey";
+
+    // Mendekripsi dan menjalankan kode JavaScript
+    function runDecryptedCode() {
+      var decryptedCode = decryptAES(encryptedCode, decryptionKey);
+      eval(decryptedCode);
+    }
+  </script>
+</head>
+<body>
+  <button onclick="runDecryptedCode()">Jalankan Kode Terenkripsi</button>
+</body>
+</html>
