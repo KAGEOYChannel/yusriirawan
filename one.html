@@ -3,109 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Love Lock Animation</title>
+  <title>Responsive Page with Love and Lock Animation</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .love-garage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .garage {
+      width: 150px;
+      height: 100px;
+      background-color: #222;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background-color: #f9f9f9;
     }
 
-    .love-lock-container {
+    .garage-door {
       position: relative;
-      cursor: pointer;
+    }
+
+    .locked-icon,
+    .unlocked-icon {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      transition: opacity 0.3s;
+    }
+
+    .unlocked-icon {
+      opacity: 0;
     }
 
     .horizontal-line {
       width: 100%;
       height: 2px;
-      background-color: #00a8ff;
+      background-image: linear-gradient(to right, #f00, #0f0, #00f);
     }
 
-    .love-lock {
-      position: absolute;
-      top: -25px;
-      left: 10px;
-      transition: left 1.5s;
+    .love-slider {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      padding-left: 10px;
     }
 
-    .lock {
-      fill: #000;
-    }
-
-    .glow {
-      position: absolute;
-      top: -25px;
-      left: 10px;
-      width: 100%;
-      height: 4px;
-      background-image: linear-gradient(90deg, #ff577f, #ffcf44, #00a8ff);
-      background-size: 300% 100%;
-      animation: glowAnimation 2s linear infinite;
-    }
-
-    @keyframes glowAnimation {
-      0% {
-        background-position: 0 0;
-      }
-      100% {
-        background-position: 300% 0;
-      }
+    .love-icon {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
     }
 
     .content {
-      opacity: 0;
-      transform: translateY(-20px);
-      transition: opacity 1s, transform 1s;
+      display: none;
+      padding: 20px;
     }
 
-    .content.visible {
-      opacity: 1;
-      transform: translateY(0);
+    /* Responsiveness for small screens */
+    @media (max-width: 600px) {
+      .garage {
+        width: 100px;
+        height: 70px;
+      }
+      
+      .love-icon {
+        width: 20px;
+        height: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="love-lock-container">
-    <svg class="love-lock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-      <!-- SVG Path for Love -->
-      <path d="M38 12c-8.3 0-15 6.7-15 15s6.7 15 15 15s15-6.7 15-15s-6.7-15-15-15z"/>
-      <!-- SVG Path for Lock -->
-      <path class="lock" d="M76 37c0-11-9-20-20-20c-3.3 0-6.5 0.8-9.3 2.4c0.2 0.2 0.5 0.3 0.7 0.5l-8.7 8.7c-0.2-0.2-0.4-0.3-0.7-0.5c-4.3-2.6-9.3-2.6-13.6 0c-0.2 0.1-0.5 0.2-0.7 0.5l-8.7-8.7c0.2-0.2 0.4-0.3 0.7-0.5C21.5 17.8 24.7 17 28 17c11 0 20 9 20 20c0 1.3-0.1 2.5-0.3 3.7c2.4 1.3 4 3.9 4 6.9c0 4.4-3.6 8-8 8h-12v13c0 3.3-2.7 6-6 6s-6-2.7-6-6v-13h-12c-4.4 0-8-3.6-8-8c0-3 1.6-5.6 4-6.9c-0.2-1.2-0.3-2.4-0.3-3.7c0-11 9-20 20-20c3.3 0 6.5 0.8 9.3 2.4c0 0.1 0.1 0.1 0.1 0.1c2.6-1.6 5.7-2.5 9-2.5c11 0 20 9 20 20c0 1.3-0.1 2.5-0.3 3.7c2.4 1.3 4 3.9 4 6.9c0 4.4-3.6 8-8 8h-12v13c0 3.3-2.7 6-6 6s-6-2.7-6-6v-13h-12c-4.4 0-8-3.6-8-8c0-3 1.6-5.6 4-6.9C18.1 39.5 18 38.3 18 37c0-11 9-20 20-20c3.3 0 6.5 0.8 9.3 2.4c0.2 0.1 0.4 0.2 0.5 0.3c2.6-1.6 5.7-2.4 9-2.4C67 17 76 26 76 37z"/>
-    </svg>
+  <div class="love-garage">
+    <div class="garage">
+      <div class="garage-door" id="garageDoor">
+        <img src="./lock.svg" alt="Locked Icon" class="locked-icon" id="lockedIcon">
+        <img src="./unlock.svg" alt="Unlocked Icon" class="unlocked-icon" id="unlockedIcon">
+      </div>
+    </div>
     <div class="horizontal-line"></div>
-    <div class="glow"></div>
+    <div class="love-slider" id="loveSlider">
+      <img src="./love.svg" alt="Love Icon" class="love-icon">
+    </div>
   </div>
 
-  <div class="content hidden">
-    <!-- Your website content goes here -->
+  <div class="content" id="content">
+    <!-- Your page content goes here -->
+    <h1>Hello, Welcome to My Website!</h1>
+    <p>This is the content of the page.</p>
   </div>
 
   <script>
-    const loveLockContainer = document.querySelector('.love-lock-container');
-    const loveLock = document.querySelector('.love-lock');
-    const glow = document.querySelector('.glow');
-    const content = document.querySelector('.content');
+    const loveSlider = document.getElementById('loveSlider');
+    const garageDoor = document.getElementById('garageDoor');
+    const lockedIcon = document.getElementById('lockedIcon');
+    const unlockedIcon = document.getElementById('unlockedIcon');
+    const content = document.getElementById('content');
 
-    let locked = true;
+    loveSlider.addEventListener('pointermove', (e) => {
+      const loveSliderRect = loveSlider.getBoundingClientRect();
+      const garageDoorRect = garageDoor.getBoundingClientRect();
 
-    loveLockContainer.addEventListener('click', () => {
-      if (locked) {
-        loveLock.style.left = 'calc(100% - 110px)';
-        glow.style.left = 'calc(100% - 110px)';
-        content.classList.add('visible');
-      } else {
-        loveLock.style.left = '10px';
-        glow.style.left = '10px';
-        content.classList.remove('visible');
+      const x = e.clientX - loveSliderRect.left;
+      const maxDistance = loveSliderRect.width - garageDoorRect.width;
+      const distance = Math.min(Math.max(x, 0), maxDistance);
+
+      const opacityValue = distance / maxDistance;
+      lockedIcon.style.opacity = 1 - opacityValue;
+      unlockedIcon.style.opacity = opacityValue;
+
+      if (distance === maxDistance) {
+        content.style.display = 'block';
+        loveSlider.style.pointerEvents = 'none';
       }
-
-      locked = !locked;
     });
   </script>
 </body>
