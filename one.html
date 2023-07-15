@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animated Love Lock</title>
+  <title>Love Lock Animation</title>
   <style>
     body {
       margin: 0;
@@ -13,113 +13,99 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: #f1f1f1;
+      background-color: #f9f9f9;
     }
 
-    .container {
+    .love-lock-container {
       position: relative;
-      width: 400px;
-      height: 100px;
-      border-bottom: 2px solid #fff;
-      overflow: hidden;
+      cursor: pointer;
     }
 
-    .love-logo {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 50px;
-      height: 50px;
-      background-color: #ff2b5e;
-      clip-path: url(#loveClip);
-    }
-
-    .lock-container {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .horizontal-line {
       width: 100%;
-      height: 100%;
-      background-color: #fff;
-      clip-path: url(#lockClip);
+      height: 2px;
+      background-color: #00a8ff;
+    }
+
+    .love-lock {
+      position: absolute;
+      top: -25px;
+      left: 10px;
+      transition: left 1.5s;
     }
 
     .lock {
-      width: 40px;
-      height: 60px;
-      background-color: #333;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-      clip-path: url(#lockPath);
+      fill: #000;
     }
 
-    @keyframes shine {
-      0% { left: -150px; }
-      100% { left: 100%; }
-    }
-
-    .container::before {
-      content: '';
+    .glow {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: -25px;
+      left: 10px;
       width: 100%;
-      height: 100%;
-      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
-      animation: shine 1s infinite;
+      height: 4px;
+      background-image: linear-gradient(90deg, #ff577f, #ffcf44, #00a8ff);
+      background-size: 300% 100%;
+      animation: glowAnimation 2s linear infinite;
+    }
+
+    @keyframes glowAnimation {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 300% 0;
+      }
+    }
+
+    .content {
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 1s, transform 1s;
+    }
+
+    .content.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="love-logo" id="loveLogo"></div>
-    <div class="lock-container">
-      <div class="lock"></div>
-    </div>
+  <div class="love-lock-container">
+    <svg class="love-lock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+      <!-- SVG Path for Love -->
+      <path d="M38 12c-8.3 0-15 6.7-15 15s6.7 15 15 15s15-6.7 15-15s-6.7-15-15-15z"/>
+      <!-- SVG Path for Lock -->
+      <path class="lock" d="M76 37c0-11-9-20-20-20c-3.3 0-6.5 0.8-9.3 2.4c0.2 0.2 0.5 0.3 0.7 0.5l-8.7 8.7c-0.2-0.2-0.4-0.3-0.7-0.5c-4.3-2.6-9.3-2.6-13.6 0c-0.2 0.1-0.5 0.2-0.7 0.5l-8.7-8.7c0.2-0.2 0.4-0.3 0.7-0.5C21.5 17.8 24.7 17 28 17c11 0 20 9 20 20c0 1.3-0.1 2.5-0.3 3.7c2.4 1.3 4 3.9 4 6.9c0 4.4-3.6 8-8 8h-12v13c0 3.3-2.7 6-6 6s-6-2.7-6-6v-13h-12c-4.4 0-8-3.6-8-8c0-3 1.6-5.6 4-6.9c-0.2-1.2-0.3-2.4-0.3-3.7c0-11 9-20 20-20c3.3 0 6.5 0.8 9.3 2.4c0 0.1 0.1 0.1 0.1 0.1c2.6-1.6 5.7-2.5 9-2.5c11 0 20 9 20 20c0 1.3-0.1 2.5-0.3 3.7c2.4 1.3 4 3.9 4 6.9c0 4.4-3.6 8-8 8h-12v13c0 3.3-2.7 6-6 6s-6-2.7-6-6v-13h-12c-4.4 0-8-3.6-8-8c0-3 1.6-5.6 4-6.9C18.1 39.5 18 38.3 18 37c0-11 9-20 20-20c3.3 0 6.5 0.8 9.3 2.4c0.2 0.1 0.4 0.2 0.5 0.3c2.6-1.6 5.7-2.4 9-2.4C67 17 76 26 76 37z"/>
+    </svg>
+    <div class="horizontal-line"></div>
+    <div class="glow"></div>
   </div>
 
-  <svg width="0" height="0" style="position: absolute; visibility: hidden;">
-    <defs>
-      <clipPath id="loveClip" clipPathUnits="objectBoundingBox">
-        <path d="M0.5,0 C0.7,0 1,0.3 1,0.5 C1,0.7 0.7,1 0.5,1 C0.3,1 0,0.7 0,0.5 C0,0.3 0.3,0 0.5,0"></path>
-      </clipPath>
-      <clipPath id="lockClip" clipPathUnits="objectBoundingBox">
-        <path d="M0.3,0 C0.3,0 0.4,0.9 0.5,0.9 C0.6,0.9 0.7,0 0.7,0"></path>
-      </clipPath>
-      <clipPath id="lockPath" clipPathUnits="objectBoundingBox">
-        <path d="M0.1,0 L0.1,0.2 C0.1,0.3 0.2,0.4 0.3,0.4 C0.4,0.4 0.4,0.3 0.4,0.3 L0.4,0.1 C0.4,0 0.3,0 0.3,0 L0.1,0 Z"></path>
-      </clipPath>
-    </defs>
-  </svg>
+  <div class="content hidden">
+    <!-- Your website content goes here -->
+  </div>
 
   <script>
-    const loveLogo = document.getElementById('loveLogo');
-    const lock = document.querySelector('.lock');
+    const loveLockContainer = document.querySelector('.love-lock-container');
+    const loveLock = document.querySelector('.love-lock');
+    const glow = document.querySelector('.glow');
+    const content = document.querySelector('.content');
 
-    let loveLogoPosition = 0;
+    let locked = true;
 
-    loveLogo.addEventListener('mousemove', (e) => {
-      const containerWidth = loveLogo.parentNode.clientWidth;
-      const loveLogoWidth = loveLogo.clientWidth;
-      const xPosition = e.clientX - loveLogoWidth / 2;
-
-      if (xPosition >= 0 && xPosition <= containerWidth - loveLogoWidth) {
-        loveLogoPosition = xPosition;
-        loveLogo.style.left = `${loveLogoPosition}px`;
-      }
-    });
-
-    loveLogo.addEventListener('mouseup', () => {
-      if (loveLogoPosition >= lock.offsetLeft - 20 && loveLogoPosition <= lock.offsetLeft + lock.clientWidth - 30) {
-        lock.classList.add('open');
+    loveLockContainer.addEventListener('click', () => {
+      if (locked) {
+        loveLock.style.left = 'calc(100% - 110px)';
+        glow.style.left = 'calc(100% - 110px)';
+        content.classList.add('visible');
       } else {
-        loveLogo.style.left = '0';
-        loveLogoPosition = 0;
+        loveLock.style.left = '10px';
+        glow.style.left = '10px';
+        content.classList.remove('visible');
       }
+
+      locked = !locked;
     });
   </script>
 </body>
