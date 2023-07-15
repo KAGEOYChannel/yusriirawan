@@ -27,7 +27,7 @@
     .love-icon {
       width: 80px;
       height: 80px;
-      transition: transform 0.3s;
+      transition: left 0.3s;
     }
 
     .horizontal-line {
@@ -105,23 +105,43 @@
       const horizontalLine = document.querySelector('.horizontal-line');
       const contentAfterAnimation = document.getElementById('content-after-animation');
 
-      loveIcon.addEventListener('mousemove', function(event) {
-        const lineLength = horizontalLine.offsetWidth;
-        const loveIconWidth = loveIcon.offsetWidth;
-        const xPos = event.pageX;
-        const distance = Math.min(xPos - loveIconWidth / 2, lineLength - loveIconWidth);
+      let isDragging = false;
+      let initialX = 0;
+      let loveIconWidth = loveIcon.offsetWidth;
 
+      loveIcon.addEventListener('mousedown', startDragging);
+      loveIcon.addEventListener('touchstart', startDragging);
+
+      function startDragging(event) {
+        event.preventDefault();
+        isDragging = true;
+        initialX = event.clientX || event.touches[0].clientX;
+      }
+
+      document.addEventListener('mousemove', dragLoveIcon);
+      document.addEventListener('touchmove', dragLoveIcon);
+
+      function dragLoveIcon(event) {
+        if (!isDragging) return;
+        event.preventDefault();
+        const lineLength = horizontalLine.offsetWidth;
+        const currentX = event.clientX || event.touches[0].clientX;
+        const distance = Math.min(currentX - initialX + loveIconWidth / 2, lineLength - loveIconWidth);
         loveIcon.style.left = distance + 'px';
 
         if (distance >= lineLength - loveIconWidth) {
           lockIcon.classList.add('unlocked');
           contentAfterAnimation.classList.remove('d-none');
         }
-      });
+      }
 
-      loveIcon.addEventListener('mouseleave', function() {
-        loveIcon.style.left = 0;
-      });
+      document.addEventListener('mouseup', stopDragging);
+      document.addEventListener('touchend', stopDragging);
+
+      function stopDragging() {
+        isDragging = false;
+        loveIcon.style.left = '0';
+      }
     });
   </script>
 </body>
