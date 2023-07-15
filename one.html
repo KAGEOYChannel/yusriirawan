@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Halaman Website Responsif</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
   <style>
     body {
       background-color: #f0f0f0;
@@ -16,50 +16,40 @@
       margin: 0;
     }
 
-    .container {
-      max-width: 600px;
-      text-align: center;
-    }
-
-    .content {
+    .love-icon-container {
       position: relative;
-      margin-bottom: 50px;
-    }
-
-    .horizontal-line {
-      border-top: 2px solid transparent;
-      border-image: linear-gradient(to right, red, transparent);
-      border-image-slice: 1;
-      width: 100%;
-    }
-
-    .love-container,
-    .lock-container {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .love-container {
-      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
     }
 
-    .lock-container {
-      right: 0;
+    .love-icon {
+      width: 80px;
+      height: 80px;
+      transition: transform 0.3s;
     }
 
-    #love-icon,
-    #lock-icon {
-      width: 60px;
-      height: 60px;
+    .horizontal-line {
+      border-top: 4px solid red;
+      width: 100%;
     }
 
-    #content-after-animation {
-      opacity: 0;
+    .lock-icon {
+      position: absolute;
+      top: 50%;
+      right: -50px;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      opacity: 1;
+      transition: opacity 0.5s;
     }
 
-    /* Animasi Gembok Terbuka */
+    .unlocked {
+      animation: unlockAnimation 0.5s forwards;
+    }
+
     @keyframes unlockAnimation {
       0% {
         transform: rotate(0deg);
@@ -68,49 +58,69 @@
         transform: rotate(90deg);
       }
     }
+
+    /* Responsive styles */
+    @media (max-width: 767px) {
+      .love-icon {
+        width: 40px;
+        height: 40px;
+      }
+      .lock-icon {
+        right: -30px;
+        width: 30px;
+        height: 30px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="content">
-      <div class="lock-container">
-        <img id="lock-icon" src="./lock.svg" alt="Gembok Terkunci">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="love-icon-container">
+          <img class="love-icon" src="love.svg" alt="Love Icon">
+          <img class="lock-icon" src="lock.svg" alt="Lock Icon">
+        </div>
       </div>
-      <div class="love-container">
-        <img id="love-icon" src="./love.svg" alt="Love">
-      </div>
-      <div class="horizontal-line"></div>
     </div>
-    <div id="content-after-animation" class="d-none">
-      <!-- Isi halaman website Anda disini -->
-      <h1>Selamat datang di halaman website kami!</h1>
-      <p>Isi konten halaman website Anda di sini...</p>
+    <div class="row">
+      <div class="col-md-12">
+        <hr class="horizontal-line">
+      </div>
+    </div>
+    <div class="row">
+      <div id="content-after-animation" class="col-md-12 d-none">
+        <!-- Isi halaman website Anda disini -->
+        <h1>Selamat datang di halaman website kami!</h1>
+        <p>Isi konten halaman website Anda di sini...</p>
+      </div>
     </div>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    $(document).ready(function () {
-      $("#love-icon").on("mousedown touchstart", function () {
-        $(".horizontal-line").css("border-image", "linear-gradient(to right, transparent, transparent)");
-      });
+    document.addEventListener('DOMContentLoaded', function() {
+      const loveIcon = document.querySelector('.love-icon');
+      const lockIcon = document.querySelector('.lock-icon');
+      const horizontalLine = document.querySelector('.horizontal-line');
+      const contentAfterAnimation = document.getElementById('content-after-animation');
 
-      $("#love-icon").on("mousemove touchmove", function (event) {
-        const lineLength = $(".horizontal-line").width();
-        const loveIconWidth = $("#love-icon").width();
-        const xPos = event.pageX || event.originalEvent.touches[0].pageX;
+      loveIcon.addEventListener('mousemove', function(event) {
+        const lineLength = horizontalLine.offsetWidth;
+        const loveIconWidth = loveIcon.offsetWidth;
+        const xPos = event.pageX;
         const distance = Math.min(xPos - loveIconWidth / 2, lineLength - loveIconWidth);
 
-        $("#love-icon").css("left", distance + "px");
+        loveIcon.style.left = distance + 'px';
 
         if (distance >= lineLength - loveIconWidth) {
-          $("#lock-icon").css("animation", "unlockAnimation 0.5s forwards");
-          $("#content-after-animation").removeClass("d-none").addClass("animated fadeIn");
+          lockIcon.classList.add('unlocked');
+          contentAfterAnimation.classList.remove('d-none');
         }
       });
 
-      $("#love-icon").on("mouseup touchend", function () {
-        $(".horizontal-line").css("border-image", "linear-gradient(to right, red, transparent)");
+      loveIcon.addEventListener('mouseleave', function() {
+        loveIcon.style.left = 0;
       });
     });
   </script>
