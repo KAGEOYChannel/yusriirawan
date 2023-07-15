@@ -3,96 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Halaman Responsif dengan Animasi</title>
+  <title>Halaman Website Responsif</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
     body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
       background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
     }
 
     .container {
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .content {
       position: relative;
-    }
-
-    .love-icon-container {
-      position: absolute;
-      top: 50%;
-      left: 10px;
-      transform: translateY(-50%);
-    }
-
-    .love-icon {
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .lock-icon {
-      width: 40px;
-      height: 40px;
-      position: absolute;
-      top: 50%;
-      left: 10px;
-      transform: translateY(-50%);
-      opacity: 1;
-      transition: opacity 0.5s ease-in-out;
+      margin-bottom: 50px;
     }
 
     .horizontal-line {
+      border-top: 2px solid transparent;
+      border-image: linear-gradient(to right, red, transparent);
+      border-image-slice: 1;
       width: 100%;
-      height: 5px;
-      background-image: linear-gradient(to right, #ff3399, #ff6666, #ffff66, #66ff66, #3399ff, #9966ff);
-      border-radius: 5px;
+    }
+
+    .love-container,
+    .lock-container {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
     }
 
-    .opened {
+    .love-container {
+      left: 0;
+      cursor: pointer;
+    }
+
+    .lock-container {
+      right: 0;
+    }
+
+    #love-icon,
+    #lock-icon {
+      width: 60px;
+      height: 60px;
+    }
+
+    #content-after-animation {
       opacity: 0;
+    }
+
+    /* Animasi Gembok Terbuka */
+    @keyframes unlockAnimation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(90deg);
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="love-icon-container">
-      <img src="./love.svg" alt="Love Icon" class="love-icon" id="loveIcon">
-      <img src="./lock.svg" alt="Locked Icon" class="lock-icon" id="lockIcon">
+    <div class="content">
+      <div class="lock-container">
+        <img id="lock-icon" src="./lock.svg" alt="Gembok Terkunci">
+      </div>
+      <div class="love-container">
+        <img id="love-icon" src="./love.svg" alt="Love">
+      </div>
+      <div class="horizontal-line"></div>
     </div>
-    <div class="horizontal-line"></div>
+    <div id="content-after-animation" class="d-none">
+      <!-- Isi halaman website Anda disini -->
+      <h1>Selamat datang di halaman website kami!</h1>
+      <p>Isi konten halaman website Anda di sini...</p>
+    </div>
   </div>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    const loveIcon = document.getElementById('loveIcon');
-    const lockIcon = document.getElementById('lockIcon');
-    const horizontalLine = document.querySelector('.horizontal-line');
+    $(document).ready(function () {
+      $("#love-icon").on("mousedown touchstart", function () {
+        $(".horizontal-line").css("border-image", "linear-gradient(to right, transparent, transparent)");
+      });
 
-    let isLocked = true;
+      $("#love-icon").on("mousemove touchmove", function (event) {
+        const lineLength = $(".horizontal-line").width();
+        const loveIconWidth = $("#love-icon").width();
+        const xPos = event.pageX || event.originalEvent.touches[0].pageX;
+        const distance = Math.min(xPos - loveIconWidth / 2, lineLength - loveIconWidth);
 
-    loveIcon.addEventListener('mousemove', function (e) {
-      const loveIconRect = loveIcon.getBoundingClientRect();
-      const loveIconWidth = loveIconRect.width;
-      const distanceFromLeft = e.clientX - loveIconRect.left;
+        $("#love-icon").css("left", distance + "px");
 
-      if (distanceFromLeft >= loveIconWidth) {
-        lockIcon.classList.add('opened');
-        isLocked = false;
-      }
-    });
+        if (distance >= lineLength - loveIconWidth) {
+          $("#lock-icon").css("animation", "unlockAnimation 0.5s forwards");
+          $("#content-after-animation").removeClass("d-none").addClass("animated fadeIn");
+        }
+      });
 
-    horizontalLine.addEventListener('animationend', function () {
-      if (!isLocked) {
-        // Simulasikan permintaan asinkron (misalnya, pengambilan data dari server)
-        setTimeout(function () {
-          // Gantikan dengan kode untuk menampilkan isi halaman setelah gembok terbuka
-          alert('Selamat, gembok sudah terbuka! Tampilkan isi halaman di sini.');
-        }, 1000);
-      }
+      $("#love-icon").on("mouseup touchend", function () {
+        $(".horizontal-line").css("border-image", "linear-gradient(to right, red, transparent)");
+      });
     });
   </script>
 </body>
