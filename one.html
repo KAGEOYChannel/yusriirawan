@@ -3,128 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Page with Love and Lock Animation</title>
+  <title>Halaman Responsif dengan Animasi</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      overflow-x: hidden;
-    }
-
-    .love-garage {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-    }
-
-    .garage {
-      width: 150px;
-      height: 100px;
-      background-color: #222;
       display: flex;
       justify-content: center;
       align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
     }
 
-    .garage-door {
+    .container {
       position: relative;
     }
 
-    .locked-icon,
-    .unlocked-icon {
+    .love-icon-container {
       position: absolute;
-      top: 10px;
+      top: 50%;
       left: 10px;
-      transition: opacity 0.3s;
+      transform: translateY(-50%);
     }
 
-    .unlocked-icon {
-      opacity: 0;
+    .love-icon {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .lock-icon {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
     }
 
     .horizontal-line {
       width: 100%;
-      height: 2px;
-      background-image: linear-gradient(to right, #f00, #0f0, #00f);
+      height: 5px;
+      background-image: linear-gradient(to right, #ff3399, #ff6666, #ffff66, #66ff66, #3399ff, #9966ff);
+      border-radius: 5px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
-    .love-slider {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      position: relative;
-      padding-left: 10px;
-    }
-
-    .love-icon {
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-    }
-
-    .content {
-      display: none;
-      padding: 20px;
-    }
-
-    /* Responsiveness for small screens */
-    @media (max-width: 600px) {
-      .garage {
-        width: 100px;
-        height: 70px;
-      }
-      
-      .love-icon {
-        width: 20px;
-        height: 20px;
-      }
+    .opened {
+      opacity: 0;
     }
   </style>
 </head>
 <body>
-  <div class="love-garage">
-    <div class="garage">
-      <div class="garage-door" id="garageDoor">
-        <img src="./lock.svg" alt="Locked Icon" class="locked-icon" id="lockedIcon">
-        <img src="./unlock.svg" alt="Unlocked Icon" class="unlocked-icon" id="unlockedIcon">
-      </div>
+  <div class="container">
+    <div class="love-icon-container">
+      <img src="./love.png" alt="Love Icon" class="love-icon" id="loveIcon">
+      <img src="./lock.png" alt="Locked Icon" class="lock-icon" id="lockIcon">
     </div>
     <div class="horizontal-line"></div>
-    <div class="love-slider" id="loveSlider">
-      <img src="./love.svg" alt="Love Icon" class="love-icon">
-    </div>
-  </div>
-
-  <div class="content" id="content">
-    <!-- Your page content goes here -->
-    <h1>Hello, Welcome to My Website!</h1>
-    <p>This is the content of the page.</p>
   </div>
 
   <script>
-    const loveSlider = document.getElementById('loveSlider');
-    const garageDoor = document.getElementById('garageDoor');
-    const lockedIcon = document.getElementById('lockedIcon');
-    const unlockedIcon = document.getElementById('unlockedIcon');
-    const content = document.getElementById('content');
+    const loveIcon = document.getElementById('loveIcon');
+    const lockIcon = document.getElementById('lockIcon');
+    const horizontalLine = document.querySelector('.horizontal-line');
 
-    loveSlider.addEventListener('pointermove', (e) => {
-      const loveSliderRect = loveSlider.getBoundingClientRect();
-      const garageDoorRect = garageDoor.getBoundingClientRect();
+    let isLocked = true;
 
-      const x = e.clientX - loveSliderRect.left;
-      const maxDistance = loveSliderRect.width - garageDoorRect.width;
-      const distance = Math.min(Math.max(x, 0), maxDistance);
+    loveIcon.addEventListener('mousemove', function (e) {
+      const loveIconRect = loveIcon.getBoundingClientRect();
+      const loveIconWidth = loveIconRect.width;
+      const distanceFromLeft = e.clientX - loveIconRect.left;
 
-      const opacityValue = distance / maxDistance;
-      lockedIcon.style.opacity = 1 - opacityValue;
-      unlockedIcon.style.opacity = opacityValue;
+      if (distanceFromLeft >= loveIconWidth) {
+        lockIcon.classList.add('opened');
+        isLocked = false;
+      }
+    });
 
-      if (distance === maxDistance) {
-        content.style.display = 'block';
-        loveSlider.style.pointerEvents = 'none';
+    horizontalLine.addEventListener('animationend', function () {
+      if (!isLocked) {
+        // Simulasikan permintaan asinkron (misalnya, pengambilan data dari server)
+        setTimeout(function () {
+          // Gantikan dengan kode untuk menampilkan isi halaman setelah gembok terbuka
+          alert('Selamat, gembok sudah terbuka! Tampilkan isi halaman di sini.');
+        }, 1000);
       }
     });
   </script>
