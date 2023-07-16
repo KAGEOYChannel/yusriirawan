@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <title>Special for You</title>
   <style>
     /* CSS untuk tampilan dan desain */
@@ -85,12 +86,10 @@
       var passwordForm = document.getElementById("password-form");
 
       // Ganti PASSWORD yang diinginkan dengan password yang benar
-      if (password === "BINTANGKASIH") {
+      if (password === "cinta") {
         videoContainer.style.display = "block";
         passwordForm.style.display = "none";
       } 
-      if (password === "next") {        window.location.href = "rahasia.html";
-      }
       else {
         alert("Password salah! ketik next jika menyerah");
       }
@@ -100,16 +99,9 @@
 <body>
   <div class="container">
   <h1>Hello !!!</h1>
-    <p>Pecahkan petunjuk berikut ini untuk menemukan passwordnya;).<strong> Password ditulis dalam huruf kapital memiliki dua kata tapi disambungkan</strong></p>
-    <p>Petunjuk : </p>
-    <p>1. Cari di langit malam di antara yang berdansa, Di sana tersembunyi pesan cinta yang kuasa.</p>
-    <p>2. Mataku tetapkan pada kilauan yang abadi, Tanda asmara yang takkan pernah pudar atau gugur.</p>
-    <p>3. Dalam sentuhan yang penuh magis kau temukan, Kunci untuk mengurai kode rahasia yang tersembunyi.</p>
-    <p>4. Aksara pertama, sebuah melodi indah dalam hidupmu, Mengiringi langkah asmara yang takkan pernah usai.</p>
-    <p>5. Kelembutan dan kesetiaan menguak jalan keabadian, Pada huruf kedua, rahasia terpendamnya tersimpan.</p>
-    <p>6. Detik waktu berhenti saat kisah kita terjalin, Bukan hanya kata, tapi simbol cinta terukir pada aksara ketiga.</p>
-    <p>7. Terakhir, saat hati terasa berdentang indah, Pada aksara keempat, kata kasih yang suci dan tulus terungkap.</p>
-  </div>
+    <p><strong>Masukkan kata yang dimaksud kedalam kolom "masukkan password". Semoga berhasil!!!</strong></p>
+      <p>Aku adalah perasaan yang indah, melanda hati dengan kehangatan. Ketika ada, dunia terasa berwarna-warni, mengisi hari dengan kebahagiaan. Aku bisa membuatmu tersenyum hanya dengan satu sentuhan, dan mendamaikan hatimu ketika sedang gelisah. Saat kau melihatnya dalam matamu, kau tahu bahwa dia adalah... (tebak kata apa?)</p>
+      </div>
   <div id="video-container" class="video-container" style="display: none;">
     <iframe src="./lv_7251064864179899649_20230713103327.mp4" allowfullscreen></iframe>
   </div>
@@ -118,5 +110,19 @@
     <input type="password" id="password" placeholder="Masukkan password">
     <input type="submit" value="Submit" onclick="showVideo()">
   </div>
+  <div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+      <h1>Kembali ke Home</h1>
+      <!-- Tombol menuju halaman lain -->
+      <a href="rahasia.html" class="btn btn-primary btn-lg">HOME</a>
+    </div>
+  </div>
+</div>
+
+<!-- Load Bootstrap JS (Optional, only if you use Bootstrap JS components) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
