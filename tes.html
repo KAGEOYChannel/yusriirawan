@@ -36,18 +36,17 @@
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 
       /* Animasi gradient bergerak */
-      animation: gradientMove 5s infinite;
+      background-size: 200% auto;
+      background-position: 0 50%;
+      animation: gradientMove 5s linear infinite;
     }
 
     @keyframes gradientMove {
       0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
+        background-position: 0 50%;
       }
       100% {
-        background-position: 0% 50%;
+        background-position: 200% 50%;
       }
     }
   </style>
