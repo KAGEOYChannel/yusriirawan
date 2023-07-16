@@ -164,6 +164,29 @@
     .hidden {
       display: none;
     }
+    .icon-home {
+      font-size: 70px;
+      margin-right: 10px;
+    }
+    .text-home {
+      font-size: 50px;
+      animation: changeColor 5s infinite;
+      background: linear-gradient(45deg, 
+        rgb(255, 0, 0),    /* Warna merah */
+        rgb(0, 255, 0),    /* Warna hijau */
+        rgb(0, 0, 255)     /* Warna biru */
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    @keyframes changeColor {
+      0%, 100% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -186,6 +209,14 @@
     </div>
     <div class="row">
       <div id="content-after-animation" class="hidden">
+        <div class="container-fluid mt-5">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-auto">
+        <span class="icon-home">&#x1F3E0;</span>
+        <span class="text-home">HOME</span>
+      </div>
+    </div>
+        </div>
         <div class="container mt-4">
     <div class="row">
       <div class="col-md-3">
