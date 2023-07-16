@@ -103,7 +103,34 @@
         height: 200px;
       }
     }
-    /* CSS lainnya sama seperti sebelumnya */
+    .toast {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      width: 300px;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      border-radius: 8px;
+      text-align: center;
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+
+    .toast-header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn-close {
+      color: #fff;
+    }
+
+    .toast-body {
+      padding: 8px 0;
+    }
     .hidden {
       display: none;
     }
