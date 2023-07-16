@@ -14,7 +14,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: #000000;
+      background-color: #f0f0f0;
     }
     
 .content {
@@ -36,12 +36,6 @@
       margin: 0 auto;
       padding: 20px;
       background-color: #f0f0f0;
-    }
-    .container2 {
-      max-width: 80%;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #000000;
     }
 
     @media only screen and (max-width: 768px) {
@@ -149,31 +143,30 @@
     .text-yusri {
       font-size: 30px;
       font-weight: bold;
-      background: linear-gradient(45deg, #f2c49e, #f24b8e, black);
+      background: linear-gradient(45deg, gold, pink, black);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 
       /* Animasi gradient bergerak */
-      background-size: 200% auto;
-      background-position: 0 50%;
+      background-size: 200% 200%;
+      background-position: 0 100%;
       animation: gradientMove 5s linear infinite;
     }
 
     @keyframes gradientMove {
       0% {
-        background-position: 0 50%;
+        background-position: 0 100%;
       }
       100% {
-        background-position: 200% 50%;
+        background-position: 200% 0;
       }
     }
   </style>
 </head>
 <body>
 <div class="container1">
-  <div class="container2">
+  <div class="container">
     <h1>Hello, I'm <span class="text-yusri">Yusri Irawan</span></h1>
   </div>
   <div class="image-container" >
