@@ -186,6 +186,41 @@
         color: rgb(0, 0, 255); /* Warna biru */
       }
     }
+    .icon-container {
+      display: flex;
+      flex-direction: column; /* Mengatur tata letak menjadi vertikal */
+      align-items: center;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+    }
+
+    .text-home {
+      font-size: 30px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #f2c49e, #f24b8e, black);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+
+      /* Animasi gradient bergerak */
+      background-size: 200% auto;
+      background-position: 0 50%;
+      animation: gradientMove 5s linear infinite;
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0 50%;
+      }
+      100% {
+        background-position: 200% 50%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -208,14 +243,10 @@
     </div>
     <div class="row">
       <div id="content-after-animation" class="hidden">
-        <div class="container-fluid mt-5">
-    <div class="row justify-content-center align-items-center">
-      <div class="col-auto">
-        <img src="home.gif" alt="Home Icon" class="icon-home" width="50">
-        <span class="text-home">HOME</span>
-      </div>
-    </div>
-        </div>
+        <div class="icon-container">
+    <img class="icon" src="home.gif" alt="Icon Home">
+    <span class="text-home">HOME</span>
+  </div>
         <div class="container mt-4">
     <div class="row">
       <div class="col-md-3">
