@@ -107,8 +107,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="love-icon-container">
-          <img class="love-icon" src="love.png" alt="Love Icon">
-          <img class="lock-icon" src="locked.png" alt="Lock Icon">
+          <img class="love-icon" src="love.svg" alt="Love Icon">
+          <img class="lock-icon" src="lock.svg" alt="Lock Icon">
         </div>
       </div>
     </div>
@@ -176,7 +176,7 @@
           if (distance >= lineLength - loveIcon.offsetWidth) {
             lockIcon.classList.add('unlocked');
             contentAfterAnimation.classList.remove('d-none');
-            showUnlockAlert();
+            hideUnnecessaryElements();
           }
         }
 
@@ -191,27 +191,12 @@
         document.removeEventListener('touchend', stopDragging);
       }
 
-      function showUnlockAlert() {
-        const toast = document.createElement('div');
-        toast.classList.add('toast', 'show');
-        toast.setAttribute('role', 'alert');
-        toast.setAttribute('aria-live', 'assertive');
-        toast.setAttribute('aria-atomic', 'true');
-
-        toast.innerHTML = `
-          <div class="toast-header">
-            <strong class="me-auto">Gembok Terbuka!</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body">
-            Selamat! Anda berhasil membuka gembok.
-          </div>
-        `;
-
-        document.body.appendChild(toast);
-
-        const toastInstance = new bootstrap.Toast(toast);
-        toastInstance.show();
+      function hideUnnecessaryElements() {
+        const circleSegments = document.querySelectorAll('.circle-segment');
+        circleSegments.forEach(segment => {
+          segment.style.display = 'none';
+        });
+        horizontalLine.style.display = 'none';
       }
     });
   </script>
