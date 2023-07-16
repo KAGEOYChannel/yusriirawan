@@ -228,12 +228,7 @@
         const toastInstance = new bootstrap.Toast(toast);
         toastInstance.show();
       }
-// Ketika alert ditutup, tampilkan isi halaman
-        toast.addEventListener('hidden.bs.toast', function() {
-          contentAfterAnimation.classList.remove('d-none');
-          hideElements();
-        });
-                                    }
+      
       function hideElements() {
         loveIconContainer.classList.add('d-none');
         horizontalLine.classList.add('d-none');
