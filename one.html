@@ -176,7 +176,8 @@
           if (distance >= lineLength - loveIcon.offsetWidth) {
             lockIcon.classList.add('unlocked');
             contentAfterAnimation.classList.remove('d-none');
-            hideUnnecessaryElements();
+            showUnlockAlert();
+            hideElements();
           }
         }
 
@@ -191,12 +192,34 @@
         document.removeEventListener('touchend', stopDragging);
       }
 
-      function hideUnnecessaryElements() {
+      function showUnlockAlert() {
+        const toast = document.createElement('div');
+        toast.classList.add('toast', 'show');
+        toast.setAttribute('role', 'alert');
+        toast.setAttribute('aria-live', 'assertive');
+        toast.setAttribute('aria-atomic', 'true');
+
+        toast.innerHTML = `
+          <div class="toast-header">
+            <strong class="me-auto">Gembok Terbuka!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            Selamat! Anda berhasil membuka gembok.
+          </div>
+        `;
+
+        document.body.appendChild(toast);
+
+        const toastInstance = new bootstrap.Toast(toast);
+        toastInstance.show();
+      }
+
+      function hideElements() {
+        loveIconContainer.classList.add('d-none');
+        horizontalLine.classList.add('d-none');
         const circleSegments = document.querySelectorAll('.circle-segment');
-        circleSegments.forEach(segment => {
-          segment.style.display = 'none';
-        });
-        horizontalLine.style.display = 'none';
+        circleSegments.forEach(segment => segment.classList.add('d-none'));
       }
     });
   </script>
