@@ -103,7 +103,7 @@
         width: 200px;
         height: 200px;
       }
-      }
+        }
     
     .hidden {
       display: none;
@@ -234,11 +234,11 @@
 
           if (distance >= lineLength - loveIcon.offsetWidth && !isAlertShown) {
             lockIcon.src = 'unlocked.gif';
+            isAlertShown = true; // Set flag isAlertShown to true
             setTimeout(() => {
               showUnlockAlert();
               hideElements();
             }, 3000); // Delay selama 3 detik sebelum munculnya alert
-            isAlertShown = true;
           }
         }
 
