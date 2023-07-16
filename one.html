@@ -69,10 +69,11 @@
       top: -50px;
       left: 50%;
       transform: translateX(-50%);
-      width: 40px;
-      height: 40px;
+      width: 300px;
+      height: 300px;
       opacity: 1;
       transition: opacity 0.5s;
+      margin-buttom: 80px;
     }
 
     .unlocked {
@@ -142,6 +143,7 @@
       let isDragging = false;
       let initialX = 0;
       let offsetX = 0;
+      let isAlertShown = false;
 
       loveIconContainer.addEventListener('mousedown', startDragging);
       loveIconContainer.addEventListener('touchstart', startDragging);
@@ -173,11 +175,12 @@
           const distance = Math.min(currentX + offsetX, lineLength - loveIcon.offsetWidth);
           loveIcon.style.left = distance + 'px';
 
-          if (distance >= lineLength - loveIcon.offsetWidth) {
+          if (distance >= lineLength - loveIcon.offsetWidth && !isAlertShown) {
             lockIcon.classList.add('unlocked');
             contentAfterAnimation.classList.remove('d-none');
             showUnlockAlert();
             hideElements();
+            isAlertShown = true;
           }
         }
 
