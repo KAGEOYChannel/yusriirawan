@@ -103,7 +103,10 @@
         height: 200px;
       }
     }
-    
+    /* CSS lainnya sama seperti sebelumnya */
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -125,7 +128,7 @@
       </div>
     </div>
     <div class="row">
-      <div id="content-after-animation" class="col-md-12">
+      <div id="content-after-animation" class="col-md-12 hidden">
         <!-- Isi halaman website Anda disini -->
         <h1>Selamat datang di halaman website kami!</h1>
         <p>Isi konten halaman website Anda di sini...</p>
@@ -229,15 +232,15 @@
 
         // Ketika alert ditutup, tampilkan isi halaman
         toast.addEventListener('hidden.bs.toast', function() {
-          contentAfterAnimation.classList.remove('d-none');
+          contentAfterAnimation.classList.remove('hidden');
         });
       }
 
       function hideElements() {
-        loveIconContainer.classList.add('d-none');
-        horizontalLine.classList.add('d-none');
+        loveIconContainer.classList.add('hidden');
+        horizontalLine.classList.add('hidden');
         const circleSegments = document.querySelectorAll('.circle-segment');
-        circleSegments.forEach(segment => segment.classList.add('d-none'));
+        circleSegments.forEach(segment => segment.classList.add('hidden'));
       }
     });
   </script>
