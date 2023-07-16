@@ -27,7 +27,11 @@
     .love-icon {
       width: 80px;
       height: 80px;
-      transition: left 0.3s;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transition: left 0.3s ease-out;
       user-drag: none;
       user-select: none;
       touch-action: none;
@@ -41,7 +45,7 @@
     .lock-icon {
       position: absolute;
       top: 50%;
-      left: -50px;
+      left: 10px;
       transform: translateY(-50%);
       width: 40px;
       height: 40px;
@@ -69,7 +73,7 @@
         height: 40px;
       }
       .lock-icon {
-        left: -30px;
+        left: 5px;
         width: 30px;
         height: 30px;
       }
