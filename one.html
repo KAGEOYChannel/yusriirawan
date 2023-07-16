@@ -27,9 +27,11 @@
     .love-icon {
       width: 80px;
       height: 80px;
-      position: absolute;
-      left: 0;
-      transition: left 0.3s;
+      transition: left 0.3s ease-out;
+      user-drag: none;
+      user-select: none;
+      touch-action: none;
+      pointer-events: none;
     }
 
     .horizontal-line {
@@ -130,7 +132,7 @@
         event.preventDefault();
         const lineLength = horizontalLine.offsetWidth;
         const currentX = event.clientX || event.touches[0].clientX;
-        const distance = Math.min(currentX + offsetX, lineLength - loveIcon.offsetWidth);
+        const distance = Math.min(currentX + offsetX, lineLength - loveIcon.offsetWidth / 2);
         loveIcon.style.left = distance + 'px';
 
         if (distance >= lineLength - loveIcon.offsetWidth) {
@@ -148,4 +150,4 @@
     });
   </script>
 </body>
-</html>
+</
