@@ -22,7 +22,7 @@
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center; /* Mengubah ke justify-content: center */
       cursor: pointer;
     }
 
@@ -34,9 +34,9 @@
       user-select: none;
       touch-action: none;
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      left: 0;
+      top: 50%; /* Mengubah ke top: 50% */
+      transform: translateY(-50%); /* Mengubah posisi love secara vertikal */
     }
 
     .horizontal-line-container {
@@ -47,9 +47,9 @@
       border-top: 4px solid red;
       width: 100%;
       position: absolute;
-      top: 50%;
+      top: 50%; /* Mengubah ke top: 50% */
       left: 0;
-      transform: translateY(-50%);
+      transform: translateY(-50%); /* Mengubah posisi garis secara vertikal */
     }
 
     .lock-icon {
@@ -95,10 +95,10 @@
     <div class="row">
       <div class="col-md-12">
         <div class="love-icon-container">
-          <img class="love-icon" src="love.svg" alt="Love Icon">
           <div class="horizontal-line-container">
             <hr class="horizontal-line">
           </div>
+          <img class="love-icon" src="love.svg" alt="Love Icon">
           <img class="lock-icon" src="lock.svg" alt="Lock Icon">
         </div>
       </div>
