@@ -17,7 +17,7 @@
       padding: 60px;
       margin-top: 80px;
     }
-    .love-icon-container {
+.love-icon-container {
       position: relative;
       display: flex;
       align-items: center;
@@ -103,6 +103,7 @@
         height: 200px;
       }
     }
+    
   </style>
 </head>
 <body>
@@ -124,7 +125,7 @@
       </div>
     </div>
     <div class="row">
-      <div id="content-after-animation" class="col-md-12 d-none">
+      <div id="content-after-animation" class="col-md-12">
         <!-- Isi halaman website Anda disini -->
         <h1>Selamat datang di halaman website kami!</h1>
         <p>Isi konten halaman website Anda di sini...</p>
@@ -186,7 +187,6 @@
           if (distance >= lineLength - loveIcon.offsetWidth && !isAlertShown) {
             lockIcon.src = 'unlocked.gif';
             setTimeout(() => {
-              contentAfterAnimation.classList.remove('d-none');
               showUnlockAlert();
               hideElements();
             }, 3000); // Delay selama 3 detik sebelum munculnya alert
