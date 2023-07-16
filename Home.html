@@ -3,19 +3,274 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animated Lock</title>
-  <link rel="stylesheet" href="gaya.css">
+  <title>Halaman Website Responsif</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 60px;
+      margin-top: 80px;
+    }
+
+.love-icon-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      cursor: pointer;
+    }
+
+    .love-icon {
+      bottom: -40px;
+      width: 80px;
+      height: 80px;
+      transition: left 0.3s ease-out;
+      user-drag: none;
+      user-select: none;
+      touch-action: none;
+      position: absolute;
+      left: 0;
+    }
+
+    .horizontal-line-container {
+      position: relative;
+      margin-bottom: 80px; /* Margin bottom untuk meletakkan gembok di atas garis */
+    }
+
+    .horizontal-line {
+      position: relative;
+      width: 100%;
+      height: 4px;
+      background-color: red;
+    }
+
+    .circle-segment {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: red;
+      position: absolute;
+    }
+
+    .circle-start {
+      top: -3px;
+      left: -3px;
+    }
+
+    .circle-end {
+      top: -3px;
+      right: -3px;
+    }
+
+    .lock-icon {
+      position: absolute;
+      bottom: 80px; /* Mengatur posisi gembok di atas garis */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 300px;
+      opacity: 1;
+      transition: opacity 0.5s;
+    }
+
+    .unlocked {
+      animation: unlockAnimation 0.5s forwards;
+    }
+
+    @keyframes unlockAnimation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(90deg);
+      }
+    }
+
+    /* Responsive styles */
+    @media (max-width: 767px) {
+      .love-icon {
+        width: 40px;
+        height: 40px;
+      }
+      .lock-icon {
+        bottom: 40px;
+        width: 200px;
+        height: 200px;
+      }
+      }
+    
+    .hidden {
+      display: none;
+    }
+
+    .toast {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      width: 300px;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      border-radius: 8px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .show-toast {
+      opacity: 1;
+    }
+
+    .toast-header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn-close {
+      color: #fff;
+    }
+
+    .toast-body {
+      padding: 8px 0;
+    }
+  </style>
 </head>
 <body>
-  <div class="lock-container">
-    <div class="lock">
-      <div class="shackle"></div>
-      <div class="body"></div>
-      <div class="keyhole"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="love-icon-container">
+          <img class="love-icon" src="love.svg" alt="Love Icon">
+        </div>
+      </div>
     </div>
-    <div class="slider" oninput="unlock()"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="horizontal-line-container">
+          <div class="circle-segment circle-start"></div>
+          <hr class="horizontal-line">
+          <div class="circle-segment circle-end"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div id="content-after-animation" class="hidden">
+        <!-- Isi halaman website Anda disini -->
+        <h1>Selamat datang di halaman website kami!</h1>
+        <p>Isi konten halaman website Anda di sini...</p>
+      </div>
+    </div>
   </div>
 
-  <script src="apa.js"></script>
+  <div class="toast" id="unlock-alert">
+    <div class="toast-header">
+      <strong class="me-auto">Gembok Terbuka!</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Selamat! Anda berhasil membuka gembok.
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const loveIconContainer = document.querySelector('.love-icon-container');
+      const loveIcon = document.querySelector('.love-icon');
+      const horizontalLine = document.querySelector('.horizontal-line');
+      const contentAfterAnimation = document.getElementById('content-after-animation');
+      const unlockAlert = document.getElementById('unlock-alert');
+
+      const lockIcon = document.createElement('img');
+      lockIcon.classList.add('lock-icon');
+      lockIcon.src = 'locked.png';
+      lockIcon.alt = 'Lock Icon';
+      lockIcon.style.width = '250px'; // Ukuran gambar gembok terkunci
+      lockIcon.style.height = '250px';
+
+      loveIconContainer.appendChild(lockIcon);
+
+      let isDragging = false;
+      let initialX = 0;
+      let offsetX = 0;
+      let isAlertShown = false;
+
+      loveIconContainer.addEventListener('mousedown', startDragging);
+      loveIconContainer.addEventListener('touchstart', startDragging);
+
+      function startDragging(event) {
+        event.preventDefault();
+        isDragging = true;
+        initialX = event.clientX || event.touches[0].clientX;
+        offsetX = loveIcon.getBoundingClientRect().left - initialX;
+
+        document.addEventListener('mousemove', dragLoveIcon);
+        document.addEventListener('touchmove', dragLoveIcon);
+        document.addEventListener('mouseup', stopDragging);
+        document.addEventListener('touchend', stopDragging);
+
+        requestAnimationFrame(updateLovePosition);
+      }
+
+      function dragLoveIcon(event) {
+        if (!isDragging) return;
+        event.preventDefault();
+        initialX = event.clientX || event.touches[0].clientX;
+      }
+
+      function updateLovePosition() {
+        if (isDragging) {
+          const lineLength = horizontalLine.offsetWidth;
+          const currentX = initialX;
+          const distance = Math.min(currentX + offsetX, lineLength - loveIcon.offsetWidth);
+          loveIcon.style.left = distance + 'px';
+
+          if (distance >= lineLength - loveIcon.offsetWidth && !isAlertShown) {
+            lockIcon.src = 'unlocked.gif';
+            setTimeout(() => {
+              showUnlockAlert();
+              hideElements();
+            }, 3000); // Delay selama 3 detik sebelum munculnya alert
+            isAlertShown = true;
+          }
+        }
+
+        requestAnimationFrame(updateLovePosition);
+      }
+
+      function stopDragging() {
+        isDragging = false;
+        document.removeEventListener('mousemove', dragLoveIcon);
+        document.removeEventListener('touchmove', dragLoveIcon);
+        document.removeEventListener('mouseup', stopDragging);
+        document.removeEventListener('touchend', stopDragging);
+      }
+
+      function showUnlockAlert() {
+        unlockAlert.classList.add('show-toast');
+
+        // Ketika alert ditutup, tampilkan isi halaman
+        unlockAlert.addEventListener('hidden.bs.toast', function() {
+          contentAfterAnimation.classList.remove('hidden');
+        });
+      }
+
+      function hideElements() {
+        loveIconContainer.classList.add('hidden');
+        horizontalLine.classList.add('hidden');
+        const circleSegments = document.querySelectorAll('.circle-segment');
+        circleSegments.forEach(segment => segment.classList.add('hidden'));
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
