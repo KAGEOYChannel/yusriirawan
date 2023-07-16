@@ -34,7 +34,9 @@
       user-select: none;
       touch-action: none;
       position: absolute;
-      left: 0;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
 
     .horizontal-line-container {
@@ -44,6 +46,10 @@
     .horizontal-line {
       border-top: 4px solid red;
       width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
     }
 
     .lock-icon {
@@ -90,6 +96,9 @@
       <div class="col-md-12">
         <div class="love-icon-container">
           <img class="love-icon" src="love.svg" alt="Love Icon">
+          <div class="horizontal-line-container">
+            <hr class="horizontal-line">
+          </div>
           <img class="lock-icon" src="lock.svg" alt="Lock Icon">
         </div>
       </div>
@@ -152,10 +161,10 @@
         if (isDragging) {
           const lineLength = horizontalLine.offsetWidth;
           const currentX = initialX;
-          const distance = Math.min(currentX + offsetX, lineLength - loveIcon.offsetWidth);
+          const distance = Math.min(currentX + offsetX, lineLength - loveIcon.offsetWidth / 2);
           loveIcon.style.left = distance + 'px';
 
-          if (distance >= lineLength - loveIcon.offsetWidth) {
+          if (distance >= lineLength - loveIcon.offsetWidth / 2) {
             lockIcon.classList.add('unlocked');
             contentAfterAnimation.classList.remove('d-none');
             showUnlockAlert();
