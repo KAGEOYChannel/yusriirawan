@@ -108,8 +108,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="love-icon-container">
-          <img class="love-icon" src="love.svg" alt="Love Icon">
-          <img class="lock-icon" src="lock.svg" alt="Lock Icon">
+          <img class="love-icon" src="love.png" alt="Love Icon">
         </div>
       </div>
     </div>
@@ -131,14 +130,21 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const loveIconContainer = document.querySelector('.love-icon-container');
       const loveIcon = document.querySelector('.love-icon');
-      const lockIcon = document.querySelector('.lock-icon');
       const horizontalLine = document.querySelector('.horizontal-line');
       const contentAfterAnimation = document.getElementById('content-after-animation');
+
+      const lockIcon = document.createElement('img');
+      lockIcon.classList.add('lock-icon');
+      lockIcon.src = 'locked.png';
+      lockIcon.alt = 'Lock Icon';
+      lockIcon.style.width = '300px'; // Ukuran gambar gembok terkunci
+      lockIcon.style.height = '300px';
+
+      loveIconContainer.appendChild(lockIcon);
 
       let isDragging = false;
       let initialX = 0;
@@ -176,10 +182,12 @@
           loveIcon.style.left = distance + 'px';
 
           if (distance >= lineLength - loveIcon.offsetWidth && !isAlertShown) {
-            lockIcon.classList.add('unlocked');
-            contentAfterAnimation.classList.remove('d-none');
-            showUnlockAlert();
-            hideElements();
+            lockIcon.src = 'unlocked.gif';
+            setTimeout(() => {
+              contentAfterAnimation.classList.remove('d-none');
+              showUnlockAlert();
+              hideElements();
+            }, 3000); // Delay selama 3 detik sebelum munculnya alert
             isAlertShown = true;
           }
         }
@@ -226,5 +234,7 @@
       }
     });
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
