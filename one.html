@@ -20,13 +20,13 @@
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       cursor: pointer;
     }
 
     .love-icon {
-      width: 300px;
-      height: 300px;
+      width: 80px;
+      height: 80px;
       transition: left 0.3s ease-out;
       user-drag: none;
       user-select: none;
@@ -36,15 +36,12 @@
     }
 
     .horizontal-line-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px;
+      position: relative;
     }
 
     .horizontal-line {
       position: relative;
-      width: 80%;
+      width: 100%;
       height: 4px;
       background-color: red;
     }
@@ -54,16 +51,26 @@
       height: 10px;
       border-radius: 50%;
       background-color: red;
-      margin: 0 5px;
+      position: absolute;
+    }
+
+    .circle-start {
+      top: -3px;
+      left: -3px;
+    }
+
+    .circle-end {
+      top: -3px;
+      right: -3px;
     }
 
     .lock-icon {
       position: absolute;
-      top: -100px;
+      top: -50px;
       left: 50%;
       transform: translateX(-50%);
-      width: 40px;
-      height: 40px;
+      width: 300px; /* Ukuran gembok diubah menjadi 300px */
+      height: 300px; /* Ukuran gembok diubah menjadi 300px */
       opacity: 1;
       transition: opacity 0.5s;
     }
@@ -84,20 +91,13 @@
     /* Responsive styles */
     @media (max-width: 767px) {
       .love-icon {
-        width: 150px;
-        height: 150px;
+        width: 40px;
+        height: 40px;
       }
       .lock-icon {
-        top: -50px;
+        top: -30px;
         width: 30px;
         height: 30px;
-      }
-      .horizontal-line {
-        width: 90%;
-      }
-      .horizontal-line-container {
-        flex-direction: column;
-        align-items: center;
       }
     }
   </style>
@@ -115,17 +115,17 @@
     <div class="row">
       <div class="col-md-12">
         <div class="horizontal-line-container">
-          <div class="circle-segment"></div>
-          <div class="horizontal-line"></div>
-          <div class="circle-segment"></div>
+          <div class="circle-segment circle-start"></div>
+          <hr class="horizontal-line">
+          <div class="circle-segment circle-end"></div>
         </div>
       </div>
     </div>
     <div class="row">
       <div id="content-after-animation" class="col-md-12 d-none">
         <!-- Isi halaman website Anda disini -->
-        <h1 class="text-center">Selamat datang di halaman website kami!</h1>
-        <p class="text-center">Isi konten halaman website Anda di sini...</p>
+        <h1>Selamat datang di halaman website kami!</h1>
+        <p>Isi konten halaman website Anda di sini...</p>
       </div>
     </div>
   </div>
