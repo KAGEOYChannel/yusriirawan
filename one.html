@@ -121,7 +121,8 @@
       let initialX = 0;
       let offsetX = 0;
 
-      loveIconContainer.addEventListener('pointerdown', startDragging);
+      loveIconContainer.addEventListener('mousedown', startDragging);
+      loveIconContainer.addEventListener('touchstart', startDragging);
 
       function startDragging(event) {
         event.preventDefault();
@@ -129,34 +130,42 @@
         initialX = event.clientX || event.touches[0].clientX;
         offsetX = loveIcon.getBoundingClientRect().left - initialX;
 
-        loveIconContainer.setPointerCapture(event.pointerId);
-        loveIconContainer.addEventListener('pointermove', dragLoveIcon);
-        loveIconContainer.addEventListener('pointerup', stopDragging);
-        loveIconContainer.addEventListener('pointercancel', stopDragging);
-        loveIconContainer.addEventListener('pointerout', stopDragging);
+        document.addEventListener('mousemove', dragLoveIcon);
+        document.addEventListener('touchmove', dragLoveIcon);
+        document.addEventListener('mouseup', stopDragging);
+        document.addEventListener('touchend', stopDragging);
+
+        requestAnimationFrame(updateLovePosition);
       }
 
       function dragLoveIcon(event) {
         if (!isDragging) return;
         event.preventDefault();
-        const lineLength = horizontalLine.offsetWidth;
-        const currentX = event.clientX || event.touches[0].clientX;
-        const distance = Math.min(currentX + offsetX, lineLength - loveIcon.offsetWidth);
-        loveIcon.style.left = distance + 'px';
-
-        if (distance >= lineLength - loveIcon.offsetWidth) {
-          lockIcon.classList.add('unlocked');
-          contentAfterAnimation.classList.remove('d-none');
-        }
+        initialX = event.clientX || event.touches[0].clientX;
       }
 
-      function stopDragging(event) {
-        if (!isDragging) return;
+      function updateLovePosition() {
+        if (isDragging) {
+          const lineLength = horizontalLine.offsetWidth;
+          const currentX = initialX;
+          const distance = Math.min(currentX + offsetX, lineLength - loveIcon.offsetWidth);
+          loveIcon.style.left = distance + 'px';
+
+          if (distance >= lineLength - loveIcon.offsetWidth) {
+            lockIcon.classList.add('unlocked');
+            contentAfterAnimation.classList.remove('d-none');
+          }
+        }
+
+        requestAnimationFrame(updateLovePosition);
+      }
+
+      function stopDragging() {
         isDragging = false;
-        loveIconContainer.removeEventListener('pointermove', dragLoveIcon);
-        loveIconContainer.removeEventListener('pointerup', stopDragging);
-        loveIconContainer.removeEventListener('pointercancel', stopDragging);
-        loveIconContainer.removeEventListener('pointerout', stopDragging);
+        document.removeEventListener('mousemove', dragLoveIcon);
+        document.removeEventListener('touchmove', dragLoveIcon);
+        document.removeEventListener('mouseup', stopDragging);
+        document.removeEventListener('touchend', stopDragging);
       }
     });
   </script>
