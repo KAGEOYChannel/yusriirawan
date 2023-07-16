@@ -165,26 +165,25 @@
       display: none;
     }
     .icon-home {
-      font-size: 70px;
+      font-size: 50px;
       margin-right: 10px;
     }
     .text-home {
-      font-size: 50px;
-      animation: changeColor 5s infinite;
-      background: linear-gradient(45deg, 
-        rgb(255, 0, 0),    /* Warna merah */
-        rgb(0, 255, 0),    /* Warna hijau */
-        rgb(0, 0, 255)     /* Warna biru */
-      );
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 30px;
+      animation: bounceColor 1.5s infinite;
     }
-    @keyframes changeColor {
-      0%, 100% {
-        background-position: 0% 50%;
+    @keyframes bounceColor {
+      0% {
+        transform: scale(1);
+        color: rgb(255, 0, 0); /* Warna merah */
       }
       50% {
-        background-position: 100% 50%;
+        transform: scale(1.2);
+        color: rgb(0, 255, 0); /* Warna hijau */
+      }
+      100% {
+        transform: scale(1);
+        color: rgb(0, 0, 255); /* Warna biru */
       }
     }
   </style>
@@ -212,7 +211,7 @@
         <div class="container-fluid mt-5">
     <div class="row justify-content-center align-items-center">
       <div class="col-auto">
-        <span class="icon-home">&#x1F3E0;</span>
+        <img src="home.gif" alt="Home Icon" class="icon-home" width="50">
         <span class="text-home">HOME</span>
       </div>
     </div>
