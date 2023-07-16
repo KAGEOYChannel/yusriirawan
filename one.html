@@ -87,8 +87,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="love-icon-container">
-          <img class="love-icon" src="love.svg" alt="Love Icon">
-          <img class="lock-icon" src="lock.svg" alt="Lock Icon">
+          <img class="love-icon" src="love.png" alt="Love Icon">
+          <img class="lock-icon" src="locked.png" alt="Lock Icon">
         </div>
       </div>
     </div>
@@ -121,18 +121,20 @@
       let initialX = 0;
       let offsetX = 0;
 
-      loveIconContainer.addEventListener('mousedown', startDragging);
-      loveIconContainer.addEventListener('touchstart', startDragging);
+      loveIconContainer.addEventListener('pointerdown', startDragging);
 
       function startDragging(event) {
         event.preventDefault();
         isDragging = true;
         initialX = event.clientX || event.touches[0].clientX;
         offsetX = loveIcon.getBoundingClientRect().left - initialX;
-      }
 
-      document.addEventListener('mousemove', dragLoveIcon);
-      document.addEventListener('touchmove', dragLoveIcon);
+        loveIconContainer.setPointerCapture(event.pointerId);
+        loveIconContainer.addEventListener('pointermove', dragLoveIcon);
+        loveIconContainer.addEventListener('pointerup', stopDragging);
+        loveIconContainer.addEventListener('pointercancel', stopDragging);
+        loveIconContainer.addEventListener('pointerout', stopDragging);
+      }
 
       function dragLoveIcon(event) {
         if (!isDragging) return;
@@ -148,11 +150,13 @@
         }
       }
 
-      document.addEventListener('mouseup', stopDragging);
-      document.addEventListener('touchend', stopDragging);
-
-      function stopDragging() {
+      function stopDragging(event) {
+        if (!isDragging) return;
         isDragging = false;
+        loveIconContainer.removeEventListener('pointermove', dragLoveIcon);
+        loveIconContainer.removeEventListener('pointerup', stopDragging);
+        loveIconContainer.removeEventListener('pointercancel', stopDragging);
+        loveIconContainer.removeEventListener('pointerout', stopDragging);
       }
     });
   </script>
