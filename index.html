@@ -143,24 +143,24 @@
     .text-yusri {
       font-size: 30px;
       font-weight: bold;
-      background: linear-gradient(45deg, gold, pink, black);
+      background: linear-gradient(45deg, #f2c49e, #f24b8e, black);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 
       /* Animasi gradient bergerak */
-      background-size: 200% 200%;
-      background-position: 0 100%;
+      background-size: 200% auto;
+      background-position: 0 50%;
       animation: gradientMove 5s linear infinite;
     }
 
     @keyframes gradientMove {
       0% {
-        background-position: 0 100%;
+        background-position: 0 50%;
       }
       100% {
-        background-position: 100% 0%;
+        background-position: 200% 50%;
       }
     }
   </style>
