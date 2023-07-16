@@ -15,14 +15,16 @@
       height: 100vh;
     }
 
-    .icon {
-      display: inline-block;
-      width: 50px;
-      height: 50px;
-      background-color: #f2c49e;
-      border-radius: 50%;
+    .icon-container {
+      display: flex;
+      align-items: center;
       margin-right: 10px;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
     }
 
     .text-home {
@@ -32,11 +34,28 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+
+      /* Animasi gradient bergerak */
+      animation: gradientMove 5s infinite;
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="home.gif"></div>
-  <span class="text-home">HOME</span>
+  <div class="icon-container">
+    <img class="icon" src="home.gif" alt="Icon Home">
+    <span class="text-home">HOME</span>
+  </div>
 </body>
 </html>
