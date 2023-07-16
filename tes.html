@@ -3,65 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Masukkan Password</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+  <title>Home Page</title>
   <style>
-    /* CSS untuk tampilan dan desain */
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .password-form {
+      margin: 0;
+      padding: 0;
+      background-color: white;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      max-width: 400px;
-      margin: 0 auto;
+      height: 100vh;
     }
 
-    .password-form input[type="password"] {
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      outline: none;
-      margin-bottom: 10px;
+    .icon {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background-color: #f2c49e;
+      border-radius: 50%;
+      margin-right: 10px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
 
-    .password-form button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 5px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      cursor: pointer;
+    .text-home {
+      font-size: 30px;
+      background: linear-gradient(45deg, #f2c49e, #f24b8e, black);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
     }
   </style>
 </head>
 <body>
-  <div class="password-form">
-    <h1>Masukkan Password</h1>
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="checkPassword()">Submit</button>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-  <script>
-    function checkPassword() {
-      var password = document.getElementById("password").value;
-
-      // Ganti PASSWORD yang diinginkan dengan password yang benar
-      if (password === "PASSWORD") {
-        window.location.href = "halaman-lain.html";
-      } else {
-        swal("Password Salah", "Silakan coba lagi!", "error");
-      }
-    }
-  </script>
+  <div class="home.gif"></div>
+  <span class="text-home">HOME</span>
 </body>
 </html>
