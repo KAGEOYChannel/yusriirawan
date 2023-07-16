@@ -20,21 +20,23 @@
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       cursor: pointer;
     }
 
     .love-icon {
       width: 80px;
       height: 80px;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
       transition: left 0.3s ease-out;
       user-drag: none;
       user-select: none;
       touch-action: none;
+      position: absolute;
+      left: 0;
+    }
+
+    .horizontal-line-container {
+      position: relative;
     }
 
     .horizontal-line {
@@ -44,9 +46,9 @@
 
     .lock-icon {
       position: absolute;
-      top: 50%;
-      left: 10px;
-      transform: translateY(-50%);
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
       width: 40px;
       height: 40px;
       opacity: 1;
@@ -73,7 +75,7 @@
         height: 40px;
       }
       .lock-icon {
-        left: 5px;
+        top: -30px;
         width: 30px;
         height: 30px;
       }
@@ -92,7 +94,9 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <hr class="horizontal-line">
+        <div class="horizontal-line-container">
+          <hr class="horizontal-line">
+        </div>
       </div>
     </div>
     <div class="row">
@@ -135,7 +139,7 @@
         event.preventDefault();
         const lineLength = horizontalLine.offsetWidth;
         const currentX = event.clientX || event.touches[0].clientX;
-        const distance = Math.min(currentX + offsetX, lineLength - loveIcon.offsetWidth / 2);
+        const distance = Math.min(currentX + offsetX, lineLength - loveIcon.offsetWidth);
         loveIcon.style.left = distance + 'px';
 
         if (distance >= lineLength - loveIcon.offsetWidth) {
