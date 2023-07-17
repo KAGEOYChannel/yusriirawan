@@ -147,15 +147,27 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: gradientMove 5s linear infinite;
+
+      /* Animasi gradient bergerak */
+      background-size: 400% 400%; /* Ubah ukuran untuk efek yang lebih dramatis */
+      animation: gradientMove 10s linear infinite;
     }
 
     @keyframes gradientMove {
       0% {
+        background-position: 0% 0%;
+      }
+      25% {
+        background-position: 100% 0%;
+      }
+      50% {
+        background-position: 100% 100%;
+      }
+      75% {
         background-position: 0% 100%;
       }
       100% {
-        background-position: 100% 0%;
+        background-position: 0% 0%;
       }
     }
   </style>
@@ -215,19 +227,16 @@
   gsap.from("#image-container img", {scale: 0, duration: 2});
 </script>
   <script>
-    // Fungsi untuk menghasilkan nilai acak antara 0 dan 100
     function getRandomValue() {
       return Math.floor(Math.random() * 101);
     }
 
-    // Mengubah nilai background-position secara acak setiap 5 detik
     function animateRandomGradient() {
       const textHome = document.querySelector('.text-home');
       textHome.style.backgroundPosition = `${getRandomValue()}% ${getRandomValue()}%`;
       setTimeout(animateRandomGradient, 5000);
     }
 
-    // Memulai animasi acak setelah halaman dimuat
     document.addEventListener('DOMContentLoaded', () => {
       animateRandomGradient();
     });
