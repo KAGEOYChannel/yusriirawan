@@ -30,6 +30,36 @@
             -webkit-background-clip: text;
             animation: glowing 4s ease-in-out infinite;
         }
+        .text-yusri {
+      font-size: 30px;
+      font-weight: bold;
+      background: linear-gradient(45deg, pink, purple, navy, lightblue);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      /* Animasi gradient bergerak */
+      background-size: 400% 400%; /* Ubah ukuran untuk efek yang lebih dramatis */
+      animation: gradientMove 10s linear infinite;
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 0%;
+      }
+      25% {
+        background-position: 100% 0%;
+      }
+      50% {
+        background-position: 100% 100%;
+      }
+      75% {
+        background-position: 0% 100%;
+      }
+      100% {
+        background-position: 0% 0%;
+      }
+            }
 
         .blinking-cursor {
             animation: blink 1s step-end infinite;
@@ -68,7 +98,7 @@
 </head>
 <body>
     <div class="coming-soon-container">
-        <h1 class="glowing-text">Coming Soon<span class="blinking-cursor">|</span></h1>
+        <h1><span class="text-yusri">>Coming Soon</span></h1>
         <p class="typing-text">We are working hard to bring you something amazing.</p>
     </div>
 </body>
