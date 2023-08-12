@@ -378,7 +378,7 @@
     position: absolute;
   bottom: 0;
   font-size: 22px;
-  font-weight: 700;
+  font-weight: bold;
   text-align: center;
   white-space: nowrap;
   transform: translateY(-10px) translateX(-50%);
@@ -391,7 +391,7 @@
 
       /* Animasi gradient bergerak */
       background-size: 400% 400%; /* Ubah ukuran untuk efek yang lebih dramatis */
-      animation: gradientMove 10s linear infinite;
+      animation: gradientMove 20s linear infinite;
   }
 
     @keyframes gradientMove {
