@@ -52,11 +52,12 @@ body {
 	aspect-ratio: var(--ar);
 	border-radius: 100vh;
 	border: 0;
-	position: fixed;
-        bottom: 1rem;
-        right: 1rem;
-        display: flex;
-        align-items: center;
+	position: absolute;
+bottom: 1rem;
+right: 1rem;
+transform: translateX(100%);
+display: flex;
+align-items: flex-end;
 	padding: 0;
 	overflow: hidden;
 	cursor: pointer;
