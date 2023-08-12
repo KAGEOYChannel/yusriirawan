@@ -52,10 +52,8 @@ body {
 	aspect-ratio: var(--ar);
 	border-radius: 100vh;
 	border: 0;
-	position: absolute;
-bottom: 1rem;
-right: 1rem;
-transform: translateX(100%);
+	position: relative;
+float: right;
 display: flex;
 align-items: flex-end;
 	padding: 0;
