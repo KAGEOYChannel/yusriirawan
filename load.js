@@ -5,5 +5,5 @@ document.addEventListener('DOMContentLoaded', function () {
   setTimeout(function () {
     loadingOverlay.style.display = 'none'; // Sembunyikan overlay setelah loading selesai
     content.style.display = 'block'; // Tampilkan konten halaman utama
-  }, 2000); // Waktu simulasi loading (dalam milidetik)
+  }, 4000); // Waktu simulasi loading (dalam milidetik)
 });
