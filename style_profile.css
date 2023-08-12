@@ -366,15 +366,9 @@
   transition: 0.3s;
 }
 
-.text-yusri {
-  position: absolute;
-  bottom: 0;
-  font-size: 22px;
-  font-weight: 700;
-  text-align: center;
-  white-space: nowrap;
-  transform: translateY(-10px) translateX(-50%);
-  left: 50%;
+  .text-yusri {
+      font-size: 30px;
+      font-weight: bold;
       background: linear-gradient(45deg, pink, purple, navy, lightblue);
       -webkit-background-clip: text;
       background-clip: text;
@@ -383,7 +377,7 @@
       /* Animasi gradient bergerak */
       background-size: 400% 400%; /* Ubah ukuran untuk efek yang lebih dramatis */
       animation: gradientMove 10s linear infinite;
-    }
+  }
 
     @keyframes gradientMove {
       0% {
