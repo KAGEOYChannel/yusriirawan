@@ -9,7 +9,6 @@
       
 .tesbuttons {
   display: flex;
-  color: var(--color);
   margin-top: auto;
   position: sticky;
   bottom: 0;
@@ -19,7 +18,6 @@
     flex: 1 1 auto;
     user-select: none;
     font-size: 13px;
-    color: var(--color);
     border: 0;
     padding: 15px 5px;
     cursor: pointer;
@@ -31,7 +29,7 @@
 
     &.is-active,
     &:hover {
-      color: #2b2c48;
+      color: var(--color);
       border-bottom: 3px solid #8a84ff;
       background: linear-gradient(
         to bottom,
