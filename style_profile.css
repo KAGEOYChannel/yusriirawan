@@ -341,7 +341,7 @@
 .card-contact {
   display: flex;
   align-items: center;
-  font-size: 18px;
+  font-size: 13px;
   color: var(--color);
   font-family: "DM Sans", sans-serif;
   line-height: 1.2;
