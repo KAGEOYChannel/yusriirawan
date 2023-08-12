@@ -321,6 +321,7 @@
 }
 
 .card-item-title {
+  color: var(--color);
   font-weight: 500;
   font-size: 14px;
   margin-bottom: 5px;
@@ -349,7 +350,8 @@
   & + & {
     margin-top: 16px;
   }
-  svg {
+}
+  .contact-svg {
     flex-shrink: 0;
     color: var(--color);
     width: 30px;
@@ -359,7 +361,7 @@
     padding-right: 5px;
     border-right: 1px solid var(--color);
   }
-}
+
 
 
 .contact-me {
