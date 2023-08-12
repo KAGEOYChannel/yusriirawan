@@ -9,7 +9,7 @@
 /*   --slide-ease: cubic-bezier(.8,-0.3,.2,1.3); */
 	--easing: var(--slide-ease);
 	--speed: 0.5s;
-	--width: clamp(200px, 45vmin, 500px);
+	--width: clamp(100px, 22.5vmin, 250px);
 	--ar: 8 / 3;
 	--ray: hsl(0 0% 100% / 0.5);
 	--sun: hsl(47, 91%, 58%);
@@ -42,7 +42,7 @@ body {
 .toggle {
   -webkit-tap-highlight-color: transparent;
 	width: var(--width);
-	height: 34px;
+	
   /* random attempts at tackling the overflow iOS issue */
   z-index: 10;
   will-change: transform;
