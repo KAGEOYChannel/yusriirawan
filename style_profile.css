@@ -347,7 +347,6 @@
   & + & {
     margin-top: 16px;
   }
-}
   svg {
     flex-shrink: 0;
     color: var(--color);
@@ -358,6 +357,7 @@
     padding-right: 5px;
     border-right: 1px solid var(--color);
   }
+}
 
 
 .contact-me {
