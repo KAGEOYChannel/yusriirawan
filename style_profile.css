@@ -384,7 +384,7 @@
   white-space: nowrap;
   transform: translateY(-10px) translateX(-50%);
   left: 50%;
-      -webkit-text-stroke: 2px black;
+      -webkit-text-stroke: 0.5px black;
        color: transparent;
       
       background: linear-gradient(45deg, var(--clr-1), var(--clr-2), var(--clr-3), var(--clr-4));
