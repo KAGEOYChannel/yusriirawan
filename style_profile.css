@@ -220,8 +220,8 @@
   background-color: var(--bg);
   bottom: 0;
   left: 0;
-
-  button {
+}
+  .cards-buttons {
     flex: 1 1 auto;
     user-select: none;
     background: 0;
@@ -248,7 +248,7 @@
       );
     }
   }
-}
+
 
 
 .card-section {
