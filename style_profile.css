@@ -58,6 +58,11 @@
     bottom: 10px;
   }
 
+  .card-logo {
+    width: 50px;
+    height: 50px;
+  }
+
   .card-fullname,
   .card-jobtitle {
     left: 86px;
