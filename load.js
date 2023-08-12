@@ -1,4 +1,4 @@
-window.addEventListener('load', function () {
+document.addEventListener('DOMContentLoaded', function () {
   const loadingOverlay = document.querySelector('.loading-overlay');
   const content = document.querySelector('.content');
 
