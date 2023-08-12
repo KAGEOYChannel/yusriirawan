@@ -9,7 +9,7 @@
 /*   --slide-ease: cubic-bezier(.8,-0.3,.2,1.3); */
 	--easing: var(--slide-ease);
 	--speed: 0.5s;
-	--width: clamp(100px, 25vmin, 200px);
+	--width: 70px;
 	--ar: 8 / 3;
 	--ray: hsl(0 0% 100% / 0.5);
 	--sun: hsl(47, 91%, 58%);
