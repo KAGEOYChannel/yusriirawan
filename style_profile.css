@@ -34,10 +34,11 @@
 
 .card[data-state="#contact"] {
   height: 450px;
+  width: 340px
 }
 
 .card[data-state="#experience"] {
-  height: 550px;
+  height: 540px;
 }
 
 .card.is-active {
