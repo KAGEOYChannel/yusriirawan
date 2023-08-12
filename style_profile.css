@@ -155,7 +155,7 @@
 
 .card-desc {
   line-height: 1.6;
-  color: #636b6f;
+  color: var(--color);
   font-size: 14px;
   margin: 0;
   font-weight: 400;
@@ -174,7 +174,7 @@
     transition: 0.3s;
   }
   a {
-    color: #8797a1;
+    color: var(--color);
     height: 32px;
     width: 32px;
     border-radius: 50%;
@@ -200,7 +200,7 @@
 
 .card-buttons {
   display: flex;
-  background-color: #fff;
+  background-color: var(--color);
   margin-top: auto;
   position: sticky;
   bottom: 0;
@@ -215,7 +215,7 @@
     border: 0;
     padding: 15px 5px;
     cursor: pointer;
-    color: #5c5c6d;
+    color: var(--color);
     transition: 0.3s;
     font-family: "Jost", sans-serif;
     font-weight: 500;
