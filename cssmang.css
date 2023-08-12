@@ -42,6 +42,7 @@ body {
 .toggle {
   -webkit-tap-highlight-color: transparent;
 	width: var(--width);
+	height: 34px;
   /* random attempts at tackling the overflow iOS issue */
   z-index: 10;
   will-change: transform;
