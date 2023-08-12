@@ -53,9 +53,6 @@ body {
 	border-radius: 100vh;
 	border: 0;
 	position: relative;
-float: right;
-display: flex;
-align-items: flex-end;
 	padding: 0;
 	overflow: hidden;
 	cursor: pointer;
