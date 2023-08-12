@@ -350,6 +350,7 @@
 }
   svg {
     flex-shrink: 0;
+    color: var(--color);
     width: 30px;
     min-height: 34px;
     margin-right: 12px;
