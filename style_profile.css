@@ -38,7 +38,7 @@
 }
 
 .card[data-state="#experience"] {
-  height: 540px;
+  height: 500px;
 }
 
 .card.is-active {
