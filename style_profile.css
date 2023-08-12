@@ -180,14 +180,15 @@
   align-items: center;
   padding: 0 20px;
   margin-bottom: 30px;
-  svg {
+}
+  .social-svg {
     color: var(--color);
     fill: rgb(165, 181, 206);
     width: 16px;
     display: block;
     transition: 0.3s;
   }
-  a {
+  .social-a {
     color: #8797a1;
     height: 32px;
     width: 32px;
@@ -210,7 +211,7 @@
       margin-right: 0;
     }
   }
-}
+
 
 .card-buttons {
   display: flex;
