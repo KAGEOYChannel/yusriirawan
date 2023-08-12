@@ -53,6 +53,7 @@ body {
 	border-radius: 100vh;
 	border: 0;
 	position: relative;
+	right: 100%;
 	padding: 0;
 	overflow: hidden;
 	cursor: pointer;
