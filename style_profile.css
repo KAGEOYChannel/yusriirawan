@@ -389,8 +389,8 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.7);
-
+      outline: 4px solid black;
+    
       /* Animasi gradient bergerak */
       background-size: 400% 400%; /* Ubah ukuran untuk efek yang lebih dramatis */
       animation: gradientMove 20s linear infinite;
