@@ -235,8 +235,8 @@
 
     &.is-active,
     &:hover {
-      color: var(--bg);
-      border-bottom: 3px solid var(--bg);
+      color: var(--color);
+      border-bottom: 3px solid var(--color);
       background: linear-gradient(
         to bottom,
         rgba(127, 199, 231, 0) 0%,
