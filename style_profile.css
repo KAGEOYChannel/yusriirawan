@@ -301,6 +301,7 @@
 
   &:after {
     content: attr(data-year);
+    color: var(--color);
     width: 10px;
     position: absolute;
     top: 0;
