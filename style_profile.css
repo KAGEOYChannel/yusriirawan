@@ -60,7 +60,7 @@
 
   .card-logo {
     width: 70px;
-    height: auto;
+    height: 50px;
   }
 
   .card-fullname,
@@ -419,4 +419,20 @@
       100% {
         background-position: 0% 0%;
       }
+    }
+.social-icons {
+      display: flex;
+      justify-content: center;
+    }
+    
+    .social-icon {
+      margin: 10px;
+      margin-buttom: 40px;
+      font-size: 24px;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      color: #007bff;
     }
