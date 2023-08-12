@@ -199,7 +199,6 @@
 
 .card-buttons {
   display: flex;
-  background-color: var(--color);
   margin-top: auto;
   position: sticky;
   bottom: 0;
