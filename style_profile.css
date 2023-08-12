@@ -214,7 +214,6 @@
     border: 0;
     padding: 15px 5px;
     cursor: pointer;
-    color: var(--bg);
     transition: 0.3s;
     font-family: "Jost", sans-serif;
     font-weight: 500;
