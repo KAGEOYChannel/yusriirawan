@@ -384,12 +384,14 @@
   white-space: nowrap;
   transform: translateY(-10px) translateX(-50%);
   left: 50%;
+      -webkit-text-stroke: 2px black;
+       color: transparent;
       
       background: linear-gradient(45deg, var(--clr-1), var(--clr-2), var(--clr-3), var(--clr-4));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      outline: 4px solid black;
+      
     
       /* Animasi gradient bergerak */
       background-size: 400% 400%; /* Ubah ukuran untuk efek yang lebih dramatis */
