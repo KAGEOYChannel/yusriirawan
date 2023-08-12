@@ -407,7 +407,7 @@
     
       /* Animasi gradient bergerak */
       background-size: 400% 400%; /* Ubah ukuran untuk efek yang lebih dramatis */
-      animation: gradientMove 20s linear infinite;
+      animation: gradientMove 3s linear infinite;
   }
 
     @keyframes gradientMove {
