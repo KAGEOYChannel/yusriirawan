@@ -52,8 +52,11 @@ body {
 	aspect-ratio: var(--ar);
 	border-radius: 100vh;
 	border: 0;
-	position: relative;
-	right: 100%;
+	position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        display: flex;
+        align-items: center;
 	padding: 0;
 	overflow: hidden;
 	cursor: pointer;
