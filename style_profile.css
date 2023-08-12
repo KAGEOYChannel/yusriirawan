@@ -3,6 +3,14 @@
 * {
   box-sizing: border-box;
 }
+
+:root {
+      --clr-1: #00c2ff;
+      --clr-2: #33ff8c;
+      --clr-3: #ffc640;
+      --clr-4: #e54cff;
+}
+
 .card {
   max-width: 340px;
   margin: auto;
@@ -376,7 +384,7 @@
   transform: translateY(-10px) translateX(-50%);
   left: 50%;
       
-      background: linear-gradient(45deg, pink, purple, navy, lightblue);
+      background: linear-gradient(45deg, var(--clr-1), var(--clr-2), var(--clr-3), var(--clr-4));
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
