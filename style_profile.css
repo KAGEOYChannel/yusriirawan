@@ -367,8 +367,15 @@
 }
 
   .text-yusri {
-      font-size: 30px;
-      font-weight: bold;
+    position: absolute;
+  bottom: 0;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  transform: translateY(-10px) translateX(-50%);
+  left: 50%;
+      
       background: linear-gradient(45deg, pink, purple, navy, lightblue);
       -webkit-background-clip: text;
       background-clip: text;
