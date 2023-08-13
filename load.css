@@ -1,5 +1,4 @@
-@import url("https://cdn.jsdelivr.net/bourbon/5.0.0/css/bourbon.min.css");
-
+@import "bourbon";
 /* The Loader */
 
 #loader-wrapper {
