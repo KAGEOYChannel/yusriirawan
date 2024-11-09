@@ -336,10 +336,12 @@
 }
 
 .card-contact-wrapper {
+  height: 100%;
   margin-top: 20px;
 }
 
 .card-contact {
+  height: 100%;
   display: flex;
   align-items: center;
   font-size: 13px;
