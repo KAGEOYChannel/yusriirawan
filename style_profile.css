@@ -33,7 +33,7 @@
 }
 
 .card[data-state="#contact"] {
-  height: 600px;
+  height: 100%;
 }
 
 .card[data-state="#experience"] {
