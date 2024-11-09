@@ -29,6 +29,21 @@
 .nav-list li {
   margin-bottom: 5px;
 }
+            .iframe-container34 {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* Rasio aspek 16:9 (bisa diubah sesuai kebutuhan) */
+            overflow: hidden;
+        }
+
+        .iframe-container34 iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none; /* Menghilangkan border */
+        }
   </style>
 </head>
   <body>
@@ -229,10 +244,9 @@
             <svg class="contact-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
               <path d="M22 6l-10 7L2 6" /></svg></a>email@yusriirawan.my.id
-        <iframe src="https://ngl.link/poppop13710" 
-      width="100%" 
-      height="600">
-    </iframe>
+        <div class="iframe-container">
+            <iframe src="https://ngl.link/poppop13710" allowfullscreen></iframe>
+        </div>
           </div>
            <div class="card-contact-wrapper">
     <div class="card-contact" >
