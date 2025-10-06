@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belajar Excel Kelas 5 - Interaktif</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f5f9ff;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(90deg, #007bff, #00bcd4);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      transition: 0.3s;
+    }
+    nav a:hover { background: rgba(255,255,255,0.4); }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+    section { margin-bottom: 2rem; }
+    h2 {
+      color: #007bff;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid #00bcd4;
+      display: inline-block;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: center;
+    }
+    th { background: #e3f2fd; }
+
+    .rumus-btn {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .rumus-btn:hover { background: #0056b3; }
+
+    .result {
+      margin-top: 1rem;
+      background: #e3fcec;
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+
+    footer {
+      background: #007bff;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      main { padding: 1rem; }
+      nav { flex-direction: column; }
+      nav a { width: 90%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💻 Belajar Microsoft Excel - Kelas 5</h1>
+    <nav>
+      <a href="#">🏠 Halaman Utama</a>
+      <a href="#">⬅️ Materi Sebelumnya</a>
+      <a href="#">➡️ Materi Berikutnya</a>
+      <a href="#">🎮 Game Interaktif</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Pengenalan Excel</h2>
+      <p>
+        Microsoft Excel adalah program pengolah angka untuk membuat tabel, menghitung data, dan menampilkan grafik. 
+        Excel sering digunakan untuk mencatat nilai, data keuangan, atau perhitungan otomatis menggunakan rumus.
+      </p>
+    </section>
+
+    <section>
+      <h2>Bagian-bagian Utama Excel</h2>
+      <ul>
+        <li><b>Title Bar</b>: Menampilkan nama file Excel.</li>
+        <li><b>Ribbon</b>: Tempat tab menu dan ikon perintah.</li>
+        <li><b>Worksheet Area</b>: Tempat kita bekerja, berisi kolom (A, B, C...) dan baris (1, 2, 3...).</li>
+        <li><b>Formula Bar</b>: Tempat mengetik rumus atau melihat hasil perhitungan.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Simulasi Rumus Excel</h2>
+      <p>Klik tombol di bawah untuk melihat hasil perhitungan otomatis seperti di Excel!</p>
+      <table id="dataTable">
+        <tr><th>Nama</th><th>Nilai</th></tr>
+        <tr><td>Ani</td><td>80</td></tr>
+        <tr><td>Budi</td><td>90</td></tr>
+        <tr><td>Cici</td><td>75</td></tr>
+        <tr><td>Dodi</td><td>85</td></tr>
+      </table>
+      <div style="margin-top: 1rem;">
+        <button class="rumus-btn" onclick="hitung('sum')">SUM (Jumlahkan)</button>
+        <button class="rumus-btn" onclick="hitung('avg')">AVERAGE (Rata-rata)</button>
+        <button class="rumus-btn" onclick="hitung('max')">MAX (Nilai Tertinggi)</button>
+        <button class="rumus-btn" onclick="hitung('min')">MIN (Nilai Terendah)</button>
+      </div>
+      <div class="result" id="hasil"></div>
+    </section>
+
+    <section>
+      <h2>Catatan Penting</h2>
+      <ul>
+        <li>Gunakan tanda sama dengan (<b>=</b>) untuk menulis rumus di Excel.</li>
+        <li>Contoh: <code>=SUM(A1:A4)</code> untuk menjumlahkan data dari sel A1 sampai A4.</li>
+        <li>Rumus lain: <code>=AVERAGE()</code>, <code>=MAX()</code>, <code>=MIN()</code>.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Pembelajaran TIK SD | Didesain oleh Guru Kelas 5 💙
+  </footer>
+
+  <script>
+    function hitung(jenis) {
+      const nilai = [80, 90, 75, 85];
+      let hasil = 0;
+      if (jenis === 'sum') hasil = nilai.reduce((a, b) => a + b, 0);
+      if (jenis === 'avg') hasil = (nilai.reduce((a, b) => a + b, 0) / nilai.length).toFixed(2);
+      if (jenis === 'max') hasil = Math.max(...nilai);
+      if (jenis === 'min') hasil = Math.min(...nilai);
+
+      const hasilBox = document.getElementById("hasil");
+      hasilBox.innerHTML = `<b>Hasil ${jenis.toUpperCase()}:</b> ${hasil}`;
+      hasilBox.animate([{opacity: 0}, {opacity: 1}], {duration: 600});
+    }
+  </script>
+</body>
+</html>
