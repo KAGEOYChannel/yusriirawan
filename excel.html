@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TIK Kelas 5 - Mengenal Menu dan Ikon di Microsoft Excel</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f4f8fb;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #1d6f42;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+      color: #1d6f42;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #e5f3ea;
+      color: #1d6f42;
+    }
+
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .highlight {
+      background: #e8f8f0;
+      border-left: 4px solid #1d6f42;
+      padding: 10px 15px;
+      margin: 15px 0;
+      border-radius: 6px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    button {
+      background: #1d6f42;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #14532d;
+    }
+
+    .toggle-content {
+      display: none;
+    }
+
+  </style>
+  <script>
+    function toggleContent(id) {
+      const content = document.getElementById(id);
+      content.style.display = content.style.display === "none" ? "block" : "none";
+    }
+  </script>
+</head>
+<body>
+
+  <header>
+    <h1>TIK Kelas 5</h1>
+    <h2>Mengenal Menu dan Ikon di Microsoft Excel</h2>
+  </header>
+
+  <main>
+    <section>
+      <h2>1️⃣ Apa itu Microsoft Excel?</h2>
+      <p>Microsoft Excel adalah <b>program pengolah angka</b> yang digunakan untuk <b>menghitung, membuat tabel, dan grafik</b>. Biasanya digunakan untuk mencatat data nilai, laporan keuangan, dan perhitungan otomatis.</p>
+    </section>
+
+    <section>
+      <h2>2️⃣ Tampilan Lembar Kerja Excel</h2>
+      <table>
+        <tr><th>Bagian</th><th>Fungsi</th></tr>
+        <tr><td>Title Bar</td><td>Menampilkan nama file yang sedang dikerjakan.</td></tr>
+        <tr><td>Ribbon</td><td>Tempat kumpulan menu dan ikon perintah.</td></tr>
+        <tr><td>Tab Menu</td><td>Kumpulan perintah utama seperti Home, Insert, Page Layout, Formulas, Data, View.</td></tr>
+        <tr><td>Name Box</td><td>Menunjukkan posisi cell aktif (contoh: A1).</td></tr>
+        <tr><td>Formula Bar</td><td>Tempat mengetik atau melihat rumus.</td></tr>
+        <tr><td>Worksheet Area</td><td>Tempat bekerja yang berisi cell, kolom, dan baris.</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>3️⃣ Tab Menu dan Fungsinya</h2>
+      <table>
+        <tr><th>Tab Menu</th><th>Fungsi Utama</th><th>Contoh Ikon</th></tr>
+        <tr><td>Home</td><td>Mengatur teks, angka, dan tampilan tabel.</td><td>Font, Bold, Align, Border</td></tr>
+        <tr><td>Insert</td><td>Menyisipkan elemen tambahan.</td><td>Table, Picture, Chart</td></tr>
+        <tr><td>Page Layout</td><td>Mengatur tampilan halaman sebelum dicetak.</td><td>Orientation, Margin</td></tr>
+        <tr><td>Formulas</td><td>Menggunakan rumus perhitungan.</td><td>AutoSum (∑)</td></tr>
+        <tr><td>Data</td><td>Mengelola dan menyaring data.</td><td>Sort & Filter</td></tr>
+        <tr><td>View</td><td>Mengatur tampilan lembar kerja.</td><td>Zoom, Page Break Preview</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>4️⃣ Ikon Penting di Excel</h2>
+      <button onclick="toggleContent('ikon')">Tampilkan / Sembunyikan Daftar Ikon</button>
+      <div id="ikon" class="toggle-content">
+        <table>
+          <tr><th>Ikon</th><th>Nama</th><th>Fungsi</th></tr>
+          <tr><td>🅑</td><td>Bold</td><td>Membuat tulisan tebal.</td></tr>
+          <tr><td>🅘</td><td>Italic</td><td>Membuat tulisan miring.</td></tr>
+          <tr><td>🅤</td><td>Underline</td><td>Memberi garis bawah teks.</td></tr>
+          <tr><td>🧱</td><td>Border</td><td>Menambahkan garis tepi pada cell.</td></tr>
+          <tr><td>🎨</td><td>Fill Color</td><td>Memberi warna latar belakang cell.</td></tr>
+          <tr><td>∑</td><td>AutoSum</td><td>Menjumlahkan angka secara otomatis.</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <div class="highlight">
+      💡 <b>Kesimpulan:</b>  
+      Excel memiliki banyak menu dan ikon yang membantu kita mengolah data dengan mudah.  
+      Menu utama ada di <b>ribbon</b>, dan tiap tab memiliki fungsi yang berbeda.
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Pembelajaran TIK Kelas 5 | Guru: [Nama Kamu]
+  </footer>
+
+</body>
+</html>
