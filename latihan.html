@@ -3,139 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Latihan TIK Kelas 5 - Word & Excel</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Latihan Microsoft Word & Excel</title>
   <style>
+    :root {
+      --primary: #4a90e2;
+      --secondary: #f5f7fa;
+      --text: #333;
+    }
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f9fafb;
+      font-family: "Poppins", sans-serif;
+      background-color: var(--secondary);
+      margin: 0;
+      padding: 0;
     }
-    .card {
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    textarea {
-      width: 100%;
-      min-height: 80px;
-      border: 1px solid #d1d5db;
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-      resize: vertical;
-    }
-    input[type="number"] {
-      width: 100%;
-      border: 1px solid #d1d5db;
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-    }
-    .btn {
-      background-color: #2563eb;
+    header {
+      background-color: var(--primary);
       color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: all 0.2s;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
     }
-    .btn:hover {
-      background-color: #1d4ed8;
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: var(--primary);
+      margin-top: 0;
+    }
+    ol {
+      line-height: 1.8;
+      padding-left: 1.2rem;
+    }
+    li {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    .note {
+      background-color: #eaf3ff;
+      padding: 1rem;
+      border-left: 5px solid var(--primary);
+      border-radius: 8px;
+      font-style: italic;
+      margin-top: 1.5rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    /* Responsif */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.2rem;
+      }
+      .container {
+        margin: 1rem;
+        padding: 1.2rem;
+      }
+      li {
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
-<body class="text-gray-800">
+<body>
 
-  <!-- 🔹 HEADER -->
-  <header class="bg-blue-700 text-white p-4 text-center">
-    <h1 class="text-2xl font-bold">🧮 LATIHAN TIK KELAS 5</h1>
-    <p class="text-sm mt-1">Microsoft Word & Microsoft Excel</p>
+  <header>
+    <h1>Latihan Microsoft Word & Excel</h1>
   </header>
 
-  <!-- 🔹 MAIN CONTENT -->
-  <main class="max-w-4xl mx-auto p-4 md:p-8">
+  <div class="container">
+    <h2>Petunjuk:</h2>
+    <p>Tulis jawabanmu di buku latihan! Bacalah setiap soal dengan seksama dan kerjakan dengan rapi.</p>
 
-    <!-- 📘 A. Word -->
-    <section class="card">
-      <h2 class="text-xl font-semibold text-blue-800 mb-3">📘 A. Microsoft Word</h2>
+    <h2>Latihan Soal:</h2>
+    <ol>
+      <li>Apa yang dimaksud dengan <b>Microsoft Word</b>?</li>
+      <li>Bagaimana cara membuat <b>tabel</b> di Microsoft Word?</li>
+      <li>Bagaimana cara <b>memasukkan gambar</b> ke dalam dokumen Word?</li>
+      <li>Apa yang dimaksud dengan <b>Microsoft Excel</b>?</li>
+      <li>Gunakan bantuan Excel untuk menghitung: <b>8892 + 4792 + 1232 + 8421 + 4280</b>.</li>
+      <li>Gunakan Excel untuk menghitung rata-rata dari data berikut: <b>87, 85, 89, 83</b>.</li>
+    </ol>
 
-      <p class="font-medium mb-2">1. Apa yang dimaksud dengan <strong>Microsoft Word</strong>?</p>
-      <textarea placeholder="Ketik jawabanmu di sini..."></textarea>
+    <div class="note">
+      💡 <b>Catatan Guru:</b> Soal ini melatih pemahaman konsep dasar Microsoft Word & Excel serta kemampuan siswa dalam mengoperasikan rumus sederhana di Excel.
+    </div>
+  </div>
 
-      <p class="font-medium mb-2 mt-4">2. Bagaimana cara <strong>membuat tabel</strong> di Microsoft Word?</p>
-      <textarea placeholder="Tuliskan langkah-langkahnya di sini..."></textarea>
-
-      <p class="font-medium mb-2 mt-4">3. Jelaskan langkah-langkah <strong>memasukkan gambar</strong> ke dokumen Word!</p>
-      <textarea placeholder="Tuliskan langkah-langkahnya di sini..."></textarea>
-    </section>
-
-    <!-- 🧾 B. Excel -->
-    <section class="card">
-      <h2 class="text-xl font-semibold text-green-700 mb-3">🧾 B. Microsoft Excel</h2>
-
-      <p class="font-medium mb-2">4. Apa yang dimaksud dengan <strong>Microsoft Excel</strong>?</p>
-      <textarea placeholder="Ketik jawabanmu di sini..."></textarea>
-
-      <p class="font-medium mt-4">5. Hitung hasil dari penjumlahan berikut menggunakan Excel:</p>
-      <p class="text-lg font-semibold text-blue-600 mb-2">8892 + 4792 + 1232 + 8421 + 4280</p>
-      <input type="number" id="sumAnswer" placeholder="Ketik hasilnya di sini...">
-      <button class="btn mt-2" onclick="checkSum()">Periksa Jawaban</button>
-      <p id="sumResult" class="mt-2 font-semibold"></p>
-
-      <p class="font-medium mt-6">6. Hitung <strong>rata-rata</strong> dari data berikut menggunakan Excel:</p>
-      <p class="text-lg font-semibold text-blue-600 mb-2">87, 85, 89, 83</p>
-      <input type="number" id="avgAnswer" placeholder="Ketik hasilnya di sini...">
-      <button class="btn mt-2" onclick="checkAverage()">Periksa Jawaban</button>
-      <p id="avgResult" class="mt-2 font-semibold"></p>
-    </section>
-
-    <!-- 🧩 Bonus -->
-    <section class="card">
-      <h2 class="text-xl font-semibold text-purple-700 mb-3">🧩 C. Bonus Tantangan</h2>
-      <p>Buat <strong>tabel nilai teman sekelasmu</strong> (minimal 5 siswa) di Microsoft Excel.  
-      Hitung <strong>jumlah dan rata-rata</strong> nilainya dengan rumus Excel, lalu screenshot hasilnya.</p>
-      <textarea placeholder="Tuliskan pengalamanmu atau hasil pengerjaan di sini..."></textarea>
-    </section>
-  </main>
-
-  <!-- 🔹 FOOTER -->
-  <footer class="text-center text-sm p-4 bg-blue-800 text-white mt-8">
-    © 2025 Pembelajaran TIK Kelas 5 — Latihan Interaktif Word & Excel
+  <footer>
+    © 2025 Pembelajaran TIK SD | Dibuat oleh <b>Yusri Irawan</b>
   </footer>
 
-  <!-- 🔹 JAVASCRIPT LOGIC -->
-  <script>
-    function checkSum() {
-      const answer = parseInt(document.getElementById('sumAnswer').value);
-      const correct = 8892 + 4792 + 1232 + 8421 + 4280; // = 27617
-      const result = document.getElementById('sumResult');
-      if (isNaN(answer)) {
-        result.textContent = "⚠️ Silakan masukkan angka.";
-        result.className = "text-yellow-600 font-semibold mt-2";
-      } else if (answer === correct) {
-        result.textContent = "✅ Benar! Hasilnya adalah 27.617";
-        result.className = "text-green-600 font-semibold mt-2";
-      } else {
-        result.textContent = "❌ Belum tepat. Coba hitung lagi di Excel!";
-        result.className = "text-red-600 font-semibold mt-2";
-      }
-    }
-
-    function checkAverage() {
-      const answer = parseFloat(document.getElementById('avgAnswer').value);
-      const correct = (87 + 85 + 89 + 83) / 4; // = 86
-      const result = document.getElementById('avgResult');
-      if (isNaN(answer)) {
-        result.textContent = "⚠️ Silakan masukkan angka.";
-        result.className = "text-yellow-600 font-semibold mt-2";
-      } else if (Math.abs(answer - correct) < 0.1) {
-        result.textContent = "✅ Benar! Rata-ratanya adalah 86";
-        result.className = "text-green-600 font-semibold mt-2";
-      } else {
-        result.textContent = "❌ Belum tepat. Gunakan rumus =AVERAGE(A1:A4) di Excel ya!";
-        result.className = "text-red-600 font-semibold mt-2";
-      }
-    }
-  </script>
 </body>
 </html>
