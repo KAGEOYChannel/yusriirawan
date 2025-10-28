@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Catatan Canva — TIK Kelas 5</title>
+<style>
+  /* ========== Root / Theme ========== */
+  :root{
+    --bg: #f6fbff;
+    --card: #ffffff;
+    --muted: #6b7280;
+    --accent: #0f766e;     /* teal-ish */
+    --accent-2: #115e59;
+    --accent-light: #dff6f3;
+    --glass: rgba(255,255,255,0.6);
+    --shadow: 0 8px 26px rgba(15,23,42,0.08);
+    --radius: 14px;
+    --maxw: 980px;
+  }
+
+  /* ========== Reset ========== */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(180deg,#f6fbff 0%, #f0f8ff 100%);
+    color:#0f172a;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.5;
+    padding:32px 20px;
+    display:flex;
+    justify-content:center;
+  }
+
+  /* ========== Layout ========== */
+  .wrap{
+    width:100%;
+    max-width:var(--maxw);
+  }
+
+  header.appbar{
+    display:flex;
+    gap:16px;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+  }
+  .brand{
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+  .logo{
+    width:56px;
+    height:56px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,#ffb4a2,#ffecd2);
+    box-shadow: 0 6px 18px rgba(255, 99, 71, 0.08), inset 0 -6px 12px rgba(255,255,255,0.25);
+    font-weight:700;
+    color:#7c2d12;
+    font-size:20px;
+  }
+  .title{
+    font-size:18px;
+    font-weight:700;
+    color:var(--accent-2);
+  }
+  .subtitle{font-size:13px;color:var(--muted)}
+
+  nav.topnav{
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .btn{
+    border:0;
+    background:var(--accent);
+    color:white;
+    padding:8px 12px;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow: 0 6px 18px rgba(15,118,110,0.12);
+  }
+  .btn.ghost{
+    background:transparent;
+    color:var(--accent-2);
+    border:1px solid rgba(15,118,110,0.08);
+    box-shadow:none;
+  }
+
+  /* ========== Main Card ========== */
+  .card{
+    background:var(--card);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:22px;
+    overflow:hidden;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1fr 360px;
+    gap:18px;
+  }
+
+  @media (max-width:860px){
+    .grid{grid-template-columns:1fr}
+    header.appbar{flex-direction:column;align-items:flex-start;gap:12px}
+  }
+
+  /* ========== Left content ========== */
+  .section{margin-bottom:18px}
+  .h{
+    display:flex;align-items:center;gap:12px;margin-bottom:8px;
+  }
+  .h h2{margin:0;font-size:18px;color:var(--accent-2)}
+  .p{color:var(--muted);margin:0 0 8px 0}
+
+  .features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+  @media (max-width:520px){ .features{grid-template-columns:1fr} }
+
+  .feature{
+    background:linear-gradient(180deg, rgba(15,118,110,0.04), rgba(15,118,110,0.02));
+    padding:12px;border-radius:10px;border:1px solid rgba(14,116,109,0.04);
+  }
+  .feature b{display:block;color:var(--accent-2);margin-bottom:6px}
+  .feature small{color:var(--muted)}
+
+  /* ========== Accordion ========== */
+  .acc{
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid #eef2f1;
+  }
+  .acc-item + .acc-item{border-top:1px dashed #eef2f1}
+  .acc-head{
+    display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:transparent;cursor:pointer;
+  }
+  .acc-head h3{margin:0;font-size:15px;color:#0b6b63}
+  .acc-body{padding:12px 14px;color:var(--muted);background:linear-gradient(180deg,#ffffff,#fbfffe)}
+
+  /* ========== Right column (sidebar) ========== */
+  .aside{
+    position:sticky;top:28px;
+    align-self:start;
+  }
+  .card.aside-card{padding:14px}
+  .kbd{
+    display:inline-block;padding:6px 8px;border-radius:8px;background:#f3f7f6;border:1px solid #e6efee;font-weight:600;font-size:13px;color:var(--accent-2)
+  }
+
+  .steps{display:flex;flex-direction:column;gap:8px}
+  .step{
+    display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:10px;background:var(--accent-light);
+  }
+  .step .num{
+    min-width:34px;height:34px;border-radius:8px;background:var(--accent-2);color:white;display:grid;place-items:center;font-weight:700;
+  }
+  .step p{margin:0;font-weight:600;color:var(--accent-2)}
+
+  /* ========== Footer / Print ========== */
+  .meta{font-size:13px;color:var(--muted);margin-top:8px}
+  @media print{
+    body{padding:0;background:white}
+    .logo,.btn,nav.topnav,.aside{display:none}
+    .card{box-shadow:none;border-radius:0;padding:8mm}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- header -->
+  <header class="appbar">
+    <div class="brand">
+      <div class="logo">C</div>
+      <div>
+        <div class="title">Canva — Catatan Guru</div>
+        <div class="subtitle">Mengenal fitur & alat gambar (Draw Tool) — TIK Kelas 5</div>
+      </div>
+    </div>
+
+    <nav class="topnav">
+      <button class="btn" onclick="window.print()">🖨️ Cetak</button>
+      <button class="btn ghost" onclick="document.getElementById('focus').classList.toggle('hidden')">⚡ Mode Fokus</button>
+    </nav>
+  </header>
+
+  <!-- main card -->
+  <div class="card">
+
+    <div class="grid">
+
+      <!-- LEFT: content -->
+      <div>
+
+        <!-- Intro -->
+        <section class="section">
+          <div class="h">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2l3 7h7l-5.5 4 2 7L12 15l-6.5 5 2-7L2 9h7l3-7z" fill="#f59e0b"/></svg>
+            <h2>Ringkasan: Apa itu Canva?</h2>
+          </div>
+          <p class="p">Canva adalah aplikasi desain grafis yang mudah digunakan untuk membuat poster, undangan, kartu ucapan, presentasi, dan gambar kreatif. Canva tersedia via <strong>web</strong> (canva.com) dan aplikasi di HP.</p>
+        </section>
+
+        <!-- features -->
+        <section class="section">
+          <div class="h"><h2>Fitur Utama (Singkat)</h2></div>
+          <div class="features">
+            <div class="feature">
+              <b>Template</b>
+              <small>Desain siap pakai. Cepat dimodifikasi untuk tugas siswa.</small>
+            </div>
+            <div class="feature">
+              <b>Uploads</b>
+              <small>Unggah foto atau gambar dari komputer/HP.</small>
+            </div>
+            <div class="feature">
+              <b>Elements</b>
+              <small>Ikon, ilustrasi, bentuk, garis untuk mempercantik desain.</small>
+            </div>
+            <div class="feature">
+              <b>Text</b>
+              <small>Tambahkan judul dan teks dengan banyak pilihan font dan ukuran.</small>
+            </div>
+          </div>
+        </section>
+
+        <!-- draw tool -->
+        <section class="section">
+          <div class="h"><h2>Alat Gambar — Draw Tool</h2></div>
+          <p class="p">Draw Tool adalah fitur menggambar bebas di Canva. Cocok untuk menggambar sketsa, menulis tangan, membuat doodle, atau menandai bagian pada desain.</p>
+
+          <div class="acc" id="accDraw">
+            <div class="acc-item">
+              <button class="acc-head" onclick="toggleAcc(0)">
+                <h3>Jenis kuas & opsi</h3>
+                <span>▾</span>
+              </button>
+              <div class="acc-body" id="acc-body-0">
+                <p>- <strong>Pensil</strong>: garis halus untuk sketsa.<br>
+                - <strong>Spidol / Marker</strong>: garis tebal untuk aksen.<br>
+                - <strong>Glow / Neon</strong>: efek cahaya untuk dekorasi.<br>
+                - <strong>Opacity & Size</strong>: atur ketebalan dan kecerahan garis.</p>
+              </div>
+            </div>
+
+            <div class="acc-item">
+              <button class="acc-head" onclick="toggleAcc(1)">
+                <h3>Langkah menggunakan Draw Tool</h3>
+                <span>▾</span>
+              </button>
+              <div class="acc-body" id="acc-body-1">
+                <ol style="margin:0 0 0 18px;padding:8px 0;color:var(--muted)">
+                  <li>Buka <em>Canva &gt; pilih desain</em> (mis. Poster kosong).</li>
+                  <li>Pilih <strong>Apps</strong> di sidebar lalu cari <strong>Draw</strong> atau pilih alat Draw jika tersedia.</li>
+                  <li>Pilih jenis kuas, atur warna dan ketebalan.</li>
+                  <li>Gambar dengan mouse atau stylus. Gunakan <strong>Undo</strong> jika salah.</li>
+                  <li>Simpan hasil (Download) atau posisikan di desain.</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="acc-item">
+              <button class="acc-head" onclick="toggleAcc(2)">
+                <h3>Contoh tugas menggambar</h3>
+                <span>▾</span>
+              </button>
+              <div class="acc-body" id="acc-body-2">
+                <p>- Gambar rumah sederhana lalu beri warna.<br>- Buat ilustrasi pohon & tuliskan namamu di bawah.<br>- Hias poster "Hemat Energi" dengan gambar lampu menyalakan/mematikan.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- tips -->
+        <section class="section">
+          <div class="h"><h2>Tips untuk Siswa</h2></div>
+          <p class="p">Berikut beberapa catatan yang akan saya nilai saat praktik:</p>
+          <ul style="color:var(--muted);margin:8px 0 0 18px">
+            <li>Gunakan kombinasi warna yang rapi (maks 3-4 warna utama).</li>
+            <li>Buat garis besar dulu, lalu isi warna (layering).</li>
+            <li>Jangan terlalu banyak teks — fokus pada gambar.</li>
+            <li>Simpan file dengan nama: <span class="kbd">Gambar_NamaKamu</span></li>
+          </ul>
+        </section>
+
+      </div>
+
+      <!-- RIGHT: sidebar -->
+      <aside class="aside">
+        <div class="card aside-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div>
+              <div style="font-weight:700;color:var(--accent-2)">Aktivitas Hari Ini</div>
+              <div class="meta">Praktik Draw Tool di Canva • Durasi: 40 menit</div>
+            </div>
+          </div>
+
+          <div style="margin-top:10px" class="steps">
+            <div class="step"><div class="num">1</div><p>Buka canva.com → pilih poster kosong</p></div>
+            <div class="step"><div class="num">2</div><p>Pilih Apps → Draw (atau gunakan toolbar Draw)</p></div>
+            <div class="step"><div class="num">3</div><p>Pilih kuas → gambar sketsa → beri warna</p></div>
+            <div class="step"><div class="num">4</div><p>Simpan → Download & simpan sesuai nama</p></div>
+          </div>
+
+          <div style="margin-top:12px">
+            <button class="btn" style="width:100%" onclick="alert('Petunjuk praktis: Pastikan mouse/stylus sudah siap. Jika tidak ada, gunakan Shapes & Elements untuk mengganti.')">Mulai Praktik</button>
+          </div>
+
+          <div style="margin-top:12px;font-size:13px;color:var(--muted)">
+            <b>Penilaian singkat:</b>
+            <div style="margin-top:6px">Kreativitas · Kerapian · Penggunaan alat gambar</div>
+          </div>
+        </div>
+
+        <div class="card aside-card" style="margin-top:12px">
+          <div style="font-weight:700;color:var(--accent-2);margin-bottom:8px">Perlengkapan</div>
+          <ul style="margin:0;padding-left:18px;color:var(--muted);">
+            <li>Komputer / Laptop dengan browser</li>
+            <li>Akun Canva (guru atau siswa)</li>
+            <li>Mouse atau stylus (lebih baik)</li>
+            <li>Koneksi internet (jika pakai Canva web)</li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div> <!-- end grid -->
+
+    <!-- footer notes -->
+    <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+      <div style="color:var(--muted)">Catatan: Sesuaikan akses Canva sesuai kebijakan sekolah. Jika tidak ada internet, gunakan Paint sebagai alternatif menggambar.</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn ghost" onclick="window.open('https://www.canva.com','_blank')">Buka Canva (web)</button>
+        <button class="btn" onclick="window.print()">Cetak Catatan</button>
+      </div>
+    </div>
+
+  </div> <!-- end card -->
+
+</div>
+
+<script>
+  // Simple accordion toggles
+  function toggleAcc(i){
+    const bodies = Array.from(document.querySelectorAll('.acc-body'));
+    const signs = Array.from(document.querySelectorAll('.acc-head span'));
+    bodies.forEach((b, idx) => {
+      if(idx === i){
+        const isOpen = b.style.display === 'block';
+        b.style.display = isOpen ? 'none' : 'block';
+        signs[idx].textContent = isOpen ? '▾' : '▴';
+      } else {
+        b.style.display = 'none';
+        signs[idx].textContent = '▾';
+      }
+    });
+  }
+  // initialize: open first
+  document.addEventListener('DOMContentLoaded', () => {
+    toggleAcc(0);
+  });
+
+  // Mode fokus toggle (hide aside)
+  // (uses a class 'hidden' on #focus toggled by header button)
+  (function(){
+    // nothing else needed, CSS handled via class toggle in button (works)
+  })();
+</script>
+</body>
+</html>
