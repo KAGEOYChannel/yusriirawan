@@ -422,15 +422,26 @@
     background: #0f0f19;
 }
 
+/*
+   FIX "hitam di samping preview":
+   Sebelumnya iframe dibesarkan tepat 400% lalu di-scale 0.25 dari titik
+   (0,0). Karena scrollbar bawaan iframe ikut "dimakan" ruang konten,
+   sisi kanan/bawah kehilangan sedikit lebar -> muncul garis/blok hitam
+   di pinggir saat discale. Solusinya: iframe dibuat sedikit lebih besar
+   dari 400% (overscan) lalu diposisikan center dan di-crop oleh
+   overflow:hidden pada .work-preview, sehingga sisa scrollbar/gap
+   selalu berada di luar area yang terlihat.
+*/
 .work-preview iframe {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 400%;
-    height: 400%;
+    top: 50%;
+    left: 50%;
+    width: 420%;
+    height: 420%;
     border: 0;
-    transform: scale(0.25);
-    transform-origin: 0 0;
+    transform: translate(-50%, -50%) scale(0.25);
+    transform-origin: center center;
+    overflow: hidden;
 }
 
 
@@ -724,6 +735,7 @@ img, iframe, video {
             <div class="work-image">
                 <div class="work-preview">
                     <iframe src="canva.html"
+                            scrolling="no"
                             title="Preview Karya 1"
                             loading="lazy"
                             tabindex="-1"
@@ -768,6 +780,7 @@ img, iframe, video {
 
                 <div class="work-preview">
                     <iframe src="karya-2.html"
+                            scrolling="no"
                             title="Preview Karya 2"
                             loading="lazy"
                             tabindex="-1"
@@ -813,6 +826,7 @@ img, iframe, video {
 
                 <div class="work-preview">
                     <iframe src="karya-3.html"
+                            scrolling="no"
                             title="Preview Karya 3"
                             loading="lazy"
                             tabindex="-1"
@@ -858,6 +872,7 @@ img, iframe, video {
 
                 <div class="work-preview">
                     <iframe src="karya-4.html"
+                            scrolling="no"
                             title="Preview Karya 4"
                             loading="lazy"
                             tabindex="-1"

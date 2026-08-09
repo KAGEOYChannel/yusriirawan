@@ -113,6 +113,20 @@
 }
 
 
+/* =========================================================
+   HIDE CARD
+   Tambahkan class "hidden" pada elemen .work-card
+   (contoh: <a href="..." class="work-card hidden">) untuk
+   menyembunyikannya. Selector ini dibuat lebih spesifik +
+   !important supaya tidak kalah oleh "display: block" milik
+   .work-card, apapun urutan file CSS-nya.
+   ========================================================= */
+
+.works-grid .work-card.hidden {
+    display: none !important;
+}
+
+
 /* Hover */
 
 .work-card:hover {
