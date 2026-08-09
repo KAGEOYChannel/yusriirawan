@@ -26,7 +26,17 @@
 
     z-index: 9999;
 
-    background: transparent;
+    /* FIX: sebelumnya header transparan penuh sebelum di-scroll, jadi
+       kontras teks (termasuk "AWAN") ikut berubah-ubah tergantung apa
+       yang ada di belakangnya. Diberi gradient gelap tipis dari atas
+       supaya teks header selalu punya kontras minimum, tanpa terlihat
+       seperti bar solid. */
+    background: linear-gradient(
+        to bottom,
+        rgba(10, 10, 18, .55) 0%,
+        rgba(10, 10, 18, .18) 70%,
+        transparent 100%
+    );
 
     /* FIX: teks (logo, menu, hamburger) tadinya mewarisi warna default
        (hitam) dari body, jadi hilang saat background header menjadi
@@ -127,6 +137,20 @@
 
     font-size: 25px;
     font-weight: 800;
+}
+
+/* FIX: class "logo-gradient" ada di HTML tapi sebelumnya tidak
+   punya style sama sekali, jadi teks "AWAN" cuma putih polos dan
+   gampang tenggelam kalau kebetulan berada di atas area terang pada
+   background. Diberi warna gradient + text-shadow supaya tetap
+   terbaca jelas di background apa pun (gelap maupun terang). */
+.logo-gradient {
+    background: linear-gradient(90deg, #00c2ff, #33ff8c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #fff; /* fallback jika background-clip: text tidak didukung */
+    text-shadow: 0 1px 8px rgba(0, 0, 0, .45);
 }
 
 
@@ -424,24 +448,19 @@
 
 /*
    FIX "hitam di samping preview":
-   Sebelumnya iframe dibesarkan tepat 400% lalu di-scale 0.25 dari titik
-   (0,0). Karena scrollbar bawaan iframe ikut "dimakan" ruang konten,
-   sisi kanan/bawah kehilangan sedikit lebar -> muncul garis/blok hitam
-   di pinggir saat discale. Solusinya: iframe dibuat sedikit lebih besar
-   dari 400% (overscan) lalu diposisikan center dan di-crop oleh
-   overflow:hidden pada .work-preview, sehingga sisa scrollbar/gap
-   selalu berada di luar area yang terlihat.
+   Trik zoom-out (scale kecil) sebelumnya membuat preview jadi kecil/kurang
+   jelas dan tetap rawan celah di tepi (scrollbar iframe, dsb). Sekarang
+   iframe langsung mengisi penuh 100% lebar & tinggi .work-image (seukuran
+   card), tanpa di-scale. Hasilnya: preview terlihat besar & jelas, dan
+   tidak ada lagi celah/hitam di pinggir karena ukurannya persis sama
+   dengan kontainer.
 */
 .work-preview iframe {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 420%;
-    height: 420%;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     border: 0;
-    transform: translate(-50%, -50%) scale(0.25);
-    transform-origin: center center;
-    overflow: hidden;
 }
 
 
