@@ -248,14 +248,24 @@ display:flex;
 }
 
 }
-          .navbar {
+         ```css
+/* =========================================
+   RESPONSIVE DARK / LIGHT MODE TOGGLE
+   ========================================= */
+
+/* Container toggle */
+.navbar {
   position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  padding: 20px;
+  top: 20px;
+  left: 20px;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  z-index: 9999;
 }
 
+/* Hilangkan style bawaan list */
 .nav-list {
   list-style: none;
   padding: 0;
@@ -263,8 +273,240 @@ display:flex;
 }
 
 .nav-list li {
-  margin-bottom: 5px;
+  margin: 0;
+  padding: 0;
 }
+
+/* Pastikan tombol tidak terdorong oleh elemen lain */
+.nav-list button.toggle {
+  position: relative;
+  display: block;
+
+  width: 150px;
+  height: 118px;
+
+  padding: 0;
+  margin: 0;
+
+  border: 0;
+  outline: none;
+
+  background: transparent;
+  cursor: pointer;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  /* area klik */
+  touch-action: manipulation;
+
+  /* animasi */
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+/* Efek hover */
+.nav-list button.toggle:hover {
+  transform: scale(1.04);
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.18));
+}
+
+/* Efek ketika ditekan */
+.nav-list button.toggle:active {
+  transform: scale(0.97);
+}
+
+/* Fokus keyboard */
+.nav-list button.toggle:focus-visible {
+  outline: 3px solid rgba(100, 180, 255, 0.8);
+  outline-offset: 4px;
+}
+
+/* Semua elemen utama toggle */
+.toggle__content {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  overflow: hidden;
+
+  border-radius: inherit;
+}
+
+/* SVG background */
+.toggle__backdrop {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  object-fit: cover;
+}
+
+/* Bear / pilot */
+.pilot__container,
+.astrobear__container {
+  position: absolute;
+
+  pointer-events: none;
+}
+
+/* Indicator */
+.toggle__indicator-wrapper {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 54px;
+  height: 54px;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+
+  z-index: 10;
+}
+
+.toggle__indicator {
+  width: 54px;
+  height: 54px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: transform 0.45s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+/* Pastikan gambar astronaut/bear tidak keluar */
+.pilot,
+.astrobear {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    top: 14px;
+    left: 14px;
+  }
+
+  .nav-list button.toggle {
+    width: 125px;
+    height: 98px;
+
+    border-radius: 23px;
+  }
+
+  .toggle__indicator-wrapper {
+    width: 46px;
+    height: 46px;
+  }
+
+  .toggle__indicator {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+  .navbar {
+    top: 12px;
+    left: 12px;
+  }
+
+  .nav-list button.toggle {
+    width: 105px;
+    height: 82px;
+
+    border-radius: 20px;
+  }
+
+  .toggle__indicator-wrapper {
+    width: 38px;
+    height: 38px;
+  }
+
+  .toggle__indicator {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+
+/* =========================================
+   HP KECIL
+   ========================================= */
+
+@media (max-width: 360px) {
+
+  .navbar {
+    top: 10px;
+    left: 10px;
+  }
+
+  .nav-list button.toggle {
+    width: 92px;
+    height: 72px;
+
+    border-radius: 18px;
+  }
+
+  .toggle__indicator-wrapper {
+    width: 34px;
+    height: 34px;
+  }
+
+  .toggle__indicator {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+
+/* =========================================
+   SAFE AREA UNTUK HP NOTCH
+   ========================================= */
+
+@supports (top: env(safe-area-inset-top)) {
+
+  .navbar {
+    top: max(12px, env(safe-area-inset-top));
+    left: max(12px, env(safe-area-inset-left));
+  }
+
+}
+```
+
             .iframe-container34 {
             position: relative;
             width: 100%;
