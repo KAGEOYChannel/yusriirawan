@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Guru — AWAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+/* =========================================
+   TOKENS
+   ========================================= */
+:root{
+  --bg:#0a0a12;
+  --bg-soft:#0d0d18;
+  --card:#12121e;
+  --card-hover:#171726;
+  --border:rgba(255,255,255,.08);
+  --border-strong:rgba(255,255,255,.16);
+  --text:#f3f3f8;
+  --text-muted:#9898ad;
+  --purple:#6c63ff;
+  --blue:#00c6ff;
+  --green:#33ff8c;
+  --radius:18px;
+  --header-h:70px;
+  --shadow:0 20px 50px rgba(0,0,0,.35);
+}
+html[data-theme="light"]{
+  --bg:#f5f6fb;
+  --bg-soft:#eef0f8;
+  --card:#ffffff;
+  --card-hover:#f7f8ff;
+  --border:rgba(10,10,35,.08);
+  --border-strong:rgba(10,10,35,.16);
+  --text:#14141f;
+  --text-muted:#5d5d75;
+  --shadow:0 20px 40px rgba(20,20,40,.10);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  transition:background .35s ease,color .35s ease;
+  overflow-x:hidden;
+}
+h1,h2,h3,.brand-font{font-family:'Sora',system-ui,sans-serif;}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+.wrap{width:min(1200px,calc(100% - 40px));margin:0 auto;}
+::selection{background:var(--purple);color:#fff;}
+
+/* focus visibility */
+a:focus-visible,button:focus-visible,input:focus-visible{
+  outline:2px solid var(--blue);
+  outline-offset:3px;
+  border-radius:6px;
+}
+
+/* =========================================
+   HEADER (senada index.html)
+   ========================================= */
+.header{
+  position:fixed;
+  top:0;left:0;width:100%;
+  z-index:999;
+  background:linear-gradient(to bottom, rgba(10,10,18,.55) 0%, rgba(10,10,18,.15) 70%, transparent 100%);
+  transition:background .35s ease,backdrop-filter .35s ease,box-shadow .35s ease,border-color .35s ease;
+}
+html[data-theme="light"] .header{
+  background:linear-gradient(to bottom, rgba(255,255,255,.7) 0%, rgba(255,255,255,.2) 70%, transparent 100%);
+}
+.header.scrolled{
+  background:rgba(15,15,25,.72);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 8px 30px rgba(0,0,0,.15);
+}
+html[data-theme="light"] .header.scrolled{
+  background:rgba(255,255,255,.78);
+}
+.header-container{
+  width:min(1200px,calc(100% - 40px));
+  height:var(--header-h);
+  margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{display:flex;align-items:center;gap:14px;}
+.logo{display:inline-flex;align-items:center;text-decoration:none;font-size:24px;font-weight:800;}
+.logo-gradient{
+  background:linear-gradient(90deg,#00c2ff,#33ff8c);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  color:var(--text);
+  text-shadow:0 1px 8px rgba(0,0,0,.35);
+}
+.theme-toggle{
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--border-strong);
+  background:var(--card);
+  color:var(--text);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:transform .3s ease,background .3s ease,border-color .3s ease;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(15deg);border-color:var(--blue);}
+
+.menu{display:flex;align-items:center;gap:28px;}
+.menu-link{
+  position:relative;color:var(--text);text-decoration:none;
+  font-size:14px;font-weight:600;transition:color .25s ease;
+}
+.menu-link::after{
+  content:"";position:absolute;left:50%;bottom:-7px;width:0;height:2px;
+  border-radius:20px;background:linear-gradient(90deg,var(--purple),var(--blue));
+  transform:translateX(-50%);transition:width .3s ease;
+}
+.menu-link:hover::after,.menu-link.active::after{width:100%;}
+
+.btn-home{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 18px;border-radius:50px;text-decoration:none;
+  color:#fff;font-size:13px;font-weight:700;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  box-shadow:0 8px 20px rgba(0,198,255,.2);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.btn-home:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,198,255,.35);}
+
+.hamburger{
+  display:none;width:32px;height:32px;padding:0;border:0;background:transparent;cursor:pointer;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+}
+.hamburger span{display:block;width:24px;height:2px;border-radius:20px;background:var(--text);transition:transform .3s ease,opacity .3s ease;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+@media (max-width:900px){
+  .header-container{height:64px;width:calc(100% - 28px);}
+  .menu{
+    position:absolute;top:72px;right:14px;
+    width:min(260px,calc(100vw - 28px));padding:20px;
+    display:flex;flex-direction:column;align-items:stretch;gap:16px;
+    border-radius:18px;background:rgba(15,15,25,.96);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--border);box-shadow:0 20px 50px rgba(0,0,0,.25);
+    opacity:0;visibility:hidden;transform:translateY(-10px) scale(.97);
+    transition:opacity .3s ease,visibility .3s ease,transform .3s ease;
+  }
+  html[data-theme="light"] .menu{background:rgba(255,255,255,.97);}
+  .menu.show{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
+  .menu-link{color:#fff;padding:6px 4px;}
+  html[data-theme="light"] .menu-link{color:var(--text);}
+  .btn-home{width:100%;justify-content:center;}
+  .hamburger{display:flex;}
+}
+
+/* =========================================
+   HERO — motif "awan" (cloud)
+   ========================================= */
+.hero{
+  position:relative;
+  padding:calc(var(--header-h) + 70px) 0 60px;
+  overflow:hidden;
+}
+.hero-blobs{position:absolute;inset:0;z-index:-1;overflow:hidden;}
+.blob{
+  position:absolute;border-radius:50%;
+  filter:blur(70px);opacity:.35;
+  animation:drift 18s ease-in-out infinite;
+}
+.blob-1{width:420px;height:420px;background:var(--purple);top:-140px;left:-100px;}
+.blob-2{width:360px;height:360px;background:var(--blue);top:-60px;right:-120px;animation-delay:-6s;}
+.blob-3{width:300px;height:300px;background:var(--green);top:220px;left:38%;opacity:.18;animation-delay:-11s;}
+@keyframes drift{
+  0%,100%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(30px,25px) scale(1.08);}
+}
+@media (prefers-reduced-motion:reduce){.blob{animation:none;}}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-muted);
+  padding:6px 14px;border:1px solid var(--border-strong);border-radius:50px;
+  margin-bottom:22px;
+}
+.eyebrow i{color:var(--blue);}
+
+.hero h1{
+  font-size:clamp(32px,5vw,52px);
+  font-weight:800;line-height:1.12;margin:0 0 18px;
+  max-width:16ch;
+}
+.hero h1 .accent{
+  background:linear-gradient(90deg,var(--purple),var(--blue),var(--green));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero p{
+  font-size:16px;line-height:1.7;color:var(--text-muted);
+  max-width:52ch;margin:0 0 34px;
+}
+
+.search-box{
+  position:relative;
+  max-width:480px;
+}
+.search-box i{
+  position:absolute;left:18px;top:50%;transform:translateY(-50%);
+  color:var(--text-muted);font-size:14px;
+}
+.search-box input{
+  width:100%;
+  padding:15px 18px 15px 44px;
+  border-radius:50px;
+  border:1px solid var(--border-strong);
+  background:var(--card);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  transition:border-color .25s ease,box-shadow .25s ease;
+}
+.search-box input::placeholder{color:var(--text-muted);}
+.search-box input:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(0,198,255,.12);
+  outline:none;
+}
+
+/* =========================================
+   FILTER + STATS
+   ========================================= */
+.toolbar{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:16px;
+  padding:36px 0 26px;
+  border-bottom:1px solid var(--border);
+}
+.chips{display:flex;flex-wrap:wrap;gap:10px;}
+.chip{
+  padding:9px 18px;border-radius:50px;
+  border:1px solid var(--border-strong);
+  background:var(--card);
+  color:var(--text-muted);
+  font-size:13px;font-weight:600;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+.chip:hover{color:var(--text);border-color:var(--blue);}
+.chip.active{
+  color:#fff;border-color:transparent;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+}
+.result-count{font-size:13px;color:var(--text-muted);white-space:nowrap;}
+.result-count strong{color:var(--text);}
+
+/* =========================================
+   MENU GRID
+   ========================================= */
+.menu-section{padding:36px 0 80px;}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:20px;
+}
+.card{
+  position:relative;
+  display:flex;flex-direction:column;gap:14px;
+  padding:26px;
+  border-radius:var(--radius);
+  background:var(--card);
+  border:1px solid var(--border);
+  text-decoration:none;color:var(--text);
+  overflow:hidden;
+  opacity:0;transform:translateY(18px);
+  transition:transform .4s ease,opacity .5s ease,border-color .3s ease,background .3s ease,box-shadow .3s ease;
+}
+.card.reveal{opacity:1;transform:translateY(0);}
+.card::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(108,99,255,.10),rgba(0,198,255,.06));
+  opacity:0;transition:opacity .3s ease;
+}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:var(--border-strong);
+  background:var(--card-hover);
+  box-shadow:var(--shadow);
+}
+.card:hover::before{opacity:1;}
+.card-icon{
+  width:46px;height:46px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:19px;color:#fff;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  flex-shrink:0;
+}
+.card-category{
+  font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-muted);
+}
+.card h3{font-size:18px;margin:0;font-weight:700;}
+.card p{font-size:13.5px;line-height:1.6;color:var(--text-muted);margin:0;flex-grow:1;}
+.card-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;color:var(--blue);
+  margin-top:4px;
+}
+.card-cta i{transition:transform .25s ease;}
+.card:hover .card-cta i{transform:translateX(5px);}
+
+.empty-state{
+  display:none;
+  text-align:center;
+  padding:70px 20px;
+  color:var(--text-muted);
+}
+.empty-state.show{display:block;}
+.empty-state i{font-size:34px;color:var(--purple);margin-bottom:16px;}
+.empty-state h3{margin:0 0 8px;font-size:18px;color:var(--text);}
+.empty-state button{
+  margin-top:18px;padding:10px 22px;border-radius:50px;border:1px solid var(--border-strong);
+  background:transparent;color:var(--text);font-weight:600;cursor:pointer;
+  font-family:'Inter',sans-serif;font-size:13px;
+  transition:border-color .25s ease,color .25s ease;
+}
+.empty-state button:hover{border-color:var(--blue);color:var(--blue);}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+footer{
+  border-top:1px solid var(--border);
+  padding:26px 0;
+}
+.foot-wrap{
+  display:flex;flex-wrap:wrap;gap:12px;
+  align-items:center;justify-content:space-between;
+  font-size:13px;color:var(--text-muted);
+}
+.foot-wrap span.brand-font{color:var(--text);font-weight:700;}
+
+.to-top{
+  position:fixed;right:22px;bottom:22px;
+  width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--border-strong);
+  background:var(--card);color:var(--text);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:500;
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:opacity .3s ease,visibility .3s ease,transform .3s ease,border-color .3s ease;
+}
+.to-top.show{opacity:1;visibility:visible;transform:translateY(0);}
+.to-top:hover{border-color:var(--blue);color:var(--blue);}
+
+@media (max-width:520px){
+  .toolbar{flex-direction:column;align-items:flex-start;}
+  .foot-wrap{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-container">
+    <div class="brand">
+      <a href="index.html" class="logo"><span class="logo-gradient">AWAN</span></a>
+      <button class="theme-toggle" id="themeToggle" title="Ganti tema" aria-label="Ganti tema terang/gelap">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+
+    <nav class="menu" id="menu">
+      <a href="#ringkasan" class="menu-link active">Ringkasan</a>
+      <a href="#menu-guru" class="menu-link">Menu Guru</a>
+      <a href="#kontak" class="menu-link">Kontak</a>
+      <a href="index.html" class="btn-home"><i class="fas fa-arrow-left"></i> Beranda</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger" role="button" aria-label="Buka menu" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="ringkasan">
+  <div class="hero-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow"><i class="fas fa-circle-check"></i> Portal Guru — AWAN</span>
+    <h1>Semua urusan mengajar, <span class="accent">seringan awan</span></h1>
+    <p>Satu tempat untuk menyiapkan materi, memberi tugas, memantau nilai, hingga mengumumkan informasi ke siswa. Cari atau pilih kategori di bawah untuk langsung menuju halamannya.</p>
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Cari menu… misalnya nilai, jadwal, materi" autocomplete="off">
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="toolbar" id="menu-guru">
+    <div class="chips" id="chips">
+      <button class="chip active" data-filter="all">Semua</button>
+      <button class="chip" data-filter="pembelajaran">Pembelajaran</button>
+      <button class="chip" data-filter="penilaian">Penilaian</button>
+      <button class="chip" data-filter="jadwal">Jadwal &amp; Info</button>
+      <button class="chip" data-filter="administrasi">Administrasi</button>
+    </div>
+    <div class="result-count"><strong id="countNum">10</strong> menu tersedia</div>
+  </div>
+
+  <section class="menu-section">
+    <div class="grid" id="grid">
+
+      <a href="materi.html" class="card" data-category="pembelajaran" data-title="materi ajar unggah modul slide bahan bacaan">
+        <div class="card-icon"><i class="fas fa-book-open"></i></div>
+        <div class="card-category">Pembelajaran</div>
+        <h3>Materi Ajar</h3>
+        <p>Unggah, susun, dan bagikan modul, slide, serta bahan bacaan untuk setiap kelas.</p>
+        <span class="card-cta">Buka menu <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <a href="tugas.html" class="card" data-category="pembelajaran" data-title="tugas kuis buat nilai tenggat jawaban">
+        <div class="card-icon"><i class="fas fa-pen-to-square"></i></div>
+        <div class="card-category">Pembelajaran</div>
+        <h3>Tugas &amp; Kuis</h3>
+        <p>Buat tugas baru, tentukan tenggat waktu, dan periksa jawaban siswa dalam satu tempat.</p>
+        <span class="card-cta">Buka menu <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <a href="bank-soal.html" class="card" data-category="pembelajaran" data-title="bank soal koleksi ulangan latihan">
+        <div class="card-icon"><i class="fas fa-layer-group"></i></div>
+        <div class="card-category">Pembelajaran</div>
+        <h3>Bank Soal</h3>
+        <p>Simpan dan susun ulang koleksi soal untuk ulangan maupun latihan mandiri siswa.</p>
+        <span class="card-cta">Buka menu <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <a href="forum.html" class="card" data-category="pembelajaran" data-title="forum diskusi tanya jawab siswa">
+        <div class="card-icon"><i class="fas fa-comments"></i></div>
+        <div class="card-category">Pembelajaran</div>
+        <h3>Forum Diskusi</h3>
+        <p>Jawab pertanyaan siswa dan buka ruang diskusi tambahan di luar jam kelas.</p>
+        <span class="card-cta">Buka menu <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <a href="nilai.html" class="card" data-category="penilaian" data-title="rekap nilai siswa kelas periode">
+        <div class="card-icon"><i class="fas fa-chart-simple"></i></div>
+        <div class="card-category">Penilaian</div>
+        <h3>Rekap Nilai</h3>
+        <p>Pantau perkembangan nilai per siswa, per kelas, maupun per periode penilaian.</p>
+        <span class="card-cta">Buka menu <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <a href="absensi.html" class="card" data-category="penilaian" data-title="absensi kehadiran siswa rekap">
+        <div class="card-icon"><i class="fas fa-clipboard-check"></i></div>
+        <div class="card-category">Penilaian</div>
+        <h3>Absensi Siswa</h3>
+        <p>Catat kehadiran harian dan lihat rekap ketidakhadiran secara ringkas.</p>
+        <span class="card-cta">Buka menu <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <a href="jadwal.html" class="card" data-category="jadwal" data-title="jadwal mengajar minggu kelas jam ruang">
+        <div class="card-icon"><i class="fas fa-calendar-days"></i></div>
+        <div class="card-category">Jadwal &amp; Info</div>
+        <h3>Jadwal Mengajar</h3>
+        <p>Lihat jadwal mengajar minggu ini lengkap dengan ruang dan jam setiap kelas.</p>
+        <span class="card-cta">Buka menu <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <a href="kalender.html" class="card" data-category="jadwal" data-title="kalender akademik ujian libur agenda semester">
+        <div class="card-icon"><i class="fas fa-calendar-week"></i></div>
+        <div class="card-category">Jadwal &amp; Info</div>
+        <h3>Kalender Akademik</h3>
+        <p>Tandai ujian, hari libur, dan agenda sekolah penting sepanjang semester.</p>
+        <span class="card-cta">Buka menu <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <a href="pengumuman.html" class="card" data-category="jadwal" data-title="pengumuman informasi broadcast siswa">
+        <div class="card-icon"><i class="fas fa-bullhorn"></i></div>
+        <div class="card-category">Jadwal &amp; Info</div>
+        <h3>Pengumuman</h3>
+        <p>Kirim informasi penting langsung ke seluruh siswa dalam satu kelas atau lebih.</p>
+        <span class="card-cta">Buka menu <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+      <a href="kelas.html" class="card" data-category="administrasi" data-title="pengaturan kelas daftar siswa akses anggota">
+        <div class="card-icon"><i class="fas fa-users-gear"></i></div>
+        <div class="card-category">Administrasi</div>
+        <h3>Pengaturan Kelas</h3>
+        <p>Kelola daftar siswa, buat kelas baru, dan atur akses anggota kelas.</p>
+        <span class="card-cta">Buka menu <i class="fas fa-arrow-right"></i></span>
+      </a>
+
+    </div>
+
+    <div class="empty-state" id="emptyState">
+      <i class="fas fa-cloud"></i>
+      <h3>Menu tidak ditemukan</h3>
+      <p>Coba kata kunci lain atau kembali ke semua kategori.</p>
+      <button id="resetBtn">Tampilkan semua menu</button>
+    </div>
+  </section>
+</div>
+
+<footer id="kontak">
+  <div class="wrap foot-wrap">
+    <span><span class="brand-font">AWAN</span> · Portal Guru</span>
+    <span>Dibangun untuk membuat pekerjaan mengajar terasa lebih ringan.</span>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+/* ---------- Header scroll + hamburger ---------- */
+const header = document.querySelector('.header');
+const hamburger = document.getElementById('hamburger');
+const menu = document.getElementById('menu');
+
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+  toTop.classList.toggle('show', window.scrollY > 500);
+});
+
+function toggleMenu(){
+  hamburger.classList.toggle('open');
+  menu.classList.toggle('show');
+}
+hamburger.addEventListener('click', toggleMenu);
+hamburger.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleMenu(); }});
+
+document.querySelectorAll('.menu-link').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelectorAll('.menu-link').forEach(a => a.classList.remove('active'));
+    link.classList.add('active');
+    hamburger.classList.remove('open');
+    menu.classList.remove('show');
+  });
+});
+
+/* ---------- Theme toggle ---------- */
+const themeToggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+const savedTheme = localStorage.getItem('awan-theme');
+if(savedTheme){
+  root.setAttribute('data-theme', savedTheme);
+  themeToggle.innerHTML = savedTheme === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+}
+themeToggle.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('awan-theme', next);
+  themeToggle.innerHTML = next === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+});
+
+/* ---------- Filter + search ---------- */
+const chips = document.querySelectorAll('.chip');
+const cards = Array.from(document.querySelectorAll('.card'));
+const searchInput = document.getElementById('searchInput');
+const emptyState = document.getElementById('emptyState');
+const countNum = document.getElementById('countNum');
+const resetBtn = document.getElementById('resetBtn');
+
+let activeFilter = 'all';
+
+function applyFilters(){
+  const query = searchInput.value.trim().toLowerCase();
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    const matchesCategory = activeFilter === 'all' || card.dataset.category === activeFilter;
+    const haystack = (card.dataset.title + ' ' + card.querySelector('h3').textContent).toLowerCase();
+    const matchesQuery = query === '' || haystack.includes(query);
+    const visible = matchesCategory && matchesQuery;
+
+    card.style.display = visible ? '' : 'none';
+    if(visible){
+      visibleCount++;
+      requestAnimationFrame(() => card.classList.add('reveal'));
+    }
+  });
+
+  countNum.textContent = visibleCount;
+  emptyState.classList.toggle('show', visibleCount === 0);
+}
+
+chips.forEach(chip => {
+  chip.addEventListener('click', () => {
+    chips.forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilter = chip.dataset.filter;
+    applyFilters();
+  });
+});
+
+let debounce;
+searchInput.addEventListener('input', () => {
+  clearTimeout(debounce);
+  debounce = setTimeout(applyFilters, 120);
+});
+
+resetBtn.addEventListener('click', () => {
+  searchInput.value = '';
+  activeFilter = 'all';
+  chips.forEach(c => c.classList.remove('active'));
+  chips[0].classList.add('active');
+  applyFilters();
+});
+
+/* ---------- Reveal on load ---------- */
+window.addEventListener('DOMContentLoaded', () => {
+  cards.forEach((card, i) => {
+    setTimeout(() => card.classList.add('reveal'), 80 * i);
+  });
+});
+
+/* ---------- Back to top ---------- */
+const toTop = document.getElementById('toTop');
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>
