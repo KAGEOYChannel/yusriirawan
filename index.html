@@ -560,6 +560,38 @@ display:flex;
       animateRandomGradient();
     });
   </script>
+  <script>
+    const hamburger=document.getElementById("hamburger");
+const menu=document.getElementById("menu");
+
+hamburger.onclick=()=>{
+
+menu.classList.toggle("show");
+
+}
+
+window.addEventListener("scroll",()=>{
+
+const header=document.querySelector(".header");
+
+header.classList.toggle("scrolled",window.scrollY>40);
+
+});
+
+document.querySelectorAll(".menu-link").forEach(link=>{
+
+link.addEventListener("click",()=>{
+
+document.querySelectorAll(".menu-link").forEach(a=>a.classList.remove("active"));
+
+link.classList.add("active");
+
+menu.classList.remove("show");
+
+});
+
+});
+  </script>
   <!-- end -->
   </body>
 </html>
