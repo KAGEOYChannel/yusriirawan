@@ -487,6 +487,22 @@ img, iframe, video {
         grid-template-columns: 1fr !important;
     }
 }
+
+
+/* =========================================
+   WORKS SECTION - DARK MODE TEXT COLOR
+   (override warna hardcoded dari sectionBlog.css
+   supaya ikut var(--color) sesuai mode terang/gelap)
+   ========================================= */
+
+.works-heading h2,
+.works-heading p,
+.work-content h3,
+.work-content p,
+.work-meta {
+    color: var(--color);
+    transition: color var(--speed) var(--easing);
+}
   </style>
 </head>
   <body>
@@ -579,9 +595,9 @@ img, iframe, video {
         </div>
 
         <nav class="menu" id="menu">
-            <a href="#Tools" class="menu-link active">Tools</a>
-            <a href="#experience" class="menu-link">Content</a>
-            <a href="#contact" class="menu-link">List</a>
+            <a href="#about" class="menu-link active">About</a>
+            <a href="#experience" class="menu-link">Experience</a>
+            <a href="#contact" class="menu-link">Contact</a>
 
             <a href="cv.pdf" class="btn-cv" target="_blank">
                 Download CV
@@ -685,17 +701,17 @@ img, iframe, video {
      PORTFOLIO / BLOG SECTION
      ========================================= -->
 
-<section class="works-section" id="Tools">
+<section class="works-section" id="works">
 
     <div class="works-heading">
         <span class="works-label">MY WORKS</span>
 
         <h2>
-            Tools & <span>Aktivitas</span>
+            Karya & <span>Proyek</span>
         </h2>
 
         <p>
-            Beberapa tools, proyek, dan aktivitas yang mungkin membantu.
+            Beberapa karya, proyek, dan aktivitas yang saya kerjakan.
         </p>
     </div>
 
@@ -703,11 +719,11 @@ img, iframe, video {
     <div class="works-grid">
 
         <!-- CARD 1 -->
-        <a href="canva.html" class="work-card">
+        <a href="karya-1.html" class="work-card">
 
             <div class="work-image">
                 <div class="work-preview">
-                    <iframe src="canva.html"
+                    <iframe src="karya-1.html"
                             title="Preview Karya 1"
                             loading="lazy"
                             tabindex="-1"
