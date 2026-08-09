@@ -248,188 +248,202 @@ display:flex;
 }
 
 }
-         ```css
+        ```css
 /* =========================================
-   RESPONSIVE DARK / LIGHT MODE TOGGLE
+   DARK / LIGHT MODE TOGGLE
+   Floating di bawah header
    ========================================= */
 
-/* Container toggle */
 .navbar {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  width: auto;
-  height: auto;
-  padding: 0;
-  margin: 0;
-  z-index: 9999;
+    position: fixed;
+    top: 82px;                 /* di bawah header */
+    right: 24px;
+    left: auto;
+
+    width: auto;
+    height: auto;
+
+    padding: 0;
+    margin: 0;
+
+    z-index: 900;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    pointer-events: none;
 }
 
-/* Hilangkan style bawaan list */
+/* Hilangkan style list */
 .nav-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
 }
 
-.nav-list li {
-  margin: 0;
-  padding: 0;
-}
-
-/* Pastikan tombol tidak terdorong oleh elemen lain */
+/* Tombol toggle */
 .nav-list button.toggle {
-  position: relative;
-  display: block;
+    position: relative;
 
-  width: 150px;
-  height: 118px;
+    width: 78px;
+    height: 54px;
 
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 
-  border: 0;
-  outline: none;
+    border: none;
+    outline: none;
 
-  background: transparent;
-  cursor: pointer;
+    background: transparent;
 
-  overflow: hidden;
+    border-radius: 18px;
 
-  border-radius: 28px;
+    cursor: pointer;
 
-  /* area klik */
-  touch-action: manipulation;
+    overflow: hidden;
 
-  /* animasi */
-  transition:
-    transform 0.3s ease,
-    filter 0.3s ease;
+    pointer-events: auto;
+
+    transform: scale(1);
+
+    transition:
+        transform .25s ease,
+        filter .25s ease;
 }
 
-/* Efek hover */
+/* Hover */
 .nav-list button.toggle:hover {
-  transform: scale(1.04);
-  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.18));
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,.18));
 }
 
-/* Efek ketika ditekan */
+/* Click */
 .nav-list button.toggle:active {
-  transform: scale(0.97);
+    transform: scale(.94);
 }
 
-/* Fokus keyboard */
+/* Keyboard */
 .nav-list button.toggle:focus-visible {
-  outline: 3px solid rgba(100, 180, 255, 0.8);
-  outline-offset: 4px;
+    outline: 2px solid #6c63ff;
+    outline-offset: 3px;
 }
 
-/* Semua elemen utama toggle */
+
+/* =========================================
+   CONTENT TOGGLE
+   ========================================= */
+
 .toggle__content {
-  position: absolute;
+    position: absolute;
 
-  inset: 0;
+    inset: 0;
 
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 
-  display: block;
+    overflow: hidden;
 
-  overflow: hidden;
+    border-radius: inherit;
 
-  border-radius: inherit;
+    pointer-events: none;
 }
 
-/* SVG background */
+
+/* Background SVG */
 .toggle__backdrop {
-  position: absolute;
+    position: absolute;
 
-  width: 100%;
-  height: 100%;
+    inset: 0;
 
-  inset: 0;
+    width: 100%;
+    height: 100%;
 
-  pointer-events: none;
+    object-fit: cover;
 
-  object-fit: cover;
+    pointer-events: none;
 }
 
-/* Bear / pilot */
-.pilot__container,
-.astrobear__container {
-  position: absolute;
 
-  pointer-events: none;
-}
+/* =========================================
+   INDICATOR
+   ========================================= */
 
-/* Indicator */
 .toggle__indicator-wrapper {
-  position: absolute;
+    position: absolute;
 
-  top: 50%;
-  left: 50%;
+    top: 50%;
+    left: 50%;
 
-  width: 54px;
-  height: 54px;
+    width: 30px;
+    height: 30px;
 
-  transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  pointer-events: none;
+    pointer-events: none;
 
-  z-index: 10;
+    z-index: 20;
 }
 
 .toggle__indicator {
-  width: 54px;
-  height: 54px;
+    width: 30px;
+    height: 30px;
 
-  border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    border-radius: 50%;
 
-  transition: transform 0.45s cubic-bezier(.68,-0.55,.27,1.55);
+    transition:
+        transform .45s cubic-bezier(.68,-.55,.27,1.55);
 }
 
-/* Pastikan gambar astronaut/bear tidak keluar */
+
+/* Pastikan ilustrasi tidak keluar */
 .pilot,
 .astrobear {
-  max-width: 100%;
-  height: auto;
+    max-width: 100%;
+    height: auto;
+
+    pointer-events: none;
 }
+
 
 /* =========================================
    TABLET
    ========================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 
-  .navbar {
-    top: 14px;
-    left: 14px;
-  }
+    .navbar {
+        top: 76px;
+        right: 18px;
+    }
 
-  .nav-list button.toggle {
-    width: 125px;
-    height: 98px;
+    .nav-list button.toggle {
+        width: 70px;
+        height: 48px;
 
-    border-radius: 23px;
-  }
+        border-radius: 15px;
+    }
 
-  .toggle__indicator-wrapper {
-    width: 46px;
-    height: 46px;
-  }
+    .toggle__indicator-wrapper {
+        width: 27px;
+        height: 27px;
+    }
 
-  .toggle__indicator {
-    width: 46px;
-    height: 46px;
-  }
+    .toggle__indicator {
+        width: 27px;
+        height: 27px;
+    }
 }
 
 
@@ -437,29 +451,29 @@ display:flex;
    MOBILE
    ========================================= */
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
 
-  .navbar {
-    top: 12px;
-    left: 12px;
-  }
+    .navbar {
+        top: 70px;
+        right: 14px;
+    }
 
-  .nav-list button.toggle {
-    width: 105px;
-    height: 82px;
+    .nav-list button.toggle {
+        width: 60px;
+        height: 42px;
 
-    border-radius: 20px;
-  }
+        border-radius: 13px;
+    }
 
-  .toggle__indicator-wrapper {
-    width: 38px;
-    height: 38px;
-  }
+    .toggle__indicator-wrapper {
+        width: 23px;
+        height: 23px;
+    }
 
-  .toggle__indicator {
-    width: 38px;
-    height: 38px;
-  }
+    .toggle__indicator {
+        width: 23px;
+        height: 23px;
+    }
 }
 
 
@@ -467,45 +481,50 @@ display:flex;
    HP KECIL
    ========================================= */
 
-@media (max-width: 360px) {
+@media (max-width: 400px) {
 
-  .navbar {
-    top: 10px;
-    left: 10px;
-  }
+    .navbar {
+        top: 66px;
+        right: 10px;
+    }
 
-  .nav-list button.toggle {
-    width: 92px;
-    height: 72px;
+    .nav-list button.toggle {
+        width: 54px;
+        height: 38px;
 
-    border-radius: 18px;
-  }
+        border-radius: 11px;
+    }
 
-  .toggle__indicator-wrapper {
-    width: 34px;
-    height: 34px;
-  }
+    .toggle__indicator-wrapper {
+        width: 21px;
+        height: 21px;
+    }
 
-  .toggle__indicator {
-    width: 34px;
-    height: 34px;
-  }
+    .toggle__indicator {
+        width: 21px;
+        height: 21px;
+    }
 }
 
 
 /* =========================================
-   SAFE AREA UNTUK HP NOTCH
+   LANDSCAPE HP
    ========================================= */
 
-@supports (top: env(safe-area-inset-top)) {
+@media (max-height: 500px) and (orientation: landscape) {
 
-  .navbar {
-    top: max(12px, env(safe-area-inset-top));
-    left: max(12px, env(safe-area-inset-left));
-  }
+    .navbar {
+        top: 62px;
+        right: 12px;
+    }
 
+    .nav-list button.toggle {
+        width: 58px;
+        height: 40px;
+    }
 }
 ```
+
 
             .iframe-container34 {
             position: relative;
