@@ -28,6 +28,17 @@
 
     background: transparent;
 
+    /* FIX: teks (logo, menu, hamburger) tadinya mewarisi warna default
+       (hitam) dari body, jadi hilang saat background header menjadi
+       gelap ketika di-scroll. Dipaksa putih di sini. */
+    color: #fff;
+
+    /* FIX: hindari bug rendering "hitam solid" pada beberapa browser
+       Android saat position:fixed dikombinasikan dengan backdrop-filter */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: background;
+
     transition:
         background .35s ease,
         backdrop-filter .35s ease,
@@ -48,6 +59,16 @@
 
     box-shadow:
         0 8px 30px rgba(0, 0, 0, .12);
+}
+
+/* FIX: fallback untuk browser (termasuk sebagian Android WebView/Chrome
+   versi lama) yang tidak mendukung backdrop-filter sama sekali.
+   Tanpa blur, background dibuat lebih pekat supaya teks putih tetap
+   kontras dan header tidak terlihat "kosong/hitam aneh". */
+@supports not (backdrop-filter: blur(1px)) {
+    .header.scrolled {
+        background: rgba(15, 15, 25, .94);
+    }
 }
 
 
