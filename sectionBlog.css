@@ -1,0 +1,423 @@
+```css
+/* =========================================================
+   SECTION BLOG / WORKS
+   File: sectionBlog.css
+   ========================================================= */
+
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.works-section {
+    width: min(1180px, calc(100% - 40px));
+    margin: 90px auto 70px;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.works-heading {
+    margin-bottom: 35px;
+}
+
+.works-label {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    opacity: .55;
+}
+
+.works-heading h2 {
+    margin: 0;
+
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.1;
+
+    letter-spacing: -1.5px;
+}
+
+.works-heading h2 span {
+    background: linear-gradient(
+        90deg,
+        #6c63ff,
+        #00c6ff
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.works-heading p {
+    max-width: 600px;
+
+    margin: 12px 0 0;
+
+    font-size: 15px;
+    line-height: 1.7;
+
+    opacity: .6;
+}
+
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.works-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   WORK CARD
+   ========================================================= */
+
+.work-card {
+    position: relative;
+
+    display: block;
+
+    overflow: hidden;
+
+    color: inherit;
+    text-decoration: none;
+
+    border-radius: 22px;
+
+    background: rgba(255, 255, 255, .04);
+
+    border: 1px solid rgba(255, 255, 255, .08);
+
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, .08);
+
+    transition:
+        transform .4s cubic-bezier(.2, .8, .2, 1),
+        box-shadow .4s ease,
+        border-color .4s ease;
+}
+
+
+/* Hover */
+
+.work-card:hover {
+    transform: translateY(-8px);
+
+    border-color:
+        rgba(120, 120, 255, .35);
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, .16);
+}
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.work-image {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+
+    overflow: hidden;
+
+    background: #111;
+}
+
+.work-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform .6s cubic-bezier(.2, .8, .2, 1);
+}
+
+.work-card:hover .work-image img {
+    transform: scale(1.07);
+}
+
+
+/* Image overlay */
+
+.work-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 40%,
+            rgba(0, 0, 0, .55)
+        );
+
+    opacity: .5;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CATEGORY
+   ========================================================= */
+
+.work-category {
+    position: absolute;
+
+    top: 14px;
+    left: 14px;
+
+    z-index: 2;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: .5px;
+
+    color: #fff;
+
+    background:
+        rgba(0, 0, 0, .45);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+
+/* =========================================================
+   ARROW
+   ========================================================= */
+
+.work-arrow {
+    position: absolute;
+
+    top: 14px;
+    right: 14px;
+
+    z-index: 2;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #fff;
+
+    background:
+        rgba(0, 0, 0, .4);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    font-size: 17px;
+
+    transition:
+        transform .35s ease,
+        background .35s ease;
+}
+
+.work-card:hover .work-arrow {
+    transform:
+        translate(3px, -3px)
+        rotate(5deg);
+
+    background:
+        rgba(108, 99, 255, .85);
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.work-content {
+    padding: 20px 20px 22px;
+}
+
+.work-meta {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 9px;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .7px;
+
+    opacity: .45;
+}
+
+.work-content h3 {
+    margin: 0 0 8px;
+
+    font-size: 19px;
+
+    line-height: 1.35;
+
+    letter-spacing: -.3px;
+}
+
+.work-content p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+
+    opacity: .58;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .works-section {
+        width: min(700px, calc(100% - 32px));
+
+        margin-top: 70px;
+    }
+
+    .works-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 18px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .works-section {
+        width: calc(100% - 28px);
+
+        margin-top: 55px;
+        margin-bottom: 45px;
+    }
+
+    .works-heading {
+        margin-bottom: 25px;
+    }
+
+    .works-heading h2 {
+        font-size: 32px;
+    }
+
+    .works-heading p {
+        font-size: 13px;
+    }
+
+    .works-grid {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .work-card {
+        border-radius: 18px;
+    }
+
+    .work-content {
+        padding: 17px 17px 19px;
+    }
+
+    .work-content h3 {
+        font-size: 17px;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .works-section {
+        width: calc(100% - 22px);
+    }
+
+    .work-content h3 {
+        font-size: 16px;
+    }
+
+    .work-content p {
+        font-size: 12px;
+    }
+
+    .work-category {
+        top: 10px;
+        left: 10px;
+    }
+
+    .work-arrow {
+        top: 10px;
+        right: 10px;
+
+        width: 30px;
+        height: 30px;
+
+        font-size: 15px;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .work-card,
+    .work-image img,
+    .work-arrow {
+        transition: none;
+    }
+}
+```
