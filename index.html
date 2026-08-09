@@ -13,241 +13,322 @@
   <title>AWAN</title>
   <style>
     
-    /*================ HEADER ================*/
+```css
+/* =========================================
+   FIXED HEADER
+   ========================================= */
 
-.header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-z-index:9999;
-transition:.4s;
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    z-index: 9999;
+
+    background: transparent;
+
+    transition:
+        background .35s ease,
+        backdrop-filter .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
 }
 
-.header.scrolled{
 
-backdrop-filter:blur(20px);
--webkit-backdrop-filter:blur(20px);
+/* Header saat halaman di-scroll */
 
-background:rgba(15,15,25,.45);
+.header.scrolled {
+    background: rgba(15, 15, 25, .72);
 
-border-bottom:1px solid rgba(255,255,255,.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
-box-shadow:0 10px 35px rgba(0,0,0,.2);
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
 
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, .12);
 }
 
-.header-container{
 
-max-width:1300px;
+/* =========================================
+   HEADER CONTAINER
+   ========================================= */
 
-margin:auto;
+.header-container {
+    width: min(1200px, calc(100% - 40px));
 
-display:flex;
+    height: 70px;
 
-justify-content:space-between;
+    margin: 0 auto;
 
-align-items:center;
+    display: flex;
 
-padding:18px 35px;
+    align-items: center;
 
+    justify-content: space-between;
 }
 
-.logo{
 
-font-size:28px;
+/* =========================================
+   LOGO
+   ========================================= */
 
-font-weight:700;
+.logo {
+    display: inline-flex;
 
-text-decoration:none;
+    align-items: center;
 
+    text-decoration: none;
+
+    font-size: 25px;
+    font-weight: 800;
 }
 
-.logo-gradient{
 
-background:linear-gradient(45deg,#00d4ff,#7b61ff,#ff4ecd);
+/* =========================================
+   NAVIGATION
+   ========================================= */
 
--webkit-background-clip:text;
+.menu {
+    display: flex;
 
--webkit-text-fill-color:transparent;
+    align-items: center;
 
+    gap: 30px;
 }
 
-.menu{
+.menu-link {
+    position: relative;
 
-display:flex;
+    color: inherit;
 
-gap:35px;
+    text-decoration: none;
 
-align-items:center;
+    font-size: 14px;
+    font-weight: 600;
 
+    transition: color .25s ease;
 }
 
-.menu-link{
+.menu-link::after {
+    content: "";
 
-position:relative;
+    position: absolute;
 
-text-decoration:none;
+    left: 50%;
+    bottom: -7px;
 
-font-weight:600;
+    width: 0;
+    height: 2px;
 
-color:white;
+    border-radius: 20px;
 
-transition:.35s;
+    background: linear-gradient(
+        90deg,
+        #6c63ff,
+        #00c6ff
+    );
 
+    transform: translateX(-50%);
+
+    transition: width .3s ease;
 }
 
-.menu-link::after{
-
-content:"";
-
-position:absolute;
-
-left:0;
-
-bottom:-7px;
-
-width:0%;
-
-height:3px;
-
-border-radius:30px;
-
-background:linear-gradient(90deg,#00d4ff,#8d63ff);
-
-transition:.35s;
-
+.menu-link:hover::after,
+.menu-link.active::after {
+    width: 100%;
 }
 
-.menu-link:hover{
 
-color:#00d4ff;
+/* =========================================
+   DOWNLOAD CV
+   ========================================= */
 
+.btn-cv {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 17px;
+
+    border-radius: 50px;
+
+    text-decoration: none;
+
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6c63ff,
+            #00c6ff
+        );
+
+    box-shadow:
+        0 8px 20px rgba(0, 198, 255, .2);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
 }
 
-.menu-link:hover::after{
+.btn-cv:hover {
+    transform: translateY(-2px);
 
-width:100%;
-
+    box-shadow:
+        0 12px 28px rgba(0, 198, 255, .35);
 }
 
-.menu-link.active{
 
-color:#00d4ff;
+/* =========================================
+   HAMBURGER
+   ========================================= */
 
+.hamburger {
+    display: none;
+
+    width: 32px;
+    height: 32px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
 }
 
-.menu-link.active::after{
+.hamburger span {
+    display: block;
 
-width:100%;
+    width: 24px;
+    height: 2px;
 
+    border-radius: 20px;
+
+    background: currentColor;
+
+    transition:
+        transform .3s ease,
+        opacity .3s ease;
 }
 
-.btn-cv{
 
-padding:12px 22px;
+/* =========================================
+   MOBILE
+   ========================================= */
 
-border-radius:50px;
+@media (max-width: 900px) {
 
-text-decoration:none;
+    .header-container {
+        height: 64px;
 
-font-weight:600;
+        width: calc(100% - 28px);
+    }
 
-color:white;
+    .menu {
+        position: absolute;
 
-background:linear-gradient(135deg,#6c63ff,#00c6ff);
+        top: 72px;
+        right: 14px;
 
-box-shadow:0 12px 30px rgba(0,198,255,.35);
+        width: min(250px, calc(100vw - 28px));
 
-transition:.3s;
+        padding: 20px;
 
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 18px;
+
+        border-radius: 18px;
+
+        background:
+            rgba(15, 15, 25, .94);
+
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+
+        border: 1px solid rgba(255, 255, 255, .08);
+
+        box-shadow:
+            0 20px 50px rgba(0, 0, 0, .2);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transform:
+            translateY(-10px)
+            scale(.97);
+
+        transition:
+            opacity .3s ease,
+            visibility .3s ease,
+            transform .3s ease;
+    }
+
+    .menu.show {
+        opacity: 1;
+
+        visibility: visible;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    .menu-link {
+        padding: 6px 4px;
+    }
+
+    .btn-cv {
+        width: 100%;
+    }
+
+    .hamburger {
+        display: flex;
+    }
 }
 
-.btn-cv:hover{
 
-transform:translateY(-3px);
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
 
-box-shadow:0 18px 40px rgba(0,198,255,.45);
+@media (max-width: 480px) {
 
+    .header-container {
+        width: calc(100% - 22px);
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .menu {
+        top: 68px;
+        right: 11px;
+    }
 }
 
-.hamburger{
-
-display:none;
-
-flex-direction:column;
-
-gap:6px;
-
-cursor:pointer;
-
-}
-
-.hamburger span{
-
-width:28px;
-
-height:3px;
-
-background:white;
-
-border-radius:10px;
-
-transition:.3s;
-
-}
-
-@media(max-width:900px){
-
-.menu{
-
-position:absolute;
-
-top:80px;
-
-right:20px;
-
-width:250px;
-
-padding:25px;
-
-border-radius:20px;
-
-background:rgba(18,18,30,.96);
-
-backdrop-filter:blur(20px);
-
-display:flex;
-
-flex-direction:column;
-
-transform:translateY(-20px);
-
-opacity:0;
-
-pointer-events:none;
-
-transition:.35s;
-
-}
-
-.menu.show{
-
-transform:translateY(0);
-
-opacity:1;
-
-pointer-events:auto;
-
-}
-
-.hamburger{
-
-display:flex;
-
-}
-
-}
       
             .iframe-container34 {
             position: relative;
@@ -388,7 +469,6 @@ display:flex;
 </div>
 </div>
     
-```html
 <!-- =========================================
      PORTFOLIO / BLOG SECTION
      ========================================= -->
