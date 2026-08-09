@@ -7,7 +7,7 @@ permalink: pretty
 # --- Pengaturan dasar situs (opsional, sesuaikan) ---
 title: "Nama Situs Saya"
 description: "Deskripsi singkat tentang situs ini"
-url: "https://namadomain.com"    # ganti dengan custom domain kamu
+url: "https://yusriirawan.my.id"    # ganti dengan custom domain kamu
 baseurl: ""                      # kosongkan jika pakai custom domain di root
 
 # --- Tema bawaan GitHub Pages (opsional) ---
