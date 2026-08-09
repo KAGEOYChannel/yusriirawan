@@ -1,0 +1,21 @@
+# Konfigurasi Jekyll untuk GitHub Pages
+# File ini membuat URL halaman/post menjadi "pretty" tanpa ekstensi .html
+
+# Contoh: about.html -> namadomain.com/about/
+permalink: pretty
+
+# --- Pengaturan dasar situs (opsional, sesuaikan) ---
+title: "Nama Situs Saya"
+description: "Deskripsi singkat tentang situs ini"
+url: "https://namadomain.com"    # ganti dengan custom domain kamu
+baseurl: ""                      # kosongkan jika pakai custom domain di root
+
+# --- Tema bawaan GitHub Pages (opsional) ---
+# theme: minima
+
+# --- File/folder yang tidak perlu diproses Jekyll ---
+exclude:
+  - README.md
+  - LICENSE
+  - .gitignore
+  - node_modules
