@@ -946,33 +946,6 @@ menu.classList.remove("show");
 
 });
   </script>
-
-  <script>
-    // Toggle dark mode (tombol di header, samping teks AWAN)
-    (function () {
-      const darkToggle = document.getElementById("darkModeToggle");
-      if (!darkToggle) return;
-
-      const applyDarkMode = (isDark) => {
-        darkToggle.setAttribute("aria-pressed", String(isDark));
-        if (isDark) {
-          document.documentElement.setAttribute("data-dark-mode", "true");
-        } else {
-          document.documentElement.removeAttribute("data-dark-mode");
-        }
-      };
-
-      // Ingat preferensi user di kunjungan berikutnya
-      const saved = localStorage.getItem("darkMode");
-      applyDarkMode(saved === "true");
-
-      darkToggle.addEventListener("click", () => {
-        const next = darkToggle.getAttribute("aria-pressed") !== "true";
-        applyDarkMode(next);
-        localStorage.setItem("darkMode", String(next));
-      });
-    })();
-  </script>
   
   <!-- end -->
   </body>
