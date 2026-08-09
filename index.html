@@ -372,6 +372,61 @@
     transform: scale(0.25);
     transform-origin: 0 0;
 }
+
+
+/* =========================================
+   PAGE LAYOUT / SCROLL FIX
+   (memaksa halaman bisa di-scroll & 2 section jelas)
+   ========================================= */
+
+html, body {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img, iframe, video {
+    max-width: 100%;
+}
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 100px 16px 40px;
+}
+
+.works-section {
+    position: relative;
+    width: 100%;
+
+    padding: 60px 16px 100px;
+}
+
+@media (max-width: 900px) {
+    .hero-section {
+        padding: 90px 12px 32px;
+        min-height: auto;
+    }
+
+    .works-section {
+        padding: 40px 12px 80px;
+    }
+
+    .works-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
   </style>
 </head>
   <body>
@@ -410,7 +465,7 @@
     </div>
 </header>
 <!-- content -->    
-<div>
+<section id="home" class="hero-section">
 <div class="card" data-state="#about">
   <div class="card-header">
     <div class="card-cover" style="background-image: url('https://media.istockphoto.com/id/968903218/id/foto/pola-cairan-abstrak.jpg?s=612x612&w=is&k=20&c=kvfCg_Wdh0OISRLsfjOclV8s4FRBIvDUA7IEPh-XZxA=')"></div>
@@ -492,9 +547,7 @@
       <button data-section="#experience" class="cards-buttons">EXPERIENCE</button>
       <button data-section="#contact" class="cards-buttons">CONTACT</button>
     </div>
-  </div>
-</div>
-</div>
+</section>
     
 <!-- =========================================
      PORTFOLIO / BLOG SECTION
