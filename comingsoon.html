@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Coming Soon</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --white: #ffffff;
+            --blue: #5b5cff;
+            --cyan: #00eaff;
+            --purple: #a855f7;
+            --pink: #ff4ecd;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            font-family: "Inter", sans-serif;
+            overflow-x: hidden;
+        }
+
+        body {
+            min-height: 100vh;
+            color: var(--white);
+            background:
+                radial-gradient(circle at 15% 20%, rgba(0, 234, 255, .20), transparent 28%),
+                radial-gradient(circle at 85% 20%, rgba(168, 85, 247, .22), transparent 30%),
+                radial-gradient(circle at 50% 90%, rgba(255, 78, 205, .18), transparent 32%),
+                #050516;
+            position: relative;
+        }
+
+        /* =====================================================
+           3D BACKGROUND
+        ===================================================== */
+
+        #canvas3d {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .background-glow {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(91, 92, 255, .08),
+                    transparent 30%,
+                    rgba(0, 234, 255, .06),
+                    transparent 70%,
+                    rgba(255, 78, 205, .08)
+                );
+            animation: backgroundMove 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundMove {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.15);
+            }
+        }
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .page {
+            min-height: 100vh;
+            position: relative;
+            z-index: 5;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: min(100%, 950px);
+            text-align: center;
+        }
+
+        /* =====================================================
+           BADGE
+        ===================================================== */
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 9px 17px;
+
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 999px;
+
+            background: rgba(255,255,255,.07);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 0 25px rgba(91,92,255,.12),
+                inset 0 0 20px rgba(255,255,255,.03);
+
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .5px;
+
+            animation: fadeDown .9s ease both;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00ffb3;
+
+            box-shadow:
+                0 0 8px #00ffb3,
+                0 0 18px #00ffb3;
+
+            animation: pulse 1.6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(.65);
+                opacity: .6;
+            }
+        }
+
+        /* =====================================================
+           TITLE
+        ===================================================== */
+
+        .title {
+            margin-top: 28px;
+
+            font-size: clamp(48px, 9vw, 105px);
+            line-height: .95;
+            font-weight: 800;
+            letter-spacing: -5px;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    #ffffff 5%,
+                    #8deaff 30%,
+                    #8d7aff 52%,
+                    #ff75d8 76%,
+                    #ffffff 95%
+                );
+
+            background-size: 250% auto;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            animation:
+                gradientText 7s linear infinite,
+                fadeUp 1s ease .15s both;
+
+            filter:
+                drop-shadow(0 0 25px rgba(91,92,255,.25));
+        }
+
+        @keyframes gradientText {
+            to {
+                background-position: 250% center;
+            }
+        }
+
+        .subtitle {
+            max-width: 650px;
+            margin: 28px auto 0;
+
+            color: rgba(255,255,255,.68);
+
+            font-size: clamp(14px, 2vw, 17px);
+            line-height: 1.8;
+
+            animation: fadeUp 1s ease .3s both;
+        }
+
+        /* =====================================================
+           COUNTDOWN
+        ===================================================== */
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+
+            width: min(100%, 620px);
+            margin: 42px auto 0;
+
+            animation: fadeUp 1s ease .45s both;
+        }
+
+        .time-card {
+            position: relative;
+
+            padding: 20px 10px;
+
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.10),
+                    rgba(255,255,255,.025)
+                );
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,.25),
+                inset 0 1px 0 rgba(255,255,255,.08);
+
+            overflow: hidden;
+
+            transition: transform .3s ease, border-color .3s ease;
+        }
+
+        .time-card::before {
+            content: "";
+
+            position: absolute;
+            width: 80px;
+            height: 80px;
+
+            top: -40px;
+            right: -30px;
+
+            border-radius: 50%;
+
+            background: #6c63ff;
+            filter: blur(30px);
+            opacity: .25;
+        }
+
+        .time-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(255,255,255,.28);
+        }
+
+        .number {
+            position: relative;
+            z-index: 2;
+
+            font-size: clamp(30px, 5vw, 48px);
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .label {
+            position: relative;
+            z-index: 2;
+
+            margin-top: 5px;
+
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+
+            color: rgba(255,255,255,.48);
+        }
+
+        /* =====================================================
+           HOME BUTTON
+        ===================================================== */
+
+        .actions {
+            margin-top: 38px;
+
+            display: flex;
+            justify-content: center;
+
+            animation: fadeUp 1s ease .6s both;
+        }
+
+        .home-btn {
+            position: relative;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            min-width: 150px;
+
+            padding: 14px 25px;
+
+            color: #fff;
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    #5b5cff,
+                    #8b5cf6,
+                    #ec4899
+                );
+
+            background-size: 200% 100%;
+
+            box-shadow:
+                0 10px 35px rgba(91,92,255,.3);
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease,
+                background-position .5s ease;
+
+            overflow: hidden;
+        }
+
+        .home-btn::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    transparent 30%,
+                    rgba(255,255,255,.35),
+                    transparent 70%
+                );
+
+            transform: translateX(-120%);
+            transition: transform .7s ease;
+        }
+
+        .home-btn:hover::before {
+            transform: translateX(120%);
+        }
+
+        .home-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+
+            background-position: 100% 0;
+
+            box-shadow:
+                0 15px 45px rgba(139,92,246,.45);
+        }
+
+        .home-btn:active {
+            transform: translateY(-1px) scale(.98);
+        }
+
+        .home-btn svg {
+            width: 17px;
+            height: 17px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .home-btn span {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            margin-top: 45px;
+
+            color: rgba(255,255,255,.35);
+
+            font-size: 11px;
+            letter-spacing: .5px;
+
+            animation: fadeUp 1s ease .75s both;
+        }
+
+        /* =====================================================
+           ANIMATIONS
+        ===================================================== */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .page {
+                padding: 30px 16px;
+            }
+
+            .title {
+                letter-spacing: -3px;
+            }
+
+            .subtitle {
+                margin-top: 20px;
+                line-height: 1.7;
+            }
+
+            .countdown {
+                gap: 8px;
+                margin-top: 32px;
+            }
+
+            .time-card {
+                padding: 15px 5px;
+                border-radius: 15px;
+            }
+
+            .number {
+                font-size: 28px;
+            }
+
+            .label {
+                font-size: 8px;
+                letter-spacing: 1px;
+            }
+
+            .actions {
+                margin-top: 30px;
+            }
+
+            .home-btn {
+                width: 100%;
+                max-width: 220px;
+            }
+
+            .footer {
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 360px) {
+
+            .badge {
+                font-size: 11px;
+                padding: 8px 13px;
+            }
+
+            .countdown {
+                gap: 6px;
+            }
+
+            .number {
+                font-size: 24px;
+            }
+
+            .label {
+                font-size: 7px;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 3D Animated Background -->
+    <canvas id="canvas3d"></canvas>
+
+    <div class="background-glow"></div>
+
+    <!-- Main Content -->
+    <main class="page">
+
+        <div class="container">
+
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Something exciting is coming
+            </div>
+
+            <h1 class="title">
+                Coming Soon
+            </h1>
+
+            <p class="subtitle">
+                Kami sedang menyiapkan sesuatu yang baru, modern,
+                dan lebih menarik untuk Anda. Nantikan kehadirannya.
+            </p>
+
+            <!-- Countdown -->
+            <div class="countdown">
+
+                <div class="time-card">
+                    <div class="number" id="days">00</div>
+                    <div class="label">Days</div>
+                </div>
+
+                <div class="time-card">
+                    <div class="number" id="hours">00</div>
+                    <div class="label">Hours</div>
+                </div>
+
+                <div class="time-card">
+                    <div class="number" id="minutes">00</div>
+                    <div class="label">Minutes</div>
+                </div>
+
+                <div class="time-card">
+                    <div class="number" id="seconds">00</div>
+                    <div class="label">Seconds</div>
+                </div>
+
+            </div>
+
+            <!-- Home -->
+            <div class="actions">
+
+                <a href="index.html" class="home-btn">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M3 9.5L12 3l9 6.5"></path>
+                        <path d="M5 10v10h14V10"></path>
+                        <path d="M9 20v-6h6v6"></path>
+                    </svg>
+
+                    <span>Home</span>
+
+                </a>
+
+            </div>
+
+            <div class="footer">
+                © 2026 — Coming Soon
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        /* =====================================================
+           3D PARTICLE ENGINE
+           Lightweight Canvas 3D-style animation
+        ===================================================== */
+
+        const canvas = document.getElementById("canvas3d");
+        const ctx = canvas.getContext("2d");
+
+        let width;
+        let height;
+        let particles = [];
+
+        const mouse = {
+            x: 0,
+            y: 0
+        };
+
+        function resizeCanvas() {
+
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+            width = window.innerWidth;
+            height = window.innerHeight;
+
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+
+            canvas.style.width = width + "px";
+            canvas.style.height = height + "px";
+
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        window.addEventListener("resize", resizeCanvas);
+
+        resizeCanvas();
+
+        /* =====================================================
+           CREATE PARTICLES
+        ===================================================== */
+
+        function createParticles() {
+
+            particles = [];
+
+            const amount =
+                width < 600
+                    ? 90
+                    : Math.min(180, Math.floor(width / 7));
+
+            for (let i = 0; i < amount; i++) {
+
+                particles.push({
+
+                    x: Math.random() * width - width / 2,
+                    y: Math.random() * height - height / 2,
+                    z: Math.random() * width,
+
+                    size: Math.random() * 2 + .4,
+
+                    speed: Math.random() * .45 + .08,
+
+                    hue: Math.random() * 360,
+
+                    angle: Math.random() * Math.PI * 2
+
+                });
+            }
+        }
+
+        createParticles();
+
+        window.addEventListener("resize", createParticles);
+
+        /* =====================================================
+           MOUSE PARALLAX
+        ===================================================== */
+
+        window.addEventListener("pointermove", event => {
+
+            mouse.x =
+                (event.clientX / width - .5) * 2;
+
+            mouse.y =
+                (event.clientY / height - .5) * 2;
+
+        });
+
+        /* =====================================================
+           DRAW PARTICLES
+        ===================================================== */
+
+        function animate() {
+
+            ctx.fillStyle = "rgba(5,5,22,.20)";
+            ctx.fillRect(0, 0, width, height);
+
+            const centerX =
+                width / 2 + mouse.x * 25;
+
+            const centerY =
+                height / 2 + mouse.y * 25;
+
+            particles.forEach(p => {
+
+                p.z -= p.speed;
+
+                p.angle += .0015;
+
+                if (p.z <= 1) {
+
+                    p.z = width;
+
+                    p.x =
+                        Math.random() * width -
+                        width / 2;
+
+                    p.y =
+                        Math.random() * height -
+                        height / 2;
+                }
+
+                const perspective =
+                    width / p.z;
+
+                const x =
+                    p.x * perspective + centerX;
+
+                const y =
+                    p.y * perspective + centerY;
+
+                const size =
+                    p.size * perspective;
+
+                if (
+                    x < -100 ||
+                    x > width + 100 ||
+                    y < -100 ||
+                    y > height + 100
+                ) {
+                    return;
+                }
+
+                const alpha =
+                    Math.min(
+                        .9,
+                        Math.max(
+                            .05,
+                            1 - p.z / width
+                        )
+                    );
+
+                const gradient =
+                    ctx.createRadialGradient(
+                        x,
+                        y,
+                        0,
+                        x,
+                        y,
+                        Math.max(size * 5, 2)
+                    );
+
+                const hue = p.hue;
+
+                gradient.addColorStop(
+                    0,
+                    `hsla(${hue},100%,75%,${alpha})`
+                );
+
+                gradient.addColorStop(
+                    .35,
+                    `hsla(${(hue + 50) % 360},100%,65%,${alpha * .35})`
+                );
+
+                gradient.addColorStop(
+                    1,
+                    `hsla(${hue},100%,60%,0)`
+                );
+
+                ctx.fillStyle = gradient;
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    x,
+                    y,
+                    Math.max(size * 5, 2),
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fill();
+
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        /* =====================================================
+           COUNTDOWN
+           
+           Ubah tanggal di bawah sesuai tanggal launching.
+        ===================================================== */
+
+        const launchDate =
+            new Date("2026-12-31T23:59:59").getTime();
+
+        function updateCountdown() {
+
+            const now =
+                new Date().getTime();
+
+            const distance =
+                launchDate - now;
+
+            if (distance <= 0) {
+
+                document.getElementById("days").textContent = "00";
+                document.getElementById("hours").textContent = "00";
+                document.getElementById("minutes").textContent = "00";
+                document.getElementById("seconds").textContent = "00";
+
+                return;
+            }
+
+            const days =
+                Math.floor(
+                    distance /
+                    (1000 * 60 * 60 * 24)
+                );
+
+            const hours =
+                Math.floor(
+                    (distance /
+                        (1000 * 60 * 60)) % 24
+                );
+
+            const minutes =
+                Math.floor(
+                    (distance /
+                        (1000 * 60)) % 60
+                );
+
+            const seconds =
+                Math.floor(
+                    (distance / 1000) % 60
+                );
+
+            document.getElementById("days")
+                .textContent =
+                String(days).padStart(2, "0");
+
+            document.getElementById("hours")
+                .textContent =
+                String(hours).padStart(2, "0");
+
+            document.getElementById("minutes")
+                .textContent =
+                String(minutes).padStart(2, "0");
+
+            document.getElementById("seconds")
+                .textContent =
+                String(seconds).padStart(2, "0");
+        }
+
+        updateCountdown();
+
+        setInterval(updateCountdown, 1000);
+
+    </script>
+
+</body>
+</html>
