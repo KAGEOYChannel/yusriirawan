@@ -6,12 +6,12 @@ import { Navbar } from './components/Navbar';
 import { QuizGame } from './components/QuizGame';
 import { AnimatedStory } from './components/AnimatedStory';
 import { ConceptLab } from './components/ConceptLab';
-import { Leaderboard } from './components/Leaderboard';
+import { MateriSusunPendek } from './components/MateriSusunPendek';
 import { ScratchpadModal } from './components/ScratchpadModal';
 import { PrintWorksheetModal } from './components/PrintWorksheetModal';
 import { SoundEffects } from './utils/sound';
 import { triggerConfetti } from './utils/confetti';
-import { Sparkles, BookOpen, Scale, Trophy, Heart, Star, CheckCircle, ShieldCheck } from 'lucide-react';
+import { Sparkles, BookOpen, Scale, Layers, Heart, Star, CheckCircle, ShieldCheck } from 'lucide-react';
 
 const DEFAULT_LEADERBOARD: LeaderboardEntry[] = [
   { id: '1', name: 'Alif Pratama', avatar: '🦁', score: 380, stars: 28, level: 'hard', date: 'Hari Ini' },
@@ -23,7 +23,7 @@ const DEFAULT_LEADERBOARD: LeaderboardEntry[] = [
 ];
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'quiz' | 'story' | 'lab' | 'leaderboard'>('quiz');
+  const [activeTab, setActiveTab] = useState<'quiz' | 'story' | 'lab' | 'materi'>('quiz');
   const [isScratchpadOpen, setIsScratchpadOpen] = useState<boolean>(false);
   const [isPrintOpen, setIsPrintOpen] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(false);
@@ -366,20 +366,15 @@ export default function App() {
               </motion.div>
             )}
 
-            {activeTab === 'leaderboard' && (
+            {activeTab === 'materi' && (
               <motion.div
-                key="leaderboard"
+                key="materi"
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.18 }}
               >
-                <Leaderboard
-                  player={player}
-                  leaderboard={leaderboard}
-                  badges={badges}
-                  onUpdatePlayer={handleUpdatePlayer}
-                />
+                <MateriSusunPendek onUnlockBadge={handleUnlockBadge} />
               </motion.div>
             )}
           </AnimatePresence>
