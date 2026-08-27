@@ -6,7 +6,7 @@ import {
   Pencil,
   Printer,
   Sparkles,
-  Trophy,
+  Layers,
   BookOpen,
   Scale,
   BrainCircuit,
@@ -15,8 +15,8 @@ import {
 import { SoundEffects } from '../utils/sound';
 
 interface NavbarProps {
-  activeTab: 'quiz' | 'story' | 'lab' | 'leaderboard';
-  onSelectTab: (tab: 'quiz' | 'story' | 'lab' | 'leaderboard') => void;
+  activeTab: 'quiz' | 'story' | 'lab' | 'materi';
+  onSelectTab: (tab: 'quiz' | 'story' | 'lab' | 'materi') => void;
   player: PlayerProfile;
   isMuted: boolean;
   onToggleMute: () => void;
@@ -37,7 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'quiz', label: 'Kuis Tantangan', icon: Sparkles, activeBg: 'bg-yellow-400 text-black' },
     { id: 'story', label: 'Soal Cerita Animasi', icon: BookOpen, activeBg: 'bg-green-400 text-black' },
     { id: 'lab', label: 'Laboratorium Konsep', icon: Scale, activeBg: 'bg-purple-300 text-black' },
-    { id: 'leaderboard', label: 'Papan Juara', icon: Trophy, activeBg: 'bg-pink-400 text-black' },
+    { id: 'materi', label: 'Materi Susun Pendek', icon: Layers, activeBg: 'bg-blue-400 text-black' },
   ] as const;
 
   return (
@@ -96,10 +96,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* Player Capsule (XP & Avatar Bento Tag) */}
-          <button
+          <div
             id="nav-player-profile"
-            onClick={() => onSelectTab('leaderboard')}
-            className="flex items-center gap-2.5 pl-3 pr-2 py-1 bg-slate-50 hover:bg-slate-100 border-2 border-black rounded-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none transition-all"
+            className="flex items-center gap-2.5 pl-3 pr-2 py-1 bg-slate-50 border-2 border-black rounded-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
           >
             <div className="flex flex-col items-end text-right">
               <span className="text-[10px] font-black uppercase text-slate-500 leading-none">Poin Kamu</span>
@@ -108,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="w-9 h-9 bg-green-400 border-2 border-black rounded-lg flex items-center justify-center text-xl shadow-xs">
               <span>{player.avatar}</span>
             </div>
-          </button>
+          </div>
         </div>
       </div>
 
