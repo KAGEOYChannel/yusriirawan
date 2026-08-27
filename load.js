@@ -1,7 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Simulate loading process
-  setTimeout(function () {
-    // Add the "loaded" class to the body to trigger loaded styles
+(() => {
+  const finishLoading = () => {
     document.body.classList.add("loaded");
-  }, 3000); // Adjust the delay as needed
-});
+  };
+
+  // Jangan menunggu timer 3 detik. Loader ditutup setelah halaman benar-benar siap.
+  if (document.readyState === "complete") {
+    requestAnimationFrame(finishLoading);
+  } else {
+    window.addEventListener("load", () => {
+      requestAnimationFrame(finishLoading);
+    }, { once: true });
+  }
+})();
