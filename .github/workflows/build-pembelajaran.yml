@@ -1,0 +1,57 @@
+name: Build & Publish Pembelajaran MTK
+
+# Situs ini di-deploy oleh GitHub Pages langsung dari branch (raw static
+# files) — BUKAN dari GitHub Actions. Karena itu, halaman React/TypeScript
+# di folder app/ tidak bisa langsung disajikan (browser tidak bisa
+# menjalankan .tsx). Workflow ini meng-compile app/ dengan Vite, lalu
+# meng-commit hasil compile-nya (HTML+JS+CSS biasa) ke root repo sebagai
+# pembelajaranMTK.html + folder assets/, supaya bisa disajikan sebagai
+# file statis seperti halaman lain di situs ini.
+
+on:
+  push:
+    branches: ['main', 'master']
+    paths:
+      - 'app/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-pembelajaran
+  cancel-in-progress: true
+
+jobs:
+  build-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        working-directory: app
+        run: npm install
+
+      - name: Build with Vite
+        working-directory: app
+        run: npx vite build
+
+      - name: Copy compiled output to site root
+        run: |
+          rm -rf assets
+          cp app/dist/pembelajaranMTK.html ./pembelajaranMTK.html
+          cp -r app/dist/assets ./assets
+
+      - name: Commit & push compiled files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pembelajaranMTK.html assets
+          git diff --staged --quiet || git commit -m "chore: rebuild pembelajaranMTK.html dari app/ [skip ci]"
+          git push
