@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #eff6ff; /* blue-50 */
+    color: #0f172a; /* slate-900 */
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Fredoka', cursive, 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* Bento Neo-Brutalist Shadow Helpers */
+.bento-shadow-xs {
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
+}
+.bento-shadow-sm {
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+}
+.bento-shadow {
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+}
+.bento-shadow-md {
+  box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 1);
+}
+.bento-shadow-lg {
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+}
+.bento-shadow-xl {
+  box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.bento-card {
+  background-color: #ffffff;
+  border: 4px solid #000000;
+  border-radius: 1.5rem;
+  box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.bento-btn-yellow {
+  background-color: #facc15;
+  color: #000000;
+  font-weight: 800;
+  border: 2px solid #000000;
+  border-radius: 0.75rem;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+  transition: all 0.15s ease;
+}
+.bento-btn-yellow:active {
+  transform: translateY(2px);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.bento-btn-blue {
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-weight: 800;
+  border: 2px solid #000000;
+  border-radius: 0.75rem;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+  transition: all 0.15s ease;
+}
+.bento-btn-blue:active {
+  transform: translateY(2px);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 1);
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes pulse-gentle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes tilt-scale {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-float {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+.animate-pulse-gentle {
+  animation: pulse-gentle 2.5s ease-in-out infinite;
+}
+
+.animate-tilt {
+  animation: tilt-scale 1.5s ease-in-out infinite;
+}
+
+/* Custom scrollbar for game panels */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border: 2px solid #000000;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb {
+  background: #facc15;
+  border: 2px solid #000000;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #eab308;
+}

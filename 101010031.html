@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Special for You</title>
+  <style>
+    /* CSS untuk tampilan dan desain */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #e81d62;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+      transition: transform 0.3s ease;
+    }
+
+    .container:hover {
+      transform: scale(1.05);
+    }
+
+    @media only screen and (max-width: 600px) {
+      .container {
+        width: 90%;
+      }
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 150%; /* Perbandingan aspek video potret 3:2 */
+      overflow: hidden;
+      margin-top: 30px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .password-form {
+      margin-top: 30px;
+    }
+
+    .password-form input[type="password"] {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      outline: none;
+      margin-buttom: 40px;
+    }
+
+    .password-form input[type="submit"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      background-color: #e81d62;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    function showVideo() {
+      var password = document.getElementById("password").value;
+      var videoContainer = document.getElementById("video-container");
+      var passwordForm = document.getElementById("password-form");
+
+      // Ganti PASSWORD yang diinginkan dengan password yang benar
+      if (password === "cinta") {
+        videoContainer.style.display = "block";
+        passwordForm.style.display = "none";
+      } 
+      else {
+        alert("Password salah! ketik next jika menyerah");
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+  <h1>Hello !!!</h1>
+    <p><strong>Masukkan kata yang dimaksud kedalam kolom "masukkan password". Semoga berhasil!!!</strong></p>
+      <p>Aku adalah perasaan yang indah, melanda hati dengan kehangatan. Ketika ada, dunia terasa berwarna-warni, mengisi hari dengan kebahagiaan. Aku bisa membuatmu tersenyum hanya dengan satu sentuhan, dan mendamaikan hatimu ketika sedang gelisah. Saat kau melihatnya dalam matamu, kau tahu bahwa dia adalah... (tebak kata apa?)</p>
+      </div>
+  <div id="video-container" class="video-container" style="display: none;">
+    <iframe src="./lv_7251064864179899649_20230713103327.mp4" allowfullscreen></iframe>
+  </div>
+
+  <div id="password-form" class="password-form">
+    <input type="password" id="password" placeholder="Masukkan password">
+    <input type="submit" value="Submit" onclick="showVideo()">
+  </div>
+  <div class="container">
+  <div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+      <h1>Kembali ke Home</h1>
+      <!-- Tombol menuju halaman lain -->
+      <a href="https://yusriirawan.my.id/rahasia" class="btn btn-primary btn-lg">HOME</a>
+    </div>
+  </div>
+</div>
+
+<!-- Load Bootstrap JS (Optional, only if you use Bootstrap JS components) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
