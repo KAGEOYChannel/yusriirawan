@@ -1,6 +1,0 @@
-{
-  "name": "Detektif Angka: Misteri Bilangan Hilang",
-  "description": "Aplikasi pembelajaran matematika interaktif untuk siswa SD tentang konsep menentukan bilangan yang belum diketahui (aljabar dasar) dengan kuis seru, animasi soal cerita, timbangan interaktif, dan papan peringkat.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
