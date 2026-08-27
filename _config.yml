@@ -19,3 +19,6 @@ exclude:
   - LICENSE
   - .gitignore
   - node_modules
+  # Source code dev aplikasi pembelajaran (di-build otomatis oleh
+  # GitHub Actions ke pembelajaran/, tidak perlu ikut dipublish)
+  - pembelajaran/app
