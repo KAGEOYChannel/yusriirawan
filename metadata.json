@@ -1,6 +1,6 @@
 {
   "name": "Petualangan Matematika: Bilangan Misteri",
-  "description": "Aplikasi interaktif matematika SD untuk menentukan bilangan yang belum diketahui dengan gamifikasi, visualisasi timbangan, soal cerita animasi, dan papan peringkat.",
+  "description": "Aplikasi interaktif matematika SD untuk menentukan bilangan yang belum diketahui dengan materi susun pendek (ratusan, puluhan, satuan), visualisasi timbangan, kuis gamifikasi, dan soal cerita animasi.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
