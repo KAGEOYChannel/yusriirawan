@@ -29,7 +29,10 @@ export default defineConfig(() => {
     },
     build: {
       rollupOptions: {
-        input: path.resolve(__dirname, 'pembelajaranMTK.html'),
+        input: {
+          main: path.resolve(__dirname, 'index.html'),
+          pembelajaranMTK: path.resolve(__dirname, 'pembelajaranMTK.html'),
+        },
       },
     },
     server: {
