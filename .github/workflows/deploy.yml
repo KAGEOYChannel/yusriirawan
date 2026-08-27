@@ -32,6 +32,26 @@ jobs:
       - name: Build project
         run: npm run build
 
+      # Vite hanya membangun index.html & pembelajaranMTK.html (satu-satunya
+      # entry yang didaftarkan di vite.config.ts). Halaman/aset statis lama
+      # lainnya tidak pernah ikut Vite, jadi disalin apa adanya ke dist/
+      # di sini supaya tetap bisa diakses di GitHub Pages.
+      - name: Copy legacy static files
+        run: |
+          find . -maxdepth 1 -type f \
+            ! -name 'package.json' \
+            ! -name 'package-lock.json' \
+            ! -name 'bun.lock' \
+            ! -name 'tsconfig.json' \
+            ! -name 'vite.config.ts' \
+            ! -name '_config.yml' \
+            ! -name 'metadata.json' \
+            ! -name 'README.md' \
+            ! -name 'PERBAIKAN.md' \
+            ! -name 'index.html' \
+            ! -name 'pembelajaranMTK.html' \
+            -exec cp {} dist/ \;
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
