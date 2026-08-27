@@ -16,9 +16,13 @@ baseurl: ""                      # kosongkan jika pakai custom domain di root
 # --- File/folder yang tidak perlu diproses Jekyll ---
 exclude:
   - README.md
+  - PERBAIKAN.md
   - LICENSE
   - .gitignore
   - node_modules
-  # Source code dev aplikasi pembelajaran (di-build otomatis oleh
-  # GitHub Actions ke pembelajaran/, tidak perlu ikut dipublish)
-  - pembelajaran/app
+  # Source code dev aplikasi pembelajaran (React/TS mentah). Tidak perlu
+  # ikut dipublish langsung — GitHub Actions
+  # (.github/workflows/build-pembelajaran.yml) meng-compile isi folder
+  # ini lalu meng-commit hasilnya ke pembelajaranMTK.html + assets/ di
+  # root, dan itulah yang benar-benar disajikan ke pengunjung.
+  - app
