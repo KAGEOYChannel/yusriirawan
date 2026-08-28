@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link rel="stylesheet" href="header1.css">
 <style>
 /* =========================================
    TOKENS
@@ -62,6 +61,105 @@ a:focus-visible,button:focus-visible,input:focus-visible{
   outline:2px solid var(--blue);
   outline-offset:3px;
   border-radius:6px;
+}
+
+/* =========================================
+   HEADER (senada index.html)
+   ========================================= */
+.header{
+  position:fixed;
+  top:0;left:0;width:100%;
+  z-index:999;
+  background:linear-gradient(to bottom, rgba(10,10,18,.55) 0%, rgba(10,10,18,.15) 70%, transparent 100%);
+  transition:background .35s ease,backdrop-filter .35s ease,box-shadow .35s ease,border-color .35s ease;
+}
+html[data-theme="light"] .header{
+  background:linear-gradient(to bottom, rgba(255,255,255,.7) 0%, rgba(255,255,255,.2) 70%, transparent 100%);
+}
+.header.scrolled{
+  background:rgba(15,15,25,.72);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 8px 30px rgba(0,0,0,.15);
+}
+html[data-theme="light"] .header.scrolled{
+  background:rgba(255,255,255,.78);
+}
+.header-container{
+  width:min(1200px,calc(100% - 40px));
+  height:var(--header-h);
+  margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{display:flex;align-items:center;gap:14px;}
+.logo{display:inline-flex;align-items:center;text-decoration:none;font-size:24px;font-weight:800;}
+.logo-gradient{
+  background:linear-gradient(90deg,#00c2ff,#33ff8c);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  color:var(--text);
+  text-shadow:0 1px 8px rgba(0,0,0,.35);
+}
+.theme-toggle{
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--border-strong);
+  background:var(--card);
+  color:var(--text);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:transform .3s ease,background .3s ease,border-color .3s ease;
+}
+.theme-toggle:hover{transform:translateY(-2px) rotate(15deg);border-color:var(--blue);}
+
+.menu{display:flex;align-items:center;gap:28px;}
+.menu-link{
+  position:relative;color:var(--text);text-decoration:none;
+  font-size:14px;font-weight:600;transition:color .25s ease;
+}
+.menu-link::after{
+  content:"";position:absolute;left:50%;bottom:-7px;width:0;height:2px;
+  border-radius:20px;background:linear-gradient(90deg,var(--purple),var(--blue));
+  transform:translateX(-50%);transition:width .3s ease;
+}
+.menu-link:hover::after,.menu-link.active::after{width:100%;}
+
+.btn-home{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 18px;border-radius:50px;text-decoration:none;
+  color:#fff;font-size:13px;font-weight:700;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  box-shadow:0 8px 20px rgba(0,198,255,.2);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.btn-home:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,198,255,.35);}
+
+.hamburger{
+  display:none;width:32px;height:32px;padding:0;border:0;background:transparent;cursor:pointer;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+}
+.hamburger span{display:block;width:24px;height:2px;border-radius:20px;background:var(--text);transition:transform .3s ease,opacity .3s ease;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+@media (max-width:900px){
+  .header-container{height:64px;width:calc(100% - 28px);}
+  .menu{
+    position:absolute;top:72px;right:14px;
+    width:min(260px,calc(100vw - 28px));padding:20px;
+    display:flex;flex-direction:column;align-items:stretch;gap:16px;
+    border-radius:18px;background:rgba(15,15,25,.96);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border:1px solid var(--border);box-shadow:0 20px 50px rgba(0,0,0,.25);
+    opacity:0;visibility:hidden;transform:translateY(-10px) scale(.97);
+    transition:opacity .3s ease,visibility .3s ease,transform .3s ease;
+  }
+  html[data-theme="light"] .menu{background:rgba(255,255,255,.97);}
+  .menu.show{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
+  .menu-link{color:#fff;padding:6px 4px;}
+  html[data-theme="light"] .menu-link{color:var(--text);}
+  .btn-home{width:100%;justify-content:center;}
+  .hamburger{display:flex;}
 }
 
 /* =========================================
@@ -270,10 +368,10 @@ footer{
 </head>
 <body>
 
-<header class="header1">
+<header class="header">
   <div class="header-container">
     <div class="brand">
-      <a href="https://kageoychannel.github.io/yusriirawan/guru" class="logo"><span class="logo-gradient">AWAN</span></a>
+      <a href="index.html" class="logo"><span class="logo-gradient">AWAN</span></a>
       <button class="theme-toggle" id="themeToggle" title="Ganti tema" aria-label="Ganti tema terang/gelap">
         <i class="fas fa-moon"></i>
       </button>
@@ -343,8 +441,8 @@ footer{
       <a href="https://yusriirawan.my.id/pembelajaranMTK" class="card" data-category="pembelajaran" data-title="bank soal koleksi ulangan latihan">
         <div class="card-icon"><i class="fas fa-layer-group"></i></div>
         <div class="card-category">Pembelajaran</div>
-        <h3>Matematika Kelas V</h3>
-        <p>Kumpulan Materi materi kelas V Mata Pelajaran Matematika yang siap di pakai.</p>
+        <h3>Bank Soal</h3>
+        <p>Simpan dan susun ulang koleksi soal untuk ulangan maupun latihan mandiri siswa.</p>
         <span class="card-cta">Buka menu <i class="fas fa-arrow-right"></i></span>
       </a>
 
@@ -424,8 +522,48 @@ footer{
 
 <button class="to-top" id="toTop" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
 
-<script src="header.js"></script>
 <script>
+/* ---------- Header scroll + hamburger ---------- */
+const header = document.querySelector('.header');
+const hamburger = document.getElementById('hamburger');
+const menu = document.getElementById('menu');
+
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+  toTop.classList.toggle('show', window.scrollY > 500);
+});
+
+function toggleMenu(){
+  hamburger.classList.toggle('open');
+  menu.classList.toggle('show');
+}
+hamburger.addEventListener('click', toggleMenu);
+hamburger.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleMenu(); }});
+
+document.querySelectorAll('.menu-link').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelectorAll('.menu-link').forEach(a => a.classList.remove('active'));
+    link.classList.add('active');
+    hamburger.classList.remove('open');
+    menu.classList.remove('show');
+  });
+});
+
+/* ---------- Theme toggle ---------- */
+const themeToggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+const savedTheme = localStorage.getItem('awan-theme');
+if(savedTheme){
+  root.setAttribute('data-theme', savedTheme);
+  themeToggle.innerHTML = savedTheme === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+}
+themeToggle.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('awan-theme', next);
+  themeToggle.innerHTML = next === 'light' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+});
+
 /* ---------- Filter + search ---------- */
 const chips = document.querySelectorAll('.chip');
 const cards = Array.from(document.querySelectorAll('.card'));
@@ -490,9 +628,6 @@ window.addEventListener('DOMContentLoaded', () => {
 /* ---------- Back to top ---------- */
 const toTop = document.getElementById('toTop');
 toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-window.addEventListener('scroll', () => {
-  toTop.classList.toggle('show', window.scrollY > 500);
-});
 </script>
 </body>
 </html>
