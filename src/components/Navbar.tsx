@@ -9,15 +9,15 @@ import {
   Layers,
   BookOpen,
   Scale,
-  BrainCircuit,
-  Star,
+  Home,
+  ArrowLeft,
 } from 'lucide-react';
 import { SoundEffects } from '../utils/sound';
 
 interface NavbarProps {
   activeTab: 'quiz' | 'story' | 'lab' | 'materi';
   onSelectTab: (tab: 'quiz' | 'story' | 'lab' | 'materi') => void;
-  player: PlayerProfile;
+  player?: PlayerProfile;
   isMuted: boolean;
   onToggleMute: () => void;
   onOpenScratchpad: () => void;
@@ -27,7 +27,6 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({
   activeTab,
   onSelectTab,
-  player,
   isMuted,
   onToggleMute,
   onOpenScratchpad,
@@ -61,24 +60,46 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Player Stats & Quick Action Tools */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        {/* Action Tools & Navigation Links */}
+        <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+          {/* Back to Previous / Guru Page */}
+          <a
+            id="nav-btn-back-guru"
+            href="https://kageoychannel.github.io/yusriirawan/guru"
+            className="px-2.5 sm:px-3 py-2 bg-emerald-300 hover:bg-emerald-400 text-black font-black text-xs rounded-xl border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none flex items-center gap-1.5 transition-all no-underline font-heading"
+            title="Kembali ke Halaman Sebelumnya (Guru)"
+          >
+            <ArrowLeft className="w-4 h-4 text-black stroke-[2.5]" />
+            <span>Kembali</span>
+          </a>
+
+          {/* Home Page Link */}
+          <a
+            id="nav-btn-home"
+            href="https://kageoychannel.github.io/yusriirawan"
+            className="px-2.5 sm:px-3 py-2 bg-blue-300 hover:bg-blue-400 text-black font-black text-xs rounded-xl border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none flex items-center gap-1.5 transition-all no-underline font-heading"
+            title="Pindah ke Halaman Home"
+          >
+            <Home className="w-4 h-4 text-black stroke-[2.5]" />
+            <span>Home</span>
+          </a>
+
           {/* Scratchpad Button */}
           <button
             id="nav-scratchpad"
             onClick={onOpenScratchpad}
-            className="px-2.5 sm:px-3.5 py-2 bg-yellow-300 hover:bg-yellow-400 text-black font-bold text-xs rounded-xl border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none flex items-center gap-1.5 transition-all"
+            className="px-2.5 sm:px-3 py-2 bg-yellow-300 hover:bg-yellow-400 text-black font-bold text-xs rounded-xl border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none flex items-center gap-1.5 transition-all cursor-pointer"
             title="Buka Papan Cakar Oret-Oretan"
           >
             <Pencil className="w-4 h-4 text-black" />
-            <span className="hidden sm:inline">Papan Cakar</span>
+            <span className="hidden md:inline">Papan Cakar</span>
           </button>
 
           {/* Printable Worksheets */}
           <button
             id="nav-print"
             onClick={onOpenPrint}
-            className="px-2.5 sm:px-3.5 py-2 bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs rounded-xl border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none flex items-center gap-1.5 transition-all"
+            className="px-2.5 sm:px-3 py-2 bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs rounded-xl border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none flex items-center gap-1.5 transition-all cursor-pointer"
             title="Cetak Lembar Latihan"
           >
             <Printer className="w-4 h-4 text-black" />
@@ -89,25 +110,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             id="nav-sound-toggle"
             onClick={onToggleMute}
-            className="p-2 bg-white hover:bg-slate-100 text-slate-900 font-bold rounded-xl border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none transition-all"
+            className="p-2 bg-white hover:bg-slate-100 text-slate-900 font-bold rounded-xl border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none transition-all cursor-pointer"
             title={isMuted ? 'Nyalakan Suara' : 'Matikan Suara'}
           >
             {isMuted ? <VolumeX className="w-4 h-4 text-rose-600" /> : <Volume2 className="w-4 h-4 text-emerald-600" />}
           </button>
-
-          {/* Player Capsule (XP & Avatar Bento Tag) */}
-          <div
-            id="nav-player-profile"
-            className="flex items-center gap-2.5 pl-3 pr-2 py-1 bg-slate-50 border-2 border-black rounded-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-          >
-            <div className="flex flex-col items-end text-right">
-              <span className="text-[10px] font-black uppercase text-slate-500 leading-none">Poin Kamu</span>
-              <span className="text-sm sm:text-base font-black text-blue-600 font-heading leading-tight">{player.totalScore} XP</span>
-            </div>
-            <div className="w-9 h-9 bg-green-400 border-2 border-black rounded-lg flex items-center justify-center text-xl shadow-xs">
-              <span>{player.avatar}</span>
-            </div>
-          </div>
         </div>
       </div>
 
