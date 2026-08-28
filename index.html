@@ -931,8 +931,39 @@ img, iframe, video {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
     
-    <script src="jsmang.js"></script>
-    <script src="script_profile.js"></script>
+    <script>
+const BUTTON = document.querySelector("button");
+
+const TOGGLE = () => {
+  const IS_PRESSED = BUTTON.matches("[aria-pressed=true]");
+  document.body.setAttribute("data-dark-mode", IS_PRESSED ? false : true);
+  BUTTON.setAttribute("aria-pressed", IS_PRESSED ? false : true);
+};
+
+BUTTON.addEventListener("click", TOGGLE);
+    </script>
+    <script>
+const buttons = document.querySelectorAll(".card-buttons button");
+const sections = document.querySelectorAll(".card-section");
+const card = document.querySelector(".card");
+
+const handleButtonClick = (e) => {
+  const targetSection = e.target.getAttribute("data-section");
+  const section = document.querySelector(targetSection);
+  targetSection !== "#about"
+    ? card.classList.add("is-active")
+    : card.classList.remove("is-active");
+  card.setAttribute("data-state", targetSection);
+  sections.forEach((s) => s.classList.remove("is-active"));
+  buttons.forEach((b) => b.classList.remove("is-active"));
+  e.target.classList.add("is-active");
+  section.classList.add("is-active");
+};
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", handleButtonClick);
+});
+    </script>
 
       <script>
     function getRandomValue() {
