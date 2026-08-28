@@ -2,70 +2,73 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
 import { defineConfig, Plugin } from 'vite';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 /**
- * GitHub Pages serves this repository as a static site.
- * Only pembelajaranMTK.html is a Vite/React application; the other HTML
- * files are already complete static pages and must be copied unchanged.
+ * Vite hanya memproses dua HTML yang memang membutuhkan build:
+ * - index.html
+ * - pembelajaranMTK.html (React/TSX)
  *
- * Keeping the static pages out of Vite's HTML parser is intentional: some
- * of those legacy pages contain HTML that Vite/parse5 rejects even though
- * browsers can still render them. Vite only needs to process the React page.
+ * HTML statis lainnya disalin apa adanya ke dist setelah build selesai.
+ * Dengan cara ini Vite tidak mencoba mem-parse HTML lama yang mungkin
+ * memiliki sintaks yang tidak diterima parse5, tetapi semua halaman tetap
+ * tersedia di GitHub Pages dan tidak menjadi 404.
  */
-function copyStaticSiteFiles(): Plugin {
-  const staticExtensions = new Set([
-    '.html', '.css', '.js', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp',
-    '.ico', '.json', '.txt', '.webmanifest', '.xml'
-  ]);
-
-  const staticRootFiles = new Set(['CNAME', '_config.yml']);
-
+function copyStaticHtmlPages(): Plugin {
   return {
-    name: 'copy-static-site-files',
-    closeBundle() {
-      const outDir = path.resolve(__dirname, 'dist');
+    name: 'copy-static-html-pages',
+    apply: 'build',
+    writeBundle(options) {
+      const outDir = options.dir ?? path.resolve(process.cwd(), 'dist');
+      const rootDir = process.cwd();
 
-      for (const entry of fs.readdirSync(__dirname, { withFileTypes: true })) {
-        if (!entry.isFile()) continue;
+      const files = fs.readdirSync(rootDir, { withFileTypes: true });
 
-        const source = path.join(__dirname, entry.name);
-        const ext = path.extname(entry.name).toLowerCase();
-        const shouldCopy = staticExtensions.has(ext) || staticRootFiles.has(entry.name);
+      for (const entry of files) {
+        if (!entry.isFile() || !entry.name.toLowerCase().endsWith('.html')) {
+          continue;
+        }
 
-        // pembelajaranMTK.html is processed by Vite and is already in dist.
-        if (!shouldCopy || entry.name === 'pembelajaranMTK.html') continue;
+        // Dua file ini diproses oleh Vite dan jangan disalin ulang.
+        if (entry.name === 'index.html' || entry.name === 'pembelajaranMTK.html') {
+          continue;
+        }
 
-        fs.copyFileSync(source, path.join(outDir, entry.name));
+        fs.copyFileSync(
+          path.join(rootDir, entry.name),
+          path.join(outDir, entry.name),
+        );
       }
     },
   };
 }
 
 export default defineConfig({
+  // Relative asset paths aman untuk GitHub Pages, termasuk custom domain.
   base: './',
+
   plugins: [
     react(),
     tailwindcss(),
-    copyStaticSiteFiles(),
+    copyStaticHtmlPages(),
   ],
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),
     },
   },
+
   build: {
     rollupOptions: {
-      // Only the React application is processed by Vite.
-      // All other HTML pages are copied byte-for-byte by copyStaticSiteFiles.
-      input: path.resolve(__dirname, 'pembelajaranMTK.html'),
+      // HANYA dua HTML ini yang diberikan ke parser Vite/Rollup.
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        pembelajaranMTK: path.resolve(__dirname, 'pembelajaranMTK.html'),
+      },
     },
-    emptyOutDir: true,
   },
+
   server: {
     hmr: process.env.DISABLE_HMR !== 'true',
     watch: process.env.DISABLE_HMR === 'true' ? null : {},
