@@ -1,42 +1,47 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import path from 'node:path';
-import fs from 'node:fs';
+import path from 'path';
+import fs from 'fs';
 import { defineConfig, type Plugin } from 'vite';
 
 /**
- * Build only the React page with Vite. The rest of this repository is a
- * traditional static website and must be copied byte-for-byte to dist.
+ * The repository is a mixed static site + one Vite/React page.
+ * Only pembelajaranMTK.html is a Vite entry point.
+ * All legacy/static pages and their root assets are copied unchanged to dist.
  */
 function copyStaticSite(): Plugin {
-  const root = process.cwd();
-  const skip = new Set([
-    'node_modules', 'dist', 'src', '.git', '.github',
-    'pembelajaranMTK.html',
-    'vite.config.ts', 'package.json', 'bun.lock', 'tsconfig.json',
-    'README.md', 'PERBAIKAN.md', 'metadata.json'
-  ]);
-
-  function copyDirectory(from: string, to: string) {
-    fs.mkdirSync(to, { recursive: true });
-    for (const entry of fs.readdirSync(from, { withFileTypes: true })) {
-      if (skip.has(entry.name)) continue;
-      const source = path.join(from, entry.name);
-      const target = path.join(to, entry.name);
-      if (entry.isDirectory()) {
-        copyDirectory(source, target);
-      } else if (entry.isFile()) {
-        fs.copyFileSync(source, target);
-      }
-    }
-  }
-
   return {
     name: 'copy-static-site',
-    apply: 'build',
     closeBundle() {
-      copyDirectory(root, path.join(root, 'dist'));
-    }
+      const root = __dirname;
+      const outDir = path.resolve(root, 'dist');
+      const excluded = new Set([
+        '.git',
+        '.github',
+        'node_modules',
+        'dist',
+        'src',
+        'vite.config.ts',
+        'package.json',
+        'package-lock.json',
+        'bun.lock',
+        'tsconfig.json',
+      ]);
+
+      fs.mkdirSync(outDir, { recursive: true });
+
+      for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
+        if (excluded.has(entry.name)) continue;
+
+        const source = path.join(root, entry.name);
+        const destination = path.join(outDir, entry.name);
+
+        fs.cpSync(source, destination, {
+          recursive: true,
+          force: true,
+        });
+      }
+    },
   };
 }
 
@@ -52,5 +57,9 @@ export default defineConfig({
     rollupOptions: {
       input: path.resolve(__dirname, 'pembelajaranMTK.html'),
     },
+  },
+  server: {
+    hmr: process.env.DISABLE_HMR !== 'true',
+    watch: process.env.DISABLE_HMR === 'true' ? null : {},
   },
 });

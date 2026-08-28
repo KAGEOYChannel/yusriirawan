@@ -1,20 +1,35 @@
-const buttons = document.querySelectorAll(".card-buttons button");
-const sections = document.querySelectorAll(".card-section");
-const card = document.querySelector(".card");
+function initProfileCard() {
+  const buttons = document.querySelectorAll('.cards-buttons button');
+  const sections = document.querySelectorAll('.card-section');
+  const card = document.querySelector('.card');
 
-const handleButtonClick = (e) => {
-  const targetSection = e.target.getAttribute("data-section");
-  const section = document.querySelector(targetSection);
-  targetSection !== "#about"
-    ? card.classList.add("is-active")
-    : card.classList.remove("is-active");
-  card.setAttribute("data-state", targetSection);
-  sections.forEach((s) => s.classList.remove("is-active"));
-  buttons.forEach((b) => b.classList.remove("is-active"));
-  e.target.classList.add("is-active");
-  section.classList.add("is-active");
-};
+  if (!buttons.length || !sections.length || !card) return;
 
-buttons.forEach((btn) => {
-  btn.addEventListener("click", handleButtonClick);
-});
+  const handleButtonClick = (event) => {
+    const button = event.currentTarget;
+    const targetSection = button.getAttribute('data-section');
+    if (!targetSection) return;
+
+    const section = document.querySelector(targetSection);
+    if (!section) return;
+
+    card.classList.toggle('is-active', targetSection !== '#about');
+    card.setAttribute('data-state', targetSection);
+
+    sections.forEach((item) => item.classList.remove('is-active'));
+    buttons.forEach((item) => item.classList.remove('is-active'));
+
+    button.classList.add('is-active');
+    section.classList.add('is-active');
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', handleButtonClick);
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initProfileCard, { once: true });
+} else {
+  initProfileCard();
+}

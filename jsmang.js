@@ -1,9 +1,20 @@
-const BUTTON = document.querySelector("button");
+function initDarkModeToggle() {
+  const button = document.querySelector('#darkModeToggle');
+  if (!button) return;
 
-const TOGGLE = () => {
-  const IS_PRESSED = BUTTON.matches("[aria-pressed=true]");
-  document.body.setAttribute("data-dark-mode", IS_PRESSED ? false : true);
-  BUTTON.setAttribute("aria-pressed", IS_PRESSED ? false : true);
-};
+  const toggle = () => {
+    const isPressed = button.getAttribute('aria-pressed') === 'true';
+    const nextState = !isPressed;
 
-BUTTON.addEventListener("click", TOGGLE);
+    document.body.setAttribute('data-dark-mode', String(nextState));
+    button.setAttribute('aria-pressed', String(nextState));
+  };
+
+  button.addEventListener('click', toggle);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initDarkModeToggle, { once: true });
+} else {
+  initDarkModeToggle();
+}
