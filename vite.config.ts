@@ -1,45 +1,42 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import {defineConfig, Plugin} from 'vite';
+import fs from 'fs';
+import { defineConfig } from 'vite';
 
-// Plugin to rewrite root '/' or index requests to /pembelajaranMTK.html
-function customHtmlEntryPlugin(): Plugin {
-  return {
-    name: 'custom-html-entry',
-    configureServer(server) {
-      server.middlewares.use((req, _res, next) => {
-        if (req.url === '/' || req.url === '/index.html' || !req.url) {
-          req.url = '/pembelajaranMTK.html';
-        }
-        next();
-      });
-    },
-  };
-}
+// Build every HTML page in the repository so GitHub Pages keeps all
+// standalone .html pages instead of publishing only index.html and
+// pembelajaranMTK.html.
+const htmlEntries = Object.fromEntries(
+  fs.readdirSync(__dirname, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith('.html'))
+    .map((entry) => [
+      entry.name.replace(/\.html$/i, ''),
+      path.resolve(__dirname, entry.name),
+    ])
+);
 
-export default defineConfig(() => {
-  return {
-    base: './',
-    plugins: [customHtmlEntryPlugin(), react(), tailwindcss()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
+export default defineConfig({
+  // Relative asset URLs work both at the repository root and on a
+  // GitHub Pages project/custom domain.
+  base: './',
+
+  plugins: [react(), tailwindcss()],
+
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '.'),
     },
-    build: {
-      outDir: 'dist',
-      emptyOutDir: true,
-      rollupOptions: {
-        input: {
-          main: path.resolve(__dirname, 'index.html'),
-          pembelajaranMTK: path.resolve(__dirname, 'pembelajaranMTK.html'),
-        },
-      },
+  },
+
+  build: {
+    rollupOptions: {
+      input: htmlEntries,
     },
-    server: {
-      hmr: process.env.DISABLE_HMR !== 'true',
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
-    },
-  };
+  },
+
+  server: {
+    hmr: process.env.DISABLE_HMR !== 'true',
+    watch: process.env.DISABLE_HMR === 'true' ? null : {},
+  },
 });
