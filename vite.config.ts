@@ -5,62 +5,72 @@ import fs from 'fs';
 import { defineConfig, Plugin } from 'vite';
 
 /**
- * This repository is a mixed static site + one React page.
- * Only pembelajaranMTK.html is a Vite entry. All legacy/static root files
- * are copied unchanged so their original relative URLs continue to work.
+ * Vite hanya memproses dua HTML yang memang membutuhkan build:
+ * - index.html
+ * - pembelajaranMTK.html (React/TSX)
+ *
+ * HTML statis lainnya disalin apa adanya ke dist setelah build selesai.
+ * Dengan cara ini Vite tidak mencoba mem-parse HTML lama yang mungkin
+ * memiliki sintaks yang tidak diterima parse5, tetapi semua halaman tetap
+ * tersedia di GitHub Pages dan tidak menjadi 404.
  */
-function copyStaticRootFiles(): Plugin {
+function copyStaticHtmlPages(): Plugin {
   return {
-    name: 'copy-static-root-files',
+    name: 'copy-static-html-pages',
     apply: 'build',
-    generateBundle() {
-      const root = __dirname;
-      const excluded = new Set([
-        'node_modules',
-        '.git',
-        'dist',
-        'src',
-        'vite.config.ts',
-        'package.json',
-        'package-lock.json',
-        'bun.lock',
-        'tsconfig.json',
-      ]);
+    writeBundle(options) {
+      const outDir = options.dir ?? path.resolve(process.cwd(), 'dist');
+      const rootDir = process.cwd();
 
-      for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
-        if (excluded.has(entry.name)) continue;
-        if (entry.isDirectory()) continue;
+      const files = fs.readdirSync(rootDir, { withFileTypes: true });
 
-        const filePath = path.join(root, entry.name);
-        this.emitFile({
-          type: 'asset',
-          fileName: entry.name,
-          source: fs.readFileSync(filePath),
-        });
+      for (const entry of files) {
+        if (!entry.isFile() || !entry.name.toLowerCase().endsWith('.html')) {
+          continue;
+        }
+
+        // Dua file ini diproses oleh Vite dan jangan disalin ulang.
+        if (entry.name === 'index.html' || entry.name === 'pembelajaranMTK.html') {
+          continue;
+        }
+
+        fs.copyFileSync(
+          path.join(rootDir, entry.name),
+          path.join(outDir, entry.name),
+        );
       }
     },
   };
 }
 
 export default defineConfig({
+  // Relative asset paths aman untuk GitHub Pages, termasuk custom domain.
   base: './',
-  plugins: [react(), tailwindcss(), copyStaticRootFiles()],
+
+  plugins: [
+    react(),
+    tailwindcss(),
+    copyStaticHtmlPages(),
+  ],
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),
     },
   },
+
   build: {
-    outDir: 'dist',
-    emptyOutDir: true,
     rollupOptions: {
-      // IMPORTANT: index.html is intentionally NOT a Vite entry.
-      input: path.resolve(__dirname, 'pembelajaranMTK.html'),
-      output: {
-        assetFileNames: 'assets/[name]-[hash][extname]',
-        chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js',
+      // HANYA dua HTML ini yang diberikan ke parser Vite/Rollup.
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        pembelajaranMTK: path.resolve(__dirname, 'pembelajaranMTK.html'),
       },
     },
+  },
+
+  server: {
+    hmr: process.env.DISABLE_HMR !== 'true',
+    watch: process.env.DISABLE_HMR === 'true' ? null : {},
   },
 });
