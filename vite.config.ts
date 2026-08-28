@@ -2,23 +2,22 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import fs from 'fs';
-import { defineConfig, type Plugin } from 'vite';
+import { defineConfig, Plugin } from 'vite';
 
 /**
- * The repository is a mixed static site + one Vite/React page.
- * Only pembelajaranMTK.html is a Vite entry point.
- * All legacy/static pages and their root assets are copied unchanged to dist.
+ * This repository is a mixed static site + one React page.
+ * Only pembelajaranMTK.html is a Vite entry. All legacy/static root files
+ * are copied unchanged so their original relative URLs continue to work.
  */
-function copyStaticSite(): Plugin {
+function copyStaticRootFiles(): Plugin {
   return {
-    name: 'copy-static-site',
-    closeBundle() {
+    name: 'copy-static-root-files',
+    apply: 'build',
+    generateBundle() {
       const root = __dirname;
-      const outDir = path.resolve(root, 'dist');
       const excluded = new Set([
-        '.git',
-        '.github',
         'node_modules',
+        '.git',
         'dist',
         'src',
         'vite.config.ts',
@@ -28,17 +27,15 @@ function copyStaticSite(): Plugin {
         'tsconfig.json',
       ]);
 
-      fs.mkdirSync(outDir, { recursive: true });
-
       for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
         if (excluded.has(entry.name)) continue;
+        if (entry.isDirectory()) continue;
 
-        const source = path.join(root, entry.name);
-        const destination = path.join(outDir, entry.name);
-
-        fs.cpSync(source, destination, {
-          recursive: true,
-          force: true,
+        const filePath = path.join(root, entry.name);
+        this.emitFile({
+          type: 'asset',
+          fileName: entry.name,
+          source: fs.readFileSync(filePath),
         });
       }
     },
@@ -47,19 +44,23 @@ function copyStaticSite(): Plugin {
 
 export default defineConfig({
   base: './',
-  plugins: [react(), tailwindcss(), copyStaticSite()],
+  plugins: [react(), tailwindcss(), copyStaticRootFiles()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),
     },
   },
   build: {
+    outDir: 'dist',
+    emptyOutDir: true,
     rollupOptions: {
+      // IMPORTANT: index.html is intentionally NOT a Vite entry.
       input: path.resolve(__dirname, 'pembelajaranMTK.html'),
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+      },
     },
-  },
-  server: {
-    hmr: process.env.DISABLE_HMR !== 'true',
-    watch: process.env.DISABLE_HMR === 'true' ? null : {},
   },
 });
