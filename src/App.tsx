@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PlayerProfile, LeaderboardEntry, Badge, DifficultyLevel } from './types';
 import { INITIAL_BADGES } from './data/badges';
-import { Navbar } from './components/Navbar';
+import { Navbar, ActiveTabType } from './components/Navbar';
 import { QuizGame } from './components/QuizGame';
 import { AnimatedStory } from './components/AnimatedStory';
 import { ConceptLab } from './components/ConceptLab';
@@ -23,7 +23,7 @@ const DEFAULT_LEADERBOARD: LeaderboardEntry[] = [
 ];
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'quiz' | 'story' | 'lab' | 'materi'>('quiz');
+  const [activeTab, setActiveTab] = useState<ActiveTabType>('quiz');
   const [isScratchpadOpen, setIsScratchpadOpen] = useState<boolean>(false);
   const [isPrintOpen, setIsPrintOpen] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(false);
