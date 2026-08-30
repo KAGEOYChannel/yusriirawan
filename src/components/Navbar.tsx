@@ -11,12 +11,16 @@ import {
   Scale,
   Home,
   ArrowLeft,
+  ArrowRight,
+  Rocket,
 } from 'lucide-react';
 import { SoundEffects } from '../utils/sound';
 
+export type ActiveTabType = 'quiz' | 'story' | 'lab' | 'materi';
+
 interface NavbarProps {
-  activeTab: 'quiz' | 'story' | 'lab' | 'materi';
-  onSelectTab: (tab: 'quiz' | 'story' | 'lab' | 'materi') => void;
+  activeTab: ActiveTabType;
+  onSelectTab: (tab: ActiveTabType) => void;
   player?: PlayerProfile;
   isMuted: boolean;
   onToggleMute: () => void;
@@ -33,11 +37,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenPrint,
 }) => {
   const tabs = [
-    { id: 'quiz', label: 'Kuis Tantangan', icon: Sparkles, activeBg: 'bg-yellow-400 text-black' },
-    { id: 'story', label: 'Soal Cerita Animasi', icon: BookOpen, activeBg: 'bg-green-400 text-black' },
-    { id: 'lab', label: 'Laboratorium Konsep', icon: Scale, activeBg: 'bg-purple-300 text-black' },
-    { id: 'materi', label: 'Materi Susun Pendek', icon: Layers, activeBg: 'bg-blue-400 text-black' },
-  ] as const;
+    { id: 'quiz' as const, label: 'Kuis Aljabar', icon: Sparkles, activeBg: 'bg-yellow-400 text-black' },
+    { id: 'story' as const, label: 'Soal Cerita Aljabar', icon: BookOpen, activeBg: 'bg-green-400 text-black' },
+    { id: 'lab' as const, label: 'Timbangan Konsep', icon: Scale, activeBg: 'bg-purple-300 text-black' },
+    { id: 'materi' as const, label: 'Susun Pendek', icon: Layers, activeBg: 'bg-blue-400 text-black' },
+  ];
 
   return (
     <header className="sticky top-2 z-40 mb-6">
@@ -84,6 +88,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span>Home</span>
           </a>
 
+          {/* Direct Link to New HTML Material: Perkalian (perkalian.html) */}
+          <a
+            id="nav-btn-next-material"
+            href="perkalian.html"
+            className="px-3 py-2 bg-gradient-to-r from-amber-300 to-yellow-400 hover:from-amber-400 hover:to-yellow-500 text-black font-black text-xs rounded-xl border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-y-0.5 active:shadow-none flex items-center gap-1.5 transition-all no-underline font-heading animate-pulse"
+            title="Buka Halaman Materi Baru: Perkalian Bilangan sampai 100.000 (perkalian.html)"
+          >
+            <Rocket className="w-4 h-4 text-black" />
+            <span className="font-extrabold">Materi Baru: Perkalian ➔</span>
+          </a>
+
           {/* Scratchpad Button */}
           <button
             id="nav-scratchpad"
@@ -92,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             title="Buka Papan Cakar Oret-Oretan"
           >
             <Pencil className="w-4 h-4 text-black" />
-            <span className="hidden md:inline">Papan Cakar</span>
+            <span className="hidden lg:inline">Papan Cakar</span>
           </button>
 
           {/* Printable Worksheets */}
@@ -103,7 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             title="Cetak Lembar Latihan"
           >
             <Printer className="w-4 h-4 text-black" />
-            <span className="hidden md:inline">Cetak Soal</span>
+            <span className="hidden lg:inline">Cetak Soal</span>
           </button>
 
           {/* Sound Toggle */}
@@ -132,7 +147,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   SoundEffects.playClick();
                   onSelectTab(tab.id);
                 }}
-                className={`flex-1 min-w-[130px] sm:min-w-0 py-2.5 px-3.5 rounded-xl font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-2 whitespace-nowrap border-2 border-black ${
+                className={`flex-1 min-w-[130px] sm:min-w-0 py-2.5 px-3 rounded-xl font-black text-xs sm:text-sm transition-all flex items-center justify-center gap-2 whitespace-nowrap border-2 border-black ${
                   isActive
                     ? `${tab.activeBg} shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] scale-102 font-heading`
                     : 'bg-white text-slate-700 hover:bg-slate-100 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'
