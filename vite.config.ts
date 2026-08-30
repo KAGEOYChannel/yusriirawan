@@ -5,9 +5,10 @@ import fs from 'fs';
 import { defineConfig, Plugin } from 'vite';
 
 /**
- * Vite hanya memproses dua HTML yang memang membutuhkan build:
+ * Vite hanya memproses HTML yang memang membutuhkan build:
  * - index.html
  * - pembelajaranMTK.html (React/TSX)
+ * - perkalian.html (React/TSX)
  *
  * HTML statis lainnya disalin apa adanya ke dist setelah build selesai.
  * Dengan cara ini Vite tidak mencoba mem-parse HTML lama yang mungkin
@@ -29,8 +30,12 @@ function copyStaticHtmlPages(): Plugin {
           continue;
         }
 
-        // Dua file ini diproses oleh Vite dan jangan disalin ulang.
-        if (entry.name === 'index.html' || entry.name === 'pembelajaranMTK.html') {
+        // Tiga file ini diproses oleh Vite dan jangan disalin ulang.
+        if (
+          entry.name === 'index.html' ||
+          entry.name === 'pembelajaranMTK.html' ||
+          entry.name === 'perkalian.html'
+        ) {
           continue;
         }
 
@@ -61,10 +66,11 @@ export default defineConfig({
 
   build: {
     rollupOptions: {
-      // HANYA dua HTML ini yang diberikan ke parser Vite/Rollup.
+      // HANYA HTML ini yang diberikan ke parser Vite/Rollup.
       input: {
         main: path.resolve(__dirname, 'index.html'),
         pembelajaranMTK: path.resolve(__dirname, 'pembelajaranMTK.html'),
+        perkalian: path.resolve(__dirname, 'perkalian.html'),
       },
     },
   },
