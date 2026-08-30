@@ -1,16 +1,1018 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Petualangan Bilangan Misteri - Matematika SD Interaktif</title>
-    <meta name="description" content="Aplikasi Pembelajaran Matematika Interaktif untuk Siswa Sekolah Dasar - Menentukan Bilangan yang Belum Diketahui" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-amber-50 text-slate-800 antialiased selection:bg-amber-300 selection:text-amber-900 min-h-screen">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.css">
+<link rel="stylesheet" href="cssmang.css">
+<link rel="stylesheet" href="style_profile.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/bourbon/7.3.0/css/bourbon.min.css">
+<link rel="stylesheet" href="sectionBlog.css">
+  
+  <title>AWAN</title>
+  <style>
+    
+/* =========================================
+   FIXED HEADER
+   ========================================= */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    z-index: 9999;
+
+    /* FIX: sebelumnya header transparan penuh sebelum di-scroll, jadi
+       kontras teks (termasuk "AWAN") ikut berubah-ubah tergantung apa
+       yang ada di belakangnya. Diberi gradient gelap tipis dari atas
+       supaya teks header selalu punya kontras minimum, tanpa terlihat
+       seperti bar solid. */
+    background: linear-gradient(
+        to bottom,
+        rgba(10, 10, 18, .55) 0%,
+        rgba(10, 10, 18, .18) 70%,
+        transparent 100%
+    );
+
+    /* FIX: teks (logo, menu, hamburger) tadinya mewarisi warna default
+       (hitam) dari body, jadi hilang saat background header menjadi
+       gelap ketika di-scroll. Dipaksa putih di sini. */
+    color: #fff;
+
+    /* FIX: hindari bug rendering "hitam solid" pada beberapa browser
+       Android saat position:fixed dikombinasikan dengan backdrop-filter */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: background;
+
+    transition:
+        background .35s ease,
+        backdrop-filter .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+
+/* Header saat halaman di-scroll */
+
+.header.scrolled {
+    background: rgba(15, 15, 25, .72);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, .12);
+}
+
+/* FIX: fallback untuk browser (termasuk sebagian Android WebView/Chrome
+   versi lama) yang tidak mendukung backdrop-filter sama sekali.
+   Tanpa blur, background dibuat lebih pekat supaya teks putih tetap
+   kontras dan header tidak terlihat "kosong/hitam aneh". */
+@supports not (backdrop-filter: blur(1px)) {
+    .header.scrolled {
+        background: rgba(15, 15, 25, .94);
+    }
+}
+
+
+/* =========================================
+   HEADER CONTAINER
+   ========================================= */
+
+.header-container {
+    width: min(1200px, calc(100% - 40px));
+
+    height: 70px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* =========================================
+   BRAND (LOGO + DARK MODE TOGGLE)
+   ========================================= */
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+}
+
+/* Tombol toggle dark mode, ukuran dikecilkan supaya pas di header
+   (styling animasinya sendiri diambil dari cssmang.css) */
+.header-toggle {
+    --width: 84px;
+
+    flex-shrink: 0;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   LOGO
+   ========================================= */
+
+.logo {
+    display: inline-flex;
+
+    align-items: center;
+
+    text-decoration: none;
+
+    font-size: 25px;
+    font-weight: 800;
+}
+
+/* FIX: class "logo-gradient" ada di HTML tapi sebelumnya tidak
+   punya style sama sekali, jadi teks "AWAN" cuma putih polos dan
+   gampang tenggelam kalau kebetulan berada di atas area terang pada
+   background. Diberi warna gradient + text-shadow supaya tetap
+   terbaca jelas di background apa pun (gelap maupun terang). */
+.logo-gradient {
+    background: linear-gradient(90deg, #00c2ff, #33ff8c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #fff; /* fallback jika background-clip: text tidak didukung */
+    text-shadow: 0 1px 8px rgba(0, 0, 0, .45);
+}
+
+
+/* =========================================
+   NAVIGATION
+   ========================================= */
+
+.menu {
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+.menu-link {
+    position: relative;
+
+    color: inherit;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: color .25s ease;
+}
+
+.menu-link::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: -7px;
+
+    width: 0;
+    height: 2px;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        90deg,
+        #6c63ff,
+        #00c6ff
+    );
+
+    transform: translateX(-50%);
+
+    transition: width .3s ease;
+}
+
+.menu-link:hover::after,
+.menu-link.active::after {
+    width: 100%;
+}
+
+
+/* =========================================
+   DOWNLOAD CV
+   ========================================= */
+
+.btn-cv {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 17px;
+
+    border-radius: 50px;
+
+    text-decoration: none;
+
+    color: #fff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6c63ff,
+            #00c6ff
+        );
+
+    box-shadow:
+        0 8px 20px rgba(0, 198, 255, .2);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.btn-cv:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(0, 198, 255, .35);
+}
+
+
+/* =========================================
+   HAMBURGER
+   ========================================= */
+
+.hamburger {
+    display: none;
+
+    width: 32px;
+    height: 32px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+}
+
+.hamburger span {
+    display: block;
+
+    width: 24px;
+    height: 2px;
+
+    border-radius: 20px;
+
+    background: currentColor;
+
+    transition:
+        transform .3s ease,
+        opacity .3s ease;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .header-container {
+        height: 64px;
+
+        width: calc(100% - 28px);
+    }
+
+    .brand {
+        gap: 10px;
+    }
+
+    .header-toggle {
+        --width: 66px;
+    }
+
+    .menu {
+        position: absolute;
+
+        top: 72px;
+        right: 14px;
+
+        width: min(250px, calc(100vw - 28px));
+
+        padding: 20px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 18px;
+
+        border-radius: 18px;
+
+        background:
+            rgba(15, 15, 25, .94);
+
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+
+        border: 1px solid rgba(255, 255, 255, .08);
+
+        box-shadow:
+            0 20px 50px rgba(0, 0, 0, .2);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transform:
+            translateY(-10px)
+            scale(.97);
+
+        transition:
+            opacity .3s ease,
+            visibility .3s ease,
+            transform .3s ease;
+    }
+
+    .menu.show {
+        opacity: 1;
+
+        visibility: visible;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    .menu-link {
+        padding: 6px 4px;
+    }
+
+    .btn-cv {
+        width: 100%;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .header-container {
+        width: calc(100% - 22px);
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .brand {
+        gap: 8px;
+    }
+
+    .header-toggle {
+        --width: 56px;
+    }
+
+    .menu {
+        top: 68px;
+        right: 11px;
+    }
+}
+
+      
+            .iframe-container34 {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* Rasio aspek 16:9 (bisa diubah sesuai kebutuhan) */
+            overflow: hidden;
+        }
+
+        .iframe-container34 iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none; /* Menghilangkan border */
+        }
+
+/* =========================================
+   WORK CARD LIVE PREVIEW (iframe)
+   ========================================= */
+
+.work-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.work-preview {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none; /* klik tetap ditangani oleh <a class="work-card"> */
+    background: #0f0f19;
+}
+
+/*
+   FIX "hitam di samping preview":
+   Trik zoom-out (scale kecil) sebelumnya membuat preview jadi kecil/kurang
+   jelas dan tetap rawan celah di tepi (scrollbar iframe, dsb). Sekarang
+   iframe langsung mengisi penuh 100% lebar & tinggi .work-image (seukuran
+   card), tanpa di-scale. Hasilnya: preview terlihat besar & jelas, dan
+   tidak ada lagi celah/hitam di pinggir karena ukurannya persis sama
+   dengan kontainer.
+*/
+.work-preview iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+
+/* =========================================
+   PAGE LAYOUT / SCROLL FIX
+   (memaksa halaman bisa di-scroll & 2 section jelas)
+   ========================================= */
+
+html, body {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img, iframe, video {
+    max-width: 100%;
+}
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 100px 16px 40px;
+}
+
+.works-section {
+    position: relative;
+    width: 100%;
+
+    padding: 60px 16px 100px;
+}
+
+@media (max-width: 900px) {
+    .hero-section {
+        padding: 90px 12px 32px;
+        min-height: auto;
+    }
+
+    .works-section {
+        padding: 40px 12px 80px;
+    }
+
+    .works-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+
+/* =========================================
+   WORKS SECTION - DARK MODE TEXT COLOR
+   (override warna hardcoded dari sectionBlog.css
+   supaya ikut var(--color) sesuai mode terang/gelap)
+   ========================================= */
+
+.works-heading h2,
+.works-heading p,
+.work-content h3,
+.work-content p,
+.work-meta {
+    color: var(--color);
+    transition: color var(--speed) var(--easing);
+}
+  </style>
+</head>
+  <body>
+<header class="header">
+    <div class="header-container">
+
+        <div class="brand">
+            <a href="#" class="logo">
+                <span class="logo-gradient">AWAN</span>
+            </a>
+
+            <button class="toggle header-toggle" id="darkModeToggle" aria-pressed="false" title="Toggle Dark Mode">
+              <span class="toggle__content">
+                <svg aria-hidden="true" class="toggle__backdrop" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 290 228">
+                  <g class="clouds">
+                    <path fill="#D9D9D9" d="M335 147.5c0 27.89-22.61 50.5-50.5 50.5a50.78 50.78 0 0 1-9.29-.853c-2.478 12.606-10.595 23.188-21.615 29.011C245.699 243.749 228.03 256 207.5 256a50.433 50.433 0 0 1-16.034-2.599A41.811 41.811 0 0 1 166 262a41.798 41.798 0 0 1-22.893-6.782A42.21 42.21 0 0 1 135 256a41.82 41.82 0 0 1-19.115-4.592A41.84 41.84 0 0 1 88 262c-1.827 0-3.626-.117-5.391-.343C74.911 270.448 63.604 276 51 276c-23.196 0-42-18.804-42-42s18.804-42 42-42c1.827 0 3.626.117 5.391.343C64.089 183.552 75.396 178 88 178a41.819 41.819 0 0 1 19.115 4.592C114.532 176.002 124.298 172 135 172a41.798 41.798 0 0 1 22.893 6.782 42.066 42.066 0 0 1 7.239-.773C174.137 164.159 189.749 155 207.5 155c.601 0 1.199.01 1.794.031A41.813 41.813 0 0 1 234 147h.002c.269-27.66 22.774-50 50.498-50 27.89 0 50.5 22.61 50.5 50.5Z" />
+                  </g>
+                </svg>
+                <span aria-hidden="true" class="pilot__container">
+                  <span class="pilot-bear">
+                    <img src="https://assets.codepen.io/605876/pilot-bear.svg" alt="pilot-bear" class="pilot" />
+                  </span>
+                </span>
+                <svg aria-hidden="true" class="toggle__backdrop" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 290 228">
+                  <g class="clouds">
+                    <path fill="#fff" d="M328 167.5c0 15.214-7.994 28.56-20.01 36.068.007.31.01.621.01.932 0 23.472-19.028 42.5-42.5 42.5-3.789 0-7.461-.496-10.957-1.426C249.671 263.676 233.141 277 213.5 277a42.77 42.77 0 0 1-7.702-.696C198.089 284.141 187.362 289 175.5 289a42.338 42.338 0 0 1-27.864-10.408A42.411 42.411 0 0 1 133.5 281c-4.36 0-8.566-.656-12.526-1.876C113.252 287.066 102.452 292 90.5 292a42.388 42.388 0 0 1-15.8-3.034A42.316 42.316 0 0 1 48.5 298C25.028 298 6 278.972 6 255.5S25.028 213 48.5 213a42.388 42.388 0 0 1 15.8 3.034A42.316 42.316 0 0 1 90.5 207c4.36 0 8.566.656 12.526 1.876C110.748 200.934 121.548 196 133.5 196a42.338 42.338 0 0 1 27.864 10.408A42.411 42.411 0 0 1 175.5 204c2.63 0 5.204.239 7.702.696C190.911 196.859 201.638 192 213.5 192c3.789 0 7.461.496 10.957 1.426 2.824-10.491 9.562-19.377 18.553-24.994-.007-.31-.01-.621-.01-.932 0-23.472 19.028-42.5 42.5-42.5s42.5 19.028 42.5 42.5Z" />
+                  </g>
+                </svg>
+                <span class="toggle__indicator-wrapper">
+                  <span class="toggle__indicator">
+                    <span class="toggle__star">
+                      <span class="sun">
+                        <span class="moon">
+                          <span class="moon__crater"></span>
+                          <span class="moon__crater"></span>
+                          <span class="moon__crater"></span>
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                </span>
+                <svg aria-hidden="true" class="toggle__backdrop" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 290 228">
+                  <g>
+                    <g class="stars">
+                      <g><path fill="#fff" fill-rule="evenodd" d="M61 11.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.749 3.749 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.749 3.749 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813a3.749 3.749 0 0 0 2.576-2.576l.813-2.846A.75.75 0 0 1 61 11.5Z" clip-rule="evenodd" /></g>
+                      <g><path fill="#fff" fill-rule="evenodd" d="M62.5 45.219a.329.329 0 0 1 .315.238l.356 1.245a1.641 1.641 0 0 0 1.127 1.127l1.245.356a.328.328 0 0 1 0 .63l-1.245.356a1.641 1.641 0 0 0-1.127 1.127l-.356 1.245a.328.328 0 0 1-.63 0l-.356-1.245a1.641 1.641 0 0 0-1.127-1.127l-1.245-.356a.328.328 0 0 1 0-.63l1.245-.356a1.641 1.641 0 0 0 1.127-1.127l.356-1.245a.328.328 0 0 1 .315-.238Z" clip-rule="evenodd" /></g>
+                      <g><path fill="#fff" fill-rule="evenodd" d="M32 31.188a.28.28 0 0 1 .27.204l.305 1.067a1.405 1.405 0 0 0 .966.966l1.068.305a.28.28 0 0 1 0 .54l-1.068.305a1.405 1.405 0 0 0-.966.966l-.305 1.068a.28.28 0 0 1-.54 0l-.305-1.068a1.406 1.406 0 0 0-.966-.966l-1.067-.305a.28.28 0 0 1 0-.54l1.067-.305a1.406 1.406 0 0 0 .966-.966l.305-1.068a.281.281 0 0 1 .27-.203Z" clip-rule="evenodd" /></g>
+                      <g><path fill="#fff" fill-rule="evenodd" d="M41.5 74.219a.329.329 0 0 1 .315.238l.356 1.245a1.641 1.641 0 0 0 1.127 1.127l1.245.356a.328.328 0 0 1 0 .63l-1.245.356a1.641 1.641 0 0 0-1.127 1.127l-.356 1.245a.328.328 0 0 1-.63 0l-.356-1.245a1.641 1.641 0 0 0-1.127-1.127l-1.245-.356a.328.328 0 0 1 0-.63l1.245-.356a1.641 1.641 0 0 0 1.127-1.127l.356-1.245a.328.328 0 0 1 .315-.238Z" clip-rule="evenodd" /></g>
+                      <g><path fill="#fff" fill-rule="evenodd" d="M34 83.188a.28.28 0 0 1 .27.203l.305 1.068a1.405 1.405 0 0 0 .966.966l1.068.305a.28.28 0 0 1 0 .54l-1.068.305a1.405 1.405 0 0 0-.966.966l-.305 1.068a.28.28 0 0 1-.54 0l-.305-1.068a1.406 1.406 0 0 0-.966-.966l-1.068-.305a.28.28 0 0 1 0-.54l1.068-.305a1.406 1.406 0 0 0 .966-.966l.305-1.068a.281.281 0 0 1 .27-.204Z" clip-rule="evenodd" /></g>
+                      <g><path fill="#fff" fill-rule="evenodd" d="M63 89.25a.375.375 0 0 1 .36.272l.407 1.423a1.874 1.874 0 0 0 1.288 1.288l1.423.406a.374.374 0 0 1 0 .722l-1.423.406a1.874 1.874 0 0 0-1.288 1.288l-.407 1.423a.374.374 0 0 1-.72 0l-.407-1.423a1.874 1.874 0 0 0-1.288-1.288l-1.423-.406a.374.374 0 0 1 0-.722l1.423-.406a1.874 1.874 0 0 0 1.288-1.288l.407-1.423a.376.376 0 0 1 .36-.272Z" clip-rule="evenodd" /></g>
+                      <g><path fill="#fff" fill-rule="evenodd" d="M110.5 53.156a.236.236 0 0 1 .225.17l.254.89a1.174 1.174 0 0 0 .805.805l.89.254a.23.23 0 0 1 .122.084.233.233 0 0 1-.122.366l-.89.254a1.167 1.167 0 0 0-.805.805l-.254.89a.232.232 0 0 1-.225.17.235.235 0 0 1-.225-.17l-.254-.89a1.174 1.174 0 0 0-.805-.805l-.89-.254a.23.23 0 0 1-.122-.084.233.233 0 0 1 .122-.366l.89-.254a1.167 1.167 0 0 0 .805-.805l.254-.89a.232.232 0 0 1 .225-.17Z" clip-rule="evenodd" /></g>
+                      <g><path fill="#fff" fill-rule="evenodd" d="M120 27.188a.279.279 0 0 1 .27.204l.305 1.067a1.41 1.41 0 0 0 .966.966l1.067.305a.283.283 0 0 1 .148.1.286.286 0 0 1 0 .34.283.283 0 0 1-.148.1l-1.067.305a1.403 1.403 0 0 0-.966.966l-.305 1.067a.279.279 0 0 1-.439.147.275.275 0 0 1-.101-.147l-.305-1.067a1.41 1.41 0 0 0-.966-.966l-1.068-.305a.284.284 0 0 1-.147-.1.286.286 0 0 1 0-.34.284.284 0 0 1 .147-.1l1.068-.305a1.405 1.405 0 0 0 .966-.966l.305-1.067a.279.279 0 0 1 .27-.204Z" clip-rule="evenodd" /></g>
+                      <g><path fill="#fff" fill-rule="evenodd" d="M155 28.5a.753.753 0 0 1 .721.544l.813 2.846a3.746 3.746 0 0 0 2.576 2.576l2.846.813a.747.747 0 0 1 .543.721.75.75 0 0 1-.543.721l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.747.747 0 0 1-.721.543.749.749 0 0 1-.721-.543l-.813-2.846a3.746 3.746 0 0 0-2.576-2.576l-2.846-.813a.747.747 0 0 1-.543-.721.75.75 0 0 1 .543-.721l2.846-.813a3.75 3.75 0 0 0 2.576-2.576l.813-2.846A.751.751 0 0 1 155 28.5Z" clip-rule="evenodd" /></g>
+                      <g><path fill="#fff" fill-rule="evenodd" d="M147 60.25a.377.377 0 0 1 .36.272l.407 1.423a1.883 1.883 0 0 0 1.288 1.288l1.423.407a.375.375 0 0 1 0 .72l-1.423.407a1.875 1.875 0 0 0-1.288 1.288l-.407 1.423a.371.371 0 0 1-.36.272.377.377 0 0 1-.36-.272l-.407-1.423a1.883 1.883 0 0 0-1.288-1.288l-1.423-.406a.375.375 0 0 1 0-.722l1.423-.406a1.875 1.875 0 0 0 1.288-1.288l.407-1.423a.372.372 0 0 1 .36-.272Z" clip-rule="evenodd" /></g>
+                      <g><path fill="#fff" fill-rule="evenodd" d="M125.5 76.344a.513.513 0 0 1 .496.374l.559 1.956a2.574 2.574 0 0 0 1.771 1.771l1.956.56a.514.514 0 0 1 .27.805.514.514 0 0 1-.27.186l-1.956.559a2.57 2.57 0 0 0-1.771 1.77l-.559 1.957a.514.514 0 0 1-.806.27.514.514 0 0 1-.186-.27l-.559-1.956a2.574 2.574 0 0 0-1.771-1.771l-1.956-.56a.514.514 0 0 1-.27-.805.514.514 0 0 1 .27-.186l1.956-.559a2.57 2.57 0 0 0 1.771-1.77l.559-1.957a.515.515 0 0 1 .496-.374Z" clip-rule="evenodd" /></g>
+                    </g>
+                  </g>
+                </svg>
+                <span class="astrobear__container">
+                  <span class="astrobear">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 316 432">
+                      <circle cx="158" cy="143" r="140" fill="#444" />
+                      <circle cx="158" cy="143" r="140" fill="url(#header-a)" fill-opacity=".2" />
+                      <circle cx="158" cy="143" r="140" stroke="#000" stroke-width="6" />
+                      <path fill="#AF7128" fill-rule="evenodd" d="M65.98 159.61C49.913 155.643 38 141.134 38 123.842 38 103.495 54.495 87 74.842 87c14.337 0 26.761 8.19 32.85 20.146C119.687 100.674 133.414 97 148 97h20c14.52 0 28.19 3.641 40.146 10.059C214.251 95.15 226.65 87 240.952 87c20.347 0 36.842 16.495 36.842 36.842 0 17.222-11.818 31.685-27.787 35.72A85.104 85.104 0 0 1 253 182v66.56l10.054-10.054c11.325-11.325 29.687-11.325 41.012 0s11.325 29.687 0 41.012l-44.548 44.548a29.004 29.004 0 0 1-6.518 4.906V407c0 12.15-9.85 22-22 22h-44c-12.15 0-22-9.85-22-22v-28.69a41.072 41.072 0 0 1-14 .174V407c0 12.15-9.85 22-22 22H85c-12.15 0-22-9.85-22-22v-77.797a28.99 28.99 0 0 1-6.946-5.137l-44.548-44.548c-11.325-11.325-11.325-29.687 0-41.012 11.326-11.325 29.687-11.325 41.013 0L63 248.988V182a85.106 85.106 0 0 1 2.98-22.39Z" clip-rule="evenodd" />
+                      <path fill="#000" fill-rule="evenodd" d="M225.3 113.481c17.939 14.394 28.018 37.148 28.018 57.504H191.67c-.087-13.669-11.194-24.723-24.883-24.723h-18.56c-13.689 0-24.796 11.054-24.883 24.723H62c0-20.356 10.078-43.11 28.018-57.504C107.957 99.087 132.289 91 157.659 91c25.37 0 49.701 8.087 67.641 22.481Z" clip-rule="evenodd" />
+                      <circle cx="212.665" cy="197.079" r="8.079" fill="#000" />
+                      <circle cx="104.079" cy="197.079" r="8.079" fill="#000" />
+                      <path fill="#000" d="M179.165 211.683c0 8.21-9.868 17.451-20.845 17.451-10.977 0-20.845-9.241-20.845-17.451 0-8.211 9.868-12.281 20.845-12.281 10.977 0 20.845 4.07 20.845 12.281Z" />
+                      <defs>
+                        <linearGradient id="header-a" x1="158" x2="158" y1="0" y2="286" gradientUnits="userSpaceOnUse">
+                          <stop offset=".219" />
+                          <stop offset="1" stop-color="#fff" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </span>
+                </span>
+              </span>
+            </button>
+        </div>
+
+        <nav class="menu" id="menu">
+            <a href="#Tools" class="menu-link active">Tools</a>
+            <a href="#experience" class="menu-link">Content</a>
+            <a href="#contact" class="menu-link">List</a>
+
+            <a href="cv.pdf" class="btn-cv" target="_blank">
+                Download CV
+            </a>
+        </nav>
+
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+    </div>
+</header>
+<!-- content -->    
+<section id="home" class="hero-section">
+<div class="card" data-state="#about">
+  <div class="card-header">
+    <div class="card-cover" style="background-image: url('https://media.istockphoto.com/id/968903218/id/foto/pola-cairan-abstrak.jpg?s=612x612&w=is&k=20&c=kvfCg_Wdh0OISRLsfjOclV8s4FRBIvDUA7IEPh-XZxA=')"></div>
+    <img class="card-avatar" src="awan.png" alt="avatar" />
+    <h1 class="text-yusri">YUSRI IRAWAN</h1>
+    <h2 class="card-jobtitle"> </h2>
+  </div>
+  <div class="card-main">
+    <div class="card-section is-active" id="about">
+      <div class="card-content">
+        <div class="card-subtitle">ABOUT</div>
+        <p class="card-desc">Blockchain technology enthusiast. A Profesional Community Support Manager. Involved in Promotion, Community Moderation and Management. Support all new projects in blockchain development.</p>
+
+      </div>
+       <div class="card-social">
+        <a href="https://discordapp.com/users/685240966575292424" class="social-a">
+           <svg class="social-svg" xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 33.867 33.867" id="discord"><path d="M11.343 5.177c-1.076 0-4.32 1.316-4.902 1.579-.582.263-1.228 1.084-1.961 2.439-.734 1.355-1.323 2.939-2.28 5.269-.956 2.33-1.179 6.822-1.147 8.193.032 1.371.189 2.442 1.594 3.253 1.404.81 2.646 1.658 3.953 2.168 1.308.51 2.2.877 2.806.367.606-.51 1.005-1.403 1.005-1.403s.574-.797-.51-1.275c-1.084-.479-1.626-.814-1.579-1.308.048-.494.127-.765.398-.701.271.064.91 1.211 3.365 1.737s4.848.447 4.848.447 2.394.08 4.849-.447c2.455-.526 3.093-1.673 3.364-1.737.271-.064.35.207.398.7.048.495-.494.83-1.578 1.309-1.084.478-.51 1.275-.51 1.275s.399.892 1.005 1.403c.605.51 1.498.143 2.805-.367 1.307-.51 2.55-1.357 3.954-2.168 1.405-.811 1.562-1.882 1.594-3.253.032-1.37-.191-5.863-1.148-8.193-.956-2.33-1.546-3.914-2.28-5.269-.732-1.355-1.379-2.176-1.96-2.44-.582-.262-3.827-1.578-4.903-1.578-1.076 0-1.394.75-1.394.75l-.375.829s-2.52-.479-3.804-.48c-1.284 0-3.837.48-3.837.48l-.375-.83s-.318-.749-1.395-.749zm.117 9.948h.04c1.569 0 2.84 1.373 2.84 3.066 0 1.694-1.271 3.066-2.84 3.066s-2.84-1.372-2.84-3.066c-.001-1.677 1.247-3.043 2.8-3.066zm10.907 0h.04c1.553.023 2.8 1.39 2.8 3.066 0 1.694-1.271 3.066-2.84 3.066-1.57 0-2.84-1.372-2.84-3.066 0-1.693 1.27-3.066 2.84-3.066z" paint-order="fill markers stroke"></path></svg>
+        </a>
+        <a href="https://twitter.com/" class="social-a"><svg class="social-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M512 97.248c-19.04 8.352-39.328 13.888-60.48 16.576 21.76-12.992 38.368-33.408 46.176-58.016-20.288 12.096-42.688 20.64-66.56 25.408C411.872 60.704 384.416 48 354.464 48c-58.112 0-104.896 47.168-104.896 104.992 0 8.32.704 16.32 2.432 23.936-87.264-4.256-164.48-46.08-216.352-109.792-9.056 15.712-14.368 33.696-14.368 53.056 0 36.352 18.72 68.576 46.624 87.232-16.864-.32-33.408-5.216-47.424-12.928v1.152c0 51.008 36.384 93.376 84.096 103.136-8.544 2.336-17.856 3.456-27.52 3.456-6.72 0-13.504-.384-19.872-1.792 13.6 41.568 52.192 72.128 98.08 73.12-35.712 27.936-81.056 44.768-130.144 44.768-8.608 0-16.864-.384-25.12-1.44C46.496 446.88 101.6 464 161.024 464c193.152 0 298.752-160 298.752-298.688 0-4.64-.16-9.12-.384-13.568 20.832-14.784 38.336-33.248 52.608-54.496z" />
+        </svg></a>
+        <a href="https://instagram.com/yusriirawan44" class="social-a"><svg class="social-svg" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M301 256c0 24.852-20.148 45-45 45s-45-20.148-45-45 20.148-45 45-45 45 20.148 45 45zm0 0" />
+            <path d="M332 120H180c-33.086 0-60 26.914-60 60v152c0 33.086 26.914 60 60 60h152c33.086 0 60-26.914 60-60V180c0-33.086-26.914-60-60-60zm-76 211c-41.355 0-75-33.645-75-75s33.645-75 75-75 75 33.645 75 75-33.645 75-75 75zm86-146c-8.285 0-15-6.715-15-15s6.715-15 15-15 15 6.715 15 15-6.715 15-15 15zm0 0" />
+            <path d="M377 0H135C60.562 0 0 60.563 0 135v242c0 74.438 60.563 135 135 135h242c74.438 0 135-60.563 135-135V135C512 60.562 451.437 0 377 0zm45 332c0 49.625-40.375 90-90 90H180c-49.625 0-90-40.375-90-90V180c0-49.625 40.375-90 90-90h152c49.625 0 90 40.375 90 90zm0 0" />
+        </svg></a>
+       
+      </div>
+    </div>
+    <div class="card-section" id="experience">
+      <div class="card-content">
+        <div class="card-subtitle">LIVE MODERATION</div>
+        <div class="card-timeline">
+          <div class="card-item" data-year="1">
+            <img src="./pf_logo2.png" class="card-logo" alt="Puzzle Fantasy"/>
+            <div class="card-item-title">Puzzle Fantasy</div>
+            <div class="card-item-desc">Puzzle Fantasy is a P2E game provided on the BISKIT platform. Puzzle Fantasy introduces the P2E System, so players enjoy the game while receiving Token mining and rewards. </div>
+          <div class="card-social">
+        <a href="https://discord.gg/jJMYcv5qMQ" class="social-a">
+           <svg class="social-svg" xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 33.867 33.867" id="discord"><path d="M11.343 5.177c-1.076 0-4.32 1.316-4.902 1.579-.582.263-1.228 1.084-1.961 2.439-.734 1.355-1.323 2.939-2.28 5.269-.956 2.33-1.179 6.822-1.147 8.193.032 1.371.189 2.442 1.594 3.253 1.404.81 2.646 1.658 3.953 2.168 1.308.51 2.2.877 2.806.367.606-.51 1.005-1.403 1.005-1.403s.574-.797-.51-1.275c-1.084-.479-1.626-.814-1.579-1.308.048-.494.127-.765.398-.701.271.064.91 1.211 3.365 1.737s4.848.447 4.848.447 2.394.08 4.849-.447c2.455-.526 3.093-1.673 3.364-1.737.271-.064.35.207.398.7.048.495-.494.83-1.578 1.309-1.084.478-.51 1.275-.51 1.275s.399.892 1.005 1.403c.605.51 1.498.143 2.805-.367 1.307-.51 2.55-1.357 3.954-2.168 1.405-.811 1.562-1.882 1.594-3.253.032-1.37-.191-5.863-1.148-8.193-.956-2.33-1.546-3.914-2.28-5.269-.732-1.355-1.379-2.176-1.96-2.44-.582-.262-3.827-1.578-4.903-1.578-1.076 0-1.394.75-1.394.75l-.375.829s-2.52-.479-3.804-.48c-1.284 0-3.837.48-3.837.48l-.375-.83s-.318-.749-1.395-.749zm.117 9.948h.04c1.569 0 2.84 1.373 2.84 3.066 0 1.694-1.271 3.066-2.84 3.066s-2.84-1.372-2.84-3.066c-.001-1.677 1.247-3.043 2.8-3.066zm10.907 0h.04c1.553.023 2.8 1.39 2.8 3.066 0 1.694-1.271 3.066-2.84 3.066-1.57 0-2.84-1.372-2.84-3.066 0-1.693 1.27-3.066 2.84-3.066z" paint-order="fill markers stroke"></path></svg>
+        </a>
+        <a href="https://twitter.com/BISKIT_TOKEN" class="social-a"><svg class="social-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M512 97.248c-19.04 8.352-39.328 13.888-60.48 16.576 21.76-12.992 38.368-33.408 46.176-58.016-20.288 12.096-42.688 20.64-66.56 25.408C411.872 60.704 384.416 48 354.464 48c-58.112 0-104.896 47.168-104.896 104.992 0 8.32.704 16.32 2.432 23.936-87.264-4.256-164.48-46.08-216.352-109.792-9.056 15.712-14.368 33.696-14.368 53.056 0 36.352 18.72 68.576 46.624 87.232-16.864-.32-33.408-5.216-47.424-12.928v1.152c0 51.008 36.384 93.376 84.096 103.136-8.544 2.336-17.856 3.456-27.52 3.456-6.72 0-13.504-.384-19.872-1.792 13.6 41.568 52.192 72.128 98.08 73.12-35.712 27.936-81.056 44.768-130.144 44.768-8.608 0-16.864-.384-25.12-1.44C46.496 446.88 101.6 464 161.024 464c193.152 0 298.752-160 298.752-298.688 0-4.64-.16-9.12-.384-13.568 20.832-14.784 38.336-33.248 52.608-54.496z" />
+        </svg></a>
+      </div>
+          </div>
+          <div class="card-item" data-year="2">
+            <div class="card-item-title">look forward to it</div>
+            <div class="card-item-desc"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-section" id="contact">
+      <div class="card-content">
+        <div class="card-contact-wrapper">
+          <div class="card-contact">
+            <a href="mailto:email@yusriirawan.my.id">
+            <svg class="contact-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <path d="M22 6l-10 7L2 6" /></svg></a>email@yusriirawan.my.id
+          </div>
+    <div class="card-contact" >
+  <div class="password-form">
+    <h2>--------</h2>
+    <input nput type="password" id="password" placeholder="Masukkan Password">
+    <button onclick="checkPassword()" class="submit-button">Submit</button>
+    </div>
+  </div>
+           </div>
+      </div>
+
+         
+        </div>
+      </div>
+    <div class="card-buttons">
+      <button data-section="#about" class="is-active cards-buttons">ABOUT</button>
+      <button data-section="#experience" class="cards-buttons">EXPERIENCE</button>
+      <button data-section="#contact" class="cards-buttons">CONTACT</button>
+    </div>
+  </div>
+</section>
+    
+<!-- =========================================
+     PORTFOLIO / BLOG SECTION
+     ========================================= -->
+
+<section class="works-section" id="Tools">
+
+    <div class="works-heading">
+        <span class="works-label">MY WORKS</span>
+
+        <h2>
+            Tools & <span>Activity</span>
+        </h2>
+
+        <p>
+            Beberapa tools, dan aktivitas yang mungkin berguna untuk anda.
+        </p>
+    </div>
+
+
+    <div class="works-grid">
+
+        <!-- CARD 1 -->
+        <a href="https://yusriirawan.my.id/guru" class="work-card">
+
+            <div class="work-image">
+                <div class="work-preview">
+                    <iframe src="guru.html"
+                            scrolling="no"
+                            title="Preview Karya 1"
+                            loading="lazy"
+                            tabindex="-1"
+                            aria-hidden="true"></iframe>
+                </div>
+
+                <span class="work-category">
+                    Education
+                </span>
+
+                <span class="work-arrow">
+                    ↗
+                </span>
+            </div>
+
+            <div class="work-content">
+
+                <div class="work-meta">
+                    <span>2026</span>
+                    <span>•</span>
+                    <span>Project</span>
+                </div>
+
+                <h3>
+                    Pembelajaran
+                </h3>
+
+                <p>
+                    Akses pembelajaran yang mungkin ada dan anda butuhkan disini.
+                </p>
+
+            </div>
+
+        </a>
+
+
+        <!-- CARD 2 -->
+        <a href="https://yusriirawan.my.id/comingsoon" class="work-card">
+
+            <div class="work-image">
+
+                <div class="work-preview">
+                    <iframe src="comingsoon.html"
+                            scrolling="no"
+                            title="Preview Karya 2"
+                            loading="lazy"
+                            tabindex="-1"
+                            aria-hidden="true"></iframe>
+                </div>
+
+                <span class="work-category">
+                    Research
+                </span>
+
+                <span class="work-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+            <div class="work-content">
+
+                <div class="work-meta">
+                    <span>2026</span>
+                    <span>•</span>
+                    <span>Research</span>
+                </div>
+
+                <h3>
+                    Computational Thinking
+                </h3>
+
+                <p>
+                    Penelitian mengenai penerapan computational
+                    thinking dalam pembelajaran matematika.
+                </p>
+
+            </div>
+
+        </a>
+
+
+        <!-- CARD 3 -->
+        <a href="https://yusriirawan.my.id/comingsoon" class="work-card">
+
+            <div class="work-image">
+
+                <div class="work-preview">
+                    <iframe src="comingsoon.html"
+                            scrolling="no"
+                            title="Preview Karya 3"
+                            loading="lazy"
+                            tabindex="-1"
+                            aria-hidden="true"></iframe>
+                </div>
+
+                <span class="work-category">
+                    Web
+                </span>
+
+                <span class="work-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+            <div class="work-content">
+
+                <div class="work-meta">
+                    <span>2026</span>
+                    <span>•</span>
+                    <span>Web</span>
+                </div>
+
+                <h3>
+                    Website Portfolio
+                </h3>
+
+                <p>
+                    Website personal portfolio dengan desain
+                    modern, responsif, dan interaktif.
+                </p>
+
+            </div>
+
+        </a>
+
+
+        <!-- CARD 4 -->
+        <a href="https://yusriirawan.my.id/comingsoon" class="work-card">
+
+            <div class="work-image">
+
+                <div class="work-preview">
+                    <iframe src="comingsoon.html"
+                            scrolling="no"
+                            title="Preview Karya 4"
+                            loading="lazy"
+                            tabindex="-1"
+                            aria-hidden="true"></iframe>
+                </div>
+
+                <span class="work-category">
+                    Design
+                </span>
+
+                <span class="work-arrow">
+                    ↗
+                </span>
+
+            </div>
+
+            <div class="work-content">
+
+                <div class="work-meta">
+                    <span>2026</span>
+                    <span>•</span>
+                    <span>Design</span>
+                </div>
+
+                <h3>
+                    Desain Media Visual
+                </h3>
+
+                <p>
+                    Berbagai desain visual untuk kebutuhan
+                    pendidikan dan publikasi.
+                </p>
+
+            </div>
+
+        </a>
+
+    </div>
+
+</section>
+
+<!-- end content -->    
+
+<!-- script -->    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    
+    <script>
+const BUTTON = document.querySelector("button");
+
+const TOGGLE = () => {
+  const IS_PRESSED = BUTTON.matches("[aria-pressed=true]");
+  document.body.setAttribute("data-dark-mode", IS_PRESSED ? false : true);
+  BUTTON.setAttribute("aria-pressed", IS_PRESSED ? false : true);
+};
+
+BUTTON.addEventListener("click", TOGGLE);
+    </script>
+    <script>
+const buttons = document.querySelectorAll(".card-buttons button");
+const sections = document.querySelectorAll(".card-section");
+const card = document.querySelector(".card");
+
+const handleButtonClick = (e) => {
+  const targetSection = e.target.getAttribute("data-section");
+  const section = document.querySelector(targetSection);
+  targetSection !== "#about"
+    ? card.classList.add("is-active")
+    : card.classList.remove("is-active");
+  card.setAttribute("data-state", targetSection);
+  sections.forEach((s) => s.classList.remove("is-active"));
+  buttons.forEach((b) => b.classList.remove("is-active"));
+  e.target.classList.add("is-active");
+  section.classList.add("is-active");
+};
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", handleButtonClick);
+});
+    </script>
+
+      <script>
+    function getRandomValue() {
+      return Math.floor(Math.random() * 101);
+    }
+
+    function animateRandomGradient() {
+      const textHome = document.querySelector('.text-yusri');
+      textHome.style.backgroundPosition = `${getRandomValue()}% ${getRandomValue()}%`;
+      setTimeout(animateRandomGradient, 5000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      animateRandomGradient();
+    });
+  </script>
+  <script>
+    const hamburger=document.getElementById("hamburger");
+const menu=document.getElementById("menu");
+
+hamburger.onclick=()=>{
+
+menu.classList.toggle("show");
+
+}
+
+window.addEventListener("scroll",()=>{
+
+const header=document.querySelector(".header");
+
+header.classList.toggle("scrolled",window.scrollY>40);
+
+});
+
+document.querySelectorAll(".menu-link").forEach(link=>{
+
+link.addEventListener("click",()=>{
+
+document.querySelectorAll(".menu-link").forEach(a=>a.classList.remove("active"));
+
+link.classList.add("active");
+
+menu.classList.remove("show");
+
+});
+
+});
+  </script>
+  
+  <!-- end -->
   </body>
 </html>
