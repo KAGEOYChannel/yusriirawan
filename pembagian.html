@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belajar Pembagian - Kelas 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pemstyle.css">
+</head>
+<body>
+<header class="atas">
+  <h1>Pembagian itu membagi sama rata</h1>
+  <p>Kita mulai dari kue, lalu perkalian. Cara bersusun datang terakhir.</p>
+  <ol class="langkah" id="langkah">
+    <li data-s="1">1 Bagi kue</li>
+    <li data-s="2">2 Cari dengan perkalian</li>
+    <li data-s="3">3 Bersusun</li>
+  </ol>
+</header>
+
+<main>
+  <section id="s1" class="kartu">
+    <h2>1. Bagi kue sama rata</h2>
+    <p>Atur jumlah kue dan piring. Tekan <b>Bagikan 1 putaran</b>: setiap piring dapat 1 kue, adil untuk semua. Ulangi sampai kue tidak cukup untuk satu putaran lagi.</p>
+    <div class="atur">
+      <div class="stepper"><span>Kue</span>
+        <button type="button" onclick="atur('kue',-1)" aria-label="Kurangi kue">−</button>
+        <output id="vKue">12</output>
+        <button type="button" onclick="atur('kue',1)" aria-label="Tambah kue">+</button></div>
+      <div class="stepper"><span>Piring</span>
+        <button type="button" onclick="atur('piring',-1)" aria-label="Kurangi piring">−</button>
+        <output id="vPiring">3</output>
+        <button type="button" onclick="atur('piring',1)" aria-label="Tambah piring">+</button></div>
+    </div>
+    <div class="nampan" id="nampan" aria-label="Kue yang belum dibagi"></div>
+    <div class="piringan" id="piringan"></div>
+    <div class="aksi">
+      <button type="button" class="utama" id="bagi1" onclick="bagi1()">Bagikan 1 putaran</button>
+      <button type="button" onclick="reset1()">Ulang</button>
+    </div>
+    <p class="pesan" id="pesan1" role="status" aria-live="polite"></p>
+  </section>
+
+  <section id="s2" class="kartu">
+    <h2>2. Pembagian dicari dengan perkalian</h2>
+    <p>Kalau ada 4 kelompok sama banyak dan jumlahnya 24, isi tiap kelompok bisa dicari dengan <b>4 × ? = 24</b>. Selesaikan 3 soal.</p>
+    <div id="tanya2"></div>
+    <form id="form2" class="jawab" autocomplete="off">
+      <label for="in2">Jawabanmu</label>
+      <input id="in2" type="number" inputmode="numeric" required>
+      <button class="utama" type="submit">Cek</button>
+    </form>
+    <p class="pesan" id="pesan2" role="status" aria-live="polite"></p>
+    <p class="skor">Benar: <b id="skor2">0</b> dari 3</p>
+  </section>
+
+  <section id="s3" class="kartu terkunci">
+    <h2>3. Pembagian bersusun panjang</h2>
+    <p id="kunci">Terkunci. Selesaikan Bagian 1 dan Bagian 2 dulu, supaya kamu paham bahwa membagi itu membagi sama rata dan bisa dicari dengan perkalian.</p>
+    <div id="papan3" hidden>
+      <p>Ikuti empat langkah berulang: <b>Bagi, Kali, Kurang, Turunkan</b>. Setiap langkah memakai perkalian yang sudah kamu kuasai.</p>
+      <pre class="susun" id="susun" aria-label="Papan pembagian bersusun"></pre>
+      <p class="tugas" id="tugas3" role="status" aria-live="polite"></p>
+      <form id="form3" class="jawab" autocomplete="off">
+        <label for="in3">Jawabanmu</label>
+        <input id="in3" type="number" inputmode="numeric" required>
+        <button class="utama" type="submit" id="cek3">Cek</button>
+        <button type="button" id="turun3">Turunkan angka</button>
+      </form>
+      <div class="aksi">
+        <button type="button" onclick="tabelKali()">Lihat kelipatan</button>
+        <button type="button" onclick="baru3()">Soal baru</button>
+      </div>
+      <div id="tabel3" class="tabel" hidden></div>
+      <p class="pesan" id="pesan3" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+<script src="pemjs.js"></script>
+</body>
+</html>

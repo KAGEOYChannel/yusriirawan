@@ -1,0 +1,64 @@
+:root{
+  --kertas:#fbfaf4; --garis:#d6e6f2; --tinta:#1d3557; --pensil:#f4c430;
+  --margin:#e0524d; --benar:#2a9d6f; --lembut:#eef5fb;
+  --fh:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --fb:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-tema="terang"]){--kertas:#14212e;--garis:#223548;--tinta:#eaf1f8;--lembut:#1c2e41}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--tinta);font:18px/1.6 var(--fb);background-color:var(--kertas);
+  background-image:linear-gradient(var(--garis) 1px,transparent 1px),linear-gradient(90deg,var(--garis) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+.atas{max-width:760px;margin:0 auto;padding:36px 20px 8px 56px;position:relative}
+.atas::before,main::before{content:"";position:absolute;left:36px;top:0;bottom:0;width:2px;background:var(--margin);opacity:.55}
+main{max-width:760px;margin:0 auto;padding:8px 20px 60px 56px;position:relative}
+main::before{left:36px}
+h1,h2{font-family:var(--fh);line-height:1.15;margin:0 0 8px}
+h1{font-size:clamp(28px,6vw,44px);font-weight:800}
+h2{font-size:26px;font-weight:800}
+.langkah{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:16px 0;list-style:none}
+.langkah li{padding:4px 14px;border:2px solid var(--tinta);border-radius:99px;font-weight:700;font-size:15px;background:var(--kertas)}
+.langkah li.ok{background:var(--benar);border-color:var(--benar);color:#fff}
+.langkah li.ok::after{content:" ✓"}
+.kartu{background:var(--kertas);border:2px solid var(--tinta);border-radius:6px 22px 6px 22px;padding:22px;margin:22px 0;box-shadow:5px 5px 0 var(--pensil)}
+.kartu.terkunci{box-shadow:5px 5px 0 var(--garis)}
+.kartu.terkunci #kunci{color:var(--margin);font-weight:700}
+button{font:700 16px var(--fb);color:var(--tinta);background:var(--kertas);border:2px solid var(--tinta);border-radius:12px;padding:8px 16px;cursor:pointer;min-height:44px}
+button:hover{background:var(--lembut)}
+button.utama{background:var(--pensil);color:#1d3557}
+button:disabled{opacity:.45;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--margin);outline-offset:2px}
+.atur,.aksi,.jawab{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:12px 0}
+.stepper{display:flex;align-items:center;gap:8px;font-weight:700}
+.stepper button{width:44px;padding:0;font-size:22px}
+.stepper output{min-width:34px;text-align:center;font:800 26px var(--fh)}
+.nampan{min-height:52px;padding:8px;background:var(--lembut);border-radius:12px;display:flex;flex-wrap:wrap;gap:2px;font-size:26px}
+.piringan{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin:14px 0}
+.piring{border:3px solid var(--tinta);border-radius:50%;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--lembut);text-align:center;font-size:20px;line-height:1.2;padding:8px}
+.piring small{font:700 14px var(--fb)}
+.nampan i,.piring i{font-style:normal}
+.pesan{min-height:1.6em;font-weight:700}
+.pesan.salah{color:var(--margin)}
+.pesan.benar{color:var(--benar)}
+.besar{font:800 40px var(--fh);margin:6px 0}
+.grup{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.grup div{padding:6px 10px;border:2px dashed var(--tinta);border-radius:12px;font-size:20px}
+.jawab label{font-weight:700}
+input[type=number]{width:110px;font:800 22px var(--fh);padding:6px 10px;color:var(--tinta);background:var(--kertas);border:2px solid var(--tinta);border-radius:12px}
+.susun{font:700 28px/1.35 "Courier New",ui-monospace,monospace;background:var(--lembut);border-radius:12px;padding:16px;margin:12px 0;overflow-x:auto}
+.susun .tanya{background:var(--pensil);color:#1d3557;border-radius:4px;padding:0 2px}
+.susun .q{color:var(--benar)}
+.tugas{font-weight:700;font-size:20px;min-height:3.2em}
+.tabel{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px;margin:8px 0;padding:10px;background:var(--lembut);border-radius:12px;font-weight:700}
+@media (max-width:520px){
+  body{font-size:17px}
+  .atas,main{padding-left:44px}
+  .atas::before,main::before{left:26px}
+  .susun{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
