@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Madani Content Calendar | SPMB 2027/2028</title>
+  <link rel="stylesheet" href="SPMB.css">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">M</div>
+        <div><strong>MADANI</strong><span>CONTENT STUDIO</span></div>
+      </div>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-item active" data-view="dashboard"><span>▦</span> Dashboard</button>
+      <button class="nav-item" data-view="calendar"><span>▦</span> Kalender Konten</button>
+      <button class="nav-item" data-view="content"><span>☷</span> Semua Konten</button>
+      <button class="nav-item" data-view="checklist"><span>✓</span> Checklist Tim</button>
+      <div class="sidebar-bottom">
+        <div class="side-label">DATA EXCEL</div>
+        <button class="nav-item" id="importSide"><span>⇧</span> Impor Excel</button>
+        <button class="nav-item" id="exportSide"><span>⇩</span> Ekspor Excel</button>
+        <div class="side-note">SPMB Tahun Ajaran<br><b>2027/2028</b></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">SDS IT MADANI KAYUAGUNG</div>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="top-actions">
+          <label class="searchbox">⌕ <input id="globalSearch" type="search" placeholder="Cari konten..."></label>
+          <button class="btn btn-primary" id="addTop">＋ Tambah Konten</button>
+        </div>
+      </header>
+
+      <section class="view active" id="view-dashboard">
+        <div class="welcome">
+          <div>
+            <div class="eyebrow light">CONTENT PLANNING • 2027/2028</div>
+            <h2>Plan with purpose.<br><em>Post with impact.</em></h2>
+            <p>Ruang kerja terpusat untuk merencanakan, memproduksi, dan mengevaluasi konten SPMB.</p>
+          </div>
+          <div class="welcome-art" aria-hidden="true"><div class="art-circle">M</div><div class="art-orbit"></div><div class="art-dot"></div></div>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total Konten</span><span class="stat-icon">▤</span></div><strong id="statTotal">0</strong><small>Semua rencana konten</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Sudah Tayang</span><span class="stat-icon green">↗</span></div><strong id="statPublished">0</strong><small>Konten published</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Dalam Proses</span><span class="stat-icon gold">◷</span></div><strong id="statProcess">0</strong><small>Brief sampai review</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Perlu Dikerjakan</span><span class="stat-icon rose">!</span></div><strong id="statIdeas">0</strong><small>Ide yang belum diproses</small></article>
+        </div>
+        <div class="dashboard-grid">
+          <section class="panel">
+            <div class="panel-heading"><div><h3>Konten Berikutnya</h3><p>Jadwal terdekat dalam kalender</p></div><button class="text-btn" data-goto="calendar">Lihat kalender →</button></div>
+            <div id="upcomingList" class="upcoming-list"></div>
+          </section>
+          <section class="panel">
+            <div class="panel-heading"><div><h3>Distribusi Status</h3><p>Ringkasan pekerjaan tim</p></div></div>
+            <div id="statusChart" class="status-chart"></div>
+            <div class="chart-legend" id="chartLegend"></div>
+          </section>
+        </div>
+        <section class="panel quick-panel">
+          <div class="panel-heading"><div><h3>Excel Workflow</h3><p>Kelola banyak konten melalui spreadsheet</p></div><span class="excel-pill">XLSX / CSV</span></div>
+          <div class="excel-actions">
+            <div class="excel-info"><div class="excel-symbol">X</div><div><b>Impor dari Excel</b><p>Perbarui jadwal dari file .xlsx atau .csv yang sudah kamu edit.</p></div></div>
+            <div class="inline-actions"><button class="btn btn-secondary" id="templateBtn">Unduh Template</button><button class="btn btn-primary" id="importMain">Pilih File Excel</button></div>
+          </div>
+          <div class="hint">Tips: gunakan kolom <b>Tanggal</b>, <b>Judul</b>, <b>Format</b>, <b>Platform</b>, <b>Status</b>, <b>PIC</b>, dan <b>Brief</b>. Tanggal gunakan format YYYY-MM-DD.</div>
+        </section>
+      </section>
+
+      <section class="view" id="view-calendar">
+        <div class="toolbar">
+          <div class="month-switch"><button class="icon-btn" id="prevMonth" aria-label="Bulan sebelumnya">‹</button><h2 id="monthLabel">Oktober 2026</h2><button class="icon-btn" id="nextMonth" aria-label="Bulan berikutnya">›</button><button class="btn btn-light" id="todayBtn">Hari ini</button></div>
+          <div class="filters"><select id="calStatus"><option value="">Semua status</option></select><select id="calPlatform"><option value="">Semua platform</option></select><div class="view-toggle"><button class="selected" id="monthViewBtn">Bulan</button><button id="listViewBtn">Daftar</button></div></div>
+        </div>
+        <div class="calendar-wrap panel" id="calendarContainer"></div>
+      </section>
+
+      <section class="view" id="view-content">
+        <section class="panel">
+          <div class="panel-heading content-heading"><div><h3>Semua Konten</h3><p>Kelola seluruh ide dan jadwal publikasi</p></div><button class="btn btn-primary" id="addContentBtn">＋ Tambah Konten</button></div>
+          <div class="table-filters"><select id="listStatus"><option value="">Semua status</option></select><select id="listPlatform"><option value="">Semua platform</option></select><span id="resultCount"></span></div>
+          <div class="table-scroll"><table><thead><tr><th>TANGGAL</th><th>JUDUL KONTEN</th><th>FORMAT</th><th>PLATFORM</th><th>PIC</th><th>STATUS</th><th></th></tr></thead><tbody id="contentTable"></tbody></table></div>
+        </section>
+      </section>
+
+      <section class="view" id="view-checklist">
+        <section class="panel checklist-panel">
+          <div class="panel-heading"><div><h3>Checklist Mingguan Tim</h3><p>Pastikan setiap tahap produksi berjalan</p></div><button class="btn btn-secondary" id="resetChecklist">Reset checklist</button></div>
+          <div class="progress-track"><div id="checkProgress"></div></div><div id="checkProgressText" class="progress-text">0 dari 5 selesai</div>
+          <div id="checklistItems"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <input type="file" id="excelInput" accept=".xlsx,.xls,.csv" hidden>
+
+  <div class="modal-backdrop" id="contentModal" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head"><div><div class="eyebrow">CONTENT MANAGEMENT</div><h2 id="modalTitle">Tambah Konten</h2></div><button class="icon-btn" id="closeModal" aria-label="Tutup">×</button></div>
+      <form id="contentForm">
+        <input type="hidden" id="contentId">
+        <div class="form-grid">
+          <label class="field full">Judul konten *<input id="fTitle" required placeholder="Contoh: Kenalan dengan SDS IT Madani"></label>
+          <label class="field">Tanggal *<input id="fDate" type="date" required></label>
+          <label class="field">Format konten<select id="fFormat"><option>Reels</option><option>Carousel</option><option>Foto</option><option>Story</option><option>Video</option><option>Poster</option><option>Lainnya</option></select></label>
+          <label class="field">Platform<select id="fPlatform"><option>Instagram</option><option>TikTok</option><option>Facebook</option><option>YouTube</option><option>WhatsApp</option><option>Multi-platform</option></select></label>
+          <label class="field">Status<select id="fStatus"><option>Ide</option><option>Brief</option><option>Produksi</option><option>Review</option><option>Terjadwal</option><option>Published</option></select></label>
+          <label class="field full">Penanggung jawab / PIC<input id="fPic" placeholder="Contoh: Tim Desain"></label>
+          <label class="field full">Brief / ide caption<textarea id="fBrief" rows="4" placeholder="Tujuan, pesan utama, bahan yang dibutuhkan..."></textarea></label>
+        </div>
+        <div class="modal-actions"><button type="button" class="btn btn-danger hidden" id="deleteContent">Hapus</button><div></div><button type="button" class="btn btn-secondary" id="cancelModal">Batal</button><button type="submit" class="btn btn-primary">Simpan Konten</button></div>
+      </form>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <footer>Madani Content Studio <span>•</span> SPMB 2027/2028 <span>•</span> Data tersimpan di browser ini</footer>
+  <script src="SPMB.js"></script>
+</body>
+</html>
