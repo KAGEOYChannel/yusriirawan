@@ -1,4 +1,4 @@
-/* Madani Content Studio - semua data konten dibaca dari content-calendar.xlsx (read-only) */
+﻿/* Madani Content Studio - semua data konten dibaca dari content-calendar.xlsx (read-only) */
 const EXCEL_FILE = "content-calendar.xlsx";
 const STATUS = ["Ide","Brief","Produksi","Review","Terjadwal","Published"];
 
@@ -78,13 +78,35 @@ function parseSheet(ws){
   }
   return {items,skipped};
 }
+/* ---------- Sumber data: Google Sheets (online) atau Excel (fallback) ---------- */
+const SHEET_URL_DEFAULT="https://docs.google.com/spreadsheets/d/1PHu5aUJE613pu4wwItlrSwN1nCghTpUh4endboxdCHw/edit?usp=sharing"; /* opsional: tempel link Google Sheets di sini agar permanen */
+function getSheetUrl(){try{return (localStorage.getItem("madaniSheetUrl")||SHEET_URL_DEFAULT||"").trim();}catch{return SHEET_URL_DEFAULT;}}
+function toCsvUrl(u){
+  u=String(u||"").trim();if(!u)return "";
+  if(/output=csv|format=csv|tqx=out:csv/i.test(u))return u;
+  let m=u.match(/\/spreadsheets\/d\/e\/([^/]+)/);
+  if(m)return `https://docs.google.com/spreadsheets/d/e/${m[1]}/pub?output=csv`+(/gid=(\d+)/.test(u)?`&gid=${u.match(/gid=(\d+)/)[1]}`:"");
+  m=u.match(/\/spreadsheets\/d\/([^/]+)/);
+  if(m){const g=u.match(/gid=(\d+)/);return `https://docs.google.com/spreadsheets/d/${m[1]}/gviz/tq?tqx=out:csv`+(g?`&gid=${g[1]}`:"");}
+  return u;
+}
+function sourceLabel(){return getSheetUrl()?"Google Sheets":EXCEL_FILE;}
 async function loadExcelFile(manual=false){
-  if(typeof XLSX==="undefined"){excelState={status:"error",count:contents.length,time:new Date(),msg:"Pustaka Excel belum termuat. Periksa koneksi internet."};renderAll();return;}
-  const before=JSON.stringify(contents);
+  if(typeof XLSX==="undefined"){excelState={status:"error",count:contents.length,time:new Date(),msg:"Pustaka pembaca data belum termuat. Periksa koneksi internet."};renderAll();return;}
+  const before=JSON.stringify(contents),sheetUrl=toCsvUrl(getSheetUrl());
   try{
-    const res=await fetch(`${EXCEL_FILE}?t=${Date.now()}`,{cache:"no-store"});
-    if(!res.ok)throw new Error(res.status===404?`File ${EXCEL_FILE} tidak ditemukan di folder yang sama dengan file HTML.`:`Gagal memuat file (HTTP ${res.status}).`);
-    const wb=XLSX.read(await res.arrayBuffer(),{type:"array"});
+    let wb;
+    if(sheetUrl){
+      const res=await fetch(sheetUrl+(sheetUrl.includes("?")?"&":"?")+`_=${Date.now()}`,{cache:"no-store"});
+      if(!res.ok)throw new Error(`Google Sheets tidak bisa dibaca (HTTP ${res.status}). Pastikan sheet dibagikan "Siapa saja yang memiliki link: Pelihat" atau di-Publish to web.`);
+      const text=await res.text();
+      if(/^\s*<(!doctype|html)/i.test(text))throw new Error('Google Sheets meminta login. Atur berbagi ke "Siapa saja yang memiliki link: Pelihat".');
+      wb=XLSX.read(text,{type:"string",raw:true});
+    }else{
+      const res=await fetch(`${EXCEL_FILE}?t=${Date.now()}`,{cache:"no-store"});
+      if(!res.ok)throw new Error(res.status===404?`File ${EXCEL_FILE} tidak ditemukan di folder yang sama dengan file HTML.`:`Gagal memuat file (HTTP ${res.status}).`);
+      wb=XLSX.read(await res.arrayBuffer(),{type:"array"});
+    }
     const {items,skipped}=parseSheet(wb.Sheets[wb.SheetNames[0]]);
     contents=items;
     excelState={status:"ok",count:items.length,time:new Date(),msg:skipped?`${skipped} baris dilewati karena tanggal tidak valid.`:""};
@@ -94,11 +116,11 @@ async function loadExcelFile(manual=false){
       currentMonth=new Date(Number(target.date.slice(0,4)),Number(target.date.slice(5,7))-1,1);
     }
     firstLoad=false;
-    if(manual)showToast(`${items.length} konten dimuat dari ${EXCEL_FILE}.`);
+    if(manual)showToast(`${items.length} konten dimuat dari ${sourceLabel()}.`);
   }catch(err){
     const isFile=location.protocol==="file:";
-    excelState={status:"error",count:contents.length,time:new Date(),msg:isFile?`Browser memblokir pembacaan file saat HTML dibuka langsung (file://). Jalankan lewat hosting atau server lokal agar ${EXCEL_FILE} terbaca.`:(err.message||"Gagal memuat file.")};
-    if(manual)showToast("Gagal memuat "+EXCEL_FILE);
+    excelState={status:"error",count:contents.length,time:new Date(),msg:(isFile&&!sheetUrl)?`Browser memblokir pembacaan file saat HTML dibuka langsung (file://). Jalankan lewat hosting atau server lokal, atau gunakan link Google Sheets.`:(err.message||"Gagal memuat data.")};
+    if(manual)showToast("Gagal memuat "+sourceLabel());
   }
   if(before!==JSON.stringify(contents)||manual||excelState.status==="error"||!renderedOnce)renderAll();else renderExcelStatus();
 }
@@ -125,13 +147,13 @@ function gotoView(view){
 function renderExcelStatus(){
   const el=document.getElementById("excelSync");if(!el)return;
   const t=excelState.time?excelState.time.toLocaleTimeString("id-ID",{hour:"2-digit",minute:"2-digit"}):"";
-  if(excelState.status==="ok"){el.className="sync-status ok";el.innerHTML=`<b>● Tersinkron</b> ${esc(EXCEL_FILE)} · ${excelState.count} konten · ${t}${excelState.msg?`<br>${esc(excelState.msg)}`:""}`;}
+  if(excelState.status==="ok"){el.className="sync-status ok";el.innerHTML=`<b>● Tersinkron</b> ${esc(sourceLabel())} · ${excelState.count} konten · ${t}${excelState.msg?`<br>${esc(excelState.msg)}`:""}`;}
   else if(excelState.status==="error"){el.className="sync-status err";el.innerHTML=`<b>● Belum terbaca</b> ${esc(excelState.msg)}`;}
-  else{el.className="sync-status";el.innerHTML=`<b>◷ Memuat</b> ${esc(EXCEL_FILE)}...`;}
+  else{el.className="sync-status";el.innerHTML=`<b>◷ Memuat</b> ${esc(sourceLabel())}...`;}
 }
-function emptyMsg(){return excelState.status==="error"?`Data belum bisa dibaca dari ${esc(EXCEL_FILE)}.`:"Belum ada konten di Excel.";}
+function emptyMsg(){return excelState.status==="error"?`Data belum bisa dibaca dari ${esc(sourceLabel())}.`:"Belum ada konten di sumber data.";}
 function renderStats(){
-  const set=(id,v)=>document.getElementById(id).textContent=v;
+  const set=(id,v)=>countUp(document.getElementById(id),v);
   set("statTotal",contents.length);
   set("statPublished",contents.filter(c=>c.status==="Published").length);
   set("statProcess",contents.filter(c=>["Brief","Produksi","Review","Terjadwal"].includes(c.status)).length);
@@ -218,3 +240,78 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden)loadExcelF
 setInterval(()=>{if(!document.hidden)loadExcelFile();},60000);
 renderAll();
 loadExcelFile();
+
+/* ================= Motion & efek ================= */
+function prefersReduced(){return window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;}
+function countUp(el,to){
+  if(!el)return;to=Number(to)||0;
+  const from=Number(el.dataset.v||0);el.dataset.v=to;
+  if(prefersReduced()||from===to){el.textContent=to;return;}
+  const t0=performance.now(),dur=900;
+  cancelAnimationFrame(el._raf);
+  const step=t=>{const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=Math.round(from+(to-from)*e);if(p<1)el._raf=requestAnimationFrame(step);};
+  el._raf=requestAnimationFrame(step);
+}
+/* progress scroll */
+(function(){
+  const bar=document.createElement("div");bar.className="scroll-progress";document.body.appendChild(bar);
+  const f=()=>{const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform=`scaleX(${h>0?scrollY/h:0})`;};
+  addEventListener("scroll",f,{passive:true});f();
+})();
+/* spotlight kursor + tilt kartu + ripple tombol */
+document.addEventListener("pointermove",e=>{
+  const c=e.target.closest&&e.target.closest(".stat-card,.panel,.welcome,.quick-links");
+  if(!c)return;
+  const r=c.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+  c.style.setProperty("--mx",x+"px");c.style.setProperty("--my",y+"px");
+  if(c.classList.contains("stat-card")&&!prefersReduced()){
+    const rx=((y/r.height)-.5)*-10,ry=((x/r.width)-.5)*10;
+    c.style.transform=`perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+  }
+});
+document.addEventListener("pointerout",e=>{const c=e.target.closest&&e.target.closest(".stat-card");if(c&&!c.contains(e.relatedTarget))c.style.transform="";});
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".btn,.nav-item,.icon-btn,.view-toggle button");if(!b||prefersReduced())return;
+  const r=b.getBoundingClientRect(),s=Math.max(r.width,r.height),d=document.createElement("span");
+  d.className="ripple";d.style.cssText=`width:${s}px;height:${s}px;left:${e.clientX-r.left-s/2}px;top:${e.clientY-r.top-s/2}px`;
+  b.appendChild(d);setTimeout(()=>d.remove(),650);
+});
+/* partikel melayang pada banner */
+(function(){
+  const host=document.querySelector(".welcome");if(!host||prefersReduced())return;
+  const cv=document.createElement("canvas");cv.className="particles";host.prepend(cv);
+  const ctx=cv.getContext("2d");let w,h,ps=[];
+  function size(){w=cv.width=host.clientWidth;h=cv.height=host.clientHeight;ps=Array.from({length:Math.max(18,Math.floor(w/32))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+.6,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35}));}
+  size();addEventListener("resize",size);
+  let mx=-999,my=-999;host.addEventListener("pointermove",e=>{const r=host.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;});host.addEventListener("pointerleave",()=>{mx=my=-999;});
+  (function loop(){
+    if(!document.hidden){
+      ctx.clearRect(0,0,w,h);
+      ps.forEach(p=>{
+        p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;
+        const dx=p.x-mx,dy=p.y-my,dist=Math.hypot(dx,dy);if(dist<90){p.x+=dx/dist*1.2;p.y+=dy/dist*1.2;}
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fillStyle="rgba(226,199,126,.7)";ctx.fill();
+      });
+      for(let i=0;i<ps.length;i++)for(let j=i+1;j<ps.length;j++){const d=Math.hypot(ps[i].x-ps[j].x,ps[i].y-ps[j].y);if(d<95){ctx.strokeStyle=`rgba(226,199,126,${.22*(1-d/95)})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(ps[i].x,ps[i].y);ctx.lineTo(ps[j].x,ps[j].y);ctx.stroke();}}
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
+/* reveal saat scroll */
+(function(){
+  if(!("IntersectionObserver" in window))return;
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target);}}),{threshold:.08});
+  document.querySelectorAll(".panel,.quick-links,.toolbar").forEach(el=>{el.classList.add("reveal");io.observe(el);});
+})();
+
+/* ================= Pengaturan Google Sheets ================= */
+(function(){
+  const inp=document.getElementById("sheetUrl");if(!inp)return;
+  inp.value=getSheetUrl();
+  document.getElementById("sheetSave").addEventListener("click",()=>{
+    const v=inp.value.trim();
+    try{v?localStorage.setItem("madaniSheetUrl",v):localStorage.removeItem("madaniSheetUrl");}catch{}
+    firstLoad=true;showToast(v?"Sumber diganti ke Google Sheets.":"Kembali memakai file Excel.");loadExcelFile(true);
+  });
+  document.getElementById("sheetClear").addEventListener("click",()=>{inp.value="";document.getElementById("sheetSave").click();});
+})();

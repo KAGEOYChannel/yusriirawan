@@ -19,7 +19,7 @@
       <button class="nav-item" data-view="calendar"><span>▦</span> Kalender Konten</button>
       <button class="nav-item" data-view="content"><span>☷</span> Semua Konten</button>
       <div class="sidebar-bottom">
-        <div class="side-label">DATA EXCEL</div>
+        <div class="side-label">SUMBER DATA</div>
         <button class="nav-item" id="reloadSide"><span>↻</span> Muat Ulang Data</button>
         <button class="nav-item" id="templateSide"><span>⇩</span> Unduh Template</button>
         <div class="side-note">SPMB Tahun Ajaran<br><b>2027/2028</b></div>
@@ -53,7 +53,7 @@
           <div>
             <div class="eyebrow light">CONTENT PLANNING • 2027/2028</div>
             <h2>Plan with purpose.<br><em>Post with impact.</em></h2>
-            <p>Jadwal konten SPMB dibaca langsung dari file Excel content-calendar.xlsx.</p>
+            <p>Jadwal konten SPMB tersinkron otomatis dari Google Sheets atau file Excel.</p>
           </div>
           <div class="welcome-art" aria-hidden="true"><div class="art-circle">M</div><div class="art-orbit"></div><div class="art-dot"></div></div>
         </div>
@@ -75,11 +75,12 @@
           </section>
         </div>
         <section class="panel quick-panel">
-          <div class="panel-heading"><div><h3>Sumber Data Excel</h3><p>Semua konten dibaca otomatis dari file Excel</p></div><span class="excel-pill">content-calendar.xlsx</span></div>
+          <div class="panel-heading"><div><h3>Sumber Data</h3><p>Google Sheets (online) atau file Excel</p></div><span class="excel-pill">content-calendar.xlsx</span></div>
           <div class="excel-actions">
             <div class="excel-info"><div class="excel-symbol">X</div><div><b>Edit di Excel, tampil di website</b><p>Ubah <b>content-calendar.xlsx</b>, simpan, lalu website akan memperbarui datanya otomatis (maks. 1 menit) atau klik muat ulang.</p></div></div>
             <div class="inline-actions"><button class="btn btn-secondary" id="templateBtn">Unduh Template</button><button class="btn btn-primary" id="reloadExcel">↻ Muat Ulang</button></div>
           </div>
+          <div class="sheet-box"><label for="sheetUrl"><b>☁ Update tanpa Excel: pakai Google Sheets</b><small>Tempel link Google Sheets (Bagikan → Siapa saja yang memiliki link: Pelihat). Edit di HP/laptop, website ikut berubah otomatis, tanpa upload file.</small></label><div class="sheet-row"><input id="sheetUrl" type="url" placeholder="https://docs.google.com/spreadsheets/d/..."><button class="btn btn-primary" id="sheetSave">Simpan</button><button class="btn btn-secondary" id="sheetClear">Pakai Excel</button></div></div>
           <div class="sync-row"><div id="excelSync" class="sync-status">Memuat...</div></div>
           <div class="hint">Kolom Excel: <b>Tanggal</b> (YYYY-MM-DD), <b>Judul</b>, <b>Format</b>, <b>Platform</b>, <b>Status</b>, <b>PIC</b>, <b>Brief</b>, dan <b>Referensi</b> (link; boleh lebih dari satu, pisahkan dengan Enter, koma, atau spasi).</div>
         </section>
