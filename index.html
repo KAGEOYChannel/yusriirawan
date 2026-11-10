@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZENITSU AGATSUMA &times; AWAN (Yusri Irawan) | Portfolio & Media Pembelajaran</title>
-  <meta name="description" content="Website interaktif Yusri Irawan (AWAN) bertema Zenitsu Agatsuma Demon Slayer. Akses lengkap modul matematika SD mandiri, TIK, dan Portal Guru." />
+  <title>YUSRI IRAWAN (AWAN) | Portfolio & Media Pembelajaran Interaktif</title>
+  <meta name="description" content="Website resmi Yusri Irawan (AWAN) - Pendidik Matematika & TIK SD, Web Creator, dan Community Support. Dilengkapi modul pembelajaran interaktif mandiri." />
   <link rel="icon" type="image/png" href="awan.png" />
 
-  <!-- Google Fonts: Outfit & Inter & Caveat/Dancing Script for handwritten accent -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -17,45 +17,42 @@
 
   <style>
     /* ==========================================================
-       THEME VARIABLES & DESIGN TOKENS
+       THEME VARIABLES & TOKENS (ZENITSU THEME + AWAN IDENTITY)
        ========================================================== */
     :root {
       --f-display: 'Outfit', system-ui, -apple-system, sans-serif;
       --f-body: 'Inter', system-ui, -apple-system, sans-serif;
       --f-hand: 'Caveat', cursive;
 
-      /* Dark Anime Palette (Default - Khas Demon Slayer & Zenitsu) */
       --bg: #090c19;
       --ink: #f8fafc;
       --muted: #94a3b8;
       --yellow: #facc15;
       --yellow-glow: rgba(250, 204, 21, 0.45);
       --electric-blue: #38bdf8;
-      --card-bg: rgba(18, 24, 46, 0.75);
+      --card-bg: rgba(18, 24, 46, 0.82);
       --card-solid: #151b33;
       --card-border: rgba(255, 255, 255, 0.22);
-      --card-border-hover: #facc15;
       --line: rgba(255, 255, 255, 0.12);
       --shadow-float: 0 20px 45px -12px rgba(0, 0, 0, 0.75);
       --text-stroke: #ffffff;
-      --text-fill: transparent;
+      --overlay-bg: rgba(9, 12, 25, 0.72);
     }
 
     html[data-theme="light"] {
-      --bg: #e8ecf8;
+      --bg: #f4f6fc;
       --ink: #0f172a;
       --muted: #475569;
       --yellow: #eab308;
       --yellow-glow: rgba(234, 179, 8, 0.35);
       --electric-blue: #0284c7;
-      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-bg: rgba(255, 255, 255, 0.88);
       --card-solid: #ffffff;
-      --card-border: rgba(15, 23, 42, 0.15);
-      --card-border-hover: #eab308;
+      --card-border: rgba(15, 23, 42, 0.16);
       --line: rgba(15, 23, 42, 0.12);
-      --shadow-float: 0 20px 40px -12px rgba(15, 23, 42, 0.18);
+      --shadow-float: 0 20px 40px -12px rgba(15, 23, 42, 0.15);
       --text-stroke: #0f172a;
-      --text-fill: transparent;
+      --overlay-bg: rgba(244, 246, 252, 0.82);
     }
 
     *, *::before, *::after {
@@ -88,36 +85,51 @@
       color: inherit;
     }
 
-    /* Background Ambient Gradients & Technical Curved Lines */
-    .bg-canvas-wrap {
+    /* ==========================================================
+       BACKGROUND VIDEO (zen.mp4 LOOPING) DENGAN OPTIMALISASI
+       ========================================================== */
+    .bg-video-container {
       position: fixed;
       inset: 0;
       z-index: -2;
-      pointer-events: none;
       overflow: hidden;
-      background: 
-        radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.18) 0%, transparent 55%),
-        radial-gradient(circle at 85% 75%, rgba(250, 204, 21, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 15% 80%, rgba(99, 102, 241, 0.18) 0%, transparent 50%),
-        var(--bg);
+      background: #090c19;
     }
 
-    /* Garis elips teknis halus persis foto referensi */
-    .bg-lines {
+    .bg-video-player {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: contrast(1.1) brightness(0.9);
+      will-change: transform;
+    }
+
+    /* Tint Overlay agar teks dan karakter di atasnya sangat kontras & terbaca */
+    .bg-video-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: var(--overlay-bg);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* Ambient technical curved lines seperti pada foto referensi */
+    .bg-technical-lines {
       position: fixed;
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      opacity: 0.3;
+      opacity: 0.28;
       background-image: 
-        radial-gradient(ellipse 90% 70% at 50% 45%, transparent 48%, rgba(255, 255, 255, 0.15) 49%, transparent 50%),
-        radial-gradient(ellipse 60% 85% at 45% 50%, transparent 48%, rgba(255, 255, 255, 0.12) 49%, transparent 50%),
-        radial-gradient(circle at 50% 50%, transparent 65%, rgba(250, 204, 21, 0.1) 66%, transparent 67%);
+        radial-gradient(ellipse 95% 75% at 50% 45%, transparent 48%, rgba(255, 255, 255, 0.18) 49%, transparent 50%),
+        radial-gradient(ellipse 65% 90% at 45% 50%, transparent 48%, rgba(250, 204, 21, 0.16) 49%, transparent 50%);
     }
 
     /* ==========================================================
-       TOP NAVIGATION BAR (SESUAI FOTO REFERENSI)
-       ========================================================== */
+       TOPBAR (HOME, ABOUT, GALERY, SEARCH PILL, CLOCK)
+       ========================================================= */
     .topbar {
       position: fixed;
       top: 0;
@@ -133,7 +145,7 @@
     }
 
     .topbar.scrolled {
-      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       padding-top: 14px;
@@ -213,7 +225,7 @@
       font-size: 1rem;
     }
 
-    /* Kanan: Jam & Hari/Tanggal + Theme Toggle */
+    /* Kanan: Tanggal & Jam Live + Theme Toggle */
     .clock-right-wrap {
       justify-self: end;
       display: flex;
@@ -264,7 +276,7 @@
     }
 
     /* ==========================================================
-       HERO POSTER STAGE (PERSIS SEPERTI FOTO REFERENSI)
+       HERO POSTER STAGE (SESUAI FOTO REFERENSI RYOU YAMADA)
        ========================================================== */
     .hero-stage {
       position: relative;
@@ -287,54 +299,55 @@
       position: absolute;
     }
 
-    /* 1. Karakter Zenitsu & Video Background di Tengah */
-    .zen-figure-wrapper {
+    /* 1. KARAKTER ZENITSU DI TENGAH (MENGGUNAKAN zenitsu.png) */
+    .zen-character-center {
       left: 50%;
-      top: 50%;
+      top: 52%;
       transform: translate(-50%, -50%);
       width: clamp(280px, 34vw, 460px);
-      height: clamp(380px, 48vh, 600px);
+      height: clamp(380px, 52vh, 620px);
       z-index: 3;
-      border-radius: 200px 200px 140px 140px;
-      position: relative;
-      overflow: hidden;
-      border: 5px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 
-        0 0 50px var(--yellow-glow),
-        0 25px 60px rgba(0, 0, 0, 0.6);
-      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-
-    .zen-figure-wrapper:hover {
-      transform: translate(-50%, -52%) scale(1.02);
-      border-color: var(--yellow);
-    }
-
-    .zen-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 20%;
-      display: block;
-      filter: contrast(1.08) brightness(1.05);
-    }
-
-    .zen-glow-ring {
-      position: absolute;
-      inset: -12px;
-      border-radius: 220px 220px 160px 160px;
-      border: 3px solid var(--yellow);
-      opacity: 0.8;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
       pointer-events: none;
-      animation: pulseGlow 3s infinite ease-in-out;
     }
 
-    @keyframes pulseGlow {
-      0%, 100% { transform: scale(1); opacity: 0.6; filter: blur(4px); }
-      50% { transform: scale(1.02); opacity: 1; filter: blur(8px); }
+    /* Halo Lingkaran Kuning di Belakang Karakter (Persis Foto) */
+    .character-halo {
+      position: absolute;
+      width: clamp(240px, 30vw, 420px);
+      height: clamp(240px, 30vw, 420px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(250, 204, 21, 0.35) 0%, rgba(250, 204, 21, 0.1) 60%, transparent 75%);
+      border: 4px solid rgba(250, 204, 21, 0.7);
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+      box-shadow: 0 0 50px var(--yellow-glow);
+      animation: pulseHalo 4s ease-in-out infinite alternate;
     }
 
-    /* 2. TIPOGRAFI KANAN: "ZENITSU AGATSUMA" (OUTLINE TEBAL ALA RYOU YAMADA) */
+    @keyframes pulseHalo {
+      0% { transform: translateX(-50%) scale(0.97); opacity: 0.7; }
+      100% { transform: translateX(-50%) scale(1.03); opacity: 1; }
+    }
+
+    .zen-char-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.65));
+      animation: floatChar 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatChar {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    /* 2. TIPOGRAFI KANAN: "YUSRI IRAWAN" (OUTLINE TEBAL ALA RYOU YAMADA) */
     .hero-title-right {
       right: 0;
       top: 50%;
@@ -363,7 +376,7 @@
       transform: translateX(-10%);
     }
 
-    /* 3. TIPOGRAFI KIRI: "ZENITSU" + HANDWRITTEN SCRIPT + INTRO */
+    /* 3. TIPOGRAFI KIRI: "AWAN" + HANDWRITTEN SCRIPT + INTRO YUSRI IRAWAN */
     .hero-intro-left {
       left: 0;
       top: 50%;
@@ -376,7 +389,7 @@
     .hero-script-overlay {
       position: absolute;
       top: -24px;
-      left: 30px;
+      left: 20px;
       font-family: var(--f-hand);
       font-size: clamp(2.4rem, 4.5vw, 4rem);
       color: var(--yellow);
@@ -477,7 +490,7 @@
       transform: rotate(90deg) scale(1.1);
     }
 
-    /* Kartu Floating Kiri Atas: Avatar / Focus Mini */
+    /* Kartu Floating Kiri Atas: Foto Profil Yusri Irawan (awan.png) */
     .card-top-left {
       left: 19%;
       top: 3%;
@@ -485,6 +498,7 @@
       height: 130px;
       border-radius: 24px;
       overflow: hidden;
+      background: #0f172a;
     }
 
     .card-top-left img {
@@ -519,7 +533,7 @@
       50% { transform: scale(0.7) rotate(35deg); opacity: 0.6; }
     }
 
-    /* Kartu Floating Kiri Bawah: "description." */
+    /* Kartu Floating Kiri Bawah: "description." (Profil Yusri Irawan) */
     .card-desc-left {
       left: 6%;
       bottom: 2%;
@@ -549,7 +563,7 @@
       max-height: 18em;
     }
 
-    /* Kartu Floating Kanan Bawah: Video/Action Mini */
+    /* Kartu Floating Kanan Bawah: Fitur Highlight */
     .card-bottom-right {
       right: 7%;
       bottom: 5%;
@@ -559,7 +573,7 @@
       overflow: hidden;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      background: linear-gradient(135deg, #f59e0b, #6366f1);
       color: #fff;
       font-size: 3rem;
     }
@@ -1111,9 +1125,9 @@
         transform: none;
         margin-left: 0;
       }
-      .zen-figure-wrapper {
+      .zen-character-center {
         order: 2;
-        width: min(320px, 75vw);
+        width: min(300px, 70vw);
         height: 380px;
         margin: 10px auto;
       }
@@ -1168,9 +1182,14 @@
 </head>
 <body>
 
-  <!-- Ambient Background Canvas & Geometrics -->
-  <div class="bg-canvas-wrap"></div>
-  <div class="bg-lines"></div>
+  <!-- ========================================================
+       BACKGROUND VIDEO (zen.mp4 LOOPING DENGAN OVERLAY GELAP)
+       ======================================================== -->
+  <div class="bg-video-container">
+    <video class="bg-video-player" src="zen.mp4" autoplay loop muted playsinline preload="auto"></video>
+  </div>
+  <div class="bg-video-overlay"></div>
+  <div class="bg-technical-lines"></div>
 
   <!-- ========================================================
        TOPBAR (HOME, ABOUT, GALERY, SEARCH PILL, CLOCK)
@@ -1189,7 +1208,7 @@
       <i class="fa-solid fa-magnifying-glass search-pill-icon"></i>
     </div>
 
-    <!-- Jam, Tanggal & Theme Toggle Kanan -->
+    <!-- Kanan: Tanggal & Jam Live + Theme Toggle -->
     <div class="clock-right-wrap">
       <div class="clock-text">
         <span class="clock-date" id="liveDate">MON, 16 JUNE</span>
@@ -1203,30 +1222,32 @@
 
   <!-- ========================================================
        HERO POSTER STAGE (SESUAI FOTO REFERENSI RYOU YAMADA)
-       KARAKTER: ZENITSU DENGAN VIDEO BERGERAK zen.mp4
+       KARAKTER: ZENITSU DARI GAMBAR USER (zenitsu.png)
+       BACKGROUND: zen.mp4
+       ISI WEB: YUSRI IRAWAN (AWAN)
        ======================================================== -->
   <section class="hero-stage" id="home">
     <div class="stage-container" id="stageContainer">
 
-      <!-- 1. TULISAN BESAR KANAN: "ZENITSU AGATSUMA" (OUTLINE TEBAL) -->
+      <!-- 1. TULISAN BESAR KANAN: "YUSRI IRAWAN" (OUTLINE TEBAL ALA REFERENSI) -->
       <div class="hero-title-right" aria-hidden="true">
-        <span>ZENITSU</span>
-        <span>AGATSUMA</span>
+        <span>YUSRI</span>
+        <span>IRAWAN</span>
       </div>
 
-      <!-- 2. KARAKTER ZENITSU DI TENGAH: VIDEO GERAK zen.mp4 -->
-      <div class="zen-figure-wrapper">
-        <div class="zen-glow-ring"></div>
-        <video class="zen-video" src="zen.mp4" autoplay loop muted playsinline></video>
+      <!-- 2. KARAKTER ZENITSU DI TENGAH: MENGGUNAKAN zenitsu.png + HALO KUNING -->
+      <div class="zen-character-center">
+        <div class="character-halo"></div>
+        <img class="zen-char-img" src="zenitsu.png" alt="Zenitsu Character Art" />
       </div>
 
-      <!-- 3. TULISAN INTRO KIRI: "ZENITSU" + HANDWRITTEN OVERLAY + READ MORE -->
+      <!-- 3. TULISAN INTRO KIRI: AWAN / YUSRI IRAWAN + HANDWRITTEN SCRIPT + READ MORE -->
       <div class="hero-intro-left">
-        <div class="hero-script-overlay">Thunder Breathing</div>
-        <h1 class="hero-name-left">ZENITSU</h1>
-        <div class="hero-subtitle-left">Demon Slayer: Kimetsu no Yaiba</div>
+        <div class="hero-script-overlay">Creative Educator</div>
+        <h1 class="hero-name-left">AWAN</h1>
+        <div class="hero-subtitle-left">Yusri Irawan, S.Pd.</div>
         <p class="hero-desc-left">
-          Pendekar pedang petir dengan tekad pantang menyerah. Bersama <strong>Yusri Irawan (AWAN)</strong>, kita buktikan bahwa ketekunan dalam belajar Matematika &amp; TIK mampu mengubah kelemahan menjadi keahlian yang tak tertandingi!
+          Pendidik Sekolah Dasar, Web Creator, dan Community Support Lead. Berdedikasi menghadirkan media pembelajaran matematika dan teknologi informasi yang interaktif, visual, dan menyenangkan bagi anak-anak.
         </p>
         <a href="#gallery" class="btn-readmore">Read More</a>
       </div>
@@ -1235,7 +1256,7 @@
       <span class="sparkle-star s1"><i class="fa-solid fa-star-of-life"></i></span>
       <span class="sparkle-star s2"><i class="fa-solid fa-star-of-life"></i></span>
 
-      <!-- 5. KARTU FLOATING KIRI ATAS: AVATAR / FOCUS MINI DENGAN (+) KUNING -->
+      <!-- 5. KARTU FLOATING KIRI ATAS: AVATAR ASLI YUSRI IRAWAN (awan.png) DENGAN (+) KUNING -->
       <div class="float-card card-top-left">
         <span class="badge-plus" title="Detail">+</span>
         <img src="awan.png" alt="Avatar Yusri Irawan" />
@@ -1246,14 +1267,14 @@
         <span class="badge-plus" title="Buka Detail">+</span>
         <h4>description.</h4>
         <p id="descText">
-          Yusri Irawan (AWAN) adalah pendidik Matematika &amp; TIK Sekolah Dasar serta Community Support Lead. Merancang media belajar mandiri tanpa ribet: kuis detektif, kalkulator bersusun, simulasi rumus Excel, dan portal ajar interaktif.
+          Yusri Irawan (AWAN) merancang media belajar mandiri tanpa ketergantungan server: Petualangan Bilangan Misteri, Kalkulator Perkalian Bersusun, Simulasi Rumus Excel, dan Portal Guru. Semua file siap dibuka langsung di browser!
         </p>
       </div>
 
-      <!-- 7. KARTU FLOATING KANAN BAWAH: KARTU AKSI (+) KUNING -->
+      <!-- 7. KARTU FLOATING KANAN BAWAH: KARTU HIGHLIGHT FITUR (+) KUNING -->
       <div class="float-card card-bottom-right">
         <span class="badge-plus" title="Detail">+</span>
-        <i class="fa-solid fa-bolt" style="color: var(--yellow);"></i>
+        <i class="fa-solid fa-graduation-cap" style="color: var(--yellow);"></i>
       </div>
 
       <!-- 8. WIDGET CUACA KANAN BAWAH (25° cerah) -->
@@ -1321,7 +1342,7 @@
         <h2 class="sec-title">Filosofi &amp;<br/><em>Keahlian</em></h2>
       </div>
       <p class="sec-desc">
-        Menggabungkan semangat pantang menyerah seperti Zenitsu dalam menciptakan media ajar yang menyenangkan dan ramah anak.
+        Menggabungkan pengalaman pedagogik di dunia pendidikan dasar dengan kapabilitas teknologi web modern.
       </p>
     </div>
 
@@ -1366,7 +1387,7 @@
         <i class="fa-regular fa-copy"></i>
       </div>
 
-      <p style="font-size: 0.85rem; color: var(--muted);">&copy; 2026 <strong>Yusri Irawan (AWAN)</strong> &middot; Inspired by Demon Slayer: Zenitsu Agatsuma</p>
+      <p style="font-size: 0.85rem; color: var(--muted);">&copy; 2026 <strong>Yusri Irawan (AWAN)</strong> &middot; Theme inspired by Zenitsu Agatsuma &middot; All Rights Reserved</p>
     </div>
   </footer>
 
@@ -1397,7 +1418,7 @@
        SCRIPTS: CLOCK, TABS, SEARCH, MODAL
        ======================================================== -->
   <script>
-    /* 1. DATA LENGKAP SEMUA MODUL (SEMUANYA SUDAH MANDIRI STANDALONE) */
+    /* 1. DATA LENGKAP SEMUA MODUL (MANDIRI STANDALONE) */
     const MODULES = [
       {
         cat: 'math',
@@ -1519,12 +1540,12 @@
     };
 
     /* 2. JAM & TANGGAL REAL-TIME (SESUAI FOTO: MON, 16 JUNE 23: 02 PM) */
-    const DAYS_EN = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const DAYS_EN = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
     const MONTHS_EN = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUNE', 'JULY', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
     function updateLiveClock() {
       const now = new Date();
-      const day = DAYS_EN[now.getDay()];
+      const day = DAYS_EN[(now.getDay() + 6) % 7];
       const date = now.getDate();
       const month = MONTHS_EN[now.getMonth()];
       document.getElementById('liveDate').textContent = `${day}, ${date} ${month}`;

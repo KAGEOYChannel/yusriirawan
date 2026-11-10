@@ -49,6 +49,7 @@ function copyStaticHtmlPages(): Plugin {
       const extraAssets = [
         'CNAME',
         'zen.mp4',
+        'zenitsu.png',
         'awan.png',
         'pf_logo2.png',
         'tik.jpg',
