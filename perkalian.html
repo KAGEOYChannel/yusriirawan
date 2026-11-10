@@ -1,16 +1,614 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Petualangan Perkalian - Matematika SD Interaktif</title>
-    <meta name="description" content="Aplikasi Pembelajaran Matematika SD Interaktif - Perkalian Bilangan sampai 100.000 dengan visualisasi modern, kalkulator bersusun langkah demi langkah, kuis kilat 20 detik, tantangan bersusun, dan soal cerita kontekstual." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-slate-900 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white min-h-screen">
-    <div id="perkalian-root"></div>
-    <script type="module" src="/src/perkalian-main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Petualangan Perkalian - Matematika SD Interaktif</title>
+  <meta name="description" content="Aplikasi Pembelajaran Matematika SD - Perkalian Bilangan sampai 100.000 dengan Kalkulator Bersusun dan Kuis Kilat 20 Detik.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #38bdf8;
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.1);
+      --radius: 20px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header.app-bar {
+      background: #1e293b;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 24px;
+    }
+    .bar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #6366f1, #38bdf8);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+    }
+    .logo-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #38bdf8;
+      line-height: 1.1;
+    }
+    .logo-text span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .bar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-nav-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .btn-nav-home:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .stat-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      color: #818cf8;
+      font-weight: 700;
+    }
+
+    main.content {
+      max-width: 1000px;
+      width: 100%;
+      margin: 24px auto;
+      padding: 0 16px 40px;
+      flex: 1;
+    }
+
+    /* Tabs */
+    .tab-bar {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #1e293b;
+      color: var(--text-muted);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover {
+      color: #f8fafc;
+      background: #334155;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #6366f1, #38bdf8);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .app-card {
+      background: #1e293b;
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      border: 1px solid var(--border);
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 1. KALKULATOR BERSUSUN */
+    .calc-input-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .input-num {
+      width: 140px;
+      padding: 12px;
+      border-radius: 14px;
+      background: #0f172a;
+      border: 2px solid var(--border);
+      color: #f8fafc;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      outline: none;
+    }
+    .input-num:focus {
+      border-color: var(--primary);
+    }
+    .btn-calc {
+      padding: 12px 26px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #6366f1, #38bdf8);
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+      transition: transform 0.2s;
+    }
+    .btn-calc:hover {
+      transform: translateY(-2px);
+    }
+    .steps-board {
+      background: #0f172a;
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 440px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      font-family: monospace;
+      font-size: 1.6rem;
+      text-align: right;
+      line-height: 1.4;
+      color: #38bdf8;
+    }
+    .steps-board hr {
+      border: none;
+      border-top: 2px solid #64748b;
+      margin: 8px 0;
+    }
+
+    /* 2. KUIS KILAT 20 DETIK */
+    .timer-ring {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: #f59e0b;
+      margin-bottom: 12px;
+    }
+    .quiz-problem {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: #ffffff;
+    }
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 440px;
+      margin: 0 auto 20px;
+    }
+    .btn-quiz-opt {
+      padding: 16px;
+      border-radius: 16px;
+      background: #334155;
+      border: 1px solid var(--border);
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-quiz-opt:hover {
+      background: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* 3. SOAL CERITA */
+    .story-box {
+      background: #0f172a;
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      max-width: 600px;
+      margin: 0 auto 24px;
+      text-align: left;
+      line-height: 1.7;
+    }
+
+    footer.app-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      background: #1e293b;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-bar">
+    <div class="bar-inner">
+      <a href="index.html" class="logo-group">
+        <div class="logo-badge">
+          <i class="fa-solid fa-calculator"></i>
+        </div>
+        <div class="logo-text">
+          <h1>Perkalian s.d 100.000</h1>
+          <span>Matematika SD Interaktif</span>
+        </div>
+      </a>
+
+      <div class="bar-actions">
+        <div class="stat-pill">
+          <i class="fa-solid fa-trophy" style="color: #f59e0b;"></i>
+          Skor: <span id="perkalianScore">0</span>
+        </div>
+        <a href="index.html" class="btn-nav-home">
+          <i class="fa-solid fa-house"></i>
+          <span>Beranda</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="content">
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('calc')">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Kalkulator Bersusun</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('rush')">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Kuis Kilat 20 Detik</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('concept')">
+        <i class="fa-solid fa-lightbulb"></i>
+        <span>Konsep Cepat</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('story')">
+        <i class="fa-solid fa-book"></i>
+        <span>Soal Cerita</span>
+      </button>
+    </div>
+
+    <!-- PANEL 1: KALKULATOR BERSUSUN -->
+    <div class="tab-panel active" id="panel-calc">
+      <div class="app-card">
+        <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; margin-bottom: 8px; color: #38bdf8;">
+          Kalkulator Perkalian Bersusun
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 24px;">
+          Masukkan dua angka untuk melihat langkah perkalian bersusun pendek langkah demi langkah secara otomatis!
+        </p>
+
+        <div class="calc-input-group">
+          <input type="number" class="input-num" id="calcNum1" value="234" min="1" max="9999" />
+          <span style="font-size: 2rem; color: #94a3b8; font-weight: 800;">&times;</span>
+          <input type="number" class="input-num" id="calcNum2" value="15" min="1" max="999" />
+          <button class="btn-calc" onclick="runMultiplicationStep()">
+            Hitung Bersusun ➔
+          </button>
+        </div>
+
+        <div class="steps-board" id="stepsOutput">
+          <!-- Render kalkulator bersusun -->
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: KUIS KILAT 20 DETIK -->
+    <div class="tab-panel" id="panel-rush">
+      <div class="app-card">
+        <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; margin-bottom: 8px; color: #f59e0b;">
+          Tantangan Kilat 20 Detik
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Jawab perkalian sebanyak-banyaknya sebelum waktu habis!</p>
+
+        <div class="timer-ring" id="timerDisplay">20s</div>
+        <div class="quiz-problem" id="quizProblem">7 &times; 8 = ?</div>
+        <div class="quiz-grid" id="quizGrid"></div>
+
+        <button class="btn-calc" id="startRushBtn" onclick="startRushGame()" style="background: #10b981; margin-top: 10px;">
+          <i class="fa-solid fa-play"></i> Mulai Tantangan Baru
+        </button>
+        <div id="rushFeedback" style="font-size: 1.2rem; font-weight: 700; margin-top: 14px; min-height: 1.5em;"></div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: KONSEP CEPAT -->
+    <div class="tab-panel" id="panel-concept">
+      <div class="app-card" style="text-align: left;">
+        <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; margin-bottom: 16px; color: #38bdf8; text-align: center;">
+          Trik Perkalian Cepat Bilangan Besar
+        </h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+          <div style="background: #0f172a; padding: 20px; border-radius: 16px; border: 1px solid var(--border);">
+            <h3 style="color: #f59e0b; margin-bottom: 8px;">1. Perkalian dengan 10, 100, 1.000</h3>
+            <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.6;">
+              Cukup tambahkan jumlah angka nol di belakangnya! <br>
+              &bull; <code>45 &times; 10 = 450</code> <br>
+              &bull; <code>45 &times; 100 = 4.500</code> <br>
+              &bull; <code>45 &times; 1.000 = 45.000</code>
+            </p>
+          </div>
+
+          <div style="background: #0f172a; padding: 20px; border-radius: 16px; border: 1px solid var(--border);">
+            <h3 style="color: #38bdf8; margin-bottom: 8px;">2. Perkalian dengan Angka 5</h3>
+            <p style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.6;">
+              Kalikan dulu dengan 10, lalu bagi 2! <br>
+              &bull; <code>24 &times; 5 = (24 &times; 10) &divide; 2 = 240 &divide; 2 = 120</code> <br>
+              &bull; <code>64 &times; 5 = 640 &divide; 2 = 320</code>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 4: SOAL CERITA -->
+    <div class="tab-panel" id="panel-story">
+      <div class="app-card">
+        <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; margin-bottom: 16px; color: #38bdf8;">
+          Soal Cerita Kontekstual
+        </h2>
+
+        <div class="story-box">
+          <h3 style="color: #f59e0b; margin-bottom: 10px;">📦 Ekspedisi Buku Perpustakaan</h3>
+          <p style="color: #cbd5e1; margin-bottom: 14px;">
+            Sebuah toko buku mengirimkan <strong>25 kardus besar</strong> ke perpustakaan sekolah. Setiap kardus berisi <strong>140 eksemplar buku cerita</strong>.
+          </p>
+          <div style="padding: 12px; background: rgba(56, 189, 248, 0.1); border-radius: 10px; color: #38bdf8; font-weight: 700;">
+            Pertanyaan: Berapakah total buku yang diterima perpustakaan?
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <input type="number" class="input-num" id="storyAnswerInput" placeholder="Hasil..." style="width: 160px;" />
+          <button class="btn-calc" onclick="checkStory()">Periksa Hasil</button>
+        </div>
+        <div id="storyMsg" style="margin-top: 14px; font-size: 1.15rem; font-weight: 700;"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="app-footer">
+    &copy; 2026 <strong>Yusri Irawan (AWAN)</strong> &middot; Media Pembelajaran Matematika SD Interaktif
+  </footer>
+
+  <script>
+    // Audio Synthesizer
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playSound(type) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      if (type === 'correct') {
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.1); // A5
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } else {
+        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      }
+    }
+
+    // STATE
+    let pScore = parseInt(localStorage.getItem('perkalian_score') || '0', 10);
+    document.getElementById('perkalianScore').textContent = pScore;
+    function addPScore(pts) {
+      pScore += pts;
+      document.getElementById('perkalianScore').textContent = pScore;
+      localStorage.setItem('perkalian_score', pScore);
+    }
+
+    // TABS
+    function switchTab(name) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.getElementById('panel-' + name).classList.add('active');
+    }
+
+    // 1. KALKULATOR BERSUSUN LOGIC
+    function runMultiplicationStep() {
+      const n1 = parseInt(document.getElementById('calcNum1').value, 10);
+      const n2 = parseInt(document.getElementById('calcNum2').value, 10);
+      const board = document.getElementById('stepsOutput');
+
+      if (isNaN(n1) || isNaN(n2) || n1 < 0 || n2 < 0) {
+        board.innerHTML = '<div style="color:#ef4444; font-size:1rem; text-align:center;">Masukkan dua angka yang valid!</div>';
+        return;
+      }
+
+      const total = n1 * n2;
+      const digits2 = String(n2).split('').reverse().map(Number);
+
+      let html = `<div>${n1}</div>`;
+      html += `<div>${n2} &times;</div>`;
+      html += `<hr>`;
+
+      if (digits2.length === 1) {
+        html += `<div style="color:#10b981; font-weight:bold;">${total}</div>`;
+      } else {
+        digits2.forEach((d, idx) => {
+          const subtotal = n1 * d;
+          const shift = idx > 0 ? '&nbsp;'.repeat(idx) : '';
+          html += `<div style="color:#cbd5e1;">${subtotal}${shift}</div>`;
+        });
+        html += `<hr>`;
+        html += `<div style="color:#10b981; font-weight:bold;">${total}</div>`;
+      }
+
+      board.innerHTML = html;
+      playSound('correct');
+    }
+
+    // 2. KUIS KILAT 20s
+    let rushTimer = null;
+    let timeLeft = 20;
+    let isPlayingRush = false;
+    let currentRushAns = 0;
+
+    function startRushGame() {
+      clearInterval(rushTimer);
+      timeLeft = 20;
+      isPlayingRush = true;
+      document.getElementById('startRushBtn').style.display = 'none';
+      document.getElementById('rushFeedback').textContent = '';
+      nextRushProblem();
+
+      rushTimer = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timerDisplay').textContent = timeLeft + 's';
+        if (timeLeft <= 0) {
+          clearInterval(rushTimer);
+          isPlayingRush = false;
+          document.getElementById('quizGrid').innerHTML = '';
+          document.getElementById('quizProblem').textContent = 'Waktu Habis!';
+          document.getElementById('startRushBtn').style.display = 'inline-block';
+          document.getElementById('rushFeedback').innerHTML = '<span style="color:#10b981">Tantangan selesai! Hebat sudah berlatih!</span>';
+        }
+      }, 1000);
+    }
+
+    function nextRushProblem() {
+      if (!isPlayingRush) return;
+      const a = Math.floor(Math.random() * 9) + 2;
+      const b = Math.floor(Math.random() * 12) + 2;
+      currentRushAns = a * b;
+
+      document.getElementById('quizProblem').innerHTML = `${a} &times; ${b} = ?`;
+
+      const options = [
+        currentRushAns,
+        currentRushAns + Math.floor(Math.random() * 5) + 1,
+        Math.max(1, currentRushAns - (Math.floor(Math.random() * 5) + 1)),
+        currentRushAns + 10
+      ].sort(() => Math.random() - 0.5);
+
+      const grid = document.getElementById('quizGrid');
+      grid.innerHTML = '';
+      options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'btn-quiz-opt';
+        btn.textContent = opt;
+        btn.onclick = () => {
+          if (!isPlayingRush) return;
+          if (opt === currentRushAns) {
+            playSound('correct');
+            addPScore(5);
+            nextRushProblem();
+          } else {
+            playSound('wrong');
+          }
+        };
+        grid.appendChild(btn);
+      });
+    }
+
+    // 3. SOAL CERITA LOGIC
+    function checkStory() {
+      const val = parseInt(document.getElementById('storyAnswerInput').value, 10);
+      const msg = document.getElementById('storyMsg');
+      if (val === 3500) {
+        msg.innerHTML = '<span style="color:#10b981;">🎉 TEPAT SEKALI! 25 &times; 140 = 3.500 buku! (+15 Skor)</span>';
+        playSound('correct');
+        addPScore(15);
+      } else {
+        msg.innerHTML = '<span style="color:#ef4444;">Masih belum tepat. Coba hitung: 25 &times; 140.</span>';
+        playSound('wrong');
+      }
+    }
+
+    // Initialize
+    runMultiplicationStep();
+  </script>
+</body>
 </html>
