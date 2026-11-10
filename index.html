@@ -1,566 +1,1711 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="light">
+<html lang="id" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yusri Irawan (AWAN) | Portfolio & Media Pembelajaran</title>
-  <meta name="description" content="Website Yusri Irawan (AWAN) - pendidik, web creator & community support. Akses semua modul pembelajaran Matematika, TIK, dan Portal Guru." />
+  <title>ZENITSU AGATSUMA &times; AWAN (Yusri Irawan) | Portfolio & Media Pembelajaran</title>
+  <meta name="description" content="Website interaktif Yusri Irawan (AWAN) bertema Zenitsu Agatsuma Demon Slayer. Akses lengkap modul matematika SD mandiri, TIK, dan Portal Guru." />
   <link rel="icon" type="image/png" href="awan.png" />
+
+  <!-- Google Fonts: Outfit & Inter & Caveat/Dancing Script for handwritten accent -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
   <style>
+    /* ==========================================================
+       THEME VARIABLES & DESIGN TOKENS
+       ========================================================== */
     :root {
-      --f-display: 'Outfit', system-ui, sans-serif;
-      --f-body: 'Inter', system-ui, sans-serif;
-      --bg: #f4ecdc;
-      --ink: #14161f;
-      --muted: #5b5f70;
-      --card: rgba(255,255,255,.72);
+      --f-display: 'Outfit', system-ui, -apple-system, sans-serif;
+      --f-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --f-hand: 'Caveat', cursive;
+
+      /* Dark Anime Palette (Default - Khas Demon Slayer & Zenitsu) */
+      --bg: #090c19;
+      --ink: #f8fafc;
+      --muted: #94a3b8;
+      --yellow: #facc15;
+      --yellow-glow: rgba(250, 204, 21, 0.45);
+      --electric-blue: #38bdf8;
+      --card-bg: rgba(18, 24, 46, 0.75);
+      --card-solid: #151b33;
+      --card-border: rgba(255, 255, 255, 0.22);
+      --card-border-hover: #facc15;
+      --line: rgba(255, 255, 255, 0.12);
+      --shadow-float: 0 20px 45px -12px rgba(0, 0, 0, 0.75);
+      --text-stroke: #ffffff;
+      --text-fill: transparent;
+    }
+
+    html[data-theme="light"] {
+      --bg: #e8ecf8;
+      --ink: #0f172a;
+      --muted: #475569;
+      --yellow: #eab308;
+      --yellow-glow: rgba(234, 179, 8, 0.35);
+      --electric-blue: #0284c7;
+      --card-bg: rgba(255, 255, 255, 0.85);
       --card-solid: #ffffff;
-      --line: rgba(20,22,31,.10);
-      --yellow: #ffd23f;
-      --blob1: #7f9cf5;
-      --blob2: #c7b8f5;
-      --blob3: #ffd9b0;
-      --hero-text: #ffffff;
-      --hero-stroke: #14161f;
-      --shadow: 0 18px 40px -18px rgba(20,22,31,.35);
-      --r: 28px;
+      --card-border: rgba(15, 23, 42, 0.15);
+      --card-border-hover: #eab308;
+      --line: rgba(15, 23, 42, 0.12);
+      --shadow-float: 0 20px 40px -12px rgba(15, 23, 42, 0.18);
+      --text-stroke: #0f172a;
+      --text-fill: transparent;
     }
-    html[data-theme="dark"] {
-      --bg: #0d1020;
-      --ink: #f3f4fa;
-      --muted: #a3a8c0;
-      --card: rgba(30,34,58,.70);
-      --card-solid: #1b1f38;
-      --line: rgba(255,255,255,.10);
-      --blob1: #3b52c4;
-      --blob2: #6a3fb5;
-      --blob3: #b4552f;
-      --hero-text: #ffffff;
-      --hero-stroke: #000;
-      --shadow: 0 18px 40px -18px rgba(0,0,0,.7);
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: var(--f-body);
-      background: var(--bg);
+      background-color: var(--bg);
       color: var(--ink);
+      min-height: 100vh;
       overflow-x: hidden;
-      transition: background .4s, color .4s;
       line-height: 1.55;
+      transition: background-color 0.35s ease, color 0.35s ease;
     }
-    a { color: inherit; text-decoration: none; }
-    button, input { font: inherit; color: inherit; }
-    button { cursor: pointer; }
 
-    /* Blurred pastel background (poster style) */
-    .bg-blobs { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-    .blob { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .75; transition: background .4s; }
-    .blob.b1 { width: 55vw; height: 55vw; left: -12vw; top: -10vw; background: var(--blob1); animation: float1 18s ease-in-out infinite alternate; }
-    .blob.b2 { width: 45vw; height: 45vw; right: -10vw; top: 20vh; background: var(--blob2); animation: float1 22s ease-in-out infinite alternate-reverse; }
-    .blob.b3 { width: 40vw; height: 40vw; left: 25vw; bottom: -18vw; background: var(--blob3); animation: float1 26s ease-in-out infinite alternate; }
-    @keyframes float1 { to { transform: translate(6vw, 5vh) scale(1.12); } }
-    .bg-grain { position: fixed; inset: 0; z-index: -1; opacity: .35; pointer-events: none;
-      background-image: radial-gradient(var(--line) 1px, transparent 1px); background-size: 26px 26px; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-    /* ============ TOP BAR ============ */
+    button, input {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    /* Background Ambient Gradients & Technical Curved Lines */
+    .bg-canvas-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      overflow: hidden;
+      background: 
+        radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.18) 0%, transparent 55%),
+        radial-gradient(circle at 85% 75%, rgba(250, 204, 21, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 15% 80%, rgba(99, 102, 241, 0.18) 0%, transparent 50%),
+        var(--bg);
+    }
+
+    /* Garis elips teknis halus persis foto referensi */
+    .bg-lines {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.3;
+      background-image: 
+        radial-gradient(ellipse 90% 70% at 50% 45%, transparent 48%, rgba(255, 255, 255, 0.15) 49%, transparent 50%),
+        radial-gradient(ellipse 60% 85% at 45% 50%, transparent 48%, rgba(255, 255, 255, 0.12) 49%, transparent 50%),
+        radial-gradient(circle at 50% 50%, transparent 65%, rgba(250, 204, 21, 0.1) 66%, transparent 67%);
+    }
+
+    /* ==========================================================
+       TOP NAVIGATION BAR (SESUAI FOTO REFERENSI)
+       ========================================================== */
     .topbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px;
-      padding: 18px clamp(16px, 4vw, 48px);
-      transition: background .3s, backdrop-filter .3s, padding .3s;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 20px;
+      padding: 22px clamp(20px, 4.5vw, 60px);
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
     }
-    .topbar.scrolled { background: color-mix(in srgb, var(--bg) 75%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); padding-top: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
-    .nav { display: flex; gap: clamp(14px, 2.4vw, 32px); align-items: center; }
-    .nav a { font-family: var(--f-display); font-weight: 500; font-size: clamp(1rem, 1.5vw, 1.35rem); color: var(--muted); position: relative; padding: 2px 0; transition: color .2s; }
-    .nav a::after { content: ""; position: absolute; left: 0; bottom: -2px; height: 2px; width: 0; background: var(--ink); transition: width .25s; }
-    .nav a:hover, .nav a.active { color: var(--ink); }
-    .nav a.active::after, .nav a:hover::after { width: 100%; }
-    .searchpill {
-      display: flex; align-items: center; gap: 10px; width: min(300px, 30vw);
-      padding: 8px 18px; border-radius: 999px; background: var(--card); border: 2px solid var(--ink);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+
+    .topbar.scrolled {
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding-top: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
     }
-    .searchpill input { background: none; border: 0; outline: 0; width: 100%; font-size: .95rem; }
-    .searchpill input::placeholder { color: var(--muted); }
-    .clockbox { justify-self: end; text-align: right; display: flex; align-items: center; gap: 14px; }
-    .clock-txt .date { font-size: .72rem; letter-spacing: .5px; text-transform: uppercase; font-weight: 600; color: var(--muted); }
-    .clock-txt .time { font-family: var(--f-display); font-weight: 500; font-size: clamp(1.4rem, 2.6vw, 2.2rem); line-height: 1; letter-spacing: 1px; }
-    .icon-btn { width: 42px; height: 42px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); display: grid; place-items: center; transition: transform .2s; }
-    .icon-btn:hover { transform: rotate(18deg) scale(1.06); }
 
-    /* ============ HERO ============ */
-    .hero { position: relative; min-height: 100vh; min-height: 100svh; padding: 110px clamp(16px, 4vw, 48px) 90px; display: flex; align-items: center; justify-content: center; }
-    .stage { position: relative; width: min(1280px, 100%); height: min(720px, 76vh); min-height: 560px; }
-    .stage > * { position: absolute; }
-
-    .hero-name { right: 0; top: 50%; transform: translateY(-52%); z-index: 4; font-family: var(--f-display); font-weight: 900; line-height: .82; text-transform: uppercase; pointer-events: none; text-align: left; }
-    .hero-name span { display: block; font-size: clamp(3.6rem, 11.5vw, 10.5rem); color: var(--hero-text);
-      -webkit-text-stroke: 3px var(--hero-stroke); paint-order: stroke fill; letter-spacing: -.02em;
-      text-shadow: 0 12px 30px rgba(20,22,31,.25); }
-    .hero-name span:nth-child(2) { margin-left: clamp(-10px, -2vw, -30px); transform: translateX(-12%); }
-
-    .hero-figure { left: 50%; top: 50%; width: clamp(240px, 32vw, 440px); aspect-ratio: 1; transform: translate(-58%, -50%); z-index: 3; }
-    .hero-figure .ring { position: absolute; inset: -14px; border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%; background: var(--yellow); animation: morph 9s ease-in-out infinite; }
-    .hero-figure img { position: relative; width: 100%; height: 100%; object-fit: cover; border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%; border: 6px solid var(--card-solid); box-shadow: var(--shadow); animation: morph 9s ease-in-out infinite; background: var(--card-solid); }
-    @keyframes morph { 50% { border-radius: 58% 42% 45% 55% / 52% 58% 42% 48%; } }
-
-    .intro { left: 0; top: 50%; transform: translateY(-62%); z-index: 5; width: min(400px, 36%); }
-    .intro h2 { font-family: var(--f-display); font-weight: 900; font-size: clamp(2.4rem, 6vw, 5rem); line-height: .9; letter-spacing: -.02em; }
-    .intro h3 { font-family: var(--f-display); font-weight: 700; font-size: clamp(1rem, 1.5vw, 1.25rem); margin: 14px 0 6px; min-height: 1.6em; }
-    .intro h3 .caret { display: inline-block; width: 2px; height: 1em; background: var(--ink); vertical-align: -2px; animation: blink 1s steps(2) infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
-    .intro p { font-size: .88rem; color: var(--muted); }
-    .btn-mini { display: inline-block; margin-top: 12px; padding: 4px 14px; border-radius: 6px; font-size: .78rem; font-weight: 600; border: 1px solid var(--ink); background: var(--card-solid); transition: transform .2s, background .2s, color .2s; }
-    .btn-mini:hover { background: var(--ink); color: var(--card-solid); transform: translateY(-2px); }
-
-    /* Floating tile cards (reference style) */
-    .tile {
-      border-radius: 26px; background: var(--card-solid); border: 3px solid #fff; box-shadow: var(--shadow);
-      overflow: visible; z-index: 6; transition: transform .35s cubic-bezier(.2,.8,.2,1);
+    /* Menu Kiri: Home, About, Galery */
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: clamp(16px, 2.5vw, 36px);
     }
-    html[data-theme="dark"] .tile { border-color: rgba(255,255,255,.25); }
-    .tile:hover { transform: translateY(-6px) rotate(-1.5deg); }
-    .tile .plus { position: absolute; top: -10px; right: -10px; width: 30px; height: 30px; border-radius: 50%; background: var(--yellow); color: var(--ink); font-weight: 800; font-size: 1.2rem; line-height: 1; display: grid; place-items: center; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,.2); transition: transform .3s; }
-    .tile:hover .plus, .tile.open .plus { transform: rotate(90deg); }
-    .tile-pic { width: 130px; height: 130px; overflow: hidden; border-radius: 23px; display: grid; place-items: center; font-size: 3rem; color: #fff; }
-    .tile-a { left: 20%; top: 2%; } .tile-a .tile-pic { background: linear-gradient(135deg,#6366f1,#38bdf8); }
-    .tile-b { right: 6%; bottom: 4%; } .tile-b .tile-pic { background: linear-gradient(135deg,#f59e0b,#ef4444); width: 150px; height: 150px; }
-    .tile-desc { left: 6%; bottom: 0; width: clamp(190px, 21vw, 250px); padding: 16px 18px 14px; cursor: pointer; }
-    .tile-desc h4 { font-family: var(--f-display); font-size: 1.5rem; font-weight: 600; margin-bottom: 4px; }
-    .tile-desc p { font-size: .76rem; color: var(--muted); line-height: 1.45; max-height: 4.4em; overflow: hidden; transition: max-height .4s; }
-    .tile-desc.open p { max-height: 14em; }
-    .weather { right: 0; bottom: 20%; width: 118px; padding: 12px 14px; z-index: 7; border-radius: 22px; }
-    .weather .deg { font-family: var(--f-display); font-size: 2rem; font-weight: 500; line-height: 1; }
-    .weather .lbl { font-size: .95rem; font-family: var(--f-display); }
-    .weather i { position: absolute; right: 10px; bottom: 10px; font-size: 1.4rem; color: #f59e0b; }
 
-    .spark { color: var(--yellow); font-size: 2.6rem; z-index: 6; filter: drop-shadow(0 4px 8px rgba(0,0,0,.2)); animation: twinkle 3.2s ease-in-out infinite; }
-    .spark.s1 { left: 17%; top: 8%; font-size: 2.2rem; } .spark.s2 { right: 24%; bottom: 14%; animation-delay: -1.4s; }
-    @keyframes twinkle { 50% { transform: scale(.7) rotate(25deg); opacity: .75; } }
-
-    .next-arrow { right: -6px; top: 52%; z-index: 8; width: 44px; height: 44px; border-radius: 50%; border: 0; background: transparent; font-size: 1.9rem; color: var(--ink); animation: nudge 1.6s ease-in-out infinite; }
-    @keyframes nudge { 50% { transform: translateX(6px); } }
-
-    .socials { position: absolute; left: clamp(16px, 4vw, 48px); bottom: 22px; display: flex; gap: 16px; z-index: 8; flex-wrap: wrap; }
-    .socials a { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: .95rem; transition: transform .2s; }
-    .socials a i { font-size: 1.5rem; }
-    .socials a:hover { transform: translateY(-3px); }
-    .scroll-hint { position: absolute; right: clamp(16px, 4vw, 48px); bottom: 26px; font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
-    .scroll-hint i { animation: bounce 1.4s infinite; }
-    @keyframes bounce { 50% { transform: translateY(5px); } }
-
-    /* ============ MARQUEE (jiro-style) ============ */
-    .marquee { border-block: 2px solid var(--ink); background: var(--yellow); color: #14161f; overflow: hidden; transform: rotate(-1deg); margin: 20px -2vw; }
-    .marquee-track { display: flex; width: max-content; animation: scroll 28s linear infinite; }
-    .marquee:hover .marquee-track { animation-play-state: paused; }
-    .marquee span { font-family: var(--f-display); font-weight: 800; font-size: 1.3rem; padding: 12px 26px; text-transform: uppercase; white-space: nowrap; }
-    .marquee span::after { content: "✦"; margin-left: 52px; }
-    @keyframes scroll { to { transform: translateX(-50%); } }
-
-    /* ============ SECTIONS ============ */
-    section.block { padding: clamp(60px, 9vw, 110px) clamp(16px, 4vw, 48px); max-width: 1320px; margin: 0 auto; }
-    .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 34px; }
-    .sec-head .kicker { font-weight: 700; font-size: .8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-    .sec-head h2 { font-family: var(--f-display); font-weight: 900; font-size: clamp(2.4rem, 6vw, 4.8rem); line-height: .95; letter-spacing: -.02em; }
-    .sec-head h2 em { font-style: normal; background: var(--yellow); color: #14161f; padding: 0 .15em; border-radius: 10px; }
-    .sec-head p { max-width: 380px; color: var(--muted); font-size: .95rem; }
-
-    .chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
-    .chip { padding: 9px 18px; border-radius: 999px; border: 2px solid var(--ink); background: transparent; font-weight: 600; font-size: .88rem; transition: all .2s; }
-    .chip:hover { transform: translateY(-2px); }
-    .chip.active { background: var(--ink); color: var(--bg); }
-    .chip b { opacity: .6; font-weight: 600; margin-left: 4px; }
-
-    /* Cards: tile style from reference */
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 24px; }
-    .card {
-      position: relative; border-radius: var(--r); background: var(--card); border: 3px solid #fff;
-      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: var(--shadow);
-      padding: 22px; display: flex; flex-direction: column; gap: 14px;
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .6s, transform .6s cubic-bezier(.2,.8,.2,1), box-shadow .3s;
+    .nav-link {
+      font-family: var(--f-display);
+      font-size: clamp(1.1rem, 1.6vw, 1.45rem);
+      font-weight: 600;
+      color: var(--muted);
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.25s ease;
     }
-    html[data-theme="dark"] .card { border-color: rgba(255,255,255,.14); }
-    .card.in { opacity: 1; transform: none; }
-    .card.in:hover { transform: translateY(-8px) rotate(-.8deg); box-shadow: 0 28px 50px -20px rgba(20,22,31,.5); }
-    .card.hide { display: none; }
-    .card-top { display: flex; justify-content: space-between; align-items: flex-start; }
-    .c-icon { position: relative; width: 74px; height: 74px; border-radius: 22px; display: grid; place-items: center; font-size: 1.9rem; color: #fff; box-shadow: 0 10px 20px -8px rgba(0,0,0,.4); }
-    .c-plus { position: absolute; top: -9px; right: -9px; width: 28px; height: 28px; border-radius: 50%; border: 2px solid #fff; background: var(--yellow); color: #14161f; font-size: 1.1rem; font-weight: 800; display: grid; place-items: center; transition: transform .3s; box-shadow: 0 3px 8px rgba(0,0,0,.25); }
-    .c-plus:hover { transform: scale(1.15); }
-    .card.open .c-plus { transform: rotate(45deg); }
-    .c-tag { font-size: .7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: var(--card-solid); border: 1px solid var(--line); color: var(--muted); }
-    .card h3 { font-family: var(--f-display); font-size: 1.45rem; font-weight: 700; line-height: 1.15; }
-    .card p { font-size: .88rem; color: var(--muted); }
-    .c-extra { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s ease; }
-    .card.open .c-extra { grid-template-rows: 1fr; }
-    .c-extra > div { overflow: hidden; }
-    .c-extra ul { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding-top: 4px; }
-    .c-extra li { font-size: .74rem; font-weight: 600; padding: 4px 10px; border-radius: 8px; background: var(--card-solid); border: 1px solid var(--line); }
-    .c-actions { display: flex; gap: 8px; margin-top: auto; }
-    .btn-open { flex: 1; text-align: center; padding: 11px 14px; border-radius: 14px; background: var(--ink); color: var(--bg); font-weight: 700; font-size: .88rem; transition: transform .2s, background .2s; }
-    .btn-open:hover { transform: translateY(-2px); background: var(--yellow); color: #14161f; }
-    .btn-prev { padding: 11px 15px; border-radius: 14px; border: 2px solid var(--ink); background: transparent; font-weight: 700; font-size: .88rem; transition: all .2s; }
-    .btn-prev:hover { background: var(--card-solid); transform: translateY(-2px); }
-    .empty { grid-column: 1/-1; text-align: center; padding: 60px 10px; color: var(--muted); }
 
-    /* About bento */
-    .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
-    .bento .b { border-radius: var(--r); background: var(--card); border: 3px solid #fff; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: var(--shadow); padding: 28px; transition: transform .3s; }
-    html[data-theme="dark"] .bento .b { border-color: rgba(255,255,255,.14); }
-    .bento .b:hover { transform: translateY(-5px); }
-    .b i.big { font-size: 1.6rem; width: 54px; height: 54px; display: grid; place-items: center; border-radius: 16px; background: var(--yellow); color: #14161f; margin-bottom: 18px; }
-    .b h3 { font-family: var(--f-display); font-weight: 800; font-size: 1.5rem; margin-bottom: 8px; }
-    .b p { color: var(--muted); font-size: .92rem; }
-    .b.w5 { grid-column: span 5; } .b.w7 { grid-column: span 7; } .b.w4 { grid-column: span 4; }
-    .b.dark { background: var(--ink); color: var(--bg); } .b.dark p { color: color-mix(in srgb, var(--bg) 70%, transparent); }
-    .stats { display: flex; gap: 28px; margin-top: 18px; flex-wrap: wrap; }
-    .stats strong { display: block; font-family: var(--f-display); font-size: 2.6rem; font-weight: 900; line-height: 1; }
-    .stats span { font-size: .78rem; opacity: .7; }
-
-    /* Contact */
-    .contact { text-align: center; border-radius: 40px; background: var(--ink); color: var(--bg); padding: clamp(40px, 7vw, 80px) 20px; position: relative; overflow: hidden; }
-    .contact h2 { font-family: var(--f-display); font-weight: 900; font-size: clamp(2.2rem, 6vw, 4.6rem); line-height: .95; letter-spacing: -.02em; }
-    .contact h2 em { font-style: normal; color: var(--yellow); }
-    .contact p { max-width: 460px; margin: 16px auto 28px; opacity: .75; }
-    .mail { display: inline-flex; align-items: center; gap: 12px; padding: 12px 14px 12px 22px; border-radius: 999px; background: var(--yellow); color: #14161f; font-weight: 700; max-width: 100%; transition: transform .2s; }
-    .mail:hover { transform: scale(1.04); }
-    .mail span { word-break: break-all; }
-    .mail button { width: 38px; height: 38px; border-radius: 50%; border: 0; background: #14161f; color: #fff; }
-    .contact .row { display: flex; justify-content: center; gap: 12px; margin-top: 26px; }
-    .contact .row a { width: 48px; height: 48px; border-radius: 50%; border: 2px solid color-mix(in srgb, var(--bg) 40%, transparent); display: grid; place-items: center; font-size: 1.2rem; transition: all .2s; }
-    .contact .row a:hover { background: var(--yellow); color: #14161f; transform: translateY(-4px) rotate(8deg); }
-    footer { text-align: center; padding: 30px 16px 40px; font-size: .85rem; color: var(--muted); }
-
-    /* Modal preview */
-    .modal { position: fixed; inset: 0; z-index: 500; background: rgba(8,10,20,.78); backdrop-filter: blur(8px); display: grid; place-items: center; padding: 16px; opacity: 0; visibility: hidden; transition: .3s; }
-    .modal.on { opacity: 1; visibility: visible; }
-    .modal-box { width: min(1100px, 100%); height: 90vh; background: var(--card-solid); border-radius: 26px; overflow: hidden; display: flex; flex-direction: column; border: 3px solid #fff; transform: scale(.94); transition: transform .35s cubic-bezier(.3,1.4,.5,1); }
-    .modal.on .modal-box { transform: none; }
-    .modal-bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 18px; border-bottom: 1px solid var(--line); }
-    .modal-bar strong { font-family: var(--f-display); font-size: 1.05rem; }
-    .modal-bar small { color: var(--muted); font-family: monospace; margin-left: 8px; }
-    .modal-bar .acts { display: flex; gap: 8px; }
-    .modal-bar a, .modal-bar button { padding: 7px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); font-weight: 600; font-size: .82rem; }
-    .modal-bar button.x { background: var(--yellow); color: #14161f; }
-    .modal-body { flex: 1; position: relative; background: #fff; }
-    .modal-body iframe { width: 100%; height: 100%; border: 0; }
-    .toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 90px); background: var(--ink); color: var(--bg); padding: 12px 22px; border-radius: 999px; font-weight: 600; font-size: .9rem; z-index: 600; transition: transform .35s cubic-bezier(.3,1.4,.5,1); }
-    .toast.on { transform: translate(-50%, 0); }
-
-    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s, transform .7s cubic-bezier(.2,.8,.2,1); }
-    .reveal.in { opacity: 1; transform: none; }
-
-    /* ============ RESPONSIVE ============ */
-    @media (max-width: 1000px) {
-      .topbar { grid-template-columns: 1fr auto; }
-      .searchpill { display: none; }
-      .stage { height: auto; min-height: 0; display: flex; flex-direction: column; align-items: center; gap: 22px; padding-bottom: 20px; }
-      .stage > * { position: relative !important; inset: auto !important; transform: none !important; }
-      .hero-name { order: 1; text-align: center; margin-bottom: -10px; }
-      .hero-name span:nth-child(2) { transform: none; margin-left: 0; }
-      .hero-figure { order: 2; width: min(300px, 70vw); margin: 10px 0; }
-      .intro { order: 3; width: min(560px, 100%); text-align: center; }
-      .tile-a, .spark, .next-arrow { display: none; }
-      .tile-desc { order: 4; width: min(420px, 100%); }
-      .tile-b { order: 5; } .weather { order: 6; width: 150px; }
-      .hero { padding-bottom: 130px; align-items: flex-start; }
-      .scroll-hint { display: none; }
-      .bento .b.w5, .bento .b.w7, .bento .b.w4 { grid-column: span 12; }
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--ink);
     }
+
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--ink);
+      border-radius: 2px;
+    }
+
+    /* Search Bar Tengah: Bentuk Pil Transparan */
+    .search-pill-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: min(340px, 28vw);
+      padding: 9px 20px;
+      border-radius: 999px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-pill-wrap:focus-within {
+      border-color: var(--yellow);
+      box-shadow: 0 0 0 3px var(--yellow-glow);
+    }
+
+    .search-pill-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    .search-pill-input::placeholder {
+      color: var(--muted);
+    }
+
+    .search-pill-icon {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    /* Kanan: Jam & Hari/Tanggal + Theme Toggle */
+    .clock-right-wrap {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-align: right;
+    }
+
+    .clock-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .clock-date {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .clock-time {
+      font-family: var(--f-display);
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: 0.5px;
+    }
+
+    .theme-toggle-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--yellow);
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      transform: scale(1.08) rotate(15deg);
+      border-color: var(--yellow);
+    }
+
+    /* ==========================================================
+       HERO POSTER STAGE (PERSIS SEPERTI FOTO REFERENSI)
+       ========================================================== */
+    .hero-stage {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: 110px clamp(16px, 4.5vw, 60px) 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stage-container {
+      position: relative;
+      width: min(1340px, 100%);
+      height: min(740px, 78vh);
+      min-height: 580px;
+    }
+
+    .stage-container > * {
+      position: absolute;
+    }
+
+    /* 1. Karakter Zenitsu & Video Background di Tengah */
+    .zen-figure-wrapper {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(280px, 34vw, 460px);
+      height: clamp(380px, 48vh, 600px);
+      z-index: 3;
+      border-radius: 200px 200px 140px 140px;
+      position: relative;
+      overflow: hidden;
+      border: 5px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 
+        0 0 50px var(--yellow-glow),
+        0 25px 60px rgba(0, 0, 0, 0.6);
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .zen-figure-wrapper:hover {
+      transform: translate(-50%, -52%) scale(1.02);
+      border-color: var(--yellow);
+    }
+
+    .zen-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+      filter: contrast(1.08) brightness(1.05);
+    }
+
+    .zen-glow-ring {
+      position: absolute;
+      inset: -12px;
+      border-radius: 220px 220px 160px 160px;
+      border: 3px solid var(--yellow);
+      opacity: 0.8;
+      pointer-events: none;
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); opacity: 0.6; filter: blur(4px); }
+      50% { transform: scale(1.02); opacity: 1; filter: blur(8px); }
+    }
+
+    /* 2. TIPOGRAFI KANAN: "ZENITSU AGATSUMA" (OUTLINE TEBAL ALA RYOU YAMADA) */
+    .hero-title-right {
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      font-family: var(--f-display);
+      font-weight: 900;
+      line-height: 0.84;
+      text-transform: uppercase;
+      pointer-events: none;
+      text-align: left;
+    }
+
+    .hero-title-right span {
+      display: block;
+      font-size: clamp(3.8rem, 10.5vw, 9.8rem);
+      color: transparent;
+      -webkit-text-stroke: 3.5px var(--text-stroke);
+      paint-order: stroke fill;
+      letter-spacing: -0.02em;
+      text-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-title-right span:nth-child(2) {
+      margin-left: clamp(-10px, -2vw, -30px);
+      transform: translateX(-10%);
+    }
+
+    /* 3. TIPOGRAFI KIRI: "ZENITSU" + HANDWRITTEN SCRIPT + INTRO */
+    .hero-intro-left {
+      left: 0;
+      top: 50%;
+      transform: translateY(-62%);
+      z-index: 5;
+      width: min(420px, 35%);
+      position: relative;
+    }
+
+    .hero-script-overlay {
+      position: absolute;
+      top: -24px;
+      left: 30px;
+      font-family: var(--f-hand);
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      color: var(--yellow);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      transform: rotate(-10deg);
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .hero-name-left {
+      font-family: var(--f-display);
+      font-weight: 900;
+      font-size: clamp(2.8rem, 6.2vw, 5.4rem);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-subtitle-left {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+      color: var(--electric-blue);
+      margin: 12px 0 6px;
+    }
+
+    .hero-desc-left {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .btn-readmore {
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: 1.5px solid var(--ink);
+      background: var(--card-solid);
+      color: var(--ink);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: all 0.2s ease;
+    }
+
+    .btn-readmore:hover {
+      background: var(--yellow);
+      color: #000;
+      border-color: var(--yellow);
+      transform: translateY(-2px);
+    }
+
+    /* 4. KARTU-KARTU FLOATING DENGAN TOMBOL (+) KUNING */
+    .float-card {
+      position: absolute;
+      border-radius: 26px;
+      background: var(--card-solid);
+      border: 3px solid #ffffff;
+      box-shadow: var(--shadow-float);
+      z-index: 6;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+    }
+
+    html[data-theme="dark"] .float-card {
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .float-card:hover {
+      transform: translateY(-6px) rotate(-1.5deg);
+      box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Tombol (+) Kuning Khas Foto Referensi */
+    .badge-plus {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: #0f172a;
+      font-size: 1.3rem;
+      font-weight: 800;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      border: 2.5px solid #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .badge-plus:hover {
+      transform: rotate(90deg) scale(1.1);
+    }
+
+    /* Kartu Floating Kiri Atas: Avatar / Focus Mini */
+    .card-top-left {
+      left: 19%;
+      top: 3%;
+      width: 130px;
+      height: 130px;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .card-top-left img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Sparkle Bintang Kuning */
+    .sparkle-star {
+      position: absolute;
+      color: var(--yellow);
+      font-size: 2.2rem;
+      z-index: 6;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+      animation: sparkleAnim 3.5s infinite ease-in-out;
+    }
+
+    .sparkle-star.s1 {
+      left: 16%;
+      top: 10%;
+    }
+
+    .sparkle-star.s2 {
+      right: 22%;
+      bottom: 16%;
+      animation-delay: -1.6s;
+    }
+
+    @keyframes sparkleAnim {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+      50% { transform: scale(0.7) rotate(35deg); opacity: 0.6; }
+    }
+
+    /* Kartu Floating Kiri Bawah: "description." */
+    .card-desc-left {
+      left: 6%;
+      bottom: 2%;
+      width: clamp(210px, 22vw, 270px);
+      padding: 16px 18px 14px;
+      cursor: pointer;
+    }
+
+    .card-desc-left h4 {
+      font-family: var(--f-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .card-desc-left p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.45;
+      max-height: 4.8em;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+
+    .card-desc-left.open p {
+      max-height: 18em;
+    }
+
+    /* Kartu Floating Kanan Bawah: Video/Action Mini */
+    .card-bottom-right {
+      right: 7%;
+      bottom: 5%;
+      width: 140px;
+      height: 140px;
+      border-radius: 24px;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: #fff;
+      font-size: 3rem;
+    }
+
+    /* Widget Cuaca Kanan Bawah (25° cerah) */
+    .widget-weather {
+      right: 1%;
+      bottom: 22%;
+      width: 120px;
+      padding: 14px 16px;
+      border-radius: 22px;
+      position: absolute;
+      z-index: 7;
+      background: var(--card-solid);
+      border: 3px solid #ffffff;
+      box-shadow: var(--shadow-float);
+    }
+
+    html[data-theme="dark"] .widget-weather {
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .weather-deg {
+      font-family: var(--f-display);
+      font-size: 2.1rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .weather-lbl {
+      font-family: var(--f-display);
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .weather-icon {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      font-size: 1.6rem;
+      color: var(--yellow);
+    }
+
+    /* Panah Navigasi Kanan (Next Arrow) */
+    .nav-next-arrow {
+      right: -8px;
+      top: 52%;
+      transform: translateY(-50%);
+      z-index: 8;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      font-size: 2rem;
+      color: var(--ink);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      animation: nudgeArrow 1.6s ease-in-out infinite;
+    }
+
+    @keyframes nudgeArrow {
+      50% { transform: translateY(-50%) translateX(6px); }
+    }
+
+    /* Footer Sosial Media Kiri Bawah */
+    .hero-socials {
+      position: absolute;
+      left: clamp(20px, 4.5vw, 60px);
+      bottom: 24px;
+      display: flex;
+      gap: 20px;
+      z-index: 8;
+      flex-wrap: wrap;
+    }
+
+    .social-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--ink);
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .social-tag i {
+      font-size: 1.5rem;
+      color: var(--yellow);
+    }
+
+    .social-tag:hover {
+      transform: translateY(-3px);
+      color: var(--yellow);
+    }
+
+    /* ==========================================================
+       MARQUEE TEXT PITA KUNING (INSPIRASI JIRO.BUILD)
+       ========================================================== */
+    .marquee-strip {
+      border-block: 2.5px solid var(--ink);
+      background: var(--yellow);
+      color: #0f172a;
+      overflow: hidden;
+      transform: rotate(-1deg);
+      margin: 20px -2vw;
+      box-shadow: 0 10px 25px rgba(250, 204, 21, 0.2);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 30s linear infinite;
+    }
+
+    .marquee-strip:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    .marquee-track span {
+      font-family: var(--f-display);
+      font-weight: 900;
+      font-size: 1.35rem;
+      padding: 12px 28px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+
+    .marquee-track span::after {
+      content: "✦";
+      margin-left: 56px;
+      color: #0f172a;
+    }
+
+    @keyframes marqueeScroll {
+      to { transform: translateX(-50%); }
+    }
+
+    /* ==========================================================
+       GALLERY & MEDIA BELAJAR SECTION
+       ========================================================== */
+    section.block-section {
+      padding: clamp(70px, 9vw, 110px) clamp(20px, 4.5vw, 60px);
+      max-width: 1340px;
+      margin: 0 auto;
+    }
+
+    .sec-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .sec-kicker {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 6px;
+    }
+
+    .sec-title {
+      font-family: var(--f-display);
+      font-weight: 900;
+      font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+    }
+
+    .sec-title em {
+      font-style: normal;
+      background: var(--yellow);
+      color: #0f172a;
+      padding: 0 0.2em;
+      border-radius: 12px;
+    }
+
+    .sec-desc {
+      max-width: 420px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Filter Chips */
+    .filter-chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .filter-chip {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 2px solid var(--ink);
+      background: transparent;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-chip:hover {
+      transform: translateY(-2px);
+      background: rgba(250, 204, 21, 0.15);
+      border-color: var(--yellow);
+    }
+
+    .filter-chip.active {
+      background: var(--yellow);
+      color: #0f172a;
+      border-color: var(--yellow);
+      box-shadow: 0 4px 14px var(--yellow-glow);
+    }
+
+    .filter-chip b {
+      margin-left: 6px;
+      font-size: 0.8rem;
+      opacity: 0.75;
+    }
+
+    /* Grid Kartu Modul */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 26px;
+    }
+
+    .module-card {
+      position: relative;
+      border-radius: 28px;
+      background: var(--card-bg);
+      border: 3px solid #ffffff;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-float);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+    }
+
+    html[data-theme="dark"] .module-card {
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .module-card:hover {
+      transform: translateY(-8px) rotate(-0.8deg);
+      border-color: var(--yellow);
+      box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.6);
+    }
+
+    .module-card.hide {
+      display: none;
+    }
+
+    .card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .card-icon-box {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+      color: #ffffff;
+      box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-icon-plus {
+      position: absolute;
+      top: -9px;
+      right: -9px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      background: var(--yellow);
+      color: #0f172a;
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .module-card.open .card-icon-plus {
+      transform: rotate(45deg);
+    }
+
+    .card-badge-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .card-title {
+      font-family: var(--f-display);
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.55;
+      flex-grow: 1;
+    }
+
+    .card-extra-info {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease;
+    }
+
+    .module-card.open .card-extra-info {
+      grid-template-rows: 1fr;
+    }
+
+    .card-extra-info > div {
+      overflow: hidden;
+    }
+
+    .card-feature-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding-top: 6px;
+    }
+
+    .card-feature-list li {
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: var(--card-solid);
+      border: 1px solid var(--line);
+    }
+
+    .card-action-row {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .btn-card-open {
+      flex: 1;
+      text-align: center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--ink);
+      color: var(--bg);
+      font-weight: 800;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-card-open:hover {
+      background: var(--yellow);
+      color: #0f172a;
+      transform: translateY(-2px);
+    }
+
+    .btn-card-preview {
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 2px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-card-preview:hover {
+      background: var(--card-solid);
+      border-color: var(--yellow);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================
+       MODAL QUICK PREVIEW
+       ========================================================== */
+    .preview-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(8, 10, 20, 0.85);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .preview-modal-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .preview-modal-window {
+      width: min(1140px, 100%);
+      height: 90vh;
+      background: var(--card-solid);
+      border-radius: 26px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 3px solid #ffffff;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+      transform: scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1);
+    }
+
+    .preview-modal-backdrop.active .preview-modal-window {
+      transform: scale(1);
+    }
+
+    .modal-bar-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .modal-bar-top strong {
+      font-family: var(--f-display);
+      font-size: 1.1rem;
+    }
+
+    .modal-bar-top small {
+      color: var(--muted);
+      font-family: monospace;
+      margin-left: 8px;
+    }
+
+    .modal-actions-right {
+      display: flex;
+      gap: 8px;
+    }
+
+    .modal-actions-right a,
+    .modal-actions-right button {
+      padding: 7px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--card-solid);
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+
+    .modal-actions-right button.btn-close-modal {
+      background: var(--yellow);
+      color: #0f172a;
+      border: none;
+    }
+
+    .modal-frame-body {
+      flex: 1;
+      position: relative;
+      background: #ffffff;
+    }
+
+    .modal-frame-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Toast Notification */
+    .toast-pill {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translate(-50%, 100px);
+      background: var(--ink);
+      color: var(--bg);
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      z-index: 600;
+      transition: transform 0.35s cubic-bezier(0.3, 1.4, 0.5, 1);
+    }
+
+    .toast-pill.show {
+      transform: translate(-50%, 0);
+    }
+
+    /* ==========================================================
+       RESPONSIVE BREAKPOINTS
+       ========================================================== */
+    @media (max-width: 1024px) {
+      .topbar {
+        grid-template-columns: 1fr auto;
+      }
+      .search-pill-wrap {
+        display: none;
+      }
+      .stage-container {
+        height: auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+      .stage-container > * {
+        position: relative !important;
+        inset: auto !important;
+        transform: none !important;
+      }
+      .hero-title-right {
+        order: 1;
+        text-align: center;
+      }
+      .hero-title-right span:nth-child(2) {
+        transform: none;
+        margin-left: 0;
+      }
+      .zen-figure-wrapper {
+        order: 2;
+        width: min(320px, 75vw);
+        height: 380px;
+        margin: 10px auto;
+      }
+      .hero-intro-left {
+        order: 3;
+        width: min(580px, 100%);
+        text-align: center;
+      }
+      .hero-script-overlay {
+        left: 50%;
+        transform: translateX(-50%) rotate(-6deg);
+      }
+      .card-top-left, .sparkle-star, .nav-next-arrow {
+        display: none;
+      }
+      .card-desc-left {
+        order: 4;
+        width: min(440px, 100%);
+      }
+      .widget-weather {
+        order: 5;
+        width: 140px;
+      }
+      .card-bottom-right {
+        display: none;
+      }
+      .hero-stage {
+        padding-bottom: 120px;
+      }
+      .hero-socials {
+        position: static;
+        margin-top: 20px;
+        justify-content: center;
+      }
+    }
+
     @media (max-width: 640px) {
-      .clock-txt .date { display: none; }
-      .nav a { font-size: .95rem; }
-      .topbar { padding-inline: 14px; }
-      .socials a span { display: none; }
-      .tile-b { display: none; }
-      .grid { grid-template-columns: 1fr; }
-      .modal-bar small { display: none; }
+      .clock-date {
+        display: none;
+      }
+      .nav-link {
+        font-size: 1rem;
+      }
+      .topbar {
+        padding-inline: 16px;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
     }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; } .reveal, .card { opacity: 1; transform: none; } }
   </style>
 </head>
 <body>
-  <div class="bg-blobs"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
-  <div class="bg-grain"></div>
 
-  <!-- TOP BAR -->
+  <!-- Ambient Background Canvas & Geometrics -->
+  <div class="bg-canvas-wrap"></div>
+  <div class="bg-lines"></div>
+
+  <!-- ========================================================
+       TOPBAR (HOME, ABOUT, GALERY, SEARCH PILL, CLOCK)
+       ======================================================== -->
   <header class="topbar" id="topbar">
-    <nav class="nav">
-      <a href="#home" class="active">Home</a>
-      <a href="#about">About</a>
-      <a href="#gallery">Gallery</a>
+    <!-- Menu Kiri -->
+    <nav class="nav-left">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#gallery" class="nav-link">Galery</a>
     </nav>
-    <label class="searchpill" title="Cari modul">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input id="search" type="search" placeholder="Search..." autocomplete="off" />
-    </label>
-    <div class="clockbox">
-      <div class="clock-txt"><div class="date" id="date">--</div><div class="time" id="time">--:--</div></div>
-      <button class="icon-btn" id="themeBtn" aria-label="Ganti tema"><i class="fa-solid fa-moon" id="themeIcon"></i></button>
+
+    <!-- Search Bar Pil Tengah -->
+    <div class="search-pill-wrap">
+      <input type="text" class="search-pill-input" id="globalSearch" placeholder="Search..." autocomplete="off" />
+      <i class="fa-solid fa-magnifying-glass search-pill-icon"></i>
+    </div>
+
+    <!-- Jam, Tanggal & Theme Toggle Kanan -->
+    <div class="clock-right-wrap">
+      <div class="clock-text">
+        <span class="clock-date" id="liveDate">MON, 16 JUNE</span>
+        <span class="clock-time" id="liveTime">23: 02 PM</span>
+      </div>
+      <button class="theme-toggle-btn" id="themeBtn" aria-label="Ganti Tema">
+        <i class="fa-solid fa-moon" id="themeIcon"></i>
+      </button>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="stage" id="stage">
-      <div class="hero-name" aria-hidden="true"><span>Yusri</span><span>Irawan</span></div>
+  <!-- ========================================================
+       HERO POSTER STAGE (SESUAI FOTO REFERENSI RYOU YAMADA)
+       KARAKTER: ZENITSU DENGAN VIDEO BERGERAK zen.mp4
+       ======================================================== -->
+  <section class="hero-stage" id="home">
+    <div class="stage-container" id="stageContainer">
 
-      <div class="hero-figure" data-depth="14">
-        <div class="ring"></div>
-        <img src="awan.png" alt="Yusri Irawan (AWAN)" />
+      <!-- 1. TULISAN BESAR KANAN: "ZENITSU AGATSUMA" (OUTLINE TEBAL) -->
+      <div class="hero-title-right" aria-hidden="true">
+        <span>ZENITSU</span>
+        <span>AGATSUMA</span>
       </div>
 
-      <div class="intro">
-        <h2>AWAN</h2>
-        <h3><span id="typed">Pendidik Matematika &amp; TIK SD</span><span class="caret"></span></h3>
-        <p>Membangun media pembelajaran interaktif yang ceria dan adaptif untuk siswa SD, plus platform web & manajemen komunitas teknologi.</p>
-        <a href="#gallery" class="btn-mini">Read More</a>
+      <!-- 2. KARAKTER ZENITSU DI TENGAH: VIDEO GERAK zen.mp4 -->
+      <div class="zen-figure-wrapper">
+        <div class="zen-glow-ring"></div>
+        <video class="zen-video" src="zen.mp4" autoplay loop muted playsinline></video>
       </div>
 
-      <span class="spark s1"><i class="fa-solid fa-star-of-life"></i></span>
-      <span class="spark s2"><i class="fa-solid fa-star-of-life"></i></span>
+      <!-- 3. TULISAN INTRO KIRI: "ZENITSU" + HANDWRITTEN OVERLAY + READ MORE -->
+      <div class="hero-intro-left">
+        <div class="hero-script-overlay">Thunder Breathing</div>
+        <h1 class="hero-name-left">ZENITSU</h1>
+        <div class="hero-subtitle-left">Demon Slayer: Kimetsu no Yaiba</div>
+        <p class="hero-desc-left">
+          Pendekar pedang petir dengan tekad pantang menyerah. Bersama <strong>Yusri Irawan (AWAN)</strong>, kita buktikan bahwa ketekunan dalam belajar Matematika &amp; TIK mampu mengubah kelemahan menjadi keahlian yang tak tertandingi!
+        </p>
+        <a href="#gallery" class="btn-readmore">Read More</a>
+      </div>
 
-      <a href="#gallery" class="tile tile-a" data-depth="-22" aria-label="Lihat galeri">
-        <div class="tile-pic"><i class="fa-solid fa-shapes"></i></div><span class="plus">+</span>
-      </a>
+      <!-- 4. SPARKLE BINTANG KUNING ALA REFERENSI -->
+      <span class="sparkle-star s1"><i class="fa-solid fa-star-of-life"></i></span>
+      <span class="sparkle-star s2"><i class="fa-solid fa-star-of-life"></i></span>
 
-      <div class="tile tile-desc" id="descTile" data-depth="18" role="button" tabindex="0">
+      <!-- 5. KARTU FLOATING KIRI ATAS: AVATAR / FOCUS MINI DENGAN (+) KUNING -->
+      <div class="float-card card-top-left">
+        <span class="badge-plus" title="Detail">+</span>
+        <img src="awan.png" alt="Avatar Yusri Irawan" />
+      </div>
+
+      <!-- 6. KARTU FLOATING KIRI BAWAH: "description." DENGAN (+) KUNING -->
+      <div class="float-card card-desc-left" id="descCard">
+        <span class="badge-plus" title="Buka Detail">+</span>
         <h4>description.</h4>
-        <p>Yusri Irawan adalah pendidik Matematika &amp; TIK di tingkat SD yang gemar membuat media belajar interaktif: kuis, simulasi Excel, kalkulator bersusun, dan portal guru. Aktif juga sebagai Community Support Manager di ekosistem Web3.</p>
-        <span class="plus">+</span>
+        <p id="descText">
+          Yusri Irawan (AWAN) adalah pendidik Matematika &amp; TIK Sekolah Dasar serta Community Support Lead. Merancang media belajar mandiri tanpa ribet: kuis detektif, kalkulator bersusun, simulasi rumus Excel, dan portal ajar interaktif.
+        </p>
       </div>
 
-      <a href="guru.html" class="tile tile-b" data-depth="-16" aria-label="Portal Guru">
-        <div class="tile-pic"><i class="fa-solid fa-chalkboard-user"></i></div><span class="plus">+</span>
-      </a>
-
-      <div class="tile weather" data-depth="10">
-        <div class="deg" id="modCount">11</div>
-        <div class="lbl">modul</div>
-        <i class="fa-solid fa-cloud-sun"></i>
+      <!-- 7. KARTU FLOATING KANAN BAWAH: KARTU AKSI (+) KUNING -->
+      <div class="float-card card-bottom-right">
+        <span class="badge-plus" title="Detail">+</span>
+        <i class="fa-solid fa-bolt" style="color: var(--yellow);"></i>
       </div>
 
-      <button class="next-arrow" aria-label="Selanjutnya" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})"><i class="fa-solid fa-chevron-right"></i></button>
-    </div>
+      <!-- 8. WIDGET CUACA KANAN BAWAH (25° cerah) -->
+      <div class="widget-weather">
+        <div class="weather-deg">25&deg;</div>
+        <div class="weather-lbl">cerah</div>
+        <i class="fa-solid fa-cloud-sun weather-icon"></i>
+      </div>
 
-    <div class="socials">
-      <a href="https://instagram.com/yusriirawan44" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i><span>yusriirawan44</span></a>
-      <a href="https://discordapp.com/users/685240966575292424" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i><span>Discord</span></a>
-      <a href="https://twitter.com/BISKIT_TOKEN" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i><span>BISKIT_TOKEN</span></a>
+      <!-- 9. TOMBOL PANAH NAVIGASI > KE GALERI -->
+      <button class="nav-next-arrow" aria-label="Lihat Galeri" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <!-- 10. SOCIALS FOOTER KIRI BAWAH -->
+      <div class="hero-socials">
+        <a href="https://instagram.com/yusriirawan44" target="_blank" rel="noopener" class="social-tag">
+          <i class="fa-brands fa-instagram"></i>
+          <span>@yusriirawan44</span>
+        </a>
+        <a href="https://discordapp.com/users/685240966575292424" target="_blank" rel="noopener" class="social-tag">
+          <i class="fa-brands fa-discord"></i>
+          <span>Discord</span>
+        </a>
+      </div>
+
     </div>
-    <div class="scroll-hint">Scroll <i class="fa-solid fa-arrow-down"></i></div>
   </section>
 
-  <!-- MARQUEE -->
-  <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
+  <!-- ========================================================
+       MARQUEE TEXT PITA KUNING (INSPIRASI JIRO.BUILD)
+       ======================================================== -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
 
-  <!-- GALLERY / CATALOG -->
-  <section class="block" id="gallery">
-    <div class="sec-head reveal">
+  <!-- ========================================================
+       GALLERY: MEDIA BELAJAR & TOOLS INTERAKTIF MANDIRI
+       ======================================================== -->
+  <section class="block-section" id="gallery">
+    <div class="sec-head">
       <div>
-        <div class="kicker">Library &amp; Tools</div>
-        <h2>Media <em>Belajar</em><br/>&amp; Aplikasi</h2>
+        <div class="sec-kicker">Interactive Library &amp; Tools</div>
+        <h2 class="sec-title">Media <em>Belajar</em><br/>&amp; Aplikasi Mandiri</h2>
       </div>
-      <p>Semua halaman dalam satu tempat. Klik <b>+</b> untuk detail, <b>Preview</b> untuk intip tanpa pindah halaman.</p>
+      <p class="sec-desc">
+        Semua file HTML dapat dibuka langsung seketika seperti file Excel tanpa ketergantungan server atau build! Klik <b>+</b> untuk fitur, atau <b>Preview</b> untuk melihat langsung.
+      </p>
     </div>
-    <div class="chips reveal" id="chips"></div>
-    <div class="grid" id="grid"></div>
+
+    <!-- Filter Chips -->
+    <div class="filter-chips" id="filterChips"></div>
+
+    <!-- Cards Grid -->
+    <div class="cards-grid" id="cardsGrid"></div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="block" id="about">
-    <div class="sec-head reveal">
-      <div><div class="kicker">Tentang</div><h2>Dedikasi &amp;<br/><em>Keahlian</em></h2></div>
-      <p>Pengalaman pedagogik di pendidikan dasar dipadukan teknologi web modern.</p>
-    </div>
-    <div class="bento">
-      <div class="b w7 dark reveal">
-        <i class="fa-solid fa-graduation-cap big"></i>
-        <h3>Inovasi Pembelajaran SD</h3>
-        <p>Mengajar Matematika dan TIK kelas 5 dengan gamifikasi, visualisasi konsep abstrak, dan latihan yang menyenangkan.</p>
-        <div class="stats"><div><strong>11</strong><span>Halaman &amp; modul</span></div><div><strong>SD</strong><span>Fokus belajar</span></div><div><strong>100%</strong><span>Akses terbuka</span></div></div>
+  <!-- ========================================================
+       ABOUT SECTION
+       ======================================================== -->
+  <section class="block-section" id="about">
+    <div class="sec-head">
+      <div>
+        <div class="sec-kicker">Profil &amp; Dedikasi</div>
+        <h2 class="sec-title">Filosofi &amp;<br/><em>Keahlian</em></h2>
       </div>
-      <div class="b w5 reveal"><i class="fa-solid fa-code big"></i><h3>Web Modern</h3><p>HTML, CSS, JavaScript/TypeScript, React, Tailwind &amp; Vite untuk pengalaman cepat di semua perangkat.</p></div>
-      <div class="b w5 reveal"><i class="fa-solid fa-users big"></i><h3>Community Support</h3><p>Community Support Manager &amp; penggiat Web3: moderasi, promosi, dan edukasi publik.</p></div>
-      <div class="b w7 reveal"><i class="fa-solid fa-calendar-days big"></i><h3>Content Planning</h3><p>Perencanaan konten sosial media dan kalender promosi SPMB sekolah, terhubung dengan spreadsheet kerja terstruktur.</p></div>
+      <p class="sec-desc">
+        Menggabungkan semangat pantang menyerah seperti Zenitsu dalam menciptakan media ajar yang menyenangkan dan ramah anak.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+      <div style="background: var(--card-solid); border: 2.5px solid var(--card-border); border-radius: 24px; padding: 28px;">
+        <i class="fa-solid fa-graduation-cap" style="font-size: 2rem; color: var(--yellow); margin-bottom: 14px; display: block;"></i>
+        <h3 style="font-family: var(--f-display); font-size: 1.4rem; margin-bottom: 8px;">Pendidikan Matematika SD</h3>
+        <p style="color: var(--muted); font-size: 0.92rem; line-height: 1.6;">
+          Fokus pada pembelajaran interaktif: Timbangan Neraca Bilangan Misteri, Perkalian s.d 100.000 dengan langkah bersusun, serta Pembagian visual bagi kue.
+        </p>
+      </div>
+
+      <div style="background: var(--card-solid); border: 2.5px solid var(--card-border); border-radius: 24px; padding: 28px;">
+        <i class="fa-solid fa-laptop-code" style="font-size: 2rem; color: var(--electric-blue); margin-bottom: 14px; display: block;"></i>
+        <h3 style="font-family: var(--f-display); font-size: 1.4rem; margin-bottom: 8px;">TIK &amp; Literasi Digital</h3>
+        <p style="color: var(--muted); font-size: 0.92rem; line-height: 1.6;">
+          Modul Microsoft Excel interaktif kelas 5, desain grafis Canva untuk anak, kuis evaluasi Word &amp; Excel, serta infografis materi komputer.
+        </p>
+      </div>
+
+      <div style="background: var(--card-solid); border: 2.5px solid var(--card-border); border-radius: 24px; padding: 28px;">
+        <i class="fa-solid fa-users-rays" style="font-size: 2rem; color: #10b981; margin-bottom: 14px; display: block;"></i>
+        <h3 style="font-family: var(--f-display); font-size: 1.4rem; margin-bottom: 8px;">Community &amp; Management</h3>
+        <p style="color: var(--muted); font-size: 0.92rem; line-height: 1.6;">
+          Portal Guru AWAN untuk administrasi mengajar, dan kalender konten promosi SPMB Madani yang terstruktur rapi.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section class="block" id="contact">
-    <div class="contact reveal">
-      <h2>Let's <em>connect</em><br/>&amp; collaborate.</h2>
-      <p>Ada ide media pembelajaran atau ingin berdiskusi? Sapa saja.</p>
-      <div class="mail"><i class="fa-solid fa-envelope"></i><span id="mailTxt">email@yusriirawan.my.id</span><button id="copyBtn" aria-label="Salin email"><i class="fa-regular fa-copy"></i></button></div>
-      <div class="row">
-        <a href="https://instagram.com/yusriirawan44" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://discordapp.com/users/685240966575292424" target="_blank" rel="noopener" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
-        <a href="https://twitter.com/BISKIT_TOKEN" target="_blank" rel="noopener" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="mailto:email@yusriirawan.my.id" aria-label="Email"><i class="fa-solid fa-paper-plane"></i></a>
+  <!-- ========================================================
+       FOOTER & CONTACT
+       ======================================================== -->
+  <footer style="text-align: center; padding: 60px 20px 40px; border-top: 1px solid var(--line); background: var(--bg);">
+    <div style="max-width: 600px; margin: 0 auto;">
+      <h3 style="font-family: var(--f-display); font-size: 2rem; font-weight: 800; margin-bottom: 12px;">Mari Terhubung &amp; Berkolaborasi</h3>
+      <p style="color: var(--muted); margin-bottom: 24px;">Hubungi untuk diskusi media pembelajaran atau kerjasama.</p>
+      
+      <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; background: var(--yellow); color: #0f172a; border-radius: 999px; font-weight: 700; margin-bottom: 24px; cursor: pointer;" onclick="copyMail()">
+        <i class="fa-solid fa-envelope"></i>
+        <span>email@yusriirawan.my.id</span>
+        <i class="fa-regular fa-copy"></i>
       </div>
-    </div>
-  </section>
-  <footer>&copy; 2026 Yusri Irawan (AWAN) &middot; Dibuat dengan ♥ untuk belajar</footer>
 
-  <!-- Preview modal -->
-  <div class="modal" id="modal">
-    <div class="modal-box">
-      <div class="modal-bar">
-        <div><strong id="mTitle">Preview</strong><small id="mUrl"></small></div>
-        <div class="acts"><a id="mLink" href="#" target="_blank" rel="noopener">Buka tab baru ↗</a><button class="x" id="mClose">Tutup ✕</button></div>
+      <p style="font-size: 0.85rem; color: var(--muted);">&copy; 2026 <strong>Yusri Irawan (AWAN)</strong> &middot; Inspired by Demon Slayer: Zenitsu Agatsuma</p>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       PREVIEW MODAL
+       ======================================================== -->
+  <div class="preview-modal-backdrop" id="modalBackdrop">
+    <div class="preview-modal-window">
+      <div class="modal-bar-top">
+        <div>
+          <strong id="modalTitle">Preview Halaman</strong>
+          <small id="modalUrlBadge"></small>
+        </div>
+        <div class="modal-actions-right">
+          <a href="#" id="modalNewTabLink" target="_blank" rel="noopener">Buka Tab Penuh ↗</a>
+          <button class="btn-close-modal" onclick="closePreviewModal()">Tutup ✕</button>
+        </div>
       </div>
-      <div class="modal-body"><iframe id="mFrame" title="Preview"></iframe></div>
+      <div class="modal-frame-body">
+        <iframe id="modalIframe" src="about:blank" title="Pratinjau Modul"></iframe>
+      </div>
     </div>
   </div>
-  <div class="toast" id="toast"></div>
 
+  <div class="toast-pill" id="toastPill">Email disalin ke clipboard!</div>
+
+  <!-- ========================================================
+       SCRIPTS: CLOCK, TABS, SEARCH, MODAL
+       ======================================================== -->
   <script>
-  (function () {
-    var $ = function (s) { return document.querySelector(s); };
-
-    /* ---------- DATA: semua halaman HTML ---------- */
-    var CATS = { all: 'Semua', math: 'Matematika', tik: 'TIK & Komputer', mgmt: 'Portal & Manajemen' };
-    var MODULES = [
-      { cat:'math', icon:'fa-shapes', grad:'#f59e0b,#ef4444', tag:'Matematika SD', url:'pembelajaranMTK.html', title:'Petualangan Bilangan Misteri', desc:'Aljabar dasar SD dengan timbangan neraca interaktif dan papan peringkat.', feats:['React + Vite','Timbangan','Kuis & Badge'] },
-      { cat:'math', icon:'fa-xmark', grad:'#6366f1,#38bdf8', tag:'Matematika SD', url:'perkalian.html', title:'Perkalian s.d 100.000', desc:'Kalkulator bersusun langkah demi langkah, kuis kilat 20 detik, soal cerita.', feats:['Kalkulator Susun','Kuis 20 Detik','Audio & Confetti'] },
-      { cat:'math', icon:'fa-divide', grad:'#ec4899,#f97316', tag:'Matematika SD', url:'pembagian.html', title:'Pembagian Visual & Bersusun', desc:'Dari membagi kue sama rata hingga pembagian bersusun (porogapit).', feats:['Visual Kue','Langkah Interaktif','Bersusun'] },
-      { cat:'tik', icon:'fa-file-excel', grad:'#10b981,#047857', tag:'TIK Kelas 5', url:'excel.html', title:'Mengenal Menu & Ikon Excel', desc:'Pengenalan ribbon, cell, toolbar, dan navigasi lembar kerja Microsoft Excel.', feats:['Kelas 5 SD','Ribbon','Dasar Excel'] },
-      { cat:'tik', icon:'fa-table-cells', grad:'#0ea5e9,#6366f1', tag:'TIK Kelas 5', url:'experi.html', title:'Lab Formula Excel', desc:'Simulasi langsung rumus SUM, AVERAGE, MAX, MIN di browser.', feats:['Simulasi Rumus','SUM/AVERAGE','Tabel Dinamis'] },
-      { cat:'tik', icon:'fa-palette', grad:'#06b6d4,#8b5cf6', tag:'Desain', url:'canva.html', title:'Catatan Panduan Canva', desc:'Mengenal fitur dan alat gambar Canva untuk poster, undangan, dan presentasi.', feats:['Draw Tool','Template','Tips Desain'] },
-      { cat:'tik', icon:'fa-pen-to-square', grad:'#3b82f6,#1d4ed8', tag:'Evaluasi TIK', url:'latihan.html', title:'Latihan Word & Excel', desc:'Soal latihan pemahaman Microsoft Word dan Excel untuk siswa.', feats:['Soal Latihan','Word','Excel'] },
-      { cat:'tik', icon:'fa-image', grad:'#a855f7,#ec4899', tag:'Visual', url:'tik.html', title:'Infografis Materi TIK', desc:'Penampil catatan Microsoft Word layar penuh untuk penjelasan di kelas.', feats:['Fullscreen','Infografis','Kelas'] },
-      { cat:'mgmt', icon:'fa-chalkboard-user', grad:'#f43f5e,#f59e0b', tag:'Portal Utama', url:'guru.html', title:'Portal Guru AWAN', desc:'Dasbor pengajar: akses cepat seluruh modul ajar dan menu administrasi.', feats:['Dashboard','Akses Cepat','Dark/Light'] },
-      { cat:'mgmt', icon:'fa-calendar-days', grad:'#8b5cf6,#3b82f6', tag:'Manajemen Media', url:'SOSMEDSPMB.html', title:'Kalender Konten SPMB', desc:'Perencanaan jadwal konten sosial media promosi SPMB Madani 2027/2028.', feats:['Content Plan','SPMB','Excel Sync'] },
-      { cat:'mgmt', icon:'fa-flask', grad:'#64748b,#0f172a', tag:'Lab Inovasi', url:'comingsoon.html', title:'Riset Computational Thinking', desc:'Proyek penelitian mendatang tentang computational thinking di matematika SD.', feats:['Riset','Countdown','Animasi'] }
+    /* 1. DATA LENGKAP SEMUA MODUL (SEMUANYA SUDAH MANDIRI STANDALONE) */
+    const MODULES = [
+      {
+        cat: 'math',
+        icon: 'fa-shapes',
+        color: '#f59e0b,#ea580c',
+        tag: 'Matematika SD',
+        url: 'pembelajaranMTK.html',
+        title: 'Petualangan Bilangan Misteri',
+        desc: 'Menemukan bilangan yang belum diketahui dengan visual timbangan neraca, kuis detektif, dan piala prestasi.',
+        feats: ['Timbangan Neraca', 'Kuis Detektif', 'Audio Synthesizer', '100% Mandiri']
+      },
+      {
+        cat: 'math',
+        icon: 'fa-calculator',
+        color: '#6366f1,#38bdf8',
+        tag: 'Matematika SD',
+        url: 'perkalian.html',
+        title: 'Perkalian s.d 100.000',
+        desc: 'Kalkulator perkalian bersusun pendek langkah demi langkah, kuis kilat 20 detik, dan soal cerita.',
+        feats: ['Kalkulator Bersusun', 'Kuis Kilat 20 Detik', 'Trik Cepat', '100% Mandiri']
+      },
+      {
+        cat: 'math',
+        icon: 'fa-divide',
+        color: '#ec4899,#f97316',
+        tag: 'Matematika SD',
+        url: 'pembagian.html',
+        title: 'Pembagian Visual & Bersusun',
+        desc: 'Konsep membagi kue sama rata, keterkaitan fakta perkalian, hingga metode bersusun panjang (porogapit).',
+        feats: ['Visual Kue', 'Langkah Interaktif', 'Porogapit Bersusun']
+      },
+      {
+        cat: 'tik',
+        icon: 'fa-file-excel',
+        color: '#10b981,#047857',
+        tag: 'TIK Kelas 5',
+        url: 'excel.html',
+        title: 'Mengenal Menu & Ikon Excel',
+        desc: 'Materi pengenalan antarmuka Microsoft Excel untuk siswa: ribbon, cell, rumus dasar, dan toolbar kerja.',
+        feats: ['Materi Kelas 5', 'Penjelasan Ikon', 'Navigasi Worksheet']
+      },
+      {
+        cat: 'tik',
+        icon: 'fa-table-cells',
+        color: '#0ea5e9,#6366f1',
+        tag: 'TIK Kelas 5',
+        url: 'experi.html',
+        title: 'Lab Formula Excel',
+        desc: 'Simulasi interaktif langsung di browser untuk latihan rumus SUM, AVERAGE, MAX, dan perhitungan otomatis.',
+        feats: ['Simulasi Rumus', 'SUM / AVERAGE', 'Tabel Nilai Dinamis']
+      },
+      {
+        cat: 'tik',
+        icon: 'fa-palette',
+        color: '#06b6d4,#8b5cf6',
+        tag: 'Desain Visual',
+        url: 'canva.html',
+        title: 'Catatan Panduan Canva',
+        desc: 'Panduan membuat poster, kartu ucapan, dan pemanfaatan alat gambar Draw Tool di Canva untuk siswa.',
+        feats: ['Draw Tool Canva', 'Desain Grafis SD', 'Mode Fokus & Cetak']
+      },
+      {
+        cat: 'tik',
+        icon: 'fa-pen-to-square',
+        color: '#3b82f6,#1d4ed8',
+        tag: 'Evaluasi TIK',
+        url: 'latihan.html',
+        title: 'Latihan Soal Word & Excel',
+        desc: 'Soal latihan pemahaman Microsoft Word dan Excel untuk melatih kecakapan komputer dasar anak.',
+        feats: ['Kuis Evaluasi', 'Soal Terstruktur', 'Catatan Pengajar']
+      },
+      {
+        cat: 'tik',
+        icon: 'fa-image',
+        color: '#a855f7,#ec4899',
+        tag: 'Visual Media',
+        url: 'tik.html',
+        title: 'Infografis Materi TIK',
+        desc: 'Tampilan infografis diagram visual resolusi tinggi untuk mempermudah pemaparan materi di kelas.',
+        feats: ['Fullscreen View', 'Diagram Komputer', 'Visual Bersih']
+      },
+      {
+        cat: 'mgmt',
+        icon: 'fa-chalkboard-user',
+        color: '#f43f5e,#f59e0b',
+        tag: 'Portal Utama',
+        url: 'guru.html',
+        title: 'Portal Guru AWAN',
+        desc: 'Dasbor sentral pengajar: tautan kilat ke seluruh modul ajar, menu absensi, nilai, dan administrasi.',
+        feats: ['Dashboard Pengajar', 'Akses Modul Cepat', 'Tema Dark/Light']
+      },
+      {
+        cat: 'mgmt',
+        icon: 'fa-calendar-days',
+        color: '#8b5cf6,#3b82f6',
+        tag: 'Manajemen Media',
+        url: 'SOSMEDSPMB.html',
+        title: 'Kalender Konten SPMB',
+        desc: 'Perencanaan jadwal publikasi media sosial dan agenda promosi SDS IT Madani Kayuagung 2027/2028.',
+        feats: ['Content Planner', 'SPMB 2027/2028', 'Excel Spreadsheet Sync']
+      },
+      {
+        cat: 'mgmt',
+        icon: 'fa-flask',
+        color: '#64748b,#0f172a',
+        tag: 'Lab Inovasi',
+        url: 'comingsoon.html',
+        title: 'Riset Computational Thinking',
+        desc: 'Laboratorium riset mendatang tentang penerapan computational thinking dalam kurikulum matematika SD.',
+        feats: ['Riset Edukasi', 'Animasi 3D Canvas', 'Countdown Project']
+      }
     ];
 
-    /* ---------- Clock ---------- */
-    var DAYS = ['MIN','SEN','SEL','RAB','KAM','JUM','SAB'];
-    var MON = ['JANUARI','FEBRUARI','MARET','APRIL','MEI','JUNI','JULI','AGUSTUS','SEPTEMBER','OKTOBER','NOVEMBER','DESEMBER'];
-    function tick() {
-      var d = new Date(), p = function (n) { return String(n).padStart(2, '0'); };
-      $('#time').textContent = p(d.getHours()) + ' : ' + p(d.getMinutes());
-      $('#date').textContent = DAYS[d.getDay()] + ', ' + d.getDate() + ' ' + MON[d.getMonth()];
+    const CATEGORIES = {
+      all: 'Semua',
+      math: 'Matematika SD',
+      tik: 'TIK & Komputer',
+      mgmt: 'Portal & Manajemen'
+    };
+
+    /* 2. JAM & TANGGAL REAL-TIME (SESUAI FOTO: MON, 16 JUNE 23: 02 PM) */
+    const DAYS_EN = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    const MONTHS_EN = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUNE', 'JULY', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+    function updateLiveClock() {
+      const now = new Date();
+      const day = DAYS_EN[now.getDay()];
+      const date = now.getDate();
+      const month = MONTHS_EN[now.getMonth()];
+      document.getElementById('liveDate').textContent = `${day}, ${date} ${month}`;
+
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      const formattedHours = String(hours).padStart(2, '0');
+      document.getElementById('liveTime').textContent = `${formattedHours}: ${minutes} ${ampm}`;
     }
-    tick(); setInterval(tick, 10000);
+    updateLiveClock();
+    setInterval(updateLiveClock, 1000);
 
-    /* ---------- Theme ---------- */
-    var root = document.documentElement;
-    function setTheme(t) { root.setAttribute('data-theme', t); localStorage.setItem('awan_theme2', t); $('#themeIcon').className = t === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'; }
-    setTheme(localStorage.getItem('awan_theme2') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-    $('#themeBtn').onclick = function () { setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); };
+    /* 3. TEMA DARK / LIGHT */
+    const rootHtml = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    const themeIcon = document.getElementById('themeIcon');
 
-    /* ---------- Typewriter ---------- */
-    var words = ['Pendidik Matematika & TIK SD', 'Web & Interactive Media Creator', 'Penggiat Belajar Gamifikasi', 'Community Support Lead'];
-    var wi = 0, ci = 0, del = false, typed = $('#typed');
-    (function loop() {
-      var w = words[wi]; ci += del ? -1 : 1; typed.textContent = w.slice(0, ci);
-      var t = del ? 35 : 75;
-      if (!del && ci === w.length) { t = 1800; del = true; }
-      else if (del && ci === 0) { del = false; wi = (wi + 1) % words.length; t = 350; }
-      setTimeout(loop, t);
-    })();
+    function applyTheme(t) {
+      rootHtml.setAttribute('data-theme', t);
+      localStorage.setItem('zen_theme', t);
+      themeIcon.className = t === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    }
+    const savedTheme = localStorage.getItem('zen_theme') || 'dark';
+    applyTheme(savedTheme);
+    themeBtn.onclick = () => {
+      const cur = rootHtml.getAttribute('data-theme');
+      applyTheme(cur === 'dark' ? 'light' : 'dark');
+    };
 
-    /* ---------- Marquee ---------- */
-    var mq = MODULES.map(function (m) { return '<span>' + m.title + '</span>'; }).join('');
-    $('#marquee').innerHTML = mq + mq;
-    $('#modCount').textContent = MODULES.length;
+    /* 4. MARQUEE GENERATOR (JIRO.BUILD STYLE) */
+    const marqueeTrack = document.getElementById('marqueeTrack');
+    const marqueeText = MODULES.map(m => `<span>${m.title}</span>`).join('');
+    marqueeTrack.innerHTML = marqueeText + marqueeText;
 
-    /* ---------- Catalog ---------- */
-    var grid = $('#grid'), chips = $('#chips'), curCat = 'all', q = '';
-    grid.innerHTML = MODULES.map(function (m, i) {
-      return '<article class="card" data-cat="' + m.cat + '" data-s="' + (m.title + ' ' + m.desc + ' ' + m.tag + ' ' + m.feats.join(' ')).toLowerCase() + '" style="transition-delay:' + (i % 3) * 80 + 'ms">' +
-        '<div class="card-top"><div class="c-icon" style="background:linear-gradient(135deg,' + m.grad + ')"><i class="fa-solid ' + m.icon + '"></i><span class="c-plus" role="button" tabindex="0" aria-label="Detail">+</span></div><span class="c-tag">' + m.tag + '</span></div>' +
-        '<h3>' + m.title + '</h3><p>' + m.desc + '</p>' +
-        '<div class="c-extra"><div><ul>' + m.feats.map(function (f) { return '<li>' + f + '</li>'; }).join('') + '</ul></div></div>' +
-        '<div class="c-actions"><a class="btn-open" href="' + m.url + '">Buka halaman ↗</a><button class="btn-prev" data-url="' + m.url + '" data-title="' + m.title + '"><i class="fa-regular fa-eye"></i></button></div></article>';
-    }).join('') + '<div class="empty hide" id="empty"><i class="fa-solid fa-cloud" style="font-size:2.4rem"></i><h3 style="margin-top:10px">Tidak ketemu</h3><p>Coba kata kunci lain: perkalian, excel, canva, guru…</p></div>';
-    var cards = [].slice.call(grid.querySelectorAll('.card'));
+    /* 5. RENDER CHIPS & GRID CARDS */
+    const chipsContainer = document.getElementById('filterChips');
+    const cardsGrid = document.getElementById('cardsGrid');
+    let activeFilter = 'all';
+    let searchQuery = '';
 
-    chips.innerHTML = Object.keys(CATS).map(function (k) {
-      var n = k === 'all' ? MODULES.length : MODULES.filter(function (m) { return m.cat === k; }).length;
-      return '<button class="chip' + (k === 'all' ? ' active' : '') + '" data-c="' + k + '">' + CATS[k] + '<b>' + n + '</b></button>';
+    // Render filter chips
+    chipsContainer.innerHTML = Object.keys(CATEGORIES).map(key => {
+      const count = key === 'all' ? MODULES.length : MODULES.filter(m => m.cat === key).length;
+      return `<button class="filter-chip ${key === 'all' ? 'active' : ''}" data-cat="${key}">
+        ${CATEGORIES[key]} <b>(${count})</b>
+      </button>`;
     }).join('');
 
-    function apply() {
-      var n = 0;
-      cards.forEach(function (c) {
-        var ok = (curCat === 'all' || c.dataset.cat === curCat) && (!q || c.dataset.s.indexOf(q) > -1);
-        c.classList.toggle('hide', !ok); if (ok) n++;
+    // Render cards
+    cardsGrid.innerHTML = MODULES.map(m => `
+      <article class="module-card" data-cat="${m.cat}" data-search="${(m.title + ' ' + m.desc + ' ' + m.feats.join(' ')).toLowerCase()}">
+        <div class="card-top-row">
+          <div class="card-icon-box" style="background: linear-gradient(135deg, ${m.color});">
+            <i class="fa-solid ${m.icon}"></i>
+            <span class="card-icon-plus" title="Buka Detail">+</span>
+          </div>
+          <span class="card-badge-tag">${m.tag}</span>
+        </div>
+        <h3 class="card-title">${m.title}</h3>
+        <p class="card-desc">${m.desc}</p>
+        <div class="card-extra-info">
+          <div>
+            <ul class="card-feature-list">
+              ${m.feats.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+        <div class="card-action-row">
+          <a href="${m.url}" class="btn-card-open">Buka Halaman ↗</a>
+          <button class="btn-card-preview" data-url="${m.url}" data-title="${m.title}">Preview 👁</button>
+        </div>
+      </article>
+    `).join('');
+
+    const allCards = document.querySelectorAll('.module-card');
+
+    function filterCards() {
+      allCards.forEach(card => {
+        const cat = card.getAttribute('data-cat');
+        const sData = card.getAttribute('data-search');
+        const matchCat = (activeFilter === 'all') || (cat === activeFilter);
+        const matchSearch = !searchQuery || sData.includes(searchQuery);
+
+        if (matchCat && matchSearch) {
+          card.classList.remove('hide');
+        } else {
+          card.classList.add('hide');
+        }
       });
-      $('#empty').classList.toggle('hide', n > 0);
     }
-    chips.addEventListener('click', function (e) {
-      var b = e.target.closest('.chip'); if (!b) return;
-      chips.querySelectorAll('.chip').forEach(function (x) { x.classList.remove('active'); });
-      b.classList.add('active'); curCat = b.dataset.c; apply();
-    });
-    $('#search').addEventListener('input', function (e) {
-      q = e.target.value.trim().toLowerCase(); apply();
-      if (q) document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
-    });
-    grid.addEventListener('click', function (e) {
-      var pl = e.target.closest('.c-plus'); if (pl) { pl.closest('.card').classList.toggle('open'); return; }
-      var pv = e.target.closest('.btn-prev'); if (pv) openModal(pv.dataset.url, pv.dataset.title);
-    });
-    grid.addEventListener('keydown', function (e) {
-      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('c-plus')) { e.preventDefault(); e.target.closest('.card').classList.toggle('open'); }
+
+    chipsContainer.addEventListener('click', (e) => {
+      const chip = e.target.closest('.filter-chip');
+      if (!chip) return;
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.getAttribute('data-cat');
+      filterCards();
     });
 
-    /* ---------- Hero description tile ---------- */
-    var dt = $('#descTile');
-    dt.onclick = function () { dt.classList.toggle('open'); };
-    dt.onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); dt.classList.toggle('open'); } };
+    // Global Search Bar in Header
+    document.getElementById('globalSearch').addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      filterCards();
+      if (searchQuery) {
+        document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
 
-    /* ---------- Parallax on mouse (desktop only) ---------- */
-    var stage = $('#stage'), layers = [].slice.call(stage.querySelectorAll('[data-depth]'));
-    if (matchMedia('(hover:hover) and (min-width:1001px)').matches) {
-      document.getElementById('home').addEventListener('mousemove', function (e) {
-        var x = (e.clientX / innerWidth - .5), y = (e.clientY / innerHeight - .5);
-        layers.forEach(function (l) {
-          var d = +l.dataset.depth, base = l.classList.contains('hero-figure') ? 'translate(-58%,-50%) ' : '';
-          l.style.transform = base + 'translate(' + (x * d * 2) + 'px,' + (y * d * 2) + 'px)';
-        });
+    // Expand Card (+) Toggle
+    cardsGrid.addEventListener('click', (e) => {
+      const plusBtn = e.target.closest('.card-icon-plus');
+      if (plusBtn) {
+        const card = plusBtn.closest('.module-card');
+        card.classList.toggle('open');
+      }
+
+      const prevBtn = e.target.closest('.btn-card-preview');
+      if (prevBtn) {
+        openPreviewModal(prevBtn.dataset.url, prevBtn.dataset.title);
+      }
+    });
+
+    // Expand "description." Card in Hero
+    const descCard = document.getElementById('descCard');
+    descCard.addEventListener('click', () => {
+      descCard.classList.toggle('open');
+    });
+
+    /* 6. MODAL QUICK PREVIEW LOGIC */
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalUrlBadge = document.getElementById('modalUrlBadge');
+    const modalNewTabLink = document.getElementById('modalNewTabLink');
+    const modalIframe = document.getElementById('modalIframe');
+
+    function openPreviewModal(url, title) {
+      modalTitle.textContent = title;
+      modalUrlBadge.textContent = url;
+      modalNewTabLink.href = url;
+      modalIframe.src = url;
+      modalBackdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePreviewModal() {
+      modalBackdrop.classList.remove('active');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        modalIframe.src = 'about:blank';
+      }, 300);
+    }
+
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) closePreviewModal();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePreviewModal();
+    });
+
+    /* 7. COPY MAIL TOAST */
+    function copyMail() {
+      const email = 'email@yusriirawan.my.id';
+      navigator.clipboard.writeText(email).then(() => {
+        const toast = document.getElementById('toastPill');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
       });
     }
 
-    /* ---------- Scroll: header + active nav + reveal ---------- */
-    var tb = $('#topbar'), links = [].slice.call(document.querySelectorAll('.nav a'));
-    var secs = ['home', 'about', 'gallery'].map(function (id) { return document.getElementById(id); });
-    addEventListener('scroll', function () {
-      tb.classList.toggle('scrolled', scrollY > 30);
-      var pos = scrollY + innerHeight * .35, cur = 'home';
-      secs.forEach(function (s) { if (s.offsetTop <= pos) cur = s.id; });
-      links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
+    /* 8. TOPBAR SCROLL LISTENER */
+    window.addEventListener('scroll', () => {
+      const topbar = document.getElementById('topbar');
+      if (window.scrollY > 30) {
+        topbar.classList.add('scrolled');
+      } else {
+        topbar.classList.remove('scrolled');
+      }
     }, { passive: true });
-    var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }); }, { threshold: .12 });
-    document.querySelectorAll('.reveal, .card').forEach(function (el) { io.observe(el); });
-
-    /* ---------- Modal ---------- */
-    var modal = $('#modal'), frame = $('#mFrame');
-    function openModal(url, title) {
-      $('#mTitle').textContent = title; $('#mUrl').textContent = url; $('#mLink').href = url;
-      frame.src = url; modal.classList.add('on'); document.body.style.overflow = 'hidden';
-    }
-    function closeModal() { modal.classList.remove('on'); document.body.style.overflow = ''; setTimeout(function () { frame.src = 'about:blank'; }, 300); }
-    $('#mClose').onclick = closeModal;
-    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
-    addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
-
-    /* ---------- Copy email ---------- */
-    var toast = $('#toast'), tt;
-    $('#copyBtn').onclick = function () {
-      var m = $('#mailTxt').textContent.trim();
-      (navigator.clipboard ? navigator.clipboard.writeText(m) : Promise.reject()).then(function () { say('Email disalin ✓'); }, function () { say('Gagal menyalin'); });
-    };
-    function say(t) { toast.textContent = t; toast.classList.add('on'); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove('on'); }, 2400); }
-  })();
   </script>
 </body>
 </html>

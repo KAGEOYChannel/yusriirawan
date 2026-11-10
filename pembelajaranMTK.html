@@ -1,16 +1,795 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Petualangan Bilangan Misteri - Matematika SD Interaktif</title>
-    <meta name="description" content="Aplikasi Pembelajaran Matematika Interaktif untuk Siswa Sekolah Dasar - Menentukan Bilangan yang Belum Diketahui" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-amber-50 text-slate-800 antialiased selection:bg-amber-300 selection:text-amber-900 min-h-screen">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Petualangan Bilangan Misteri - Matematika SD Interaktif</title>
+  <meta name="description" content="Aplikasi Pembelajaran Matematika SD Interaktif - Menemukan Bilangan Misterius dengan Timbangan Neraca dan Kuis Detektif.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --primary: #f59e0b;
+      --primary-dark: #d97706;
+      --accent: #6366f1;
+      --bg: #fffbeb;
+      --card: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #fde68a;
+      --radius: 20px;
+      --shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.15), 0 8px 10px -6px rgba(245, 158, 11, 0.1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header.app-bar {
+      background: #ffffff;
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .bar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f59e0b, #ea580c);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+    }
+    .logo-text h1 {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #d97706;
+      line-height: 1.1;
+    }
+    .logo-text span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .bar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-nav-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: #f1f5f9;
+      color: #334155;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    .btn-nav-home:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    .score-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      font-family: 'Fredoka', cursive;
+      font-size: 0.95rem;
+      color: #b45309;
+      font-weight: 600;
+    }
+
+    main.content {
+      max-width: 1000px;
+      width: 100%;
+      margin: 24px auto;
+      padding: 0 16px 40px;
+      flex: 1;
+    }
+
+    /* Tab Switcher */
+    .tab-bar {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 2px solid transparent;
+      background: #ffffff;
+      color: var(--text-muted);
+      font-family: 'Fredoka', cursive;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      transition: all 0.2s;
+    }
+    .tab-btn:hover {
+      color: var(--primary-dark);
+      background: #fffbeb;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #ffffff;
+      border-color: #f59e0b;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+    }
+
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* CARD STYLES */
+    .app-card {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      text-align: center;
+      position: relative;
+    }
+
+    /* 1. TIMBANGAN NERACA LAB */
+    .scale-container {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      height: 280px;
+      margin: 0 auto 30px;
+    }
+    .scale-base {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 24px;
+      background: #94a3b8;
+      border-radius: 12px;
+    }
+    .scale-pillar {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 160px;
+      background: #cbd5e1;
+      border-radius: 6px;
+    }
+    .scale-beam {
+      position: absolute;
+      top: 90px;
+      left: 50%;
+      width: 380px;
+      height: 14px;
+      background: #f59e0b;
+      border-radius: 7px;
+      transform-origin: center center;
+      transform: translateX(-50%) rotate(0deg);
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .scale-fulcrum {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 32px;
+      height: 32px;
+      background: #d97706;
+      border-radius: 50%;
+      border: 4px solid #ffffff;
+    }
+    .pan {
+      position: absolute;
+      top: 14px;
+      width: 130px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .pan.left { left: 10px; }
+    .pan.right { right: 10px; }
+    .pan-chain {
+      width: 2px;
+      height: 70px;
+      background: #94a3b8;
+    }
+    .pan-plate {
+      width: 120px;
+      height: 24px;
+      background: #475569;
+      border-radius: 0 0 60px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    .pan-content {
+      position: absolute;
+      bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: 'Fredoka', cursive;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .box-mystery {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      padding: 6px 14px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+      animation: pulse 1.8s infinite;
+    }
+    .box-number {
+      background: linear-gradient(135deg, #10b981, #059669);
+      padding: 6px 14px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    .equation-display {
+      font-family: 'Fredoka', cursive;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #334155;
+    }
+    .mystery-symbol {
+      color: #6366f1;
+      background: #e0e7ff;
+      padding: 4px 16px;
+      border-radius: 14px;
+      border: 2px dashed #6366f1;
+    }
+
+    .input-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .input-box {
+      width: 140px;
+      padding: 12px 16px;
+      border: 3px solid #cbd5e1;
+      border-radius: 16px;
+      font-family: 'Fredoka', cursive;
+      font-size: 1.6rem;
+      text-align: center;
+      font-weight: 700;
+      color: #1e293b;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .input-box:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.25);
+    }
+    .btn-action {
+      padding: 14px 28px;
+      border-radius: 16px;
+      border: none;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #ffffff;
+      font-family: 'Fredoka', cursive;
+      font-size: 1.15rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+      transition: all 0.2s;
+    }
+    .btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.45);
+    }
+    .feedback-msg {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.25rem;
+      min-height: 2em;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+    .feedback-msg.correct { color: #10b981; }
+    .feedback-msg.wrong { color: #ef4444; }
+
+    /* 2. KUIS PILIHAN GANDA */
+    .quiz-question {
+      font-family: 'Fredoka', cursive;
+      font-size: 1.6rem;
+      color: #1e293b;
+      margin-bottom: 24px;
+    }
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 480px;
+      margin: 0 auto 20px;
+    }
+    .quiz-opt-btn {
+      padding: 16px;
+      border-radius: 16px;
+      border: 2px solid #e2e8f0;
+      background: #ffffff;
+      font-family: 'Fredoka', cursive;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .quiz-opt-btn:hover {
+      border-color: var(--primary);
+      background: #fef3c7;
+      transform: translateY(-2px);
+    }
+
+    /* 3. PAPAN PERINGKAT & BADGES */
+    .badges-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .badge-card {
+      padding: 14px 20px;
+      border-radius: 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      width: 140px;
+    }
+    .badge-icon {
+      font-size: 2rem;
+    }
+    .badge-card strong {
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    footer.app-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      background: #ffffff;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top App Bar -->
+  <header class="app-bar">
+    <div class="bar-inner">
+      <a href="index.html" class="logo-group">
+        <div class="logo-badge">
+          <i class="fa-solid fa-shapes"></i>
+        </div>
+        <div class="logo-text">
+          <h1>Bilangan Misteri</h1>
+          <span>Matematika SD Interaktif</span>
+        </div>
+      </a>
+
+      <div class="bar-actions">
+        <div class="score-badge">
+          <i class="fa-solid fa-star" style="color: #f59e0b;"></i>
+          <span id="scoreVal">0</span> Poin
+        </div>
+        <a href="index.html" class="btn-nav-home">
+          <i class="fa-solid fa-house"></i>
+          <span>Beranda</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="content">
+
+    <!-- Tab Navigation -->
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('lab')">
+        <i class="fa-solid fa-scale-balanced"></i>
+        <span>Lab Timbangan</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('quiz')">
+        <i class="fa-solid fa-puzzle-piece"></i>
+        <span>Kuis Detektif</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('story')">
+        <i class="fa-solid fa-book-open-reader"></i>
+        <span>Cerita Bilangan</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('badges')">
+        <i class="fa-solid fa-award"></i>
+        <span>Piala & Prestasi</span>
+      </button>
+    </div>
+
+    <!-- PANEL 1: LAB TIMBANGAN -->
+    <div class="tab-panel active" id="panel-lab">
+      <div class="app-card">
+        <h2 style="font-family: 'Fredoka', cursive; font-size: 1.8rem; margin-bottom: 8px; color: #d97706;">
+          Timbangan Neraca Bilangan
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.95rem;">
+          Temukan angka misterius agar kedua sisi timbangan berada pada posisi yang <strong>seimbang sama rata</strong>!
+        </p>
+
+        <!-- Visual Timbangan -->
+        <div class="scale-container">
+          <div class="scale-base"></div>
+          <div class="scale-pillar"></div>
+          <div class="scale-beam" id="scaleBeam">
+            <div class="scale-fulcrum"></div>
+
+            <!-- Piringan Kiri -->
+            <div class="pan left">
+              <div class="pan-chain"></div>
+              <div class="pan-content">
+                <span class="box-mystery" id="leftMystery">?</span>
+                <span style="color:#64748b; font-size: 1.6rem;">+</span>
+                <span class="box-number" id="leftAdd">12</span>
+              </div>
+              <div class="pan-plate"></div>
+            </div>
+
+            <!-- Piringan Kanan -->
+            <div class="pan right">
+              <div class="pan-chain"></div>
+              <div class="pan-content">
+                <span class="box-number" id="rightTotal">30</span>
+              </div>
+              <div class="pan-plate"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="equation-display">
+          <span class="mystery-symbol" id="displayMystery">?</span> + <span id="displayAdd">12</span> = <span id="displayTotal">30</span>
+        </div>
+
+        <div class="input-row">
+          <input type="number" class="input-box" id="mysteryInput" placeholder="Nilai ?" autocomplete="off" />
+          <button class="btn-action" onclick="checkBalance()">
+            <i class="fa-solid fa-check"></i> Uji Timbangan
+          </button>
+          <button class="btn-action" style="background: #64748b;" onclick="generateBalanceProblem()">
+            <i class="fa-solid fa-rotate"></i> Soal Baru
+          </button>
+        </div>
+
+        <div class="feedback-msg" id="scaleFeedback">Ketik bilangan pengganti tanda ? lalu klik Uji Timbangan.</div>
+      </div>
+    </div>
+
+    <!-- PANEL 2: KUIS DETEKTIF -->
+    <div class="tab-panel" id="panel-quiz">
+      <div class="app-card">
+        <h2 style="font-family: 'Fredoka', cursive; font-size: 1.8rem; margin-bottom: 8px; color: #d97706;">
+          Kuis Detektif Misteri
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 24px;">Pilih jawaban yang benar untuk memecahkan teka-teki bilangan!</p>
+
+        <div class="quiz-question" id="quizQuestion">
+          Berapakah nilai <strong>x</strong> pada: x + 15 = 40 ?
+        </div>
+
+        <div class="quiz-options" id="quizOptions"></div>
+
+        <div class="feedback-msg" id="quizFeedback">Pilih salah satu jawaban di atas!</div>
+      </div>
+    </div>
+
+    <!-- PANEL 3: CERITA BILANGAN -->
+    <div class="tab-panel" id="panel-story">
+      <div class="app-card" style="text-align: left;">
+        <h2 style="font-family: 'Fredoka', cursive; font-size: 1.8rem; margin-bottom: 8px; color: #d97706; text-align: center;">
+          Petualangan Detektif Kucing
+        </h2>
+        <div style="background: #f8fafc; border-radius: 16px; padding: 24px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+          <h3 style="font-family: 'Fredoka', cursive; color: #4338ca; margin-bottom: 12px; font-size: 1.3rem;">
+            Kasus Keranjang Apel Pak Tani
+          </h3>
+          <p style="line-height: 1.7; color: #334155; margin-bottom: 14px;">
+            Pak Tani memetik sejumlah apel di kebun misterius. Karena keranjangnya penuh, ia meletakkan <strong>24 buah apel</strong> di meja, dan sisanya masih tersimpan di dalam karung tertutup rapat.
+          </p>
+          <p style="line-height: 1.7; color: #334155; margin-bottom: 14px;">
+            Ketika semua apel ditimbang bersama, total apel yang dimiliki Pak Tani adalah <strong>60 buah apel</strong>.
+          </p>
+          <div style="padding: 12px 16px; background: #e0e7ff; border-radius: 12px; font-weight: 700; color: #3730a3;">
+            Tantangan: Berapakah isi apel di dalam karung tertutup (<strong>y</strong>)? <br>
+            Persamaan: <code>y + 24 = 60</code>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <input type="number" class="input-box" id="storyAnswerInput" placeholder="Jawaban" style="width: 140px; margin-right: 10px;" />
+          <button class="btn-action" onclick="checkStoryAnswer()">Periksa Jawaban</button>
+          <div class="feedback-msg" id="storyFeedback"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL 4: PRESTASI & BADGES -->
+    <div class="tab-panel" id="panel-badges">
+      <div class="app-card">
+        <h2 style="font-family: 'Fredoka', cursive; font-size: 1.8rem; margin-bottom: 8px; color: #d97706;">
+          Koleksi Lencana & Prestasi
+        </h2>
+        <p style="color: var(--text-muted); margin-bottom: 24px;">Kumpulkan poin dari soal untuk membuka lencana detektif cilik!</p>
+
+        <div class="badges-row">
+          <div class="badge-card" id="b1">
+            <span class="badge-icon">🥉</span>
+            <strong>Detektif Pemula</strong>
+            <small style="color: var(--text-muted)">10 Poin</small>
+          </div>
+          <div class="badge-card" id="b2">
+            <span class="badge-icon">🥈</span>
+            <strong>Ahli Neraca</strong>
+            <small style="color: var(--text-muted)">30 Poin</small>
+          </div>
+          <div class="badge-card" id="b3">
+            <span class="badge-icon">🥇</span>
+            <strong>Master Aljabar</strong>
+            <small style="color: var(--text-muted)">60 Poin</small>
+          </div>
+          <div class="badge-card" id="b4">
+            <span class="badge-icon">👑</span>
+            <strong>Cendekiawan</strong>
+            <small style="color: var(--text-muted)">100 Poin</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="app-footer">
+    &copy; 2026 <strong>Yusri Irawan (AWAN)</strong> &middot; Media Pembelajaran Matematika SD Interaktif
+  </footer>
+
+  <script>
+    /* Audio Synthesizer sederhana (Web Audio API) tanpa file audio eksternal */
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playSound(type) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      if (type === 'correct') {
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5
+        osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.2); // G5
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.35);
+      } else {
+        osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(180, audioCtx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      }
+    }
+
+    // STATE
+    let totalScore = parseInt(localStorage.getItem('mtk_score') || '0', 10);
+    document.getElementById('scoreVal').textContent = totalScore;
+    updateBadgesUI();
+
+    function addScore(pts) {
+      totalScore += pts;
+      document.getElementById('scoreVal').textContent = totalScore;
+      localStorage.setItem('mtk_score', totalScore);
+      updateBadgesUI();
+    }
+
+    function updateBadgesUI() {
+      const b1 = document.getElementById('b1');
+      const b2 = document.getElementById('b2');
+      const b3 = document.getElementById('b3');
+      const b4 = document.getElementById('b4');
+      if (totalScore >= 10) b1.style.borderColor = '#10b981', b1.style.background = '#ecfdf5';
+      if (totalScore >= 30) b2.style.borderColor = '#10b981', b2.style.background = '#ecfdf5';
+      if (totalScore >= 60) b3.style.borderColor = '#10b981', b3.style.background = '#ecfdf5';
+      if (totalScore >= 100) b4.style.borderColor = '#10b981', b4.style.background = '#ecfdf5';
+    }
+
+    // TABS
+    function switchTab(name) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      document.getElementById('panel-' + name).classList.add('active');
+    }
+
+    // 1. TIMBANGAN LOGIC
+    let currentMystery = 18;
+    let currentAdd = 12;
+    let currentTotal = 30;
+
+    function generateBalanceProblem() {
+      currentMystery = Math.floor(Math.random() * 25) + 5;
+      currentAdd = Math.floor(Math.random() * 30) + 5;
+      currentTotal = currentMystery + currentAdd;
+
+      document.getElementById('leftMystery').textContent = '?';
+      document.getElementById('leftAdd').textContent = currentAdd;
+      document.getElementById('rightTotal').textContent = currentTotal;
+
+      document.getElementById('displayMystery').textContent = '?';
+      document.getElementById('displayAdd').textContent = currentAdd;
+      document.getElementById('displayTotal').textContent = currentTotal;
+
+      document.getElementById('mysteryInput').value = '';
+      document.getElementById('scaleBeam').style.transform = 'translateX(-50%) rotate(0deg)';
+      document.getElementById('scaleFeedback').className = 'feedback-msg';
+      document.getElementById('scaleFeedback').textContent = 'Ketik bilangan pengganti tanda ? lalu klik Uji Timbangan.';
+    }
+
+    function checkBalance() {
+      const inputVal = parseInt(document.getElementById('mysteryInput').value, 10);
+      const feedback = document.getElementById('scaleFeedback');
+      const beam = document.getElementById('scaleBeam');
+
+      if (isNaN(inputVal)) {
+        feedback.textContent = 'Silakan masukkan angka tebakanmu terlebih dahulu!';
+        feedback.className = 'feedback-msg wrong';
+        return;
+      }
+
+      if (inputVal === currentMystery) {
+        beam.style.transform = 'translateX(-50%) rotate(0deg)';
+        feedback.textContent = '🎉 HEBAT! Timbangan seimbang sempurna! Nilai ? adalah ' + currentMystery + '! (+10 Poin)';
+        feedback.className = 'feedback-msg correct';
+        document.getElementById('leftMystery').textContent = currentMystery;
+        playSound('correct');
+        addScore(10);
+      } else if (inputVal < currentMystery) {
+        beam.style.transform = 'translateX(-50%) rotate(8deg)';
+        feedback.textContent = '⚖️ Belum seimbang: Piringan kiri masih terlalu RINGAN! Coba angka yang lebih besar.';
+        feedback.className = 'feedback-msg wrong';
+        playSound('wrong');
+      } else {
+        beam.style.transform = 'translateX(-50%) rotate(-8deg)';
+        feedback.textContent = '⚖️ Belum seimbang: Piringan kiri terlalu BERAT! Coba angka yang lebih kecil.';
+        feedback.className = 'feedback-msg wrong';
+        playSound('wrong');
+      }
+    }
+
+    // 2. KUIS LOGIC
+    let currentQuizAnswer = 25;
+    function generateQuiz() {
+      const a = Math.floor(Math.random() * 20) + 10;
+      const ans = Math.floor(Math.random() * 30) + 5;
+      const total = a + ans;
+      currentQuizAnswer = ans;
+
+      document.getElementById('quizQuestion').innerHTML = 
+        `Berapakah nilai <strong>x</strong> pada: x + ${a} = ${total} ?`;
+
+      const opts = [ans, ans + 2, Math.max(1, ans - 3), ans + 5].sort(() => Math.random() - 0.5);
+      const optContainer = document.getElementById('quizOptions');
+      optContainer.innerHTML = '';
+      opts.forEach(val => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-opt-btn';
+        btn.textContent = val;
+        btn.onclick = () => checkQuiz(val);
+        optContainer.appendChild(btn);
+      });
+      document.getElementById('quizFeedback').className = 'feedback-msg';
+      document.getElementById('quizFeedback').textContent = 'Pilih salah satu jawaban di atas!';
+    }
+
+    function checkQuiz(chosen) {
+      const fb = document.getElementById('quizFeedback');
+      if (chosen === currentQuizAnswer) {
+        fb.textContent = '🌟 TEPAT SEKALI! Jawabanmu benar! (+10 Poin)';
+        fb.className = 'feedback-msg correct';
+        playSound('correct');
+        addScore(10);
+        setTimeout(generateQuiz, 1500);
+      } else {
+        fb.textContent = '❌ Masih kurang tepat, coba pikirkan kembali!';
+        fb.className = 'feedback-msg wrong';
+        playSound('wrong');
+      }
+    }
+
+    // 3. CERITA LOGIC
+    function checkStoryAnswer() {
+      const val = parseInt(document.getElementById('storyAnswerInput').value, 10);
+      const fb = document.getElementById('storyFeedback');
+      if (val === 36) {
+        fb.textContent = '🏆 LUAR BIASA! 36 + 24 = 60. Jumlah apel di karung adalah 36! (+15 Poin)';
+        fb.className = 'feedback-msg correct';
+        playSound('correct');
+        addScore(15);
+      } else {
+        fb.textContent = 'Belum pas. Ingat: Kurangkan total 60 dengan 24!';
+        fb.className = 'feedback-msg wrong';
+        playSound('wrong');
+      }
+    }
+
+    // Initialize
+    generateBalanceProblem();
+    generateQuiz();
+  </script>
+</body>
 </html>
