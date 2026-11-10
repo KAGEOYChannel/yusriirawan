@@ -1442,6 +1442,110 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
       .lightning-flash { display: none; }
+      .marquee-track { animation: marqueeScroll 40s linear infinite !important; }
+      .character-halo::before { animation: ringSpin 30s linear infinite !important; }
+    }
+
+    /* ==========================================================
+       🛠 PERAPIHAN SUSUNAN (revisi layout)
+       ========================================================== */
+    /* Kolom kiri: naik sedikit, sosmed di dalam kolom */
+    .hero-intro-left { top: 45%; transform: translateY(-58%); }
+    .hero-name-left { margin-top: 26px; }
+    .hero-script-overlay {
+      top: -34px; left: 4px;
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+    }
+    .hero-socials {
+      position: static;
+      margin-top: 16px;
+      gap: 18px;
+    }
+    .social-tag { font-size: .88rem; }
+    .social-tag i { font-size: 1.3rem; }
+
+    /* Kartu avatar: pindah ke atas karakter, tidak menutupi AWAN */
+    .card-top-left { left: 35%; top: 0; width: 104px; height: 104px; rotate: -6deg; }
+    .sparkle-star.s1 { left: 44.5%; top: 6%; font-size: 1.7rem; }
+    .card-desc-left { bottom: 0; }
+    .widget-weather { bottom: 31%; }
+
+    /* Zenitsu: bagian bawah memudar halus + cahaya lantai petir (tidak terpotong kaku) */
+    .zen-char-img {
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 74%, rgba(0,0,0,.55) 88%, transparent 100%);
+      mask-image: linear-gradient(to bottom, #000 0%, #000 74%, rgba(0,0,0,.55) 88%, transparent 100%);
+    }
+    .zen-character-center::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 50%;
+      bottom: -22px;
+      width: 120%;
+      height: 70px;
+      margin-left: -60%;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(250, 204, 21, .55) 0%, rgba(250, 204, 21, .18) 40%, transparent 70%);
+      filter: blur(10px);
+      animation: groundPulse 3s ease-in-out infinite alternate;
+    }
+    .zen-character-center::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 50%;
+      bottom: -4px;
+      width: 78%;
+      height: 26px;
+      margin-left: -39%;
+      border-radius: 50%;
+      border: 2px solid rgba(250, 204, 21, .65);
+      box-shadow: 0 0 22px var(--yellow-glow), inset 0 0 14px rgba(250, 204, 21, .3);
+      animation: groundRing 3s ease-in-out infinite;
+    }
+    @keyframes groundPulse { from { opacity: .6; transform: scaleX(.92); } to { opacity: 1; transform: scaleX(1.05); } }
+    @keyframes groundRing { 0% { transform: scale(.7); opacity: 0; } 30% { opacity: 1; } 100% { transform: scale(1.25); opacity: 0; } }
+
+    /* Garis kuning (halo): bergerak mulus — berdenyut + cincin putus-putus berputar */
+    .character-halo {
+      border-color: rgba(250, 204, 21, .8);
+      will-change: transform;
+      animation: pulseHalo 4s ease-in-out infinite alternate;
+    }
+    .character-halo::before {
+      content: "";
+      position: absolute;
+      inset: -18px;
+      border-radius: 50%;
+      border: 3px dashed rgba(250, 204, 21, .55);
+      animation: ringSpin 22s linear infinite;
+    }
+    .character-halo::after {
+      content: "";
+      position: absolute;
+      inset: -34px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: rgba(255, 244, 150, .9);
+      border-right-color: rgba(250, 204, 21, .35);
+      filter: drop-shadow(0 0 8px var(--yellow));
+      animation: ringSpin 7s cubic-bezier(.45, .05, .55, .95) infinite reverse;
+    }
+
+    /* Pita kuning (marquee): gerak halus lewat GPU */
+    .marquee-strip {
+      transform: rotate(-1.4deg) translateZ(0);
+      backface-visibility: hidden;
+      contain: paint;
+    }
+    .marquee-track {
+      will-change: transform;
+      backface-visibility: hidden;
+      animation: marqueeSmooth 34s linear infinite;
+    }
+    @keyframes marqueeSmooth {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-50%, 0, 0); }
     }
   </style>
 </head>
@@ -1533,6 +1637,18 @@
           Pendidik Sekolah Dasar, Web Creator, dan Community Support Lead. Berdedikasi menghadirkan media pembelajaran matematika dan teknologi informasi yang interaktif, visual, dan menyenangkan bagi anak-anak.
         </p>
         <a href="#gallery" class="btn-readmore">Read More</a>
+
+        <!-- Sosmed dipindah ke dalam kolom intro agar tidak menimpa kartu description -->
+        <div class="hero-socials">
+          <a href="https://instagram.com/yusriirawan44" target="_blank" rel="noopener" class="social-tag">
+            <i class="fa-brands fa-instagram"></i>
+            <span>@yusriirawan44</span>
+          </a>
+          <a href="https://discordapp.com/users/685240966575292424" target="_blank" rel="noopener" class="social-tag">
+            <i class="fa-brands fa-discord"></i>
+            <span>Discord</span>
+          </a>
+        </div>
       </div>
 
       <!-- 4. SPARKLE BINTANG KUNING ALA REFERENSI -->
@@ -1572,17 +1688,7 @@
         <i class="fa-solid fa-chevron-right"></i>
       </button>
 
-      <!-- 10. SOCIALS FOOTER KIRI BAWAH -->
-      <div class="hero-socials">
-        <a href="https://instagram.com/yusriirawan44" target="_blank" rel="noopener" class="social-tag">
-          <i class="fa-brands fa-instagram"></i>
-          <span>@yusriirawan44</span>
-        </a>
-        <a href="https://discordapp.com/users/685240966575292424" target="_blank" rel="noopener" class="social-tag">
-          <i class="fa-brands fa-discord"></i>
-          <span>Discord</span>
-        </a>
-      </div>
+      <!-- 10. SOCIALS dipindah ke kolom intro kiri -->
 
     </div>
   </section>
