@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tampilan Gambar Full</title>
+  <title>Infografis Materi TIK SD - Catatan Microsoft Word</title>
   <style>
     body {
       margin: 0;
@@ -11,16 +11,57 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background-color: #000; /* background hitam biar kontras */
+      min-height: 100vh;
+      background-color: #0b0f19;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .img-container {
+      position: relative;
+      max-width: 95vw;
+      max-height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     img {
       max-width: 100%;
-      max-height: 100%;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    }
+    .back-nav {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+    }
+    .back-btn {
+      color: #fff;
+      text-decoration: none;
+      background: rgba(17, 24, 39, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      background: #38bdf8;
+      color: #000;
     }
   </style>
 </head>
 <body>
-  <img src="tik.jpg" alt="Catatan Microsoft Word">
+  <div class="back-nav">
+    <a href="index.html" class="back-btn">← Beranda AWAN</a>
+    <a href="excel.html" class="back-btn">Materi Excel</a>
+  </div>
+  <div class="img-container">
+    <img src="tik.jpg" alt="Catatan Microsoft Word">
+  </div>
 </body>
 </html>

@@ -5,9 +5,9 @@ import fs from 'fs';
 import { defineConfig, Plugin, Connect } from 'vite';
 
 /**
- * Plugin untuk menyalin HTML statis lainnya ke dist saat build,
- * sehingga semua file HTML lama/tambahan tetap ada di GitHub Pages
- * dan tidak menghasilkan 404.
+ * Plugin untuk menyalin HTML statis dan aset pendukung ke dist saat build,
+ * sehingga semua file HTML, gambar, custom domain CNAME, dan stylesheet/script
+ * tetap lengkap di GitHub Pages tanpa 404.
  */
 function copyStaticHtmlPages(): Plugin {
   return {
@@ -42,6 +42,39 @@ function copyStaticHtmlPages(): Plugin {
           );
         } catch (err) {
           console.warn(`Gagal menyalin ${entry.name}:`, err);
+        }
+      }
+
+      // Salin file aset tambahan yang dibutuhkan halaman statis
+      const extraAssets = [
+        'CNAME',
+        'awan.png',
+        'pf_logo2.png',
+        'tik.jpg',
+        'content-calendar.xlsx',
+        'SPMB.css',
+        'SPMB.js',
+      ];
+
+      for (const assetName of extraAssets) {
+        const srcFile = path.join(rootDir, assetName);
+        if (fs.existsSync(srcFile)) {
+          try {
+            fs.copyFileSync(srcFile, path.join(outDir, assetName));
+          } catch (err) {
+            console.warn(`Gagal menyalin aset ${assetName}:`, err);
+          }
+        }
+      }
+
+      // Salin folder code/ jika ada
+      const codeDir = path.join(rootDir, 'code');
+      const destCodeDir = path.join(outDir, 'code');
+      if (fs.existsSync(codeDir)) {
+        try {
+          fs.cpSync(codeDir, destCodeDir, { recursive: true });
+        } catch (err) {
+          console.warn('Gagal menyalin folder code:', err);
         }
       }
     },
