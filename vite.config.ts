@@ -48,6 +48,7 @@ function copyStaticHtmlPages(): Plugin {
       // Salin file aset tambahan yang dibutuhkan halaman statis
       const extraAssets = [
         'CNAME',
+        'back.jpg',
         'zen.mp4',
         'zenitsu.png',
         'awan.png',

@@ -86,9 +86,9 @@
     }
 
     /* ==========================================================
-       BACKGROUND VIDEO (zen.mp4 LOOPING) DENGAN OPTIMALISASI
+       BACKGROUND IMAGE (back.jpg) - RINGAN, CEPAT & BEBAS LAG
        ========================================================== */
-    .bg-video-container {
+    .bg-image-container {
       position: fixed;
       inset: 0;
       z-index: -2;
@@ -96,13 +96,14 @@
       background: #090c19;
     }
 
-    .bg-video-player {
+    .bg-image-player {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
-      filter: contrast(1.1) brightness(0.9);
-      will-change: transform;
+      filter: contrast(1.06) brightness(0.85);
+      transform: scale(1.02);
+      transition: transform 6s ease-out;
     }
 
     /* Tint Overlay agar teks dan karakter di atasnya sangat kontras & terbaca */
@@ -111,8 +112,8 @@
       inset: 0;
       z-index: -1;
       background: var(--overlay-bg);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
     /* Ambient technical curved lines seperti pada foto referensi */
@@ -1180,7 +1181,7 @@
     }
 
     /* ==========================================================
-       ✨ LOADING SCREEN LUCU (Zenitsu tidur + petir jatuh)
+       ✨ LOADING SCREEN SIMPEL & ELEGAN (Cepat, Ringan & Bebas Lag)
        ========================================================== */
     body.loading { overflow: hidden; }
 
@@ -1192,97 +1193,105 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 14px;
-      background:
-        radial-gradient(circle at 50% 42%, #2a2150 0%, #120f2a 55%, #07081a 100%);
+      background: radial-gradient(circle at 50% 45%, #141a33 0%, #0c1022 55%, #070914 100%);
       color: #fff;
-      overflow: hidden;
-      clip-path: circle(150% at 50% 50%);
-      transition: clip-path 1s cubic-bezier(.7, 0, .2, 1), opacity .4s ease .75s;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s ease;
     }
-    .loader.done { clip-path: circle(0% at 50% 45%); opacity: 0; pointer-events: none; }
-
-    .ld-bolts { position: absolute; inset: 0; pointer-events: none; }
-    .ld-bolts span {
-      position: absolute; top: -10%;
-      left: calc(var(--x) * 1%);
-      font-size: calc(var(--s) * 1px);
-      color: var(--yellow);
-      filter: drop-shadow(0 0 12px var(--yellow-glow));
-      opacity: .85;
-      animation: boltFall calc(var(--d) * 1s) linear calc(var(--dl) * -1s) infinite;
-    }
-    @keyframes boltFall {
-      0% { transform: translateY(0) rotate(-12deg); opacity: 0; }
-      10% { opacity: .9; }
-      100% { transform: translateY(120vh) rotate(18deg); opacity: 0; }
+    .loader.done {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
 
-    .ld-stage { position: relative; width: 210px; height: 270px; display: grid; place-items: end center; }
-    .ld-ring {
-      position: absolute; top: 14px; left: 50%; width: 190px; height: 190px; margin-left: -95px;
+    .ld-brand-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+
+    .ld-avatar-ring {
+      position: relative;
+      width: 86px;
+      height: 86px;
       border-radius: 50%;
-      border: 4px dashed rgba(250, 204, 21, .75);
-      box-shadow: 0 0 40px var(--yellow-glow), inset 0 0 40px rgba(250, 204, 21, .18);
-      animation: ringSpin 6s linear infinite;
-    }
-    @keyframes ringSpin { to { transform: rotate(360deg); } }
-
-    .ld-char {
-      position: relative; z-index: 2; height: 250px; width: auto;
-      transform-origin: 50% 100%;
-      filter: drop-shadow(0 12px 22px rgba(0, 0, 0, .6));
-      animation: ldHop 1.1s cubic-bezier(.3, .0, .3, 1) infinite;
-    }
-    @keyframes ldHop {
-      0%, 100% { transform: translateY(0) scale(1.06, .92) rotate(-3deg); }
-      45% { transform: translateY(-34px) scale(.95, 1.07) rotate(4deg); }
-      70% { transform: translateY(-6px) scale(1, 1) rotate(-2deg); }
-    }
-    .ld-shadow {
-      position: absolute; bottom: -10px; left: 50%; width: 120px; height: 16px; margin-left: -60px;
-      border-radius: 50%; background: rgba(0, 0, 0, .55); filter: blur(6px);
-      animation: ldShadow 1.1s ease-in-out infinite;
-    }
-    @keyframes ldShadow { 0%, 100% { transform: scale(1.1); opacity: .7; } 45% { transform: scale(.6); opacity: .35; } }
-
-    .ld-zzz { position: absolute; right: -16px; top: 6px; z-index: 3; font-family: var(--f-display); font-weight: 900; color: #bfe3ff; }
-    .ld-zzz b { position: absolute; opacity: 0; animation: zzz 2.4s ease-in infinite; font-size: 26px; }
-    .ld-zzz b:nth-child(2) { animation-delay: .8s; font-size: 20px; }
-    .ld-zzz b:nth-child(3) { animation-delay: 1.6s; font-size: 15px; }
-    @keyframes zzz {
-      0% { transform: translate(0, 30px) rotate(0); opacity: 0; }
-      30% { opacity: 1; }
-      100% { transform: translate(30px, -40px) rotate(18deg); opacity: 0; }
+      padding: 3px;
+      background: linear-gradient(135deg, var(--yellow), #38bdf8);
+      box-shadow: 0 0 25px var(--yellow-glow);
+      animation: pulseAvatar 2.2s ease-in-out infinite alternate;
     }
 
-    .ld-title { font-family: var(--f-display); font-weight: 900; font-size: clamp(2.2rem, 7vw, 3.4rem); letter-spacing: .12em; display: flex; gap: 2px; margin-top: 6px; }
-    .ld-title i {
-      font-style: normal; display: inline-block;
-      color: transparent; -webkit-text-stroke: 2px #fff;
-      animation: ldLetter 1.2s ease-in-out infinite;
-      animation-delay: calc(var(--i) * .12s);
-    }
-    @keyframes ldLetter {
-      0%, 100% { transform: translateY(0); color: transparent; }
-      50% { transform: translateY(-12px) rotate(-4deg); color: var(--yellow); -webkit-text-stroke-color: var(--yellow); }
+    @keyframes pulseAvatar {
+      from { transform: scale(0.97); box-shadow: 0 0 16px var(--yellow-glow); }
+      to { transform: scale(1.03); box-shadow: 0 0 32px rgba(250, 204, 21, 0.55); }
     }
 
-    .ld-msg { min-height: 1.5em; font-weight: 600; font-size: .98rem; color: #d7dcff; text-align: center; padding: 0 20px; animation: msgPop .5s ease; }
-    @keyframes msgPop { from { transform: scale(.85); opacity: 0; } to { transform: none; opacity: 1; } }
-
-    .ld-bar { position: relative; width: min(320px, 78vw); height: 16px; border-radius: 99px; background: rgba(255, 255, 255, .12); border: 2px solid rgba(255, 255, 255, .5); overflow: visible; }
-    .ld-bar > i {
-      display: block; height: 100%; width: 0%; border-radius: 99px;
-      background: repeating-linear-gradient(-45deg, #facc15 0 10px, #f59e0b 10px 20px);
-      background-size: 28px 28px;
-      animation: barStripe .6s linear infinite;
-      transition: width .3s ease;
+    .ld-avatar-ring img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      background: #0f172a;
     }
-    @keyframes barStripe { to { background-position: 28px 0; } }
-    .ld-runner { position: absolute; top: -16px; left: 0%; transform: translateX(-50%); font-size: 26px; filter: drop-shadow(0 0 8px var(--yellow)); transition: left .3s ease; animation: runnerWig .3s ease-in-out infinite alternate; }
-    @keyframes runnerWig { to { transform: translateX(-50%) rotate(14deg) scale(1.15); } }
-    .ld-pct { font-family: var(--f-display); font-weight: 800; font-size: 1.1rem; color: var(--yellow); }
+
+    .ld-title {
+      font-family: var(--f-display);
+      font-weight: 900;
+      font-size: 2.2rem;
+      letter-spacing: 0.1em;
+      color: #ffffff;
+      line-height: 1;
+      margin-top: 6px;
+    }
+
+    .ld-title span {
+      color: var(--yellow);
+    }
+
+    .ld-subtitle {
+      font-family: var(--f-display);
+      font-size: 0.85rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* Slim Elegant Progress Bar */
+    .ld-bar-wrap {
+      width: min(240px, 72vw);
+      height: 4px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+      margin-top: 14px;
+    }
+
+    .ld-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #facc15, #38bdf8);
+      border-radius: 99px;
+      transition: width 0.2s ease-out;
+    }
+
+    .ld-status-row {
+      display: flex;
+      justify-content: space-between;
+      width: min(240px, 72vw);
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 8px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .ld-pct {
+      font-family: var(--f-display);
+      font-weight: 700;
+      color: var(--yellow);
+    }
 
     /* ==========================================================
        ✨ EFEK TEKS & MOTION KREATIF
@@ -1386,28 +1395,6 @@
     .card-bottom-right { translate: calc(var(--mx) * -28px) calc(var(--my) * -16px); }
     .sparkle-star.s1 { translate: calc(var(--mx) * 34px) calc(var(--my) * 20px); }
     .sparkle-star.s2 { translate: calc(var(--mx) * -34px) calc(var(--my) * -20px); }
-
-    /* Kilatan petir berkala */
-    .lightning-flash {
-      position: fixed; inset: 0; z-index: 3; pointer-events: none; opacity: 0;
-      background: radial-gradient(ellipse at 60% 30%, rgba(255, 245, 160, .55), rgba(250, 204, 21, .12) 45%, transparent 70%);
-      mix-blend-mode: screen;
-      animation: flash 7s infinite 3s;
-    }
-    @keyframes flash {
-      0%, 92%, 100% { opacity: 0; }
-      93% { opacity: 1; } 94% { opacity: .1; } 95.5% { opacity: .9; } 98% { opacity: 0; }
-    }
-
-    /* Percikan petir mengikuti kursor */
-    .spark {
-      position: fixed; z-index: 9000; pointer-events: none; font-size: 16px;
-      filter: drop-shadow(0 0 6px var(--yellow));
-      animation: sparkFade .8s ease-out forwards;
-    }
-    @keyframes sparkFade {
-      to { transform: translate(var(--dx), var(--dy)) rotate(var(--r)) scale(.2); opacity: 0; }
-    }
 
     /* Marquee: tilt + kilau */
     .marquee-strip { transform: rotate(-1.4deg); margin: 10px -2%; box-shadow: 0 10px 30px rgba(0, 0, 0, .4); }
@@ -1551,28 +1538,30 @@
 </head>
 <body class="loading">
 
-  <!-- ===== LOADING SCREEN LUCU ===== -->
+  <!-- ===== LOADING SCREEN SIMPEL & ELEGAN ===== -->
   <div class="loader" id="loader" role="status" aria-live="polite">
-    <div class="ld-bolts" id="ldBolts"></div>
-    <div class="ld-stage">
-      <div class="ld-ring"></div>
-      <div class="ld-zzz"><b>Z</b><b>z</b><b>z</b></div>
-      <img class="ld-char" src="zenitsu.png" alt="" />
-      <div class="ld-shadow"></div>
+    <div class="ld-brand-wrap">
+      <div class="ld-avatar-ring">
+        <img src="zenitsu.png" alt="Zenitsu" />
+      </div>
+      <div class="ld-title">A<span>WA</span>N</div>
+      <div class="ld-subtitle">Yusri Irawan, S.Pd.</div>
     </div>
-    <div class="ld-title" id="ldTitle" aria-label="AWAN"></div>
-    <div class="ld-msg" id="ldMsg">Membangunkan petir...</div>
-    <div class="ld-bar"><i id="ldFill"></i><span class="ld-runner" id="ldRunner">⚡</span></div>
-    <div class="ld-pct" id="ldPct">0%</div>
+    <div class="ld-bar-wrap">
+      <div class="ld-bar-fill" id="ldFill"></div>
+    </div>
+    <div class="ld-status-row">
+      <span id="ldStatus">Memuat portofolio...</span>
+      <span class="ld-pct" id="ldPct">0%</span>
+    </div>
   </div>
   <div class="scroll-progress" id="scrollProgress"></div>
-  <div class="lightning-flash"></div>
 
   <!-- ========================================================
-       BACKGROUND VIDEO (zen.mp4 LOOPING DENGAN OVERLAY GELAP)
+       BACKGROUND IMAGE (back.jpg - RINGAN & BEBAS LAG)
        ======================================================== -->
-  <div class="bg-video-container">
-    <video class="bg-video-player" src="zen.mp4" autoplay loop muted playsinline preload="auto"></video>
+  <div class="bg-image-container">
+    <img class="bg-image-player" src="back.jpg" alt="Background" />
   </div>
   <div class="bg-video-overlay"></div>
   <div class="bg-technical-lines"></div>
@@ -2127,77 +2116,58 @@
     });
     splitChars(document.querySelector('.hero-name-left'));
 
-    /* 10. LOADING SCREEN */
+    /* 10. LOADING SCREEN SIMPEL & ELEGAN */
     (function () {
       const loader = document.getElementById('loader');
       const fill = document.getElementById('ldFill');
-      const runner = document.getElementById('ldRunner');
       const pct = document.getElementById('ldPct');
-      const msg = document.getElementById('ldMsg');
-      const video = document.querySelector('.bg-video-player');
+      const status = document.getElementById('ldStatus');
 
-      // judul loader + petir jatuh
-      document.getElementById('ldTitle').innerHTML = [...'AWAN'].map((c, i) => `<i style="--i:${i}">${c}</i>`).join('');
-      document.getElementById('ldBolts').innerHTML = Array.from({ length: 12 }, () =>
-        `<span style="--x:${Math.random() * 100};--s:${14 + Math.random() * 22};--d:${2.5 + Math.random() * 3};--dl:${Math.random() * 5}">⚡</span>`).join('');
-
-      const msgs = [
-        'Membangunkan petir... 😴',
-        'Zenitsu: "Aku nggak mau berantem!" 😭',
-        'Menghitung 100.000 × 100.000... 🧮',
-        'Menyiapkan papan tulis digital ✏️',
-        'Mengisi daya kilat ⚡',
-        'Hampir siap, jangan kabur ya! 🏃'
-      ];
-      let mi = 0;
-      const msgTimer = setInterval(() => {
-        mi = (mi + 1) % msgs.length;
-        msg.textContent = msgs[mi];
-        msg.style.animation = 'none'; void msg.offsetWidth; msg.style.animation = '';
-      }, 1400);
-
-      let progress = 0, ready = false, finished = false;
+      let progress = 0;
+      let finished = false;
       const start = performance.now();
-      const MIN_MS = 2800, MAX_MS = 12000;
+      const MIN_MS = 1000; // 1.0 detik agar terasa smooth & elegan tanpa menunggu lama
 
-      const isReady = () => video && video.readyState >= 3;
-      if (video) {
-        video.addEventListener('canplay', () => { ready = true; });
-        video.addEventListener('error', () => { ready = true; });
-        if (isReady()) ready = true;
-      } else ready = true;
+      // Cek apakah background image back.jpg sudah siap
+      const bgImg = new Image();
+      let imgReady = false;
+      bgImg.onload = () => { imgReady = true; };
+      bgImg.onerror = () => { imgReady = true; };
+      bgImg.src = 'back.jpg';
 
-      function paint(p) {
-        const v = Math.min(100, Math.round(p));
+      function updateProgress(val) {
+        const v = Math.min(100, Math.round(val));
         fill.style.width = v + '%';
-        runner.style.left = v + '%';
         pct.textContent = v + '%';
+        if (v > 75) status.textContent = 'Menyiapkan halaman...';
+        else if (v > 35) status.textContent = 'Memuat aset visual...';
       }
 
-      function finish() {
+      function finishLoading() {
         if (finished) return;
         finished = true;
-        clearInterval(msgTimer);
-        paint(100);
-        msg.textContent = 'Siap! Zenitsu bangun! ⚡⚡⚡';
+        updateProgress(100);
+        status.textContent = 'Selamat datang!';
         setTimeout(() => {
           loader.classList.add('done');
           document.body.classList.remove('loading');
           document.body.classList.add('loaded');
-          if (video) video.play().catch(() => {});
-          setTimeout(() => loader.remove(), 1600);
-        }, 550);
+          setTimeout(() => loader.remove(), 600);
+        }, 350);
       }
 
-      (function tick() {
+      (function loop() {
         if (finished) return;
-        const el = performance.now() - start;
-        // progres semu naik halus; mentok 92% sampai video siap
-        const target = (ready && el >= MIN_MS) ? 100 : Math.min(92, (el / MIN_MS) * 92);
-        progress += (target - progress) * 0.08;
-        paint(progress);
-        if ((ready && el >= MIN_MS && progress > 97) || el > MAX_MS) return finish();
-        requestAnimationFrame(tick);
+        const elapsed = performance.now() - start;
+        const target = (imgReady && elapsed >= MIN_MS) ? 100 : Math.min(92, (elapsed / MIN_MS) * 90);
+        progress += (target - progress) * 0.12;
+        updateProgress(progress);
+
+        if ((imgReady && elapsed >= MIN_MS && progress >= 97) || elapsed > 3000) {
+          finishLoading();
+          return;
+        }
+        requestAnimationFrame(loop);
       })();
     })();
 
@@ -2217,35 +2187,19 @@
       })();
     })();
 
-    /* 12. PARALLAX MOUSE + PERCIKAN PETIR */
+    /* 12. PARALLAX MOUSE RINGAN (Tanpa Percikan Partikel yang Bikin Lag) */
     (function () {
       const stage = document.querySelector('.hero-stage');
       const fine = matchMedia('(pointer:fine)').matches;
-      if (!fine) return;
+      if (!fine || !stage) return;
       stage.addEventListener('mousemove', (e) => {
         const r = stage.getBoundingClientRect();
         stage.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
         stage.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
-      });
+      }, { passive: true });
       stage.addEventListener('mouseleave', () => {
-        stage.style.setProperty('--mx', 0); stage.style.setProperty('--my', 0);
-      });
-
-      let last = 0;
-      window.addEventListener('mousemove', (e) => {
-        const now = performance.now();
-        if (now - last < 60) return;
-        last = now;
-        const s = document.createElement('span');
-        s.className = 'spark';
-        s.textContent = Math.random() > 0.5 ? '⚡' : '✦';
-        s.style.left = e.clientX + 'px';
-        s.style.top = e.clientY + 'px';
-        s.style.setProperty('--dx', (Math.random() * 60 - 30) + 'px');
-        s.style.setProperty('--dy', (20 + Math.random() * 40) + 'px');
-        s.style.setProperty('--r', (Math.random() * 120 - 60) + 'deg');
-        document.body.appendChild(s);
-        setTimeout(() => s.remove(), 850);
+        stage.style.setProperty('--mx', 0);
+        stage.style.setProperty('--my', 0);
       });
     })();
 
