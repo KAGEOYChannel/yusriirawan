@@ -1,58 +1,92 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YUSRI IRAWAN (AWAN) | Portfolio & Media Pembelajaran Interaktif</title>
-  <meta name="description" content="Website resmi Yusri Irawan (AWAN) - Pendidik Matematika & TIK SD, Web Creator, dan Community Support. Dilengkapi modul pembelajaran interaktif mandiri." />
+  <title>YUSRI IRAWAN (AWAN) | Portofolio &amp; Media Pembelajaran Interaktif</title>
+  <meta name="description" content="Website resmi Yusri Irawan, S.Pd. (AWAN), pendidik Matematika dan TIK SD, web creator, serta katalog media pembelajaran interaktif mandiri." />
   <link rel="icon" type="image/png" href="awan.png" />
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
-  <!-- Font Awesome 6 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* ==========================================================
-       THEME VARIABLES & TOKENS (ZENITSU THEME + AWAN IDENTITY)
-       ========================================================== */
     :root {
-      --f-display: 'Outfit', system-ui, -apple-system, sans-serif;
-      --f-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --f-display: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
+      --f-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       --f-hand: 'Caveat', cursive;
 
-      --bg: #090c19;
-      --ink: #f8fafc;
-      --muted: #94a3b8;
-      --yellow: #facc15;
-      --yellow-glow: rgba(250, 204, 21, 0.45);
-      --electric-blue: #38bdf8;
-      --card-bg: rgba(18, 24, 46, 0.82);
-      --card-solid: #151b33;
-      --card-border: rgba(255, 255, 255, 0.22);
-      --line: rgba(255, 255, 255, 0.12);
-      --shadow-float: 0 20px 45px -12px rgba(0, 0, 0, 0.75);
-      --text-stroke: #ffffff;
-      --overlay-bg: rgba(9, 12, 25, 0.72);
+      --bg: #FBF6EC;
+      --surface: rgba(255, 255, 255, 0.92);
+      --surface-solid: #FFFFFF;
+      --surface-subtle: #F3EBDC;
+      --ink: #141311;
+      --muted: #46423A;
+      --yellow: #F5B700;
+      --yellow-ink: #141311;
+      --yellow-text: #9A4A03;
+      --yellow-glow: rgba(245, 183, 0, 0.42);
+      --electric: #0369A1;
+      --border: rgba(20, 19, 17, 0.16);
+      --border-strong: #141311;
+      --text-stroke: rgba(20, 19, 17, 0.78);
+      --scrim: rgba(251, 246, 236, 0.66);
+      --scrim-bottom: rgba(251, 246, 236, 0.90);
+      --focus-ring: #0369A1;
+      --shadow-float: 0 22px 44px -16px rgba(20, 19, 17, 0.24);
+      --shadow-sticker: 0 18px 34px -14px rgba(20, 19, 17, 0.26);
+
+      /* Keep logo cards crisp white in both themes so dark strokes in awan.png stay fully visible. */
+      --logo-surface: #FFFFFF;
+      --logo-border: rgba(20, 19, 17, 0.16);
+
+      --cat-math-bg: #FEF3C7;
+      --cat-math-fg: #78350F;
+      --cat-tik-bg: #E0F2FE;
+      --cat-tik-fg: #075985;
+      --cat-mgmt-bg: #EFE7D6;
+      --cat-mgmt-fg: #141311;
+
+      --r-sm: 8px;
+      --r-md: 14px;
+      --r-lg: 24px;
+      --r-full: 999px;
+
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --nav-height: 76px;
     }
 
-    html[data-theme="light"] {
-      --bg: #f4f6fc;
-      --ink: #0f172a;
-      --muted: #475569;
-      --yellow: #eab308;
-      --yellow-glow: rgba(234, 179, 8, 0.35);
-      --electric-blue: #0284c7;
-      --card-bg: rgba(255, 255, 255, 0.88);
-      --card-solid: #ffffff;
-      --card-border: rgba(15, 23, 42, 0.16);
-      --line: rgba(15, 23, 42, 0.12);
-      --shadow-float: 0 20px 40px -12px rgba(15, 23, 42, 0.15);
-      --text-stroke: #0f172a;
-      --overlay-bg: rgba(244, 246, 252, 0.82);
+    html[data-theme="dark"] {
+      --bg: #090C19;
+      --surface: rgba(18, 24, 46, 0.86);
+      --surface-solid: #151C34;
+      --surface-subtle: #1D2645;
+      --ink: #F8FAFC;
+      --muted: #B6C2D6;
+      --yellow: #FACC15;
+      --yellow-ink: #0F172A;
+      --yellow-text: #FACC15;
+      --yellow-glow: rgba(250, 204, 21, 0.48);
+      --electric: #38BDF8;
+      --border: rgba(255, 255, 255, 0.18);
+      --border-strong: rgba(255, 255, 255, 0.44);
+      --text-stroke: rgba(255, 255, 255, 0.88);
+      --scrim: rgba(9, 12, 25, 0.64);
+      --scrim-bottom: rgba(9, 12, 25, 0.88);
+      --focus-ring: #FACC15;
+      --shadow-float: 0 24px 50px -14px rgba(0, 0, 0, 0.72);
+      --shadow-sticker: 0 20px 38px -12px rgba(0, 0, 0, 0.65);
+
+      --logo-surface: #FFFFFF;
+      --logo-border: rgba(255, 255, 255, 0.92);
+
+      --cat-math-bg: #2B2616;
+      --cat-math-fg: #FCD34D;
+      --cat-tik-bg: #13283D;
+      --cat-tik-fg: #7DD3FC;
+      --cat-mgmt-bg: #242E4C;
+      --cat-mgmt-fg: #F8FAFC;
     }
 
     *, *::before, *::after {
@@ -63,16 +97,28 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-height) + 16px);
+      overflow-x: clip;
     }
 
     body {
       font-family: var(--f-body);
       background-color: var(--bg);
       color: var(--ink);
-      min-height: 100vh;
-      overflow-x: hidden;
-      line-height: 1.55;
-      transition: background-color 0.35s ease, color 0.35s ease;
+      min-height: 100dvh;
+      overflow-x: clip;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    main {
+      overflow-x: clip;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
     }
 
     a {
@@ -81,94 +127,206 @@
     }
 
     button, input {
-      font-family: inherit;
+      font: inherit;
       color: inherit;
     }
 
-    /* ==========================================================
-       BACKGROUND IMAGE (back.jpg) - RINGAN, CEPAT & BEBAS LAG
-       ========================================================== */
-    .bg-image-container {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      overflow: hidden;
-      background: #090c19;
+    a[href], button, summary, select, label[for],
+    label:has(> input[type="checkbox"], > input[type="radio"]),
+    [role="button"], [role="link"], [role="tab"], [role="switch"],
+    input[type="checkbox"], input[type="radio"], input[type="submit"], input[type="button"] {
+      cursor: pointer;
     }
 
-    .bg-image-player {
+    :disabled, [aria-disabled="true"] {
+      cursor: not-allowed;
+      opacity: 0.55;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -100px;
+      left: 16px;
+      z-index: 900;
+      padding: 12px 18px;
+      border-radius: var(--r-md);
+      background: var(--yellow);
+      color: var(--yellow-ink);
+      font-weight: 800;
+      border: 2px solid var(--border-strong);
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon--sm {
+      width: 17px;
+      height: 17px;
+    }
+
+    .icon--lg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .bg-scene {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      overflow: hidden;
+      background: var(--bg);
+      pointer-events: none;
+    }
+
+    .bg-scene img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
-      filter: contrast(1.06) brightness(0.85);
-      transform: scale(1.02);
-      transition: transform 6s ease-out;
+      object-position: center 24%;
+      transform: scale(1.03);
+      filter: contrast(1.06) brightness(0.98) saturate(1.02);
+      transition: filter 0.35s ease;
     }
 
-    /* Tint Overlay agar teks dan karakter di atasnya sangat kontras & terbaca */
-    .bg-video-overlay {
+    html[data-theme="dark"] .bg-scene img {
+      filter: contrast(1.1) brightness(0.76) saturate(1.08);
+    }
+
+    /* Translucent atmospheric veil preserves back.jpg artwork while keeping text readable. */
+    .bg-veil {
       position: fixed;
       inset: 0;
-      z-index: -1;
-      background: var(--overlay-bg);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      z-index: -2;
+      pointer-events: none;
+      background: linear-gradient(180deg, var(--scrim) 0%, var(--scrim) 48%, var(--scrim-bottom) 100%);
+      backdrop-filter: blur(2.5px);
+      -webkit-backdrop-filter: blur(2.5px);
     }
 
-    /* Ambient technical curved lines seperti pada foto referensi */
-    .bg-technical-lines {
+    .bg-orbital-lines {
       position: fixed;
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      opacity: 0.28;
-      background-image: 
-        radial-gradient(ellipse 95% 75% at 50% 45%, transparent 48%, rgba(255, 255, 255, 0.18) 49%, transparent 50%),
-        radial-gradient(ellipse 65% 90% at 45% 50%, transparent 48%, rgba(250, 204, 21, 0.16) 49%, transparent 50%);
+      opacity: 0.42;
+      background-image:
+        radial-gradient(ellipse 92% 72% at 50% 45%, transparent 48.5%, rgba(245, 183, 0, 0.28) 49.2%, transparent 50%),
+        radial-gradient(ellipse 64% 88% at 48% 50%, transparent 48.5%, rgba(255, 255, 255, 0.28) 49.2%, transparent 50%);
     }
 
-    /* ==========================================================
-       TOPBAR (HOME, ABOUT, GALERY, SEARCH PILL, CLOCK)
-       ========================================================= */
+    html[data-theme="light"] .bg-orbital-lines {
+      background-image:
+        radial-gradient(ellipse 92% 72% at 50% 45%, transparent 48.5%, rgba(180, 120, 0, 0.24) 49.2%, transparent 50%),
+        radial-gradient(ellipse 64% 88% at 48% 50%, transparent 48.5%, rgba(20, 19, 17, 0.14) 49.2%, transparent 50%);
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      width: 0;
+      z-index: 260;
+      background: linear-gradient(90deg, var(--yellow), var(--electric));
+      box-shadow: 0 0 12px var(--yellow-glow);
+      pointer-events: none;
+    }
+
     .topbar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
+      z-index: 160;
+      height: var(--nav-height);
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      gap: 20px;
-      padding: 22px clamp(20px, 4.5vw, 60px);
-      transition: background 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease;
+      gap: 16px;
+      padding: 0 clamp(16px, 4vw, 56px);
+      border-bottom: 1px solid transparent;
+      transition: background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
     }
 
     .topbar.scrolled {
-      background: color-mix(in srgb, var(--bg) 85%, transparent);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      padding-top: 14px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom-color: var(--border);
     }
 
-    /* Menu Kiri: Home, About, Galery */
-    .nav-left {
+    .nav-left-group {
       display: flex;
       align-items: center;
-      gap: clamp(16px, 2.5vw, 36px);
+      gap: clamp(10px, 1.4vw, 20px);
+      min-width: 0;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-width: 44px;
+      min-height: 44px;
+      flex-shrink: 0;
+    }
+
+    .brand-logo-tile {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--logo-surface);
+      border: 1.5px solid var(--logo-border);
+      padding: 5px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 12px rgba(20, 19, 17, 0.12);
+    }
+
+    .brand-logo-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .nav-desktop {
+      display: flex;
+      align-items: center;
+      gap: clamp(4px, 1.2vw, 12px);
     }
 
     .nav-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 8px 12px;
+      border-radius: var(--r-sm);
       font-family: var(--f-display);
-      font-size: clamp(1.1rem, 1.6vw, 1.45rem);
-      font-weight: 600;
+      font-size: 1.05rem;
+      font-weight: 700;
+      white-space: nowrap;
       color: var(--muted);
       position: relative;
-      padding-bottom: 4px;
-      transition: color 0.25s ease;
+      transition: color 0.2s ease, background-color 0.2s ease;
     }
 
     .nav-link:hover,
@@ -179,134 +337,408 @@
     .nav-link.active::after {
       content: "";
       position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
+      left: 12px;
+      right: 12px;
+      bottom: 6px;
       height: 3px;
       background: var(--ink);
       border-radius: 2px;
     }
 
-    /* Search Bar Tengah: Bentuk Pil Transparan */
-    .search-pill-wrap {
-      display: flex;
+    .nav-search-pill {
+      justify-self: center;
+      display: inline-flex;
       align-items: center;
-      gap: 10px;
-      width: min(340px, 28vw);
-      padding: 9px 20px;
-      border-radius: 999px;
-      background: var(--card-bg);
-      border: 1.5px solid var(--card-border);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-      transition: border-color 0.2s, box-shadow 0.2s;
+      justify-content: space-between;
+      gap: 12px;
+      width: min(220px, 19vw);
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: var(--r-full);
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: 0 6px 18px rgba(20, 19, 17, 0.08);
+      transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s var(--ease-out-expo);
     }
 
-    .search-pill-wrap:focus-within {
+    .nav-search-pill:hover {
       border-color: var(--yellow);
-      box-shadow: 0 0 0 3px var(--yellow-glow);
-    }
-
-    .search-pill-input {
-      background: transparent;
-      border: none;
-      outline: none;
-      width: 100%;
-      font-size: 0.95rem;
       color: var(--ink);
+      transform: translateY(-1px);
     }
 
-    .search-pill-input::placeholder {
-      color: var(--muted);
-    }
-
-    .search-pill-icon {
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    /* Kanan: Tanggal & Jam Live + Theme Toggle */
-    .clock-right-wrap {
+    .topbar-right {
       justify-self: end;
       display: flex;
       align-items: center;
-      gap: 16px;
-      text-align: right;
+      gap: 10px;
     }
 
-    .clock-text {
+    .clock-widget {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+      padding-right: 4px;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.08;
+      white-space: nowrap;
     }
 
     .clock-date {
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
     .clock-time {
       font-family: var(--f-display);
-      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
-      font-weight: 600;
-      line-height: 1.05;
-      letter-spacing: 0.5px;
+      font-size: clamp(1.18rem, 1.8vw, 1.55rem);
+      font-weight: 800;
+      color: var(--ink);
     }
 
-    .theme-toggle-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      border: 1px solid var(--card-border);
-      background: var(--card-bg);
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--r-md);
+      border: 1.5px solid var(--border);
+      background: var(--surface-solid);
+      color: var(--ink);
       display: grid;
       place-items: center;
-      cursor: pointer;
-      font-size: 1.1rem;
-      color: var(--yellow);
-      transition: transform 0.25s ease, background 0.25s ease;
+      transition: border-color 0.2s ease, transform 0.22s var(--ease-out-expo), background-color 0.2s ease;
     }
 
-    .theme-toggle-btn:hover {
-      transform: scale(1.08) rotate(15deg);
+    .icon-btn:hover {
       border-color: var(--yellow);
+      transform: scale(1.06);
     }
 
-    /* ==========================================================
-       HERO POSTER STAGE (SESUAI FOTO REFERENSI RYOU YAMADA)
-       ========================================================== */
+    .icon-btn:active {
+      transform: scale(0.96);
+    }
+
+    .icon-btn--theme {
+      color: var(--yellow-text);
+    }
+
+    .icon-btn--motion[aria-pressed="true"] {
+      background: var(--surface-subtle);
+      border-color: var(--border-strong);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 14px;
+      border-radius: var(--r-md);
+      border: 1.5px solid var(--border);
+      background: var(--surface-solid);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      z-index: 155;
+      background: var(--surface-solid);
+      border-bottom: 2px solid var(--border-strong);
+      padding: 16px clamp(16px, 4vw, 32px) 22px;
+      box-shadow: var(--shadow-float);
+    }
+
+    .mobile-drawer.open {
+      display: block;
+    }
+
+    .mobile-drawer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mobile-drawer-list a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 48px;
+      padding: 10px 14px;
+      border-radius: var(--r-md);
+      font-family: var(--f-display);
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .mobile-drawer-list a:hover,
+    .mobile-drawer-list a.active {
+      background: var(--surface-subtle);
+    }
+
+    .mobile-drawer-meta {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
     .hero-stage {
+      --mx: 0;
+      --my: 0;
       position: relative;
-      min-height: 100vh;
-      min-height: 100svh;
-      padding: 110px clamp(16px, 4.5vw, 60px) 70px;
+      min-height: min(860px, 100dvh);
+      padding: calc(var(--nav-height) + 22px) clamp(16px, 4.2vw, 56px) 52px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .stage-container {
+    .stage-canvas {
       position: relative;
       width: min(1340px, 100%);
-      height: min(740px, 78vh);
-      min-height: 580px;
+      min-height: 620px;
+      height: min(710px, calc(100dvh - var(--nav-height) - 76px));
     }
 
-    .stage-container > * {
+    .stage-canvas > * {
       position: absolute;
     }
 
-    /* 1. KARAKTER ZENITSU DI TENGAH (MENGGUNAKAN zenitsu.png) */
+    .hero-intro-left {
+      left: 0;
+      top: 5%;
+      z-index: 5;
+      width: min(440px, 37%);
+      padding: 12px 18px 16px 0;
+      translate: calc(var(--mx) * 8px) calc(var(--my) * 5px);
+      transition: translate 0.3s ease-out;
+    }
+
+    .hero-script {
+      display: inline-block;
+      font-family: var(--f-hand);
+      font-size: clamp(2rem, 3.1vw, 2.75rem);
+      font-weight: 700;
+      color: var(--yellow-text);
+      line-height: 1;
+      margin-bottom: 4px;
+      transform-origin: left center;
+      text-shadow: 0 2px 12px rgba(245, 183, 0, 0.28);
+      animation: scriptSway 4.2s ease-in-out infinite;
+    }
+
+    html[data-theme="dark"] .hero-script {
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
+    }
+
+    @keyframes scriptSway {
+      0%, 100% { transform: rotate(-4deg) translateY(0); }
+      50% { transform: rotate(-1.5deg) translateY(-2px); }
+    }
+
+    .hero-name-left {
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: clamp(3.3rem, 6.2vw, 5.4rem);
+      line-height: 0.9;
+      letter-spacing: -0.035em;
+      filter: drop-shadow(0 8px 18px rgba(20, 19, 17, 0.16));
+    }
+
+    .ch {
+      display: inline-block;
+      font-style: normal;
+    }
+
+    .hero-name-left .ch {
+      background: linear-gradient(100deg, #111827 0%, #B45309 36%, #0369A1 68%, #111827 100%);
+      background-size: 240% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation:
+        chDrop 0.8s var(--ease-out-expo) calc(var(--i) * 0.06s) backwards,
+        chWave 3.4s ease-in-out calc(var(--i) * 0.14s + 1s) infinite alternate,
+        gradMove 4.5s linear infinite;
+    }
+
+    html[data-theme="dark"] .hero-name-left .ch {
+      background-image: linear-gradient(100deg, #FFFFFF 0%, #FACC15 36%, #38BDF8 68%, #FFFFFF 100%);
+      background-size: 240% 100%;
+    }
+
+    @keyframes chDrop {
+      0% { opacity: 0; transform: translateY(-48px) rotate(-12deg) scale(1.25); filter: blur(6px); }
+      100% { opacity: 1; transform: none; filter: blur(0); }
+    }
+
+    @keyframes chWave {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-6px) rotate(1.2deg); }
+    }
+
+    @keyframes gradMove {
+      to { background-position: 240% 0; }
+    }
+
+    .hero-subtitle {
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: clamp(1.15rem, 1.8vw, 1.38rem);
+      color: var(--electric);
+      margin-top: 10px;
+    }
+
+    .role-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 6px 14px;
+      min-width: 220px;
+      min-height: 36px;
+      border-radius: var(--r-sm);
+      background: color-mix(in srgb, var(--yellow) 22%, var(--surface-solid));
+      border: 1.5px solid var(--yellow);
+      color: var(--ink);
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .role-pill .caret {
+      width: 2px;
+      height: 1.05em;
+      background: var(--yellow-text);
+      animation: caretBlink 0.75s steps(1) infinite;
+    }
+
+    @keyframes caretBlink {
+      50% { opacity: 0; }
+    }
+
+    .hero-desc {
+      margin-top: 12px;
+      font-size: 0.94rem;
+      color: var(--muted);
+      line-height: 1.62;
+    }
+
+    .hero-actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 10px 22px;
+      border-radius: var(--r-md);
+      background: var(--yellow);
+      color: var(--yellow-ink);
+      border: 2px solid var(--border-strong);
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 20px -10px var(--yellow-glow);
+      transition: transform 0.22s var(--ease-out-expo), box-shadow 0.22s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -8px var(--yellow-glow);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 10px 18px;
+      border-radius: var(--r-md);
+      background: var(--surface-solid);
+      color: var(--ink);
+      border: 1.5px solid var(--border-strong);
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 0.93rem;
+      transition: transform 0.22s var(--ease-out-expo), background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--yellow);
+      background: var(--surface-subtle);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(0);
+    }
+
+    .hero-socials {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .social-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 6px 12px;
+      border-radius: var(--r-sm);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--ink);
+      transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .social-tag svg {
+      color: var(--yellow-text);
+    }
+
+    .social-tag:hover {
+      transform: translateY(-2px);
+      background: var(--surface);
+      color: var(--yellow-text);
+    }
+
     .zen-character-center {
-      left: 50%;
+      left: 51%;
       top: 52%;
       transform: translate(-50%, -50%);
-      width: clamp(280px, 34vw, 460px);
-      height: clamp(380px, 52vh, 620px);
+      width: clamp(290px, 32vw, 440px);
+      aspect-ratio: 433 / 577;
       z-index: 3;
       display: flex;
       align-items: flex-end;
@@ -314,33 +746,103 @@
       pointer-events: none;
     }
 
-    /* Halo Lingkaran Kuning di Belakang Karakter (Persis Foto) */
+    .zen-character-center::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 50%;
+      bottom: -14px;
+      width: 112%;
+      height: 64px;
+      margin-left: -56%;
+      background: radial-gradient(ellipse at 50% 50%, rgba(250, 204, 21, 0.56) 0%, rgba(250, 204, 21, 0.16) 44%, transparent 72%);
+      filter: blur(10px);
+      animation: groundPulse 3s ease-in-out infinite alternate;
+    }
+
+    .zen-character-center::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 50%;
+      bottom: 0;
+      width: 76%;
+      height: 24px;
+      margin-left: -38%;
+      border-radius: var(--r-full);
+      border: 2px solid rgba(250, 204, 21, 0.7);
+      box-shadow: 0 0 22px var(--yellow-glow), inset 0 0 12px rgba(250, 204, 21, 0.28);
+      animation: groundRing 3.2s ease-in-out infinite;
+    }
+
+    @keyframes groundPulse {
+      from { opacity: 0.58; transform: scaleX(0.92); }
+      to { opacity: 1; transform: scaleX(1.06); }
+    }
+
+    @keyframes groundRing {
+      0% { transform: scale(0.72); opacity: 0; }
+      32% { opacity: 0.95; }
+      100% { transform: scale(1.24); opacity: 0; }
+    }
+
     .character-halo {
       position: absolute;
-      width: clamp(240px, 30vw, 420px);
-      height: clamp(240px, 30vw, 420px);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(250, 204, 21, 0.35) 0%, rgba(250, 204, 21, 0.1) 60%, transparent 75%);
-      border: 4px solid rgba(250, 204, 21, 0.7);
-      top: 15%;
+      width: 88%;
+      aspect-ratio: 1;
+      border-radius: var(--r-full);
+      background: radial-gradient(circle, rgba(250, 204, 21, 0.34) 0%, rgba(250, 204, 21, 0.08) 60%, transparent 75%);
+      border: 3.5px solid rgba(250, 204, 21, 0.82);
+      top: 12%;
       left: 50%;
       transform: translateX(-50%);
       z-index: -1;
-      box-shadow: 0 0 50px var(--yellow-glow);
+      box-shadow: 0 0 42px var(--yellow-glow);
+      translate: calc(var(--mx) * -10px) calc(var(--my) * -6px);
+      transition: translate 0.25s ease-out;
       animation: pulseHalo 4s ease-in-out infinite alternate;
     }
 
+    .character-halo::before {
+      content: "";
+      position: absolute;
+      inset: -16px;
+      border-radius: var(--r-full);
+      border: 2.5px dashed rgba(250, 204, 21, 0.58);
+      animation: ringSpin 22s linear infinite;
+    }
+
+    .character-halo::after {
+      content: "";
+      position: absolute;
+      inset: -30px;
+      border-radius: var(--r-full);
+      border: 2px solid transparent;
+      border-top-color: rgba(255, 240, 130, 0.95);
+      border-right-color: rgba(250, 204, 21, 0.42);
+      filter: drop-shadow(0 0 8px var(--yellow));
+      animation: ringSpin 7.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite reverse;
+    }
+
     @keyframes pulseHalo {
-      0% { transform: translateX(-50%) scale(0.97); opacity: 0.7; }
+      0% { transform: translateX(-50%) scale(0.97); opacity: 0.78; }
       100% { transform: translateX(-50%) scale(1.03); opacity: 1; }
     }
 
+    @keyframes ringSpin {
+      to { transform: rotate(360deg); }
+    }
+
     .zen-char-img {
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
-      filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.65));
-      animation: floatChar 5s ease-in-out infinite alternate;
+      filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.45));
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 76%, rgba(0, 0, 0, 0.6) 90%, transparent 100%);
+      mask-image: linear-gradient(to bottom, #000 0%, #000 76%, rgba(0, 0, 0, 0.6) 90%, transparent 100%);
+      translate: calc(var(--mx) * 16px) calc(var(--my) * 10px);
+      transition: translate 0.25s ease-out;
+      animation: floatChar 4.8s ease-in-out infinite alternate;
     }
 
     @keyframes floatChar {
@@ -348,764 +850,1255 @@
       100% { transform: translateY(-10px); }
     }
 
-    /* 2. TIPOGRAFI KANAN: "YUSRI IRAWAN" (OUTLINE TEBAL ALA RYOU YAMADA) */
     .hero-title-right {
-      right: 0;
-      top: 50%;
+      right: 54px;
+      top: 46%;
       transform: translateY(-50%);
-      z-index: 4;
+      z-index: 2;
       font-family: var(--f-display);
-      font-weight: 900;
+      font-weight: 800;
       line-height: 0.84;
       text-transform: uppercase;
       pointer-events: none;
-      text-align: left;
+      text-align: right;
+      translate: calc(var(--mx) * -20px) calc(var(--my) * -8px);
+      transition: translate 0.3s ease-out;
     }
 
     .hero-title-right span {
       display: block;
-      font-size: clamp(3.8rem, 10.5vw, 9.8rem);
+      font-size: clamp(3.6rem, 9.2vw, 8.6rem);
       color: transparent;
-      -webkit-text-stroke: 3.5px var(--text-stroke);
+      -webkit-text-stroke: 3px var(--text-stroke);
       paint-order: stroke fill;
-      letter-spacing: -0.02em;
-      text-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+      letter-spacing: -0.03em;
     }
 
-    .hero-title-right span:nth-child(2) {
-      margin-left: clamp(-10px, -2vw, -30px);
-      transform: translateX(-10%);
+    .hero-title-right .ch {
+      animation:
+        chDrop 0.85s var(--ease-out-expo) calc(var(--i) * 0.055s + 0.15s) backwards,
+        chWave 3.5s ease-in-out calc(var(--i) * 0.14s + 1.2s) infinite alternate,
+        strokeGlow 4.2s ease-in-out calc(var(--i) * 0.24s) infinite;
     }
 
-    /* 3. TIPOGRAFI KIRI: "AWAN" + HANDWRITTEN SCRIPT + INTRO YUSRI IRAWAN */
-    .hero-intro-left {
-      left: 0;
-      top: 50%;
-      transform: translateY(-62%);
-      z-index: 5;
-      width: min(420px, 35%);
-      position: relative;
+    @keyframes strokeGlow {
+      0%, 72%, 100% { -webkit-text-stroke-color: var(--text-stroke); filter: none; }
+      86% { -webkit-text-stroke-color: var(--yellow); filter: drop-shadow(0 0 14px var(--yellow-glow)); }
     }
 
-    .hero-script-overlay {
-      position: absolute;
-      top: -24px;
-      left: 20px;
-      font-family: var(--f-hand);
-      font-size: clamp(2.4rem, 4.5vw, 4rem);
-      color: var(--yellow);
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
-      transform: rotate(-10deg);
-      pointer-events: none;
-      white-space: nowrap;
-      z-index: 2;
-    }
-
-    .hero-name-left {
-      font-family: var(--f-display);
-      font-weight: 900;
-      font-size: clamp(2.8rem, 6.2vw, 5.4rem);
-      line-height: 0.9;
-      letter-spacing: -0.02em;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-subtitle-left {
-      font-family: var(--f-display);
-      font-weight: 700;
-      font-size: clamp(1.1rem, 1.8vw, 1.35rem);
-      color: var(--electric-blue);
-      margin: 12px 0 6px;
-    }
-
-    .hero-desc-left {
-      font-size: 0.92rem;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 14px;
-    }
-
-    .btn-readmore {
-      display: inline-block;
-      padding: 6px 18px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      border: 1.5px solid var(--ink);
-      background: var(--card-solid);
-      color: var(--ink);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      transition: all 0.2s ease;
-    }
-
-    .btn-readmore:hover {
-      background: var(--yellow);
-      color: #000;
-      border-color: var(--yellow);
-      transform: translateY(-2px);
-    }
-
-    /* 4. KARTU-KARTU FLOATING DENGAN TOMBOL (+) KUNING */
+    /* Floating editorial cards stay overflow:visible so corner (+) badges are never clipped. */
     .float-card {
-      position: absolute;
-      border-radius: 26px;
-      background: var(--card-solid);
-      border: 3px solid #ffffff;
-      box-shadow: var(--shadow-float);
+      border-radius: var(--r-lg);
+      background: var(--surface-solid);
+      border: 2.5px solid var(--border-strong);
+      box-shadow: var(--shadow-sticker);
       z-index: 6;
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
-    }
-
-    html[data-theme="dark"] .float-card {
-      border-color: rgba(255, 255, 255, 0.28);
+      overflow: visible;
+      transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease, border-color 0.2s ease;
     }
 
     .float-card:hover {
-      transform: translateY(-6px) rotate(-1.5deg);
-      box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.6);
+      transform: translateY(-5px) rotate(-1.5deg);
+      border-color: var(--yellow);
+      box-shadow: var(--shadow-float);
     }
 
-    /* Tombol (+) Kuning Khas Foto Referensi */
     .badge-plus {
       position: absolute;
-      top: -10px;
-      right: -10px;
+      top: -12px;
+      right: -12px;
       width: 32px;
       height: 32px;
-      border-radius: 50%;
+      border-radius: var(--r-full);
       background: var(--yellow);
-      color: #0f172a;
-      font-size: 1.3rem;
+      color: var(--yellow-ink);
+      font-family: var(--f-display);
+      font-size: 1.2rem;
       font-weight: 800;
       line-height: 1;
       display: grid;
       place-items: center;
-      border: 2.5px solid #ffffff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-      cursor: pointer;
-      transition: transform 0.3s ease;
+      border: 2.5px solid #FFFFFF;
+      box-shadow: 0 5px 12px rgba(20, 19, 17, 0.24);
+      transition: transform 0.28s var(--ease-out-expo);
     }
 
-    .badge-plus:hover {
-      transform: rotate(90deg) scale(1.1);
+    .float-card:hover .badge-plus {
+      transform: rotate(90deg) scale(1.08);
     }
 
-    /* Kartu Floating Kiri Atas: Foto Profil Yusri Irawan (awan.png) */
-    .card-top-left {
-      left: 19%;
-      top: 3%;
-      width: 130px;
-      height: 130px;
-      border-radius: 24px;
-      overflow: hidden;
-      background: #0f172a;
+    .card-logo-float {
+      left: 35%;
+      top: 1%;
+      width: 118px;
+      height: 118px;
+      padding: 15px;
+      display: grid;
+      place-items: center;
+      background: var(--logo-surface);
+      border: 2.5px solid var(--logo-border);
+      rotate: -5deg;
+      translate: calc(var(--mx) * 24px) calc(var(--my) * 16px);
+      transition: transform 0.3s var(--ease-out-expo), translate 0.25s ease-out, border-color 0.2s ease;
     }
 
-    .card-top-left img {
+    .card-logo-float img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
 
-    /* Sparkle Bintang Kuning */
-    .sparkle-star {
-      position: absolute;
-      color: var(--yellow);
-      font-size: 2.2rem;
-      z-index: 6;
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-      animation: sparkleAnim 3.5s infinite ease-in-out;
+    .card-highlight-float {
+      right: 4%;
+      bottom: 4%;
+      min-width: 150px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      background: var(--logo-surface);
+      color: #141311;
+      border: 2.5px solid var(--logo-border);
+      rotate: 2.5deg;
+      translate: calc(var(--mx) * -22px) calc(var(--my) * -14px);
+      transition: transform 0.3s var(--ease-out-expo), translate 0.25s ease-out, border-color 0.2s ease;
     }
 
-    .sparkle-star.s1 {
-      left: 16%;
-      top: 10%;
+    .highlight-chip {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      background: #FEF3C7;
+      color: #78350F;
+      display: grid;
+      place-items: center;
     }
 
-    .sparkle-star.s2 {
-      right: 22%;
-      bottom: 16%;
-      animation-delay: -1.6s;
-    }
-
-    @keyframes sparkleAnim {
-      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
-      50% { transform: scale(0.7) rotate(35deg); opacity: 0.6; }
-    }
-
-    /* Kartu Floating Kiri Bawah: "description." (Profil Yusri Irawan) */
-    .card-desc-left {
-      left: 6%;
-      bottom: 2%;
-      width: clamp(210px, 22vw, 270px);
-      padding: 16px 18px 14px;
-      cursor: pointer;
-    }
-
-    .card-desc-left h4 {
+    .highlight-metric {
       font-family: var(--f-display);
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 4px;
+      font-size: 1.24rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: #141311;
+    }
+
+    .highlight-caption {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #46423A;
+      line-height: 1.25;
+    }
+
+    .card-desc-left {
+      left: 0;
+      bottom: 1%;
+      width: clamp(260px, 27vw, 340px);
+      padding: 16px 18px;
+      border-color: var(--border);
+    }
+
+    .card-desc-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .card-desc-left h2 {
+      font-family: var(--f-display);
+      font-size: 1.22rem;
+      font-weight: 800;
       color: var(--ink);
     }
 
-    .card-desc-left p {
-      font-size: 0.78rem;
-      color: var(--muted);
-      line-height: 1.45;
-      max-height: 4.8em;
-      overflow: hidden;
-      transition: max-height 0.4s ease;
-    }
-
-    .card-desc-left.open p {
-      max-height: 18em;
-    }
-
-    /* Kartu Floating Kanan Bawah: Fitur Highlight */
-    .card-bottom-right {
-      right: 7%;
-      bottom: 5%;
-      width: 140px;
-      height: 140px;
-      border-radius: 24px;
-      overflow: hidden;
+    .desc-toggle-btn {
+      width: 44px;
+      height: 44px;
+      margin: -8px -8px -8px 0;
+      border-radius: var(--r-full);
+      border: 2px solid #FFFFFF;
+      background: var(--yellow);
+      color: var(--yellow-ink);
+      font-family: var(--f-display);
+      font-size: 1.3rem;
+      font-weight: 800;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, #f59e0b, #6366f1);
-      color: #fff;
-      font-size: 3rem;
+      box-shadow: 0 4px 10px rgba(20, 19, 17, 0.2);
+      transition: transform 0.25s var(--ease-out-expo);
     }
 
-    /* Widget Cuaca Kanan Bawah (25° cerah) */
-    .widget-weather {
-      right: 1%;
-      bottom: 22%;
-      width: 120px;
-      padding: 14px 16px;
-      border-radius: 22px;
-      position: absolute;
-      z-index: 7;
-      background: var(--card-solid);
-      border: 3px solid #ffffff;
-      box-shadow: var(--shadow-float);
+    .desc-toggle-btn[aria-expanded="true"] span {
+      transform: rotate(45deg);
     }
 
-    html[data-theme="dark"] .widget-weather {
-      border-color: rgba(255, 255, 255, 0.28);
+    .desc-toggle-btn span {
+      display: inline-block;
+      transition: transform 0.25s var(--ease-out-expo);
     }
 
-    .weather-deg {
-      font-family: var(--f-display);
-      font-size: 2.1rem;
-      font-weight: 600;
-      line-height: 1;
-    }
-
-    .weather-lbl {
-      font-family: var(--f-display);
-      font-size: 1rem;
+    .card-desc-summary {
+      margin-top: 6px;
+      font-size: 0.84rem;
       color: var(--muted);
-      font-weight: 500;
+      line-height: 1.5;
     }
 
-    .weather-icon {
-      position: absolute;
-      right: 12px;
-      bottom: 12px;
-      font-size: 1.6rem;
-      color: var(--yellow);
+    .card-desc-extra {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s var(--ease-out-expo);
     }
 
-    /* Panah Navigasi Kanan (Next Arrow) */
+    .card-desc-extra.open {
+      grid-template-rows: 1fr;
+    }
+
+    .card-desc-extra > div {
+      overflow: hidden;
+    }
+
+    .card-desc-extra p {
+      padding-top: 8px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
     .nav-next-arrow {
-      right: -8px;
-      top: 52%;
+      right: -4px;
+      top: 50%;
       transform: translateY(-50%);
       z-index: 8;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: none;
-      background: transparent;
-      font-size: 2rem;
+      width: 46px;
+      height: 46px;
+      border-radius: var(--r-full);
+      border: 1.5px solid var(--border);
+      background: var(--surface);
       color: var(--ink);
-      cursor: pointer;
       display: grid;
       place-items: center;
-      animation: nudgeArrow 1.6s ease-in-out infinite;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+      animation: nudgeArrow 1.8s ease-in-out infinite;
+    }
+
+    .nav-next-arrow:hover {
+      border-color: var(--yellow);
+      background: var(--yellow);
+      color: var(--yellow-ink);
     }
 
     @keyframes nudgeArrow {
-      50% { transform: translateY(-50%) translateX(6px); }
+      50% { transform: translateY(-50%) translateX(5px); }
     }
 
-    /* Footer Sosial Media Kiri Bawah */
-    .hero-socials {
-      position: absolute;
-      left: clamp(20px, 4.5vw, 60px);
-      bottom: 24px;
-      display: flex;
-      gap: 20px;
-      z-index: 8;
-      flex-wrap: wrap;
-    }
-
-    .social-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--ink);
-      transition: transform 0.2s, color 0.2s;
-    }
-
-    .social-tag i {
-      font-size: 1.5rem;
-      color: var(--yellow);
-    }
-
-    .social-tag:hover {
-      transform: translateY(-3px);
-      color: var(--yellow);
-    }
-
-    /* ==========================================================
-       MARQUEE TEXT PITA KUNING (INSPIRASI JIRO.BUILD)
-       ========================================================== */
-    .marquee-strip {
-      border-block: 2.5px solid var(--ink);
+    .marquee-band {
+      position: relative;
+      z-index: 10;
+      border-block: 2.5px solid var(--border-strong);
       background: var(--yellow);
-      color: #0f172a;
+      color: var(--yellow-ink);
+      transform: rotate(-1.2deg) translateZ(0);
+      margin: 14px -1.5vw 24px;
+      box-shadow: 0 12px 28px -12px rgba(20, 19, 17, 0.32);
+      display: flex;
+      align-items: center;
       overflow: hidden;
-      transform: rotate(-1deg);
-      margin: 20px -2vw;
-      box-shadow: 0 10px 25px rgba(250, 204, 21, 0.2);
+    }
+
+    .marquee-viewport {
+      flex: 1;
+      overflow: hidden;
+      min-width: 0;
     }
 
     .marquee-track {
       display: flex;
       width: max-content;
-      animation: marqueeScroll 30s linear infinite;
+      will-change: transform;
+      animation: marqueeSmooth 32s linear infinite;
     }
 
-    .marquee-strip:hover .marquee-track {
+    .marquee-band:hover .marquee-track,
+    .marquee-band.paused .marquee-track {
       animation-play-state: paused;
     }
 
     .marquee-track span {
+      display: inline-flex;
+      align-items: center;
       font-family: var(--f-display);
-      font-weight: 900;
-      font-size: 1.35rem;
-      padding: 12px 28px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      padding: 13px 24px;
       text-transform: uppercase;
       white-space: nowrap;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.03em;
     }
 
     .marquee-track span::after {
       content: "✦";
-      margin-left: 56px;
-      color: #0f172a;
+      margin-left: 44px;
+      color: var(--yellow-ink);
     }
 
-    @keyframes marqueeScroll {
-      to { transform: translateX(-50%); }
+    @keyframes marqueeSmooth {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* ==========================================================
-       GALLERY & MEDIA BELAJAR SECTION
-       ========================================================== */
-    section.block-section {
-      padding: clamp(70px, 9vw, 110px) clamp(20px, 4.5vw, 60px);
+    .marquee-toggle {
+      flex-shrink: 0;
+      min-height: 48px;
+      padding: 0 22px 0 18px;
+      margin-right: 1.5vw;
+      border: none;
+      border-left: 2px solid var(--border-strong);
+      background: var(--yellow);
+      color: var(--yellow-ink);
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: background-color 0.2s ease;
+    }
+
+    .marquee-toggle:hover {
+      background: #E0A800;
+    }
+
+    .section-shell {
       max-width: 1340px;
       margin: 0 auto;
+      padding: clamp(58px, 7.5vw, 96px) clamp(16px, 4vw, 56px);
     }
 
-    .sec-head {
+    .section-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin-bottom: 36px;
-    }
-
-    .sec-kicker {
-      font-size: 0.85rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--yellow);
-      margin-bottom: 6px;
-    }
-
-    .sec-title {
-      font-family: var(--f-display);
-      font-weight: 900;
-      font-size: clamp(2.4rem, 5.5vw, 4.6rem);
-      line-height: 0.98;
-      letter-spacing: -0.02em;
-    }
-
-    .sec-title em {
-      font-style: normal;
-      background: var(--yellow);
-      color: #0f172a;
-      padding: 0 0.2em;
-      border-radius: 12px;
-    }
-
-    .sec-desc {
-      max-width: 420px;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-
-    /* Filter Chips */
-    .filter-chips {
-      display: flex;
-      gap: 10px;
+      gap: 20px 36px;
       flex-wrap: wrap;
       margin-bottom: 32px;
     }
 
-    .filter-chip {
-      padding: 10px 20px;
-      border-radius: 999px;
-      border: 2px solid var(--ink);
+    .section-eyebrow {
+      font-family: var(--f-display);
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--yellow-text);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: clamp(2.1rem, 4.8vw, 3.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    .section-title em {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+      font-style: normal;
+      background: var(--yellow);
+      color: var(--yellow-ink);
+      padding: 0 0.22em;
+      border-radius: 12px;
+      vertical-align: bottom;
+    }
+
+    .section-title em::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 28%, rgba(255, 255, 255, 0.72) 50%, transparent 72%);
+      transform: translateX(-130%);
+      animation: titleShine 4s ease-in-out infinite;
+    }
+
+    @keyframes titleShine {
+      55%, 100% { transform: translateX(130%); }
+    }
+
+    .section-lead {
+      max-width: 44ch;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.65;
+    }
+
+    .catalog-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px 24px;
+      padding: 20px;
+      border-radius: var(--r-lg);
+      background: var(--surface);
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow-sticker);
+      margin-bottom: 26px;
+    }
+
+    .search-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1 1 280px;
+      max-width: 420px;
+    }
+
+    .search-field label {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .search-input-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-leading-icon {
+      position: absolute;
+      left: 14px;
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 46px 10px 42px;
+      border-radius: var(--r-md);
+      border: 1.5px solid var(--border);
+      background: var(--surface-solid);
+      color: var(--ink);
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search-input:hover {
+      border-color: var(--border-strong);
+    }
+
+    .search-input::placeholder {
+      color: var(--muted);
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 4px;
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: var(--r-sm);
       background: transparent;
+      color: var(--muted);
+      display: none;
+      place-items: center;
+    }
+
+    .search-clear-btn.visible {
+      display: grid;
+    }
+
+    .search-clear-btn:hover {
+      background: var(--surface-subtle);
+      color: var(--ink);
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      min-height: 44px;
+      padding: 8px 16px;
+      border-radius: var(--r-md);
+      border: 1.5px solid var(--border-strong);
+      background: var(--surface-solid);
+      color: var(--ink);
+      font-family: var(--f-display);
       font-weight: 700;
       font-size: 0.9rem;
-      color: var(--ink);
-      cursor: pointer;
-      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s var(--ease-out-expo);
     }
 
-    .filter-chip:hover {
+    .filter-btn:hover {
       transform: translateY(-2px);
-      background: rgba(250, 204, 21, 0.15);
       border-color: var(--yellow);
+      background: var(--surface-subtle);
     }
 
-    .filter-chip.active {
+    .filter-btn[aria-pressed="true"] {
       background: var(--yellow);
-      color: #0f172a;
-      border-color: var(--yellow);
-      box-shadow: 0 4px 14px var(--yellow-glow);
+      color: var(--yellow-ink);
+      border-color: var(--border-strong);
+      box-shadow: 0 6px 16px -6px var(--yellow-glow);
     }
 
-    .filter-chip b {
-      margin-left: 6px;
+    .filter-count {
       font-size: 0.8rem;
-      opacity: 0.75;
+      opacity: 0.82;
     }
 
-    /* Grid Kartu Modul */
-    .cards-grid {
+    .catalog-status {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .tier-block {
+      margin-bottom: 36px;
+    }
+
+    .tier-block:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .tier-block[hidden] {
+      display: none;
+    }
+
+    .tier-heading {
+      font-family: var(--f-display);
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tier-heading::after {
+      content: "";
+      flex: 1;
+      height: 1.5px;
+      background: var(--border);
+    }
+
+    .spotlight-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-      gap: 26px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
     }
 
     .module-card {
       position: relative;
-      border-radius: 28px;
-      background: var(--card-bg);
-      border: 3px solid #ffffff;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow: var(--shadow-float);
-      padding: 26px;
+      overflow: hidden;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 24px;
       display: flex;
       flex-direction: column;
       gap: 14px;
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+      box-shadow: var(--shadow-sticker);
+      transition: transform 0.3s var(--ease-out-expo), border-color 0.2s ease, box-shadow 0.3s ease;
     }
 
-    html[data-theme="dark"] .module-card {
-      border-color: rgba(255, 255, 255, 0.18);
+    .module-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -85%;
+      width: 55%;
+      height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.26), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.65s ease;
+      pointer-events: none;
     }
 
     .module-card:hover {
-      transform: translateY(-8px) rotate(-0.8deg);
+      transform: translateY(-7px) rotate(-0.6deg);
       border-color: var(--yellow);
-      box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.6);
+      box-shadow: var(--shadow-float);
     }
 
-    .module-card.hide {
+    .module-card:hover::before {
+      left: 135%;
+    }
+
+    .module-card--featured {
+      padding: 28px;
+      border-color: var(--border-strong);
+    }
+
+    .module-card[hidden] {
       display: none;
     }
 
-    .card-top-row {
+    .card-top {
       display: flex;
-      justify-content: space-between;
       align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
     }
 
-    .card-icon-box {
-      position: relative;
-      width: 72px;
-      height: 72px;
-      border-radius: 22px;
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
       display: grid;
       place-items: center;
-      font-size: 1.8rem;
-      color: #ffffff;
-      box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.4);
+      flex-shrink: 0;
+      border: 1.5px solid var(--border);
     }
 
-    .card-icon-plus {
-      position: absolute;
-      top: -9px;
-      right: -9px;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 2px solid #ffffff;
-      background: var(--yellow);
-      color: #0f172a;
-      font-size: 1.1rem;
+    .card-icon--math {
+      background: var(--cat-math-bg);
+      color: var(--cat-math-fg);
+    }
+
+    .card-icon--tik {
+      background: var(--cat-tik-bg);
+      color: var(--cat-tik-fg);
+    }
+
+    .card-icon--mgmt {
+      background: var(--cat-mgmt-bg);
+      color: var(--cat-mgmt-fg);
+    }
+
+    .card-tag {
+      font-size: 0.76rem;
       font-weight: 800;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      transition: transform 0.3s;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+      padding: 5px 11px;
+      border-radius: var(--r-sm);
+      background: var(--surface-subtle);
+      color: var(--ink);
+      border: 1px solid var(--border);
     }
 
-    .module-card.open .card-icon-plus {
-      transform: rotate(45deg);
+    .card-tag--math {
+      background: var(--cat-math-bg);
+      color: var(--cat-math-fg);
+      border-color: transparent;
     }
 
-    .card-badge-tag {
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border-radius: 999px;
-      background: var(--card-solid);
-      border: 1px solid var(--line);
-      color: var(--muted);
+    .card-tag--tik {
+      background: var(--cat-tik-bg);
+      color: var(--cat-tik-fg);
+      border-color: transparent;
     }
 
     .card-title {
       font-family: var(--f-display);
-      font-size: 1.45rem;
+      font-size: 1.35rem;
       font-weight: 800;
       line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .module-card--featured .card-title {
+      font-size: 1.55rem;
     }
 
     .card-desc {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--muted);
-      line-height: 1.55;
+      line-height: 1.6;
       flex-grow: 1;
     }
 
-    .card-extra-info {
+    .card-feats-wrap {
       display: grid;
       grid-template-rows: 0fr;
-      transition: grid-template-rows 0.35s ease;
+      transition: grid-template-rows 0.3s var(--ease-out-expo);
     }
 
-    .module-card.open .card-extra-info {
+    .card-feats-wrap.open {
       grid-template-rows: 1fr;
     }
 
-    .card-extra-info > div {
+    .card-feats-wrap > div {
       overflow: hidden;
     }
 
-    .card-feature-list {
+    .card-feats {
       list-style: none;
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      padding-top: 6px;
+      padding-top: 2px;
     }
 
-    .card-feature-list li {
-      font-size: 0.74rem;
+    .card-feats li {
+      font-size: 0.78rem;
       font-weight: 600;
       padding: 4px 10px;
-      border-radius: 8px;
-      background: var(--card-solid);
-      border: 1px solid var(--line);
+      border-radius: var(--r-sm);
+      background: var(--surface-subtle);
+      color: var(--ink);
     }
 
-    .card-action-row {
+    .card-actions {
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
       margin-top: auto;
+      padding-top: 4px;
     }
 
     .btn-card-open {
-      flex: 1;
-      text-align: center;
-      padding: 12px 14px;
-      border-radius: 14px;
+      flex: 1 1 130px;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: var(--r-md);
       background: var(--ink);
       color: var(--bg);
+      font-family: var(--f-display);
       font-weight: 800;
       font-size: 0.9rem;
-      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background-color 0.2s ease, color 0.2s ease, transform 0.18s ease;
     }
 
     .btn-card-open:hover {
       background: var(--yellow);
-      color: #0f172a;
+      color: var(--yellow-ink);
       transform: translateY(-2px);
     }
 
-    .btn-card-preview {
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: 2px solid var(--ink);
-      background: transparent;
+    .btn-card-secondary {
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: var(--r-md);
+      border: 1.5px solid var(--border-strong);
+      background: var(--surface-solid);
       color: var(--ink);
-      font-weight: 800;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.18s ease;
     }
 
-    .btn-card-preview:hover {
-      background: var(--card-solid);
+    .btn-card-secondary:hover {
+      background: var(--surface-subtle);
       border-color: var(--yellow);
       transform: translateY(-2px);
     }
 
-    /* ==========================================================
-       MODAL QUICK PREVIEW
-       ========================================================== */
-    .preview-modal-backdrop {
+    .empty-state {
+      padding: 44px 24px;
+      border-radius: var(--r-lg);
+      border: 2px dashed var(--border-strong);
+      background: var(--surface);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .empty-state[hidden] {
+      display: none;
+    }
+
+    .empty-state h3 {
+      font-family: var(--f-display);
+      font-size: 1.32rem;
+      font-weight: 800;
+    }
+
+    .empty-state p {
+      color: var(--muted);
+      max-width: 44ch;
+      font-size: 0.94rem;
+    }
+
+    .about-section {
+      border-top: 1px solid var(--border);
+    }
+
+    .about-split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.25fr);
+      gap: clamp(28px, 5vw, 68px);
+      align-items: start;
+    }
+
+    .about-identity {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sticker);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .about-crest-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .about-logo-frame {
+      width: 74px;
+      height: 74px;
+      border-radius: 18px;
+      background: var(--logo-surface);
+      border: 2px solid var(--logo-border);
+      padding: 10px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 6px 16px rgba(20, 19, 17, 0.12);
+    }
+
+    .about-logo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .about-crest-name {
+      font-family: var(--f-display);
+      font-size: 1.38rem;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .about-crest-role {
+      font-size: 0.88rem;
+      color: var(--electric);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .about-statement {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .about-facts {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-facts li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.88rem;
+    }
+
+    .about-facts span {
+      color: var(--muted);
+    }
+
+    .about-facts strong {
+      color: var(--ink);
+      text-align: right;
+    }
+
+    .discipline-list {
+      list-style: none;
+      border-top: 2px solid var(--border-strong);
+      background: var(--surface);
+      border-radius: 0 0 var(--r-lg) var(--r-lg);
+      padding: 0 24px;
+      border-inline: 1.5px solid var(--border);
+      border-bottom: 1.5px solid var(--border);
+    }
+
+    .discipline-item {
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: 16px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .discipline-item:last-child {
+      border-bottom: none;
+    }
+
+    .discipline-num {
+      font-family: var(--f-display);
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--yellow-text);
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .discipline-body h3 {
+      font-family: var(--f-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    .discipline-body p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .site-footer {
+      border-top: 2px solid var(--border-strong);
+      background: var(--surface-solid);
+      padding: clamp(44px, 6vw, 68px) clamp(16px, 4vw, 56px) 36px;
+    }
+
+    .footer-inner {
+      max-width: 1340px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
+      gap: 32px 48px;
+      padding-bottom: 34px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer-heading {
+      font-family: var(--f-display);
+      font-size: clamp(1.7rem, 3.2vw, 2.35rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .footer-lead {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 44ch;
+      margin-bottom: 20px;
+    }
+
+    .email-copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 10px 22px;
+      border-radius: var(--r-md);
+      background: var(--yellow);
+      color: var(--yellow-ink);
+      border: 2px solid var(--border-strong);
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: 0.96rem;
+      transition: transform 0.2s var(--ease-out-expo);
+    }
+
+    .email-copy-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .footer-links-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .footer-col-title {
+      font-family: var(--f-display);
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .footer-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .footer-nav-list a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-weight: 600;
+      font-size: 0.94rem;
+      color: var(--ink);
+      transition: color 0.2s ease;
+    }
+
+    .footer-nav-list a:hover {
+      color: var(--yellow-text);
+    }
+
+    .footer-bottom {
+      padding-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .modal-backdrop {
       position: fixed;
       inset: 0;
       z-index: 500;
-      background: rgba(8, 10, 20, 0.85);
-      backdrop-filter: blur(10px);
+      background: rgba(9, 12, 25, 0.82);
       display: grid;
       place-items: center;
       padding: 16px;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.3s, visibility 0.3s;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
     }
 
-    .preview-modal-backdrop.active {
+    .modal-backdrop.active {
       opacity: 1;
       visibility: visible;
     }
 
-    .preview-modal-window {
+    .modal-window {
       width: min(1140px, 100%);
-      height: 90vh;
-      background: var(--card-solid);
-      border-radius: 26px;
+      height: min(88dvh, 840px);
+      background: var(--surface-solid);
+      border: 2.5px solid var(--border-strong);
+      border-radius: var(--r-lg);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      border: 3px solid #ffffff;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
-      transform: scale(0.95);
-      transition: transform 0.3s cubic-bezier(0.3, 1.4, 0.5, 1);
+      box-shadow: var(--shadow-float);
+      transform: translateY(12px) scale(0.97);
+      transition: transform 0.28s var(--ease-out-expo);
     }
 
-    .preview-modal-backdrop.active .preview-modal-window {
-      transform: scale(1);
+    .modal-backdrop.active .modal-window {
+      transform: translateY(0) scale(1);
     }
 
-    .modal-bar-top {
+    .modal-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 20px;
-      background: var(--card-bg);
-      border-bottom: 1px solid var(--line);
+      gap: 12px;
+      padding: 12px 18px;
+      background: var(--surface-solid);
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
     }
 
-    .modal-bar-top strong {
-      font-family: var(--f-display);
-      font-size: 1.1rem;
-    }
-
-    .modal-bar-top small {
-      color: var(--muted);
-      font-family: monospace;
-      margin-left: 8px;
-    }
-
-    .modal-actions-right {
+    .modal-title-group {
       display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 4px 10px;
+      min-width: 0;
+    }
+
+    .modal-title-group h2 {
+      font-family: var(--f-display);
+      font-size: 1.12rem;
+      font-weight: 800;
+    }
+
+    .modal-url {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .modal-actions {
+      display: flex;
+      align-items: center;
       gap: 8px;
     }
 
-    .modal-actions-right a,
-    .modal-actions-right button {
-      padding: 7px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--line);
-      background: var(--card-solid);
+    .modal-btn {
+      min-height: 44px;
+      padding: 8px 16px;
+      border-radius: var(--r-md);
+      border: 1.5px solid var(--border-strong);
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--f-display);
       font-weight: 700;
-      font-size: 0.82rem;
-      cursor: pointer;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
     }
 
-    .modal-actions-right button.btn-close-modal {
+    .modal-btn--close {
       background: var(--yellow);
-      color: #0f172a;
-      border: none;
+      color: var(--yellow-ink);
     }
 
-    .modal-frame-body {
-      flex: 1;
+    .modal-body {
       position: relative;
-      background: #ffffff;
+      flex: 1;
+      background: #FFFFFF;
     }
 
-    .modal-frame-body iframe {
+    .modal-body iframe {
       width: 100%;
       height: 100%;
       border: none;
     }
 
-    /* Toast Notification */
-    .toast-pill {
+    .modal-state {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: var(--surface-solid);
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .modal-state[hidden] {
+      display: none;
+    }
+
+    .modal-spinner {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--r-full);
+      border: 3px solid var(--border);
+      border-top-color: var(--yellow);
+      animation: ringSpin 0.8s linear infinite;
+    }
+
+    .toast {
       position: fixed;
       bottom: 24px;
       left: 50%;
-      transform: translate(-50%, 100px);
+      transform: translate(-50%, 110px);
+      z-index: 600;
+      padding: 12px 22px;
+      border-radius: var(--r-md);
       background: var(--ink);
       color: var(--bg);
-      padding: 12px 24px;
-      border-radius: 999px;
+      border: 1.5px solid var(--border-strong);
       font-weight: 700;
       font-size: 0.9rem;
-      z-index: 600;
-      transition: transform 0.35s cubic-bezier(0.3, 1.4, 0.5, 1);
+      box-shadow: var(--shadow-float);
+      transition: transform 0.28s var(--ease-out-expo);
     }
 
-    .toast-pill.show {
+    .toast.show {
       transform: translate(-50%, 0);
     }
 
-    /* ==========================================================
-       RESPONSIVE BREAKPOINTS
-       ========================================================== */
-    @media (max-width: 1024px) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+      transition-delay: var(--rd, 0s);
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Global motion pause switch allows anyone to stop ambient effects on demand. */
+    html.motion-paused *,
+    html.motion-paused *::before,
+    html.motion-paused *::after {
+      animation-play-state: paused !important;
+    }
+
+    html.motion-paused .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 1220px) {
       .topbar {
         grid-template-columns: 1fr auto;
       }
-      .search-pill-wrap {
+
+      .nav-search-pill {
         display: none;
       }
-      .stage-container {
+    }
+
+    @media (max-width: 1120px) {
+      .hero-intro-left {
+        width: min(410px, 42%);
+      }
+
+      .card-logo-float {
+        left: 38%;
+        width: 102px;
+        height: 102px;
+        padding: 12px;
+      }
+
+      .catalog-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .about-split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 920px) {
+      .clock-widget {
+        display: none;
+      }
+
+      .hero-stage {
+        min-height: 0;
+        padding-bottom: 36px;
+      }
+
+      .stage-canvas {
         height: auto;
         min-height: 0;
         display: flex;
@@ -1113,715 +2106,532 @@
         align-items: center;
         gap: 24px;
       }
-      .stage-container > * {
-        position: relative !important;
-        inset: auto !important;
-        transform: none !important;
-      }
-      .hero-title-right {
-        order: 1;
-        text-align: center;
-      }
-      .hero-title-right span:nth-child(2) {
+
+      .stage-canvas > * {
+        position: relative;
+        inset: auto;
         transform: none;
-        margin-left: 0;
+        translate: none;
       }
+
+      .hero-intro-left {
+        order: 1;
+        width: min(600px, 100%);
+        padding: 18px;
+      }
+
+      .hero-visual-mobile-wrap {
+        display: contents;
+      }
+
       .zen-character-center {
         order: 2;
-        width: min(300px, 70vw);
-        height: 380px;
-        margin: 10px auto;
+        width: min(300px, 74vw);
+        margin: 8px auto 0;
       }
-      .hero-intro-left {
-        order: 3;
-        width: min(580px, 100%);
-        text-align: center;
-      }
-      .hero-script-overlay {
-        left: 50%;
-        transform: translateX(-50%) rotate(-6deg);
-      }
-      .card-top-left, .sparkle-star, .nav-next-arrow {
-        display: none;
-      }
-      .card-desc-left {
-        order: 4;
-        width: min(440px, 100%);
-      }
-      .widget-weather {
-        order: 5;
-        width: 140px;
-      }
-      .card-bottom-right {
-        display: none;
-      }
-      .hero-stage {
-        padding-bottom: 120px;
-      }
-      .hero-socials {
-        position: static;
-        margin-top: 20px;
-        justify-content: center;
-      }
-    }
 
-    @media (max-width: 640px) {
-      .clock-date {
+      .hero-title-right {
+        order: 3;
+        text-align: center;
+        margin-top: -18px;
+      }
+
+      .card-logo-float {
+        order: 4;
+        rotate: -2deg;
+      }
+
+      .card-highlight-float {
+        order: 5;
+        rotate: 1deg;
+      }
+
+      .card-desc-left {
+        order: 6;
+        width: min(560px, 100%);
+      }
+
+      .nav-next-arrow {
         display: none;
       }
-      .nav-link {
-        font-size: 1rem;
+
+      .spotlight-grid {
+        grid-template-columns: 1fr;
       }
-      .topbar {
-        padding-inline: 16px;
-      }
-      .cards-grid {
+
+      .footer-top {
         grid-template-columns: 1fr;
       }
     }
 
-    /* ==========================================================
-       ✨ LOADING SCREEN SIMPEL & ELEGAN (Cepat, Ringan & Bebas Lag)
-       ========================================================== */
-    body.loading { overflow: hidden; }
+    @media (max-width: 760px) {
+      :root {
+        --nav-height: 68px;
+      }
 
-    .loader {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at 50% 45%, #141a33 0%, #0c1022 55%, #070914 100%);
-      color: #fff;
-      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s ease;
-    }
-    .loader.done {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
+      .nav-desktop {
+        display: none;
+      }
 
-    .ld-brand-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 10px;
-    }
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
 
-    .ld-avatar-ring {
-      position: relative;
-      width: 86px;
-      height: 86px;
-      border-radius: 50%;
-      padding: 3px;
-      background: linear-gradient(135deg, var(--yellow), #38bdf8);
-      box-shadow: 0 0 25px var(--yellow-glow);
-      animation: pulseAvatar 2.2s ease-in-out infinite alternate;
-    }
+      .hero-actions {
+        width: 100%;
+      }
 
-    @keyframes pulseAvatar {
-      from { transform: scale(0.97); box-shadow: 0 0 16px var(--yellow-glow); }
-      to { transform: scale(1.03); box-shadow: 0 0 32px rgba(250, 204, 21, 0.55); }
-    }
+      .btn-primary,
+      .btn-secondary {
+        flex: 1 1 100%;
+      }
 
-    .ld-avatar-ring img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      background: #0f172a;
-    }
+      .catalog-grid {
+        grid-template-columns: 1fr;
+      }
 
-    .ld-title {
-      font-family: var(--f-display);
-      font-weight: 900;
-      font-size: 2.2rem;
-      letter-spacing: 0.1em;
-      color: #ffffff;
-      line-height: 1;
-      margin-top: 6px;
-    }
+      .discipline-list {
+        padding: 0 18px;
+      }
 
-    .ld-title span {
-      color: var(--yellow);
-    }
+      .discipline-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
 
-    .ld-subtitle {
-      font-family: var(--f-display);
-      font-size: 0.85rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 600;
-    }
+      .footer-links-col {
+        grid-template-columns: 1fr;
+      }
 
-    /* Slim Elegant Progress Bar */
-    .ld-bar-wrap {
-      width: min(240px, 72vw);
-      height: 4px;
-      border-radius: 99px;
-      background: rgba(255, 255, 255, 0.12);
-      overflow: hidden;
-      margin-top: 14px;
-    }
+      .marquee-band {
+        transform: none;
+        margin: 8px 0 16px;
+      }
 
-    .ld-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #facc15, #38bdf8);
-      border-radius: 99px;
-      transition: width 0.2s ease-out;
-    }
-
-    .ld-status-row {
-      display: flex;
-      justify-content: space-between;
-      width: min(240px, 72vw);
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 8px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-    }
-
-    .ld-pct {
-      font-family: var(--f-display);
-      font-weight: 700;
-      color: var(--yellow);
-    }
-
-    /* ==========================================================
-       ✨ EFEK TEKS & MOTION KREATIF
-       ========================================================== */
-    /* huruf per huruf (di-generate JS) */
-    .ch { display: inline-block; font-style: normal; }
-    .hero-title-right .ch { font-size: inherit; }
-
-    body.loaded .hero-title-right .ch,
-    body.loaded .hero-name-left .ch {
-      animation:
-        chDrop .9s cubic-bezier(.2, 1.5, .4, 1) calc(var(--i) * .07s + .55s) backwards,
-        chWave 3.2s ease-in-out calc(var(--i) * .13s + 2s) infinite alternate;
-    }
-    @keyframes chDrop {
-      0% { opacity: 0; transform: translateY(-120px) rotate(-25deg) scale(1.6); filter: blur(10px); }
-      60% { opacity: 1; filter: blur(0); }
-      100% { transform: none; }
-    }
-    @keyframes chWave {
-      0% { transform: translateY(0) rotate(0); }
-      100% { transform: translateY(-9px) rotate(1.6deg); }
-    }
-
-    /* Outline kanan: stroke berkilau emas bergantian */
-    .hero-title-right .ch {
-      animation-name: none;
-    }
-    body.loaded .hero-title-right .ch { animation-name: chDrop, chWave, strokeGlow; animation-duration: .9s, 3.2s, 4s; animation-iteration-count: 1, infinite, infinite; animation-fill-mode: backwards, none, none; animation-delay: calc(var(--i) * .07s + .55s), calc(var(--i) * .13s + 2s), calc(var(--i) * .25s); animation-timing-function: cubic-bezier(.2,1.5,.4,1), ease-in-out, ease-in-out; animation-direction: normal, alternate, normal; }
-    @keyframes strokeGlow {
-      0%, 70%, 100% { -webkit-text-stroke-color: var(--text-stroke); filter: none; }
-      85% { -webkit-text-stroke-color: var(--yellow); filter: drop-shadow(0 0 18px var(--yellow)); }
-    }
-
-    /* AWAN: gradient petir bergerak */
-    .hero-name-left .ch {
-      background: linear-gradient(100deg, #fff 0%, #facc15 35%, #38bdf8 65%, #fff 100%);
-      background-size: 250% 100%;
-      -webkit-background-clip: text; background-clip: text;
-      color: transparent;
-      animation: gradMove 4s linear infinite;
-      animation-delay: calc(var(--i) * -.3s);
-    }
-    body.loaded .hero-name-left .ch {
-      animation:
-        chDrop .9s cubic-bezier(.2, 1.5, .4, 1) calc(var(--i) * .07s + .55s) backwards,
-        chWave 3.2s ease-in-out calc(var(--i) * .13s + 2s) infinite alternate,
-        gradMove 4s linear infinite;
-    }
-    @keyframes gradMove { to { background-position: 250% 0; } }
-    html[data-theme="light"] .hero-name-left .ch { background-image: linear-gradient(100deg, #0f172a 0%, #d97706 40%, #0284c7 70%, #0f172a 100%); background-size: 250% 100%; }
-
-    /* Script tulisan tangan goyang */
-    .hero-script-overlay { animation: scriptWiggle 3s ease-in-out infinite; }
-    @keyframes scriptWiggle {
-      0%, 100% { transform: rotate(-10deg) scale(1); }
-      50% { transform: rotate(-6deg) scale(1.07); }
-    }
-
-    /* Baris peran: efek mengetik */
-    .role-line {
-      display: inline-flex; align-items: center; gap: 8px;
-      margin: 0 0 12px; padding: 6px 14px;
-      font-family: var(--f-display); font-weight: 700; font-size: .92rem;
-      border-radius: 999px;
-      background: color-mix(in srgb, var(--yellow) 18%, transparent);
-      border: 1.5px solid var(--yellow);
-      color: var(--ink);
-      min-height: 34px;
-    }
-    .role-line i { color: var(--yellow); animation: boltBlink 1.2s infinite; }
-    @keyframes boltBlink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(.8); } }
-    .role-line .caret { width: 2px; height: 1.1em; background: var(--yellow); animation: caretBlink .7s steps(1) infinite; }
-    @keyframes caretBlink { 50% { opacity: 0; } }
-
-    /* Subtitle & bio muncul bertahap */
-    body.loaded .hero-subtitle-left,
-    body.loaded .role-line,
-    body.loaded .hero-desc-left,
-    body.loaded .btn-readmore {
-      animation: slideUp .8s cubic-bezier(.2, .9, .3, 1) backwards;
-    }
-    body.loaded .hero-subtitle-left { animation-delay: 1.0s; }
-    body.loaded .role-line { animation-delay: 1.15s; }
-    body.loaded .hero-desc-left { animation-delay: 1.3s; }
-    body.loaded .btn-readmore { animation-delay: 1.45s; }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(26px); } }
-
-    body.loaded .zen-character-center { animation: charIn 1.2s cubic-bezier(.2, 1.2, .3, 1) .2s backwards; }
-    @keyframes charIn { from { opacity: 0; transform: translate(-50%, -40%) scale(.7); filter: blur(12px); } }
-    body.loaded .float-card, body.loaded .widget-weather { animation: popIn .8s cubic-bezier(.2, 1.6, .4, 1) 1.2s backwards; }
-    @keyframes popIn { from { opacity: 0; scale: .3; } }
-
-    /* Parallax mouse via properti `translate` (tidak bentrok dengan transform) */
-    .hero-stage { --mx: 0; --my: 0; }
-    .zen-char-img { translate: calc(var(--mx) * 16px) calc(var(--my) * 10px); transition: translate .25s ease-out; }
-    .character-halo { translate: calc(var(--mx) * -10px) calc(var(--my) * -6px); transition: translate .25s ease-out; }
-    .hero-title-right { translate: calc(var(--mx) * -22px) calc(var(--my) * -8px); transition: translate .3s ease-out; }
-    .hero-intro-left { translate: calc(var(--mx) * 8px) calc(var(--my) * 5px); transition: translate .3s ease-out; }
-    .card-top-left { translate: calc(var(--mx) * 26px) calc(var(--my) * 18px); }
-    .card-bottom-right { translate: calc(var(--mx) * -28px) calc(var(--my) * -16px); }
-    .sparkle-star.s1 { translate: calc(var(--mx) * 34px) calc(var(--my) * 20px); }
-    .sparkle-star.s2 { translate: calc(var(--mx) * -34px) calc(var(--my) * -20px); }
-
-    /* Marquee: tilt + kilau */
-    .marquee-strip { transform: rotate(-1.4deg); margin: 10px -2%; box-shadow: 0 10px 30px rgba(0, 0, 0, .4); }
-
-    /* Judul section: garis bawah petir + shine */
-    .sec-title em { position: relative; overflow: hidden; display: inline-block; }
-    .sec-title em::after {
-      content: ""; position: absolute; inset: 0;
-      background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .75) 50%, transparent 70%);
-      transform: translateX(-130%);
-      animation: shine 3.5s ease-in-out infinite;
-    }
-    @keyframes shine { 60%, 100% { transform: translateX(130%); } }
-
-    /* Scroll reveal */
-    .reveal { opacity: 0; }
-    .reveal.in { opacity: 1; animation: revealUp .8s cubic-bezier(.2, .9, .3, 1) backwards; animation-delay: var(--rd, 0s); }
-    @keyframes revealUp { from { opacity: 0; transform: translateY(50px) scale(.94); } }
-
-    /* Kartu modul: kilau saat hover */
-    .module-card { overflow: hidden; }
-    .module-card::before {
-      content: ""; position: absolute; top: 0; left: -80%; width: 50%; height: 100%;
-      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .16), transparent);
-      transform: skewX(-20deg); transition: left .7s ease; pointer-events: none;
-    }
-    .module-card:hover::before { left: 130%; }
-
-    /* Progress scroll bar atas */
-    .scroll-progress { position: fixed; top: 0; left: 0; height: 4px; width: 0; z-index: 200; background: linear-gradient(90deg, #facc15, #38bdf8); box-shadow: 0 0 12px var(--yellow-glow); }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-      .lightning-flash { display: none; }
-      .marquee-track { animation: marqueeScroll 40s linear infinite !important; }
-      .character-halo::before { animation: ringSpin 30s linear infinite !important; }
-    }
-
-    /* ==========================================================
-       🛠 PERAPIHAN SUSUNAN (revisi layout)
-       ========================================================== */
-    /* Kolom kiri: naik sedikit, sosmed di dalam kolom */
-    .hero-intro-left { top: 45%; transform: translateY(-58%); }
-    .hero-name-left { margin-top: 26px; }
-    .hero-script-overlay {
-      top: -34px; left: 4px;
-      font-size: clamp(1.9rem, 3vw, 2.8rem);
-    }
-    .hero-socials {
-      position: static;
-      margin-top: 16px;
-      gap: 18px;
-    }
-    .social-tag { font-size: .88rem; }
-    .social-tag i { font-size: 1.3rem; }
-
-    /* Kartu avatar: pindah ke atas karakter, tidak menutupi AWAN */
-    .card-top-left { left: 35%; top: 0; width: 104px; height: 104px; rotate: -6deg; }
-    .sparkle-star.s1 { left: 44.5%; top: 6%; font-size: 1.7rem; }
-    .card-desc-left { bottom: 0; }
-    .widget-weather { bottom: 31%; }
-
-    /* Zenitsu: bagian bawah memudar halus + cahaya lantai petir (tidak terpotong kaku) */
-    .zen-char-img {
-      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 74%, rgba(0,0,0,.55) 88%, transparent 100%);
-      mask-image: linear-gradient(to bottom, #000 0%, #000 74%, rgba(0,0,0,.55) 88%, transparent 100%);
-    }
-    .zen-character-center::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      left: 50%;
-      bottom: -22px;
-      width: 120%;
-      height: 70px;
-      margin-left: -60%;
-      background:
-        radial-gradient(ellipse at 50% 50%, rgba(250, 204, 21, .55) 0%, rgba(250, 204, 21, .18) 40%, transparent 70%);
-      filter: blur(10px);
-      animation: groundPulse 3s ease-in-out infinite alternate;
-    }
-    .zen-character-center::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      left: 50%;
-      bottom: -4px;
-      width: 78%;
-      height: 26px;
-      margin-left: -39%;
-      border-radius: 50%;
-      border: 2px solid rgba(250, 204, 21, .65);
-      box-shadow: 0 0 22px var(--yellow-glow), inset 0 0 14px rgba(250, 204, 21, .3);
-      animation: groundRing 3s ease-in-out infinite;
-    }
-    @keyframes groundPulse { from { opacity: .6; transform: scaleX(.92); } to { opacity: 1; transform: scaleX(1.05); } }
-    @keyframes groundRing { 0% { transform: scale(.7); opacity: 0; } 30% { opacity: 1; } 100% { transform: scale(1.25); opacity: 0; } }
-
-    /* Garis kuning (halo): bergerak mulus — berdenyut + cincin putus-putus berputar */
-    .character-halo {
-      border-color: rgba(250, 204, 21, .8);
-      will-change: transform;
-      animation: pulseHalo 4s ease-in-out infinite alternate;
-    }
-    .character-halo::before {
-      content: "";
-      position: absolute;
-      inset: -18px;
-      border-radius: 50%;
-      border: 3px dashed rgba(250, 204, 21, .55);
-      animation: ringSpin 22s linear infinite;
-    }
-    .character-halo::after {
-      content: "";
-      position: absolute;
-      inset: -34px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      border-top-color: rgba(255, 244, 150, .9);
-      border-right-color: rgba(250, 204, 21, .35);
-      filter: drop-shadow(0 0 8px var(--yellow));
-      animation: ringSpin 7s cubic-bezier(.45, .05, .55, .95) infinite reverse;
-    }
-
-    /* Pita kuning (marquee): gerak halus lewat GPU */
-    .marquee-strip {
-      transform: rotate(-1.4deg) translateZ(0);
-      backface-visibility: hidden;
-      contain: paint;
-    }
-    .marquee-track {
-      will-change: transform;
-      backface-visibility: hidden;
-      animation: marqueeSmooth 34s linear infinite;
-    }
-    @keyframes marqueeSmooth {
-      from { transform: translate3d(0, 0, 0); }
-      to { transform: translate3d(-50%, 0, 0); }
+      .marquee-toggle {
+        margin-right: 0;
+        padding: 0 14px;
+      }
     }
   </style>
 </head>
-<body class="loading">
+<body>
+  <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-  <!-- ===== LOADING SCREEN SIMPEL & ELEGAN ===== -->
-  <div class="loader" id="loader" role="status" aria-live="polite">
-    <div class="ld-brand-wrap">
-      <div class="ld-avatar-ring">
-        <img src="zenitsu.png" alt="Zenitsu" />
-      </div>
-      <div class="ld-title">A<span>WA</span>N</div>
-      <div class="ld-subtitle">Yusri Irawan, S.Pd.</div>
-    </div>
-    <div class="ld-bar-wrap">
-      <div class="ld-bar-fill" id="ldFill"></div>
-    </div>
-    <div class="ld-status-row">
-      <span id="ldStatus">Memuat portofolio...</span>
-      <span class="ld-pct" id="ldPct">0%</span>
-    </div>
+  <div class="bg-scene" aria-hidden="true">
+    <img src="back.jpg" alt="" width="3840" height="2160" fetchpriority="high" />
   </div>
-  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="bg-veil" aria-hidden="true"></div>
+  <div class="bg-orbital-lines" aria-hidden="true"></div>
 
-  <!-- ========================================================
-       BACKGROUND IMAGE (back.jpg - RINGAN & BEBAS LAG)
-       ======================================================== -->
-  <div class="bg-image-container">
-    <img class="bg-image-player" src="back.jpg" alt="Background" />
-  </div>
-  <div class="bg-video-overlay"></div>
-  <div class="bg-technical-lines"></div>
-
-  <!-- ========================================================
-       TOPBAR (HOME, ABOUT, GALERY, SEARCH PILL, CLOCK)
-       ======================================================== -->
   <header class="topbar" id="topbar">
-    <!-- Menu Kiri -->
-    <nav class="nav-left">
-      <a href="#home" class="nav-link active">Home</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#gallery" class="nav-link">Galery</a>
-    </nav>
+    <div class="nav-left-group">
+      <a href="#home" class="brand-mark" aria-label="Beranda Yusri Irawan AWAN">
+        <span class="brand-logo-tile">
+          <img src="awan.png" alt="Logo AWAN" width="500" height="500" />
+        </span>
+      </a>
 
-    <!-- Search Bar Pil Tengah -->
-    <div class="search-pill-wrap">
-      <input type="text" class="search-pill-input" id="globalSearch" placeholder="Search..." autocomplete="off" />
-      <i class="fa-solid fa-magnifying-glass search-pill-icon"></i>
+      <nav class="nav-desktop" aria-label="Navigasi utama">
+        <a href="#home" class="nav-link active" data-nav="home">Beranda</a>
+        <a href="#gallery" class="nav-link" data-nav="gallery">Media Belajar</a>
+        <a href="#about" class="nav-link" data-nav="about">Tentang</a>
+        <a href="#contact" class="nav-link" data-nav="contact">Kontak</a>
+      </nav>
     </div>
 
-    <!-- Kanan: Tanggal & Jam Live + Theme Toggle -->
-    <div class="clock-right-wrap">
-      <div class="clock-text">
-        <span class="clock-date" id="liveDate">MON, 16 JUNE</span>
-        <span class="clock-time" id="liveTime">23: 02 PM</span>
+    <a href="#gallery" class="nav-search-pill" id="navSearchJump">
+      <span>Cari modul...</span>
+      <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-3.5-3.5" />
+      </svg>
+    </a>
+
+    <div class="topbar-right">
+      <div class="clock-widget" aria-label="Waktu lokal saat ini">
+        <span class="clock-date" id="liveDate">Sen, 23 Nov</span>
+        <span class="clock-time" id="liveTime">20:15</span>
       </div>
-      <button class="theme-toggle-btn" id="themeBtn" aria-label="Ganti Tema">
-        <i class="fa-solid fa-moon" id="themeIcon"></i>
+
+      <button type="button" class="icon-btn icon-btn--motion" id="motionBtn" aria-label="Jeda animasi halaman" aria-pressed="false" title="Jeda atau putar efek animasi">
+        <svg class="icon icon--sm" id="motionIcon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 6v12M15 6v12" />
+        </svg>
+      </button>
+
+      <button type="button" class="icon-btn icon-btn--theme" id="themeBtn" aria-label="Aktifkan mode gelap" aria-pressed="false" title="Ganti tema terang/gelap">
+        <svg class="icon" id="themeIcon" viewBox="0 0 24 24" aria-hidden="true"></svg>
+      </button>
+
+      <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-expanded="false" aria-controls="mobileDrawer">
+        <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+        <span>Menu</span>
       </button>
     </div>
   </header>
 
-  <!-- ========================================================
-       HERO POSTER STAGE (SESUAI FOTO REFERENSI RYOU YAMADA)
-       KARAKTER: ZENITSU DARI GAMBAR USER (zenitsu.png)
-       BACKGROUND: zen.mp4
-       ISI WEB: YUSRI IRAWAN (AWAN)
-       ======================================================== -->
-  <section class="hero-stage" id="home">
-    <div class="stage-container" id="stageContainer">
+  <nav class="mobile-drawer" id="mobileDrawer" aria-label="Navigasi seluler">
+    <ul class="mobile-drawer-list">
+      <li><a href="#home" class="active" data-nav="home">Beranda</a></li>
+      <li><a href="#gallery" data-nav="gallery">Media Belajar</a></li>
+      <li><a href="#about" data-nav="about">Tentang</a></li>
+      <li><a href="#contact" data-nav="contact">Kontak</a></li>
+    </ul>
+    <div class="mobile-drawer-meta">
+      <span id="mobileDate">Sen, 23 Nov</span>
+      <strong id="mobileTime">20:15</strong>
+    </div>
+  </nav>
 
-      <!-- 1. TULISAN BESAR KANAN: "YUSRI IRAWAN" (OUTLINE TEBAL ALA REFERENSI) -->
-      <div class="hero-title-right" aria-hidden="true">
-        <span>YUSRI</span>
-        <span>IRAWAN</span>
+  <main id="main-content" tabindex="-1">
+    <section class="hero-stage" id="home">
+      <div class="stage-canvas" id="stageCanvas">
+        <div class="hero-title-right" aria-hidden="true">
+          <span>YUSRI</span>
+          <span>IRAWAN</span>
+        </div>
+
+        <div class="zen-character-center">
+          <div class="character-halo"></div>
+          <img class="zen-char-img" src="zenitsu.png" alt="Ilustrasi karakter Zenitsu sebagai tema visual situs AWAN" width="433" height="577" fetchpriority="high" />
+        </div>
+
+        <div class="hero-intro-left">
+          <div class="hero-script">Creative Educator</div>
+          <h1 class="hero-name-left">AWAN</h1>
+          <div class="hero-subtitle">Yusri Irawan, S.Pd.</div>
+          <div class="role-pill" aria-live="off">
+            <span id="roleText">Guru SD Matematika &amp; TIK</span>
+            <span class="caret" aria-hidden="true"></span>
+          </div>
+          <p class="hero-desc">
+            Pendidik Sekolah Dasar, Web Creator, dan Community Support Lead. Menghadirkan media pembelajaran matematika dan TIK yang interaktif, visual, dan siap langsung dibuka di browser.
+          </p>
+          <div class="hero-actions">
+            <a href="#gallery" class="btn-primary">Lihat Media Belajar</a>
+            <a href="guru.html" class="btn-secondary">Buka Portal Guru</a>
+          </div>
+          <div class="hero-socials">
+            <a href="https://instagram.com/yusriirawan44" target="_blank" rel="noopener noreferrer" class="social-tag">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
+              <span>@yusriirawan44</span>
+            </a>
+            <a href="https://discordapp.com/users/685240966575292424" target="_blank" rel="noopener noreferrer" class="social-tag">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 12a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Zm6 0a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z" fill="currentColor" stroke="none" />
+                <path d="M18.9 5.3a15 15 0 0 0-3.7-1.2l-.5 1a13.7 13.7 0 0 0-5.4 0l-.5-1a15 15 0 0 0-3.7 1.2C2.8 8.8 2.2 12.2 2.5 15.6a15 15 0 0 0 4.6 2.3l1-1.6a9.6 9.6 0 0 1-1.5-.7l.4-.3a10.6 10.6 0 0 0 10 0l.4.3a9.6 9.6 0 0 1-1.5.7l1 1.6a15 15 0 0 0 4.6-2.3c.4-3.9-.6-7.3-2.6-10.3Z" />
+              </svg>
+              <span>Discord</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="#about" class="float-card card-logo-float" aria-label="Logo resmi AWAN, lompat ke bagian Tentang">
+          <span class="badge-plus" aria-hidden="true">+</span>
+          <img src="awan.png" alt="Logo resmi AWAN" width="500" height="500" fetchpriority="high" />
+        </a>
+
+        <div class="float-card card-desc-left">
+          <div class="card-desc-head">
+            <h2>Catatan Proyek</h2>
+            <button type="button" class="desc-toggle-btn" id="noteToggle" aria-expanded="false" aria-controls="noteExtra" aria-label="Buka detail catatan proyek">
+              <span aria-hidden="true">+</span>
+            </button>
+          </div>
+          <p class="card-desc-summary">
+            Yusri Irawan (AWAN) merancang media belajar mandiri langsung di browser tanpa ketergantungan server.
+          </p>
+          <div class="card-desc-extra" id="noteExtra">
+            <div>
+              <p>
+                Mencakup Petualangan Bilangan Misteri, Kalkulator Perkalian Bersusun, Pembagian Visual, Simulasi Rumus Excel, Panduan Canva, serta Portal Guru AWAN.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <a href="#gallery" class="float-card card-highlight-float" aria-label="Lihat katalog 11 modul media pembelajaran">
+          <span class="badge-plus" aria-hidden="true">+</span>
+          <span class="highlight-chip" aria-hidden="true">
+            <svg class="icon icon--lg" viewBox="0 0 24 24">
+              <path d="M22 10 12 5 2 10l10 5 10-5Z" />
+              <path d="M6 12v5c0 1.6 2.7 3 6 3s6-1.4 6-3v-5" />
+              <path d="M22 10v6" />
+            </svg>
+          </span>
+          <span class="highlight-metric" id="moduleCountMetric">11 Modul</span>
+          <span class="highlight-caption">HTML mandiri siap kelas</span>
+        </a>
+
+        <a href="#gallery" class="nav-next-arrow" aria-label="Gulir ke katalog media belajar">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m9 6 6 6-6 6" />
+          </svg>
+        </a>
       </div>
+    </section>
 
-      <!-- 2. KARAKTER ZENITSU DI TENGAH: MENGGUNAKAN zenitsu.png + HALO KUNING -->
-      <div class="zen-character-center">
-        <div class="character-halo"></div>
-        <img class="zen-char-img" src="zenitsu.png" alt="Zenitsu Character Art" />
+    <div class="marquee-band" id="marqueeBand" aria-label="Daftar berjalan modul pembelajaran">
+      <div class="marquee-viewport">
+        <div class="marquee-track" id="marqueeTrack"></div>
       </div>
+      <button type="button" class="marquee-toggle" id="marqueeToggle" aria-pressed="false" aria-label="Jeda pita modul">
+        <svg class="icon icon--sm" id="marqueeIcon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 6v12M15 6v12" />
+        </svg>
+        <span id="marqueeLabel">Jeda</span>
+      </button>
+    </div>
 
-      <!-- 3. TULISAN INTRO KIRI: AWAN / YUSRI IRAWAN + HANDWRITTEN SCRIPT + READ MORE -->
-      <div class="hero-intro-left">
-        <div class="hero-script-overlay">Creative Educator</div>
-        <h1 class="hero-name-left">AWAN</h1>
-        <div class="hero-subtitle-left">Yusri Irawan, S.Pd.</div>
-        <div class="role-line"><i class="fa-solid fa-bolt"></i><span id="roleText"></span><b class="caret"></b></div>
-        <p class="hero-desc-left">
-          Pendidik Sekolah Dasar, Web Creator, dan Community Support Lead. Berdedikasi menghadirkan media pembelajaran matematika dan teknologi informasi yang interaktif, visual, dan menyenangkan bagi anak-anak.
+    <section class="section-shell" id="gallery">
+      <div class="section-header reveal">
+        <div>
+          <p class="section-eyebrow">Katalog Media Interaktif</p>
+          <h2 class="section-title">Media <em>Belajar</em><br />&amp; Aplikasi Mandiri</h2>
+        </div>
+        <p class="section-lead">
+          Semua file HTML dapat dibuka langsung seketika di browser sekolah tanpa server. Klik Fitur untuk rincian, atau Pratinjau untuk mencoba langsung.
         </p>
-        <a href="#gallery" class="btn-readmore">Read More</a>
+      </div>
 
-        <!-- Sosmed dipindah ke dalam kolom intro agar tidak menimpa kartu description -->
-        <div class="hero-socials">
-          <a href="https://instagram.com/yusriirawan44" target="_blank" rel="noopener" class="social-tag">
-            <i class="fa-brands fa-instagram"></i>
-            <span>@yusriirawan44</span>
-          </a>
-          <a href="https://discordapp.com/users/685240966575292424" target="_blank" rel="noopener" class="social-tag">
-            <i class="fa-brands fa-discord"></i>
-            <span>Discord</span>
-          </a>
+      <div class="catalog-toolbar reveal">
+        <div class="search-field">
+          <label for="moduleSearch">Cari modul atau topik</label>
+          <div class="search-input-box">
+            <svg class="icon icon--sm search-leading-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" />
+            </svg>
+            <input type="search" id="moduleSearch" class="search-input" placeholder="Contoh: perkalian, Excel, Canva..." autocomplete="off" />
+            <button type="button" class="search-clear-btn" id="clearSearchBtn" aria-label="Hapus kata kunci pencarian">
+              <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 6l12 12M18 6 6 18" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-group" id="filterGroup" role="group" aria-label="Filter kategori modul"></div>
+      </div>
+
+      <p class="catalog-status" id="catalogStatus" aria-live="polite"></p>
+
+      <div class="tier-block" id="spotlightTier">
+        <h3 class="tier-heading">Aplikasi Interaktif Utama</h3>
+        <div class="spotlight-grid" id="spotlightGrid"></div>
+      </div>
+
+      <div class="tier-block" id="catalogTier">
+        <h3 class="tier-heading">Modul &amp; Perangkat Kelas</h3>
+        <div class="catalog-grid" id="catalogGrid"></div>
+      </div>
+
+      <div class="empty-state" id="emptyState" hidden>
+        <h3>Modul tidak ditemukan</h3>
+        <p id="emptyStateDesc">Tidak ada modul yang cocok dengan pencarianmu.</p>
+        <button type="button" class="btn-secondary" id="resetFilterBtn">Tampilkan Semua Modul</button>
+      </div>
+    </section>
+
+    <section class="section-shell about-section" id="about">
+      <div class="section-header reveal">
+        <div>
+          <p class="section-eyebrow">Profil &amp; Dedikasi</p>
+          <h2 class="section-title">Filosofi &amp;<br /><em>Keahlian</em></h2>
+        </div>
+        <p class="section-lead">
+          Menggabungkan pengalaman pedagogik di dunia pendidikan dasar dengan pengembangan teknologi web ringan untuk kelas.
+        </p>
+      </div>
+
+      <div class="about-split">
+        <aside class="about-identity reveal">
+          <div class="about-crest-row">
+            <div class="about-logo-frame">
+              <img src="awan.png" alt="Logo AWAN" width="500" height="500" loading="lazy" />
+            </div>
+            <div>
+              <h3 class="about-crest-name">Yusri Irawan, S.Pd.</h3>
+              <p class="about-crest-role">Pendidik SD &amp; Web Creator (AWAN)</p>
+            </div>
+          </div>
+
+          <p class="about-statement">
+            Merancang media belajar yang langsung terbuka di lab komputer sekolah maupun perangkat siswa di rumah. Setiap konsep Matematika dan TIK disajikan konkret, visual, dan mudah diikuti.
+          </p>
+
+          <ul class="about-facts">
+            <li><span>Fokus Mata Pelajaran</span><strong>Matematika &amp; TIK SD</strong></li>
+            <li><span>Format Media</span><strong>HTML &amp; Web App Mandiri</strong></li>
+            <li><span>Unit Kolaborasi</span><strong>SDS IT Madani Kayuagung</strong></li>
+          </ul>
+        </aside>
+
+        <ol class="discipline-list reveal">
+          <li class="discipline-item">
+            <span class="discipline-num">01</span>
+            <div class="discipline-body">
+              <h3>Pendidikan Matematika SD</h3>
+              <p>
+                Fokus pada pembelajaran interaktif: Timbangan Neraca Bilangan Misteri, Perkalian s.d 100.000 dengan langkah bersusun, serta Pembagian visual bagi kue.
+              </p>
+            </div>
+          </li>
+          <li class="discipline-item">
+            <span class="discipline-num">02</span>
+            <div class="discipline-body">
+              <h3>TIK &amp; Literasi Digital</h3>
+              <p>
+                Modul Microsoft Excel interaktif kelas 5, desain grafis Canva untuk anak, kuis evaluasi Word dan Excel, serta infografis materi komputer.
+              </p>
+            </div>
+          </li>
+          <li class="discipline-item">
+            <span class="discipline-num">03</span>
+            <div class="discipline-body">
+              <h3>Portal Pengajar &amp; Komunitas</h3>
+              <p>
+                Portal Guru AWAN untuk administrasi mengajar sehari-hari dan kalender konten promosi SPMB SDS IT Madani Kayuagung yang terstruktur rapi.
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <h2 class="footer-heading">Mari Terhubung &amp; Berkolaborasi</h2>
+          <p class="footer-lead">
+            Hubungi untuk diskusi media pembelajaran SD, pelatihan TIK guru, atau kolaborasi proyek web pendidikan.
+          </p>
+          <button type="button" class="email-copy-btn" id="copyMailBtn">
+            <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="m3 7 9 6 9-6" />
+            </svg>
+            <span>email@yusriirawan.my.id</span>
+            <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="9" y="9" width="11" height="11" rx="2" />
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="footer-links-col">
+          <div>
+            <p class="footer-col-title">Navigasi</p>
+            <ul class="footer-nav-list">
+              <li><a href="#home">Beranda</a></li>
+              <li><a href="#gallery">Media Belajar</a></li>
+              <li><a href="#about">Tentang</a></li>
+              <li><a href="guru.html">Portal Guru</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="footer-col-title">Terhubung</p>
+            <ul class="footer-nav-list">
+              <li><a href="https://instagram.com/yusriirawan44" target="_blank" rel="noopener noreferrer">Instagram (@yusriirawan44)</a></li>
+              <li><a href="https://discordapp.com/users/685240966575292424" target="_blank" rel="noopener noreferrer">Discord</a></li>
+              <li><a href="mailto:email@yusriirawan.my.id">Kirim Email Langsung</a></li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <!-- 4. SPARKLE BINTANG KUNING ALA REFERENSI -->
-      <span class="sparkle-star s1"><i class="fa-solid fa-star-of-life"></i></span>
-      <span class="sparkle-star s2"><i class="fa-solid fa-star-of-life"></i></span>
-
-      <!-- 5. KARTU FLOATING KIRI ATAS: AVATAR ASLI YUSRI IRAWAN (awan.png) DENGAN (+) KUNING -->
-      <div class="float-card card-top-left">
-        <span class="badge-plus" title="Detail">+</span>
-        <img src="awan.png" alt="Avatar Yusri Irawan" />
+      <div class="footer-bottom">
+        <span>&copy; 2026 Yusri Irawan (AWAN). Seluruh hak cipta dilindungi.</span>
+        <span>Tema visual terinspirasi dari Zenitsu Agatsuma.</span>
       </div>
-
-      <!-- 6. KARTU FLOATING KIRI BAWAH: "description." DENGAN (+) KUNING -->
-      <div class="float-card card-desc-left" id="descCard">
-        <span class="badge-plus" title="Buka Detail">+</span>
-        <h4>description.</h4>
-        <p id="descText">
-          Yusri Irawan (AWAN) merancang media belajar mandiri tanpa ketergantungan server: Petualangan Bilangan Misteri, Kalkulator Perkalian Bersusun, Simulasi Rumus Excel, dan Portal Guru. Semua file siap dibuka langsung di browser!
-        </p>
-      </div>
-
-      <!-- 7. KARTU FLOATING KANAN BAWAH: KARTU HIGHLIGHT FITUR (+) KUNING -->
-      <div class="float-card card-bottom-right">
-        <span class="badge-plus" title="Detail">+</span>
-        <i class="fa-solid fa-graduation-cap" style="color: var(--yellow);"></i>
-      </div>
-
-      <!-- 8. WIDGET CUACA KANAN BAWAH (25° cerah) -->
-      <div class="widget-weather">
-        <div class="weather-deg">25&deg;</div>
-        <div class="weather-lbl">cerah</div>
-        <i class="fa-solid fa-cloud-sun weather-icon"></i>
-      </div>
-
-      <!-- 9. TOMBOL PANAH NAVIGASI > KE GALERI -->
-      <button class="nav-next-arrow" aria-label="Lihat Galeri" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">
-        <i class="fa-solid fa-chevron-right"></i>
-      </button>
-
-      <!-- 10. SOCIALS dipindah ke kolom intro kiri -->
-
-    </div>
-  </section>
-
-  <!-- ========================================================
-       MARQUEE TEXT PITA KUNING (INSPIRASI JIRO.BUILD)
-       ======================================================== -->
-  <div class="marquee-strip" aria-hidden="true">
-    <div class="marquee-track" id="marqueeTrack"></div>
-  </div>
-
-  <!-- ========================================================
-       GALLERY: MEDIA BELAJAR & TOOLS INTERAKTIF MANDIRI
-       ======================================================== -->
-  <section class="block-section" id="gallery">
-    <div class="sec-head">
-      <div>
-        <div class="sec-kicker">Interactive Library &amp; Tools</div>
-        <h2 class="sec-title">Media <em>Belajar</em><br/>&amp; Aplikasi Mandiri</h2>
-      </div>
-      <p class="sec-desc">
-        Semua file HTML dapat dibuka langsung seketika seperti file Excel tanpa ketergantungan server atau build! Klik <b>+</b> untuk fitur, atau <b>Preview</b> untuk melihat langsung.
-      </p>
-    </div>
-
-    <!-- Filter Chips -->
-    <div class="filter-chips" id="filterChips"></div>
-
-    <!-- Cards Grid -->
-    <div class="cards-grid" id="cardsGrid"></div>
-  </section>
-
-  <!-- ========================================================
-       ABOUT SECTION
-       ======================================================== -->
-  <section class="block-section" id="about">
-    <div class="sec-head">
-      <div>
-        <div class="sec-kicker">Profil &amp; Dedikasi</div>
-        <h2 class="sec-title">Filosofi &amp;<br/><em>Keahlian</em></h2>
-      </div>
-      <p class="sec-desc">
-        Menggabungkan pengalaman pedagogik di dunia pendidikan dasar dengan kapabilitas teknologi web modern.
-      </p>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-      <div style="background: var(--card-solid); border: 2.5px solid var(--card-border); border-radius: 24px; padding: 28px;">
-        <i class="fa-solid fa-graduation-cap" style="font-size: 2rem; color: var(--yellow); margin-bottom: 14px; display: block;"></i>
-        <h3 style="font-family: var(--f-display); font-size: 1.4rem; margin-bottom: 8px;">Pendidikan Matematika SD</h3>
-        <p style="color: var(--muted); font-size: 0.92rem; line-height: 1.6;">
-          Fokus pada pembelajaran interaktif: Timbangan Neraca Bilangan Misteri, Perkalian s.d 100.000 dengan langkah bersusun, serta Pembagian visual bagi kue.
-        </p>
-      </div>
-
-      <div style="background: var(--card-solid); border: 2.5px solid var(--card-border); border-radius: 24px; padding: 28px;">
-        <i class="fa-solid fa-laptop-code" style="font-size: 2rem; color: var(--electric-blue); margin-bottom: 14px; display: block;"></i>
-        <h3 style="font-family: var(--f-display); font-size: 1.4rem; margin-bottom: 8px;">TIK &amp; Literasi Digital</h3>
-        <p style="color: var(--muted); font-size: 0.92rem; line-height: 1.6;">
-          Modul Microsoft Excel interaktif kelas 5, desain grafis Canva untuk anak, kuis evaluasi Word &amp; Excel, serta infografis materi komputer.
-        </p>
-      </div>
-
-      <div style="background: var(--card-solid); border: 2.5px solid var(--card-border); border-radius: 24px; padding: 28px;">
-        <i class="fa-solid fa-users-rays" style="font-size: 2rem; color: #10b981; margin-bottom: 14px; display: block;"></i>
-        <h3 style="font-family: var(--f-display); font-size: 1.4rem; margin-bottom: 8px;">Community &amp; Management</h3>
-        <p style="color: var(--muted); font-size: 0.92rem; line-height: 1.6;">
-          Portal Guru AWAN untuk administrasi mengajar, dan kalender konten promosi SPMB Madani yang terstruktur rapi.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========================================================
-       FOOTER & CONTACT
-       ======================================================== -->
-  <footer style="text-align: center; padding: 60px 20px 40px; border-top: 1px solid var(--line); background: var(--bg);">
-    <div style="max-width: 600px; margin: 0 auto;">
-      <h3 style="font-family: var(--f-display); font-size: 2rem; font-weight: 800; margin-bottom: 12px;">Mari Terhubung &amp; Berkolaborasi</h3>
-      <p style="color: var(--muted); margin-bottom: 24px;">Hubungi untuk diskusi media pembelajaran atau kerjasama.</p>
-      
-      <div style="display: inline-flex; align-items: center; gap: 10px; padding: 10px 22px; background: var(--yellow); color: #0f172a; border-radius: 999px; font-weight: 700; margin-bottom: 24px; cursor: pointer;" onclick="copyMail()">
-        <i class="fa-solid fa-envelope"></i>
-        <span>email@yusriirawan.my.id</span>
-        <i class="fa-regular fa-copy"></i>
-      </div>
-
-      <p style="font-size: 0.85rem; color: var(--muted);">&copy; 2026 <strong>Yusri Irawan (AWAN)</strong> &middot; Theme inspired by Zenitsu Agatsuma &middot; All Rights Reserved</p>
     </div>
   </footer>
 
-  <!-- ========================================================
-       PREVIEW MODAL
-       ======================================================== -->
-  <div class="preview-modal-backdrop" id="modalBackdrop">
-    <div class="preview-modal-window">
-      <div class="modal-bar-top">
-        <div>
-          <strong id="modalTitle">Preview Halaman</strong>
-          <small id="modalUrlBadge"></small>
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-window">
+      <div class="modal-bar">
+        <div class="modal-title-group">
+          <h2 id="modalTitle">Pratinjau Modul</h2>
+          <span class="modal-url" id="modalUrlBadge"></span>
         </div>
-        <div class="modal-actions-right">
-          <a href="#" id="modalNewTabLink" target="_blank" rel="noopener">Buka Tab Penuh ↗</a>
-          <button class="btn-close-modal" onclick="closePreviewModal()">Tutup ✕</button>
+        <div class="modal-actions">
+          <a href="#" id="modalNewTabLink" class="modal-btn" target="_blank" rel="noopener noreferrer">Buka Tab Penuh</a>
+          <button type="button" class="modal-btn modal-btn--close" id="closeModalBtn">Tutup</button>
         </div>
       </div>
-      <div class="modal-frame-body">
-        <iframe id="modalIframe" src="about:blank" title="Pratinjau Modul"></iframe>
+      <div class="modal-body">
+        <div class="modal-state" id="modalLoading" role="status" aria-live="polite">
+          <div class="modal-spinner" aria-hidden="true"></div>
+          <p id="modalLoadingText">Memuat pratinjau modul...</p>
+        </div>
+        <div class="modal-state" id="modalError" role="alert" hidden>
+          <p>Pratinjau tidak berhasil dimuat di dalam jendela ini.</p>
+          <a href="#" id="modalErrorLink" class="btn-primary" target="_blank" rel="noopener noreferrer">Buka Modul di Tab Baru</a>
+        </div>
+        <iframe id="modalIframe" src="about:blank" title="Pratinjau modul pembelajaran"></iframe>
       </div>
     </div>
   </div>
 
-  <div class="toast-pill" id="toastPill">Email disalin ke clipboard!</div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <!-- ========================================================
-       SCRIPTS: CLOCK, TABS, SEARCH, MODAL
-       ======================================================== -->
   <script>
-    /* 1. DATA LENGKAP SEMUA MODUL (MANDIRI STANDALONE) */
+    const ICONS = {
+      sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+      moon: '<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.8 6.8 0 0 0 20 14.5Z"/>',
+      pause: '<path d="M9 6v12M15 6v12"/>',
+      play: '<path d="M8 6l11 6-11 6V6Z"/>',
+      scale: '<path d="M12 4v16M5 8h14M6 8l-2 6h4l-2-6Zm12 0-2 6h4l-2-6ZM8 20h8"/>',
+      calculator: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/>',
+      divide: '<path d="M5 12h14"/><circle cx="12" cy="7" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="17" r="1.3" fill="currentColor" stroke="none"/>',
+      sheet: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/>',
+      grid: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16M15 4v16"/>',
+      palette: '<path d="M12 3a9 9 0 0 0 0 18h1.5a2.5 2.5 0 0 0 0-5H13a2 2 0 0 1 0-4h4a4 4 0 0 0 4-4 5 5 0 0 0-9-5Z"/><circle cx="8" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="11.5" cy="7.5" r="1" fill="currentColor" stroke="none"/><circle cx="15.5" cy="9" r="1" fill="currentColor" stroke="none"/>',
+      quiz: '<path d="M9 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/><path d="M14.5 4.5 19.5 9.5 11 18H6v-5l8.5-8.5Z"/>',
+      image: '<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="m21 16-5-5-4 4-2-2-5 5"/>',
+      board: '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',
+      calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/>',
+      flask: '<path d="M9 3h6M10 3v5.5L5.2 17a2.2 2.2 0 0 0 1.9 3.3h9.8a2.2 2.2 0 0 0 1.9-3.3L14 8.5V3"/>'
+    };
+
     const MODULES = [
       {
+        id: 'bilangan-misteri',
+        featured: true,
         cat: 'math',
-        icon: 'fa-shapes',
-        color: '#f59e0b,#ea580c',
+        icon: 'scale',
         tag: 'Matematika SD',
         url: 'pembelajaranMTK.html',
         title: 'Petualangan Bilangan Misteri',
-        desc: 'Menemukan bilangan yang belum diketahui dengan visual timbangan neraca, kuis detektif, dan piala prestasi.',
+        desc: 'Menemukan bilangan yang belum diketahui dengan visual timbangan neraca, kuis detektif, cerita bergambar, dan piala prestasi.',
         feats: ['Timbangan Neraca', 'Kuis Detektif', 'Audio Synthesizer', '100% Mandiri']
       },
       {
+        id: 'perkalian-100k',
+        featured: true,
         cat: 'math',
-        icon: 'fa-calculator',
-        color: '#6366f1,#38bdf8',
+        icon: 'calculator',
         tag: 'Matematika SD',
         url: 'perkalian.html',
         title: 'Perkalian s.d 100.000',
-        desc: 'Kalkulator perkalian bersusun pendek langkah demi langkah, kuis kilat 20 detik, dan soal cerita.',
+        desc: 'Kalkulator perkalian bersusun pendek langkah demi langkah, papan nilai tempat, kuis cepat 20 detik, dan soal cerita.',
         feats: ['Kalkulator Bersusun', 'Kuis Kilat 20 Detik', 'Trik Cepat', '100% Mandiri']
       },
       {
+        id: 'pembagian',
+        featured: false,
         cat: 'math',
-        icon: 'fa-divide',
-        color: '#ec4899,#f97316',
+        icon: 'divide',
         tag: 'Matematika SD',
         url: 'pembagian.html',
         title: 'Pembagian Visual & Bersusun',
@@ -1829,9 +2639,10 @@
         feats: ['Visual Kue', 'Langkah Interaktif', 'Porogapit Bersusun']
       },
       {
+        id: 'excel-menu',
+        featured: false,
         cat: 'tik',
-        icon: 'fa-file-excel',
-        color: '#10b981,#047857',
+        icon: 'sheet',
         tag: 'TIK Kelas 5',
         url: 'excel.html',
         title: 'Mengenal Menu & Ikon Excel',
@@ -1839,9 +2650,10 @@
         feats: ['Materi Kelas 5', 'Penjelasan Ikon', 'Navigasi Worksheet']
       },
       {
+        id: 'excel-lab',
+        featured: false,
         cat: 'tik',
-        icon: 'fa-table-cells',
-        color: '#0ea5e9,#6366f1',
+        icon: 'grid',
         tag: 'TIK Kelas 5',
         url: 'experi.html',
         title: 'Lab Formula Excel',
@@ -1849,19 +2661,21 @@
         feats: ['Simulasi Rumus', 'SUM / AVERAGE', 'Tabel Nilai Dinamis']
       },
       {
+        id: 'canva-guide',
+        featured: false,
         cat: 'tik',
-        icon: 'fa-palette',
-        color: '#06b6d4,#8b5cf6',
+        icon: 'palette',
         tag: 'Desain Visual',
         url: 'canva.html',
         title: 'Catatan Panduan Canva',
-        desc: 'Panduan membuat poster, kartu ucapan, dan pemanfaatan alat gambar Draw Tool di Canva untuk siswa.',
+        desc: 'Panduan membuat poster, kartu ucapan, dan pemanfaatan Draw Tool di Canva untuk siswa sekolah dasar.',
         feats: ['Draw Tool Canva', 'Desain Grafis SD', 'Mode Fokus & Cetak']
       },
       {
+        id: 'latihan-tik',
+        featured: false,
         cat: 'tik',
-        icon: 'fa-pen-to-square',
-        color: '#3b82f6,#1d4ed8',
+        icon: 'quiz',
         tag: 'Evaluasi TIK',
         url: 'latihan.html',
         title: 'Latihan Soal Word & Excel',
@@ -1869,44 +2683,48 @@
         feats: ['Kuis Evaluasi', 'Soal Terstruktur', 'Catatan Pengajar']
       },
       {
+        id: 'infografis-tik',
+        featured: false,
         cat: 'tik',
-        icon: 'fa-image',
-        color: '#a855f7,#ec4899',
+        icon: 'image',
         tag: 'Visual Media',
         url: 'tik.html',
         title: 'Infografis Materi TIK',
         desc: 'Tampilan infografis diagram visual resolusi tinggi untuk mempermudah pemaparan materi di kelas.',
-        feats: ['Fullscreen View', 'Diagram Komputer', 'Visual Bersih']
+        feats: ['Layar Penuh', 'Diagram Komputer', 'Visual Bersih']
       },
       {
+        id: 'portal-guru',
+        featured: false,
         cat: 'mgmt',
-        icon: 'fa-chalkboard-user',
-        color: '#f43f5e,#f59e0b',
+        icon: 'board',
         tag: 'Portal Utama',
         url: 'guru.html',
         title: 'Portal Guru AWAN',
-        desc: 'Dasbor sentral pengajar: tautan kilat ke seluruh modul ajar, menu absensi, nilai, dan administrasi.',
-        feats: ['Dashboard Pengajar', 'Akses Modul Cepat', 'Tema Dark/Light']
+        desc: 'Dasbor sentral pengajar: tautan cepat ke seluruh modul ajar, menu absensi, nilai, dan administrasi.',
+        feats: ['Dasbor Pengajar', 'Akses Modul Cepat', 'Tema Terang & Gelap']
       },
       {
+        id: 'kalender-spmb',
+        featured: false,
         cat: 'mgmt',
-        icon: 'fa-calendar-days',
-        color: '#8b5cf6,#3b82f6',
+        icon: 'calendar',
         tag: 'Manajemen Media',
         url: 'SOSMEDSPMB.html',
         title: 'Kalender Konten SPMB',
         desc: 'Perencanaan jadwal publikasi media sosial dan agenda promosi SDS IT Madani Kayuagung 2027/2028.',
-        feats: ['Content Planner', 'SPMB 2027/2028', 'Excel Spreadsheet Sync']
+        feats: ['Perencana Konten', 'SPMB 2027/2028', 'Sinkron Spreadsheet']
       },
       {
+        id: 'riset-ct',
+        featured: false,
         cat: 'mgmt',
-        icon: 'fa-flask',
-        color: '#64748b,#0f172a',
+        icon: 'flask',
         tag: 'Lab Inovasi',
         url: 'comingsoon.html',
         title: 'Riset Computational Thinking',
-        desc: 'Laboratorium riset mendatang tentang penerapan computational thinking dalam kurikulum matematika SD.',
-        feats: ['Riset Edukasi', 'Animasi 3D Canvas', 'Countdown Project']
+        desc: 'Halaman pengantar riset penerapan computational thinking dalam kurikulum matematika SD (Coming soon).',
+        feats: ['Riset Edukasi', 'Animasi Canvas', 'Coming soon']
       }
     ];
 
@@ -1917,301 +2735,484 @@
       mgmt: 'Portal & Manajemen'
     };
 
-    /* 2. JAM & TANGGAL REAL-TIME (SESUAI FOTO: MON, 16 JUNE 23: 02 PM) */
-    const DAYS_EN = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-    const MONTHS_EN = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUNE', 'JULY', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-
-    function updateLiveClock() {
-      const now = new Date();
-      const day = DAYS_EN[(now.getDay() + 6) % 7];
-      const date = now.getDate();
-      const month = MONTHS_EN[now.getMonth()];
-      document.getElementById('liveDate').textContent = `${day}, ${date} ${month}`;
-
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const formattedHours = String(hours).padStart(2, '0');
-      document.getElementById('liveTime').textContent = `${formattedHours}: ${minutes} ${ampm}`;
+    function splitChars(el, offset = 0) {
+      const text = el.textContent.trim();
+      el.setAttribute('aria-label', text);
+      el.innerHTML = [...text]
+        .map((c, i) => `<i class="ch" aria-hidden="true" style="--i:${i + offset}">${c === ' ' ? '&nbsp;' : c}</i>`)
+        .join('');
     }
-    updateLiveClock();
-    setInterval(updateLiveClock, 1000);
 
-    /* 3. TEMA DARK / LIGHT */
-    const rootHtml = document.documentElement;
+    document.querySelectorAll('.hero-title-right span').forEach((el, row) => splitChars(el, row * 5));
+    splitChars(document.querySelector('.hero-name-left'));
+
+    const DAYS_ID = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+    const MONTHS_ID = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+
+    function updateClock() {
+      const now = new Date();
+      const dateLabel = `${DAYS_ID[now.getDay()]}, ${now.getDate()} ${MONTHS_ID[now.getMonth()]}`;
+      const timeLabel = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      document.getElementById('liveDate').textContent = dateLabel;
+      document.getElementById('liveTime').textContent = timeLabel;
+      document.getElementById('mobileDate').textContent = dateLabel;
+      document.getElementById('mobileTime').textContent = timeLabel;
+    }
+    updateClock();
+    setInterval(updateClock, 10000);
+
+    const rootEl = document.documentElement;
     const themeBtn = document.getElementById('themeBtn');
     const themeIcon = document.getElementById('themeIcon');
 
-    function applyTheme(t) {
-      rootHtml.setAttribute('data-theme', t);
-      localStorage.setItem('zen_theme', t);
-      themeIcon.className = t === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    function applyTheme(mode) {
+      const isDark = mode === 'dark';
+      rootEl.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      try {
+        localStorage.setItem('zen_theme', isDark ? 'dark' : 'light');
+      } catch {}
+      themeIcon.innerHTML = isDark ? ICONS.sun : ICONS.moon;
+      themeBtn.setAttribute('aria-pressed', String(isDark));
+      themeBtn.setAttribute('aria-label', isDark ? 'Aktifkan mode terang' : 'Aktifkan mode gelap');
     }
-    const savedTheme = localStorage.getItem('zen_theme') || 'dark';
-    applyTheme(savedTheme);
-    themeBtn.onclick = () => {
-      const cur = rootHtml.getAttribute('data-theme');
-      applyTheme(cur === 'dark' ? 'light' : 'dark');
-    };
 
-    /* 4. MARQUEE GENERATOR (JIRO.BUILD STYLE) */
+    let initialTheme = 'light';
+    try {
+      const stored = localStorage.getItem('zen_theme');
+      if (stored === 'dark' || stored === 'light') initialTheme = stored;
+    } catch {}
+    applyTheme(initialTheme);
+
+    themeBtn.addEventListener('click', () => {
+      applyTheme(rootEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+
+    const motionBtn = document.getElementById('motionBtn');
+    const motionIcon = document.getElementById('motionIcon');
+    const marqueeBand = document.getElementById('marqueeBand');
+    const marqueeToggle = document.getElementById('marqueeToggle');
+    const marqueeIcon = document.getElementById('marqueeIcon');
+    const marqueeLabel = document.getElementById('marqueeLabel');
+
+    let motionPaused = false;
+    let marqueePaused = false;
+
+    function syncMotionControls() {
+      rootEl.classList.toggle('motion-paused', motionPaused);
+      motionBtn.setAttribute('aria-pressed', String(motionPaused));
+      motionBtn.setAttribute('aria-label', motionPaused ? 'Putar animasi halaman' : 'Jeda animasi halaman');
+      motionIcon.innerHTML = motionPaused ? ICONS.play : ICONS.pause;
+
+      const tickerStopped = motionPaused || marqueePaused;
+      marqueeBand.classList.toggle('paused', tickerStopped);
+      marqueeToggle.setAttribute('aria-pressed', String(tickerStopped));
+      marqueeToggle.setAttribute('aria-label', tickerStopped ? 'Putar pita modul' : 'Jeda pita modul');
+      marqueeIcon.innerHTML = tickerStopped ? ICONS.play : ICONS.pause;
+      marqueeLabel.textContent = tickerStopped ? 'Putar' : 'Jeda';
+    }
+
+    syncMotionControls();
+
+    motionBtn.addEventListener('click', () => {
+      motionPaused = !motionPaused;
+      if (!motionPaused) marqueePaused = false;
+      syncMotionControls();
+    });
+
+    marqueeToggle.addEventListener('click', () => {
+      if (motionPaused) {
+        motionPaused = false;
+        marqueePaused = false;
+      } else {
+        marqueePaused = !marqueePaused;
+      }
+      syncMotionControls();
+    });
+
+    const roles = ['Guru SD Matematika & TIK', 'Web Creator', 'Pembuat Media Interaktif', 'Community Support'];
+    const roleEl = document.getElementById('roleText');
+    let roleIndex = 0;
+    let charPos = roles[0].length;
+    let deleting = true;
+
+    function tickRole() {
+      if (motionPaused) {
+        setTimeout(tickRole, 400);
+        return;
+      }
+      const word = roles[roleIndex];
+      charPos += deleting ? -1 : 1;
+      roleEl.textContent = word.slice(0, charPos);
+      let wait = deleting ? 32 : 68;
+      if (!deleting && charPos === word.length) {
+        wait = 1800;
+        deleting = true;
+      } else if (deleting && charPos === 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        wait = 320;
+      }
+      setTimeout(tickRole, wait);
+    }
+    setTimeout(tickRole, 1800);
+
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+
+    function setMobileMenu(open) {
+      mobileDrawer.classList.toggle('open', open);
+      mobileMenuBtn.setAttribute('aria-expanded', String(open));
+    }
+
+    mobileMenuBtn.addEventListener('click', () => {
+      setMobileMenu(!mobileDrawer.classList.contains('open'));
+    });
+
+    mobileDrawer.addEventListener('click', (e) => {
+      if (e.target.closest('a')) setMobileMenu(false);
+    });
+
+    document.getElementById('navSearchJump').addEventListener('click', () => {
+      setTimeout(() => document.getElementById('moduleSearch').focus(), 260);
+    });
+
+    const noteToggle = document.getElementById('noteToggle');
+    const noteExtra = document.getElementById('noteExtra');
+    noteToggle.addEventListener('click', () => {
+      const expanded = noteToggle.getAttribute('aria-expanded') === 'true';
+      noteToggle.setAttribute('aria-expanded', String(!expanded));
+      noteToggle.setAttribute('aria-label', expanded ? 'Buka detail catatan proyek' : 'Tutup detail catatan proyek');
+      noteExtra.classList.toggle('open', !expanded);
+    });
+
+    document.getElementById('moduleCountMetric').textContent = `${MODULES.length} Modul`;
+
     const marqueeTrack = document.getElementById('marqueeTrack');
-    const marqueeText = MODULES.map(m => `<span>${m.title}</span>`).join('');
-    marqueeTrack.innerHTML = marqueeText + marqueeText;
+    const marqueeItems = MODULES.map((m) => `<span>${m.title}</span>`).join('');
+    marqueeTrack.innerHTML = marqueeItems + marqueeItems;
 
-    /* 5. RENDER CHIPS & GRID CARDS */
-    const chipsContainer = document.getElementById('filterChips');
-    const cardsGrid = document.getElementById('cardsGrid');
-    let activeFilter = 'all';
+    const filterGroup = document.getElementById('filterGroup');
+    const spotlightGrid = document.getElementById('spotlightGrid');
+    const catalogGrid = document.getElementById('catalogGrid');
+    const spotlightTier = document.getElementById('spotlightTier');
+    const catalogTier = document.getElementById('catalogTier');
+    const emptyState = document.getElementById('emptyState');
+    const emptyStateDesc = document.getElementById('emptyStateDesc');
+    const catalogStatus = document.getElementById('catalogStatus');
+    const moduleSearch = document.getElementById('moduleSearch');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+    let activeCategory = 'all';
     let searchQuery = '';
 
-    // Render filter chips
-    chipsContainer.innerHTML = Object.keys(CATEGORIES).map(key => {
-      const count = key === 'all' ? MODULES.length : MODULES.filter(m => m.cat === key).length;
-      return `<button class="filter-chip ${key === 'all' ? 'active' : ''}" data-cat="${key}">
-        ${CATEGORIES[key]} <b>(${count})</b>
-      </button>`;
+    filterGroup.innerHTML = Object.entries(CATEGORIES).map(([key, label]) => {
+      const count = key === 'all' ? MODULES.length : MODULES.filter((m) => m.cat === key).length;
+      return `<button type="button" class="filter-btn" data-cat="${key}" aria-pressed="${key === 'all'}">${label} <span class="filter-count">(${count})</span></button>`;
     }).join('');
 
-    // Render cards
-    cardsGrid.innerHTML = MODULES.map(m => `
-      <article class="module-card" data-cat="${m.cat}" data-search="${(m.title + ' ' + m.desc + ' ' + m.feats.join(' ')).toLowerCase()}">
-        <div class="card-top-row">
-          <div class="card-icon-box" style="background: linear-gradient(135deg, ${m.color});">
-            <i class="fa-solid ${m.icon}"></i>
-            <span class="card-icon-plus" title="Buka Detail">+</span>
+    function buildCardHtml(m) {
+      const tagClass = m.cat === 'math' ? 'card-tag--math' : m.cat === 'tik' ? 'card-tag--tik' : '';
+      const featsId = `feats-${m.id}`;
+      const toggleBtn = m.featured
+        ? ''
+        : `<button type="button" class="btn-card-secondary card-toggle-btn" aria-expanded="false" aria-controls="${featsId}">Fitur</button>`;
+
+      return `
+        <article class="module-card ${m.featured ? 'module-card--featured' : ''} reveal" data-cat="${m.cat}" data-featured="${m.featured}" data-search="${(m.title + ' ' + m.desc + ' ' + m.tag + ' ' + m.feats.join(' ')).toLowerCase()}">
+          <div class="card-top">
+            <div class="card-icon card-icon--${m.cat}" aria-hidden="true">
+              <svg class="icon icon--lg" viewBox="0 0 24 24">${ICONS[m.icon]}</svg>
+            </div>
+            <span class="card-tag ${tagClass}">${m.tag}</span>
           </div>
-          <span class="card-badge-tag">${m.tag}</span>
-        </div>
-        <h3 class="card-title">${m.title}</h3>
-        <p class="card-desc">${m.desc}</p>
-        <div class="card-extra-info">
-          <div>
-            <ul class="card-feature-list">
-              ${m.feats.map(f => `<li>${f}</li>`).join('')}
-            </ul>
+          <h4 class="card-title">${m.title}</h4>
+          <p class="card-desc">${m.desc}</p>
+          <div class="card-feats-wrap ${m.featured ? 'open' : ''}" id="${featsId}">
+            <div>
+              <ul class="card-feats">
+                ${m.feats.map((f) => `<li>${f}</li>`).join('')}
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="card-action-row">
-          <a href="${m.url}" class="btn-card-open">Buka Halaman ↗</a>
-          <button class="btn-card-preview" data-url="${m.url}" data-title="${m.title}">Preview 👁</button>
-        </div>
-      </article>
-    `).join('');
-
-    const allCards = document.querySelectorAll('.module-card');
-
-    function filterCards() {
-      allCards.forEach(card => {
-        const cat = card.getAttribute('data-cat');
-        const sData = card.getAttribute('data-search');
-        const matchCat = (activeFilter === 'all') || (cat === activeFilter);
-        const matchSearch = !searchQuery || sData.includes(searchQuery);
-
-        if (matchCat && matchSearch) {
-          card.classList.remove('hide');
-        } else {
-          card.classList.add('hide');
-        }
-      });
+          <div class="card-actions">
+            <a href="${m.url}" class="btn-card-open">Buka Modul</a>
+            <button type="button" class="btn-card-secondary btn-preview" data-url="${m.url}" data-title="${m.title}">Pratinjau</button>
+            ${toggleBtn}
+          </div>
+        </article>
+      `;
     }
 
-    chipsContainer.addEventListener('click', (e) => {
-      const chip = e.target.closest('.filter-chip');
-      if (!chip) return;
-      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      activeFilter = chip.getAttribute('data-cat');
-      filterCards();
+    spotlightGrid.innerHTML = MODULES.filter((m) => m.featured).map(buildCardHtml).join('');
+    catalogGrid.innerHTML = MODULES.filter((m) => !m.featured).map(buildCardHtml).join('');
+
+    const allCards = [...document.querySelectorAll('.module-card')];
+
+    function applyFilters() {
+      let visibleFeatured = 0;
+      let visibleStandard = 0;
+
+      allCards.forEach((card) => {
+        const matchCat = activeCategory === 'all' || card.dataset.cat === activeCategory;
+        const matchQuery = !searchQuery || card.dataset.search.includes(searchQuery);
+        const visible = matchCat && matchQuery;
+        card.hidden = !visible;
+        if (visible) {
+          if (card.dataset.featured === 'true') visibleFeatured++;
+          else visibleStandard++;
+        }
+      });
+
+      const totalVisible = visibleFeatured + visibleStandard;
+      spotlightTier.hidden = visibleFeatured === 0;
+      catalogTier.hidden = visibleStandard === 0;
+      emptyState.hidden = totalVisible > 0;
+
+      if (totalVisible === 0) {
+        const label = CATEGORIES[activeCategory];
+        emptyStateDesc.textContent = searchQuery
+          ? `Tidak ada modul untuk "${moduleSearch.value.trim()}" pada kategori ${label}. Coba kata kunci lain atau tampilkan semua modul.`
+          : `Belum ada modul di kategori ${label}.`;
+      }
+
+      catalogStatus.textContent = `Menampilkan ${totalVisible} dari ${MODULES.length} modul`;
+      clearSearchBtn.classList.toggle('visible', moduleSearch.value.length > 0);
+    }
+
+    applyFilters();
+
+    filterGroup.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      activeCategory = btn.dataset.cat;
+      filterGroup.querySelectorAll('.filter-btn').forEach((item) => {
+        item.setAttribute('aria-pressed', String(item === btn));
+      });
+      applyFilters();
     });
 
-    // Global Search Bar in Header
-    document.getElementById('globalSearch').addEventListener('input', (e) => {
-      searchQuery = e.target.value.trim().toLowerCase();
-      filterCards();
-      if (searchQuery) {
-        document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+    moduleSearch.addEventListener('input', () => {
+      searchQuery = moduleSearch.value.trim().toLowerCase();
+      applyFilters();
+    });
+
+    clearSearchBtn.addEventListener('click', () => {
+      moduleSearch.value = '';
+      searchQuery = '';
+      applyFilters();
+      moduleSearch.focus();
+    });
+
+    document.getElementById('resetFilterBtn').addEventListener('click', () => {
+      moduleSearch.value = '';
+      searchQuery = '';
+      activeCategory = 'all';
+      filterGroup.querySelectorAll('.filter-btn').forEach((item) => {
+        item.setAttribute('aria-pressed', String(item.dataset.cat === 'all'));
+      });
+      applyFilters();
+      moduleSearch.focus();
+    });
+
+    document.getElementById('gallery').addEventListener('click', (e) => {
+      const toggle = e.target.closest('.card-toggle-btn');
+      if (toggle) {
+        const target = document.getElementById(toggle.getAttribute('aria-controls'));
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        toggle.textContent = expanded ? 'Fitur' : 'Tutup Fitur';
+        target.classList.toggle('open', !expanded);
+        return;
+      }
+
+      const preview = e.target.closest('.btn-preview');
+      if (preview) {
+        openPreviewModal(preview.dataset.url, preview.dataset.title, preview);
       }
     });
 
-    // Expand Card (+) Toggle
-    cardsGrid.addEventListener('click', (e) => {
-      const plusBtn = e.target.closest('.card-icon-plus');
-      if (plusBtn) {
-        const card = plusBtn.closest('.module-card');
-        card.classList.toggle('open');
-      }
-
-      const prevBtn = e.target.closest('.btn-card-preview');
-      if (prevBtn) {
-        openPreviewModal(prevBtn.dataset.url, prevBtn.dataset.title);
-      }
-    });
-
-    // Expand "description." Card in Hero
-    const descCard = document.getElementById('descCard');
-    descCard.addEventListener('click', () => {
-      descCard.classList.toggle('open');
-    });
-
-    /* 6. MODAL QUICK PREVIEW LOGIC */
     const modalBackdrop = document.getElementById('modalBackdrop');
     const modalTitle = document.getElementById('modalTitle');
     const modalUrlBadge = document.getElementById('modalUrlBadge');
     const modalNewTabLink = document.getElementById('modalNewTabLink');
+    const modalErrorLink = document.getElementById('modalErrorLink');
     const modalIframe = document.getElementById('modalIframe');
+    const modalLoading = document.getElementById('modalLoading');
+    const modalLoadingText = document.getElementById('modalLoadingText');
+    const modalError = document.getElementById('modalError');
+    const closeModalBtn = document.getElementById('closeModalBtn');
 
-    function openPreviewModal(url, title) {
+    let lastFocusedBeforeModal = null;
+    let modalLoadTimer = null;
+
+    function openPreviewModal(url, title, triggerEl) {
+      lastFocusedBeforeModal = triggerEl || document.activeElement;
       modalTitle.textContent = title;
       modalUrlBadge.textContent = url;
       modalNewTabLink.href = url;
+      modalErrorLink.href = url;
+      modalLoadingText.textContent = `Memuat pratinjau ${title}...`;
+      modalLoading.hidden = false;
+      modalError.hidden = true;
+
+      clearTimeout(modalLoadTimer);
+      modalLoadTimer = setTimeout(() => {
+        if (!modalLoading.hidden) {
+          modalLoading.hidden = true;
+          modalError.hidden = false;
+        }
+      }, 8000);
+
       modalIframe.src = url;
       modalBackdrop.classList.add('active');
+      modalBackdrop.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      closeModalBtn.focus();
     }
 
     function closePreviewModal() {
+      if (!modalBackdrop.classList.contains('active')) return;
+      clearTimeout(modalLoadTimer);
       modalBackdrop.classList.remove('active');
+      modalBackdrop.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
       setTimeout(() => {
         modalIframe.src = 'about:blank';
-      }, 300);
+        modalLoading.hidden = true;
+        modalError.hidden = true;
+      }, 240);
+      if (lastFocusedBeforeModal && typeof lastFocusedBeforeModal.focus === 'function') {
+        lastFocusedBeforeModal.focus();
+      }
     }
 
+    modalIframe.addEventListener('load', () => {
+      if (!modalBackdrop.classList.contains('active')) return;
+      if (modalIframe.getAttribute('src') === 'about:blank') return;
+      clearTimeout(modalLoadTimer);
+      modalLoading.hidden = true;
+      modalError.hidden = true;
+    });
+
+    modalIframe.addEventListener('error', () => {
+      clearTimeout(modalLoadTimer);
+      modalLoading.hidden = true;
+      modalError.hidden = false;
+    });
+
+    closeModalBtn.addEventListener('click', closePreviewModal);
     modalBackdrop.addEventListener('click', (e) => {
       if (e.target === modalBackdrop) closePreviewModal();
     });
 
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closePreviewModal();
-    });
-
-    /* 7. COPY MAIL TOAST */
-    function copyMail() {
-      const email = 'email@yusriirawan.my.id';
-      navigator.clipboard.writeText(email).then(() => {
-        const toast = document.getElementById('toastPill');
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2500);
-      });
-    }
-
-    /* 8. TOPBAR SCROLL LISTENER + PROGRESS BAR */
-    const scrollBar = document.getElementById('scrollProgress');
-    window.addEventListener('scroll', () => {
-      const topbar = document.getElementById('topbar');
-      topbar.classList.toggle('scrolled', window.scrollY > 30);
-      const max = document.documentElement.scrollHeight - innerHeight;
-      scrollBar.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + '%';
-    }, { passive: true });
-
-    /* 9. SPLIT TEKS JADI HURUF (untuk animasi per huruf) */
-    function splitChars(el) {
-      const text = el.textContent.trim();
-      el.innerHTML = [...text].map((c, i) => `<i class="ch" style="--i:${i}">${c === ' ' ? '&nbsp;' : c}</i>`).join('');
-    }
-    document.querySelectorAll('.hero-title-right span').forEach((el, row) => {
-      splitChars(el);
-      el.querySelectorAll('.ch').forEach(c => c.style.setProperty('--i', +c.style.getPropertyValue('--i') + row * 5));
-    });
-    splitChars(document.querySelector('.hero-name-left'));
-
-    /* 10. LOADING SCREEN SIMPEL & ELEGAN */
-    (function () {
-      const loader = document.getElementById('loader');
-      const fill = document.getElementById('ldFill');
-      const pct = document.getElementById('ldPct');
-      const status = document.getElementById('ldStatus');
-
-      let progress = 0;
-      let finished = false;
-      const start = performance.now();
-      const MIN_MS = 1000; // 1.0 detik agar terasa smooth & elegan tanpa menunggu lama
-
-      // Cek apakah background image back.jpg sudah siap
-      const bgImg = new Image();
-      let imgReady = false;
-      bgImg.onload = () => { imgReady = true; };
-      bgImg.onerror = () => { imgReady = true; };
-      bgImg.src = 'back.jpg';
-
-      function updateProgress(val) {
-        const v = Math.min(100, Math.round(val));
-        fill.style.width = v + '%';
-        pct.textContent = v + '%';
-        if (v > 75) status.textContent = 'Menyiapkan halaman...';
-        else if (v > 35) status.textContent = 'Memuat aset visual...';
-      }
-
-      function finishLoading() {
-        if (finished) return;
-        finished = true;
-        updateProgress(100);
-        status.textContent = 'Selamat datang!';
-        setTimeout(() => {
-          loader.classList.add('done');
-          document.body.classList.remove('loading');
-          document.body.classList.add('loaded');
-          setTimeout(() => loader.remove(), 600);
-        }, 350);
-      }
-
-      (function loop() {
-        if (finished) return;
-        const elapsed = performance.now() - start;
-        const target = (imgReady && elapsed >= MIN_MS) ? 100 : Math.min(92, (elapsed / MIN_MS) * 90);
-        progress += (target - progress) * 0.12;
-        updateProgress(progress);
-
-        if ((imgReady && elapsed >= MIN_MS && progress >= 97) || elapsed > 3000) {
-          finishLoading();
-          return;
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (modalBackdrop.classList.contains('active')) {
+          closePreviewModal();
+        } else if (mobileDrawer.classList.contains('open')) {
+          setMobileMenu(false);
+          mobileMenuBtn.focus();
         }
-        requestAnimationFrame(loop);
-      })();
-    })();
+        return;
+      }
 
-    /* 11. EFEK KETIK PERAN */
-    (function () {
-      const roles = ['Guru SD Matematika & TIK', 'Web Creator', 'Pembuat Media Interaktif', 'Community Support'];
-      const el = document.getElementById('roleText');
-      let r = 0, c = 0, del = false;
-      (function type() {
-        const word = roles[r];
-        c += del ? -1 : 1;
-        el.textContent = word.slice(0, c);
-        let wait = del ? 35 : 75;
-        if (!del && c === word.length) { wait = 1600; del = true; }
-        else if (del && c === 0) { del = false; r = (r + 1) % roles.length; wait = 350; }
-        setTimeout(type, wait);
-      })();
-    })();
+      if (e.key === 'Tab' && modalBackdrop.classList.contains('active')) {
+        const focusable = modalBackdrop.querySelectorAll('a[href], button:not([disabled]), iframe');
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
 
-    /* 12. PARALLAX MOUSE RINGAN (Tanpa Percikan Partikel yang Bikin Lag) */
-    (function () {
-      const stage = document.querySelector('.hero-stage');
-      const fine = matchMedia('(pointer:fine)').matches;
-      if (!fine || !stage) return;
-      stage.addEventListener('mousemove', (e) => {
-        const r = stage.getBoundingClientRect();
-        stage.style.setProperty('--mx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
-        stage.style.setProperty('--my', ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
-      }, { passive: true });
-      stage.addEventListener('mouseleave', () => {
-        stage.style.setProperty('--mx', 0);
-        stage.style.setProperty('--my', 0);
+    const toastEl = document.getElementById('toast');
+    let toastTimer = null;
+
+    function showToast(message) {
+      clearTimeout(toastTimer);
+      toastEl.textContent = message;
+      toastEl.classList.add('show');
+      toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2600);
+    }
+
+    document.getElementById('copyMailBtn').addEventListener('click', () => {
+      const email = 'email@yusriirawan.my.id';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email)
+          .then(() => showToast('Email disalin: email@yusriirawan.my.id'))
+          .catch(() => showToast('Salin manual: email@yusriirawan.my.id'));
+      } else {
+        showToast('Salin manual: email@yusriirawan.my.id');
+      }
+    });
+
+    const topbar = document.getElementById('topbar');
+    const scrollProgress = document.getElementById('scrollProgress');
+    const navLinks = [...document.querySelectorAll('[data-nav]')];
+    const trackedSections = ['home', 'gallery', 'about', 'contact']
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    function syncScrollUi() {
+      topbar.classList.toggle('scrolled', window.scrollY > 24);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = `${max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0}%`;
+
+      const anchorY = window.scrollY + 140;
+      let activeId = 'home';
+      for (const sec of trackedSections) {
+        if (sec.offsetTop <= anchorY) activeId = sec.id;
+      }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 24) {
+        activeId = 'contact';
+      }
+      navLinks.forEach((link) => {
+        link.classList.toggle('active', link.dataset.nav === activeId);
       });
-    })();
+    }
 
-    /* 13. SCROLL REVEAL */
-    (function () {
-      const items = document.querySelectorAll('.sec-head, .filter-chips, .module-card');
-      items.forEach((el, i) => { el.classList.add('reveal'); el.style.setProperty('--rd', (el.classList.contains('module-card') ? (i % 3) * 0.1 : 0) + 's'); });
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-      }, { threshold: 0.12 });
-      items.forEach(el => io.observe(el));
-    })();
+    window.addEventListener('scroll', syncScrollUi, { passive: true });
+    syncScrollUi();
+
+    if (matchMedia('(pointer: fine)').matches) {
+      const heroStage = document.getElementById('home');
+      heroStage.addEventListener('mousemove', (e) => {
+        if (motionPaused) return;
+        const rect = heroStage.getBoundingClientRect();
+        heroStage.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width - 0.5).toFixed(3));
+        heroStage.style.setProperty('--my', ((e.clientY - rect.top) / rect.height - 0.5).toFixed(3));
+      }, { passive: true });
+      heroStage.addEventListener('mouseleave', () => {
+        heroStage.style.setProperty('--mx', '0');
+        heroStage.style.setProperty('--my', '0');
+      });
+    }
+
+    const revealItems = [...document.querySelectorAll('.reveal')];
+    if (!('IntersectionObserver' in window)) {
+      revealItems.forEach((el) => el.classList.add('in'));
+    } else {
+      revealItems.forEach((el, idx) => {
+        if (el.classList.contains('module-card')) {
+          el.style.setProperty('--rd', `${(idx % 3) * 0.08}s`);
+        }
+      });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      revealItems.forEach((el) => observer.observe(el));
+    }
   </script>
 </body>
 </html>
