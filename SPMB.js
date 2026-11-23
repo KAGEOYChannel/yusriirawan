@@ -548,9 +548,25 @@ function renderAll() {
 }
 
 /* ---------- Detail Modal ---------- */
+const STORYBOARD_MAP = {
+  "2026-12-03": {
+    img: "storyboards/storyboard_3_des_murajaah.jpg",
+    title: "Storyboard 3 Desember: Murajaah Huruf Hijaiyah"
+  },
+  "2026-12-06": {
+    img: "storyboards/storyboard_6_des_info_spmb.jpg",
+    title: "Storyboard 6 Desember: Kode Rahasia Diskon SPMB"
+  },
+  "2026-12-10": {
+    img: "storyboards/storyboard_10_des_hiburan.jpg",
+    title: "Storyboard 10 Desember: Tebak Suara Ustadz & Ustadzah"
+  }
+};
+
 function openDetail(id) {
   const c = contents.find(x => x.id === id);
   if (!c) return;
+  const sb = STORYBOARD_MAP[c.date];
   document.getElementById("detailTitle").textContent = c.title;
   document.getElementById("detailBody").innerHTML = `
     <div class="detail-grid">
@@ -578,6 +594,13 @@ function openDetail(id) {
         <span>Brief &amp; Konsep Caption</span>
         <p>${esc(c.brief || "Belum ada catatan brief untuk konten ini.").replace(/\n/g, "<br>")}</p>
       </div>
+      ${sb ? `
+      <div class="detail-box full">
+        <span>Visual Storyboard Produksi</span>
+        <a href="${esc(sb.img)}" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:8px">
+          <img src="${esc(sb.img)}" alt="${esc(sb.title)}" style="width:100%;border-radius:10px;border:1px solid #dce7e0;display:block">
+        </a>
+      </div>` : ""}
       <div class="detail-box full">
         <span>Tautan Referensi</span>
         ${c.refs.length ? `<div class="ref-list big">${refHtml(c.refs)}</div>` : '<p class="muted">Tidak ada tautan referensi.</p>'}
