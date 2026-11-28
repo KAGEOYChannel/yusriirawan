@@ -550,15 +550,15 @@ function renderAll() {
 /* ---------- Detail Modal ---------- */
 const STORYBOARD_MAP = {
   "2026-12-03": {
-    img: "storyboards/storyboard_3_des_murajaah.jpg",
+    img: "../../assets/storyboards/storyboard_3_des_murajaah.jpg",
     title: "Storyboard 3 Desember: Murajaah Huruf Hijaiyah"
   },
   "2026-12-06": {
-    img: "storyboards/storyboard_6_des_info_spmb.jpg",
+    img: "../../assets/storyboards/storyboard_6_des_info_spmb.jpg",
     title: "Storyboard 6 Desember: Kode Rahasia Diskon SPMB"
   },
   "2026-12-10": {
-    img: "storyboards/storyboard_10_des_hiburan.jpg",
+    img: "../../assets/storyboards/storyboard_10_des_hiburan.jpg",
     title: "Storyboard 10 Desember: Tebak Suara Ustadz & Ustadzah"
   }
 };

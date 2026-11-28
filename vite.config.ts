@@ -4,89 +4,31 @@ import path from 'path';
 import fs from 'fs';
 import { defineConfig, Plugin, Connect } from 'vite';
 
-/**
- * Plugin untuk menyalin HTML statis dan aset pendukung ke dist saat build,
- * sehingga semua file HTML, gambar, custom domain CNAME, dan stylesheet/script
- * tetap lengkap di GitHub Pages tanpa 404.
- */
-function copyStaticHtmlPages(): Plugin {
+// Copies CNAME, assets/, and pages/ into dist so relative links work on GitHub Pages.
+function copyStaticSiteFolders(): Plugin {
   return {
-    name: 'copy-static-html-pages',
+    name: 'copy-static-site-folders',
     apply: 'build',
     closeBundle() {
       const outDir = path.resolve(process.cwd(), 'dist');
       const rootDir = process.cwd();
-
       if (!fs.existsSync(outDir)) return;
 
-      const files = fs.readdirSync(rootDir, { withFileTypes: true });
-
-      for (const entry of files) {
-        if (!entry.isFile() || !entry.name.toLowerCase().endsWith('.html')) {
-          continue;
-        }
-
-        // Tiga file ini diproses oleh Vite/Rollup
-        if (
-          entry.name === 'index.html' ||
-          entry.name === 'pembelajaranMTK.html' ||
-          entry.name === 'perkalian.html'
-        ) {
-          continue;
-        }
-
-        try {
-          fs.copyFileSync(
-            path.join(rootDir, entry.name),
-            path.join(outDir, entry.name),
-          );
-        } catch (err) {
-          console.warn(`Gagal menyalin ${entry.name}:`, err);
-        }
+      const cnameSrc = path.join(rootDir, 'CNAME');
+      if (fs.existsSync(cnameSrc)) {
+        fs.copyFileSync(cnameSrc, path.join(outDir, 'CNAME'));
       }
 
-      // Salin file aset tambahan yang dibutuhkan halaman statis
-      const extraAssets = [
-        'CNAME',
-        'back.jpg',
-        'zen.mp4',
-        'zenitsu.png',
-        'awan.png',
-        'pf_logo2.png',
-        'content-calendar.xlsx',
-        'SPMB.css',
-        'SPMB.js',
-      ];
-
-      for (const assetName of extraAssets) {
-        const srcFile = path.join(rootDir, assetName);
-        if (fs.existsSync(srcFile)) {
-          try {
-            fs.copyFileSync(srcFile, path.join(outDir, assetName));
-          } catch (err) {
-            console.warn(`Gagal menyalin aset ${assetName}:`, err);
-          }
-        }
-      }
-
-      // Salin folder code/ jika ada
-      const codeDir = path.join(rootDir, 'code');
-      const destCodeDir = path.join(outDir, 'code');
-      if (fs.existsSync(codeDir)) {
-        try {
-          fs.cpSync(codeDir, destCodeDir, { recursive: true });
-        } catch (err) {
-          console.warn('Gagal menyalin folder code:', err);
+      for (const dirName of ['assets', 'pages']) {
+        const srcDir = path.join(rootDir, dirName);
+        if (fs.existsSync(srcDir)) {
+          fs.cpSync(srcDir, path.join(outDir, dirName), { recursive: true });
         }
       }
     },
   };
 }
 
-/**
- * Middleware untuk dev server agar navigasi ke /perkalian atau /pembelajaranMTK
- * (baik dengan atau tanpa akhiran .html) langsung terlayani tanpa 404.
- */
 function devHtmlFallbackPlugin(): Plugin {
   return {
     name: 'dev-html-fallback',
@@ -94,11 +36,12 @@ function devHtmlFallbackPlugin(): Plugin {
     configureServer(server) {
       server.middlewares.use((req: Connect.IncomingMessage, _res, next) => {
         if (req.url) {
-          const parsedUrl = req.url.split('?')[0];
+          const [parsedUrl, query] = req.url.split('?');
+          const suffix = query ? `?${query}` : '';
           if (parsedUrl === '/perkalian') {
-            req.url = '/perkalian.html' + (req.url.includes('?') ? '?' + req.url.split('?')[1] : '');
+            req.url = `/pages/matematika/perkalian.html${suffix}`;
           } else if (parsedUrl === '/pembelajaranMTK') {
-            req.url = '/pembelajaranMTK.html' + (req.url.includes('?') ? '?' + req.url.split('?')[1] : '');
+            req.url = `/pages/matematika/pembelajaranMTK.html${suffix}`;
           }
         }
         next();
@@ -108,15 +51,13 @@ function devHtmlFallbackPlugin(): Plugin {
 }
 
 export default defineConfig(({ command }) => ({
-  // Saat build (production / GitHub Pages) gunakan './' agar path asset fleksibel.
-  // Saat serve (development), gunakan '/' agar Vite dev server memuat modul secara lancar tanpa layar putih.
   base: command === 'serve' ? '/' : './',
 
   plugins: [
     react(),
     tailwindcss(),
     devHtmlFallbackPlugin(),
-    copyStaticHtmlPages(),
+    copyStaticSiteFolders(),
   ],
 
   resolve: {
@@ -127,11 +68,8 @@ export default defineConfig(({ command }) => ({
 
   build: {
     rollupOptions: {
-      // Halaman yang diproses oleh Vite & Rollup
       input: {
         main: path.resolve(__dirname, 'index.html'),
-        pembelajaranMTK: path.resolve(__dirname, 'pembelajaranMTK.html'),
-        perkalian: path.resolve(__dirname, 'perkalian.html'),
       },
     },
   },
@@ -143,4 +81,3 @@ export default defineConfig(({ command }) => ({
     watch: process.env.DISABLE_HMR === 'true' ? null : {},
   },
 }));
-
