@@ -53,7 +53,6 @@ function copyStaticHtmlPages(): Plugin {
         'zenitsu.png',
         'awan.png',
         'pf_logo2.png',
-        'tik.jpg',
         'content-calendar.xlsx',
         'SPMB.css',
         'SPMB.js',
