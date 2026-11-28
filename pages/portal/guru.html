@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="../../assets/components/zenitsu-footer.css">
 <style>
 /* =========================================
    TOKENS
@@ -521,10 +522,15 @@ footer{
   </section>
 </div>
 
-<footer id="kontak">
-  <div class="wrap foot-wrap">
-    <span><span class="brand-font">AWAN</span> · Portal Guru</span>
-    <span>Dibangun untuk membuat pekerjaan mengajar terasa lebih ringan.</span>
+<footer id="kontak" class="zf-footer zf-footer--compact" data-zf-art="../../assets/images/zenitsu-footer.png">
+  <div class="zf-inner">
+    <div class="zf-compact-bar">
+      <div class="zf-compact-copy">
+        <span><span class="brand-font">AWAN</span> &middot; Portal Guru</span>
+        <span>Dibangun untuk membuat pekerjaan mengajar terasa lebih ringan.</span>
+      </div>
+      <a href="../../index.html" class="zf-compact-home">Kembali ke Beranda</a>
+    </div>
   </div>
 </footer>
 
@@ -637,5 +643,6 @@ window.addEventListener('DOMContentLoaded', () => {
 const toTop = document.getElementById('toTop');
 toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
+<script src="../../assets/components/zenitsu-footer.js" defer></script>
 </body>
 </html>

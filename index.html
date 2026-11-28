@@ -428,11 +428,6 @@
       color: var(--yellow-text);
     }
 
-    .icon-btn--motion[aria-pressed="true"] {
-      background: var(--surface-subtle);
-      border-color: var(--border-strong);
-    }
-
     .mobile-menu-btn {
       display: none;
       align-items: center;
@@ -1121,11 +1116,6 @@
       animation: marqueeSmooth 32s linear infinite;
     }
 
-    .marquee-band:hover .marquee-track,
-    .marquee-band.paused .marquee-track {
-      animation-play-state: paused;
-    }
-
     .marquee-track span {
       display: inline-flex;
       align-items: center;
@@ -1147,28 +1137,6 @@
     @keyframes marqueeSmooth {
       from { transform: translate3d(0, 0, 0); }
       to { transform: translate3d(-50%, 0, 0); }
-    }
-
-    .marquee-toggle {
-      flex-shrink: 0;
-      min-height: 48px;
-      padding: 0 22px 0 18px;
-      margin-right: 1.5vw;
-      border: none;
-      border-left: 2px solid var(--border-strong);
-      background: var(--yellow);
-      color: var(--yellow-ink);
-      font-family: var(--f-display);
-      font-weight: 800;
-      font-size: 0.88rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      transition: background-color 0.2s ease;
-    }
-
-    .marquee-toggle:hover {
-      background: #E0A800;
     }
 
     .cv-section {
@@ -2591,12 +2559,6 @@
       line-height: 1.65;
     }
 
-    .site-footer {
-      border-top: 2px solid var(--border-strong);
-      background: var(--surface-solid);
-      padding: clamp(44px, 6vw, 68px) clamp(16px, 4vw, 56px) 36px;
-    }
-
     .footer-inner {
       max-width: 1340px;
       margin: 0 auto;
@@ -2856,18 +2818,6 @@
       transform: translateY(0);
     }
 
-    /* Global motion pause switch allows anyone to stop ambient effects on demand. */
-    html.motion-paused *,
-    html.motion-paused *::before,
-    html.motion-paused *::after {
-      animation-play-state: paused !important;
-    }
-
-    html.motion-paused .reveal {
-      opacity: 1;
-      transform: none;
-    }
-
     @media (max-width: 1260px) {
       .nav-search-pill {
         display: none;
@@ -3064,6 +3014,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="assets/components/zenitsu-footer.css" />
 </head>
 <body>
   <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
@@ -3105,12 +3056,6 @@
         <span class="clock-date" id="liveDate">Sen, 23 Nov</span>
         <span class="clock-time" id="liveTime">20:15</span>
       </div>
-
-      <button type="button" class="icon-btn icon-btn--motion" id="motionBtn" aria-label="Jeda animasi halaman" aria-pressed="false" title="Jeda atau putar efek animasi">
-        <svg class="icon icon--sm" id="motionIcon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M9 6v12M15 6v12" />
-        </svg>
-      </button>
 
       <button type="button" class="icon-btn icon-btn--theme" id="themeBtn" aria-label="Aktifkan mode gelap" aria-pressed="false" title="Ganti tema terang/gelap">
         <svg class="icon" id="themeIcon" viewBox="0 0 24 24" aria-hidden="true"></svg>
@@ -3235,12 +3180,6 @@
       <div class="marquee-viewport">
         <div class="marquee-track" id="marqueeTrack"></div>
       </div>
-      <button type="button" class="marquee-toggle" id="marqueeToggle" aria-pressed="false" aria-label="Jeda pita modul">
-        <svg class="icon icon--sm" id="marqueeIcon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M9 6v12M15 6v12" />
-        </svg>
-        <span id="marqueeLabel">Jeda</span>
-      </button>
     </div>
 
     <section class="section-shell cv-section" id="cv">
@@ -3440,8 +3379,8 @@
     </section>
   </main>
 
-  <footer class="site-footer" id="contact">
-    <div class="footer-inner">
+  <footer class="site-footer zf-footer zf-footer--full" id="contact" data-zf-art="assets/images/zenitsu-footer.png">
+    <div class="zf-inner footer-inner">
       <div class="footer-top">
         <div>
           <h2 class="footer-heading">Mari Terhubung &amp; Berkolaborasi</h2>
@@ -3522,8 +3461,6 @@
     const ICONS = {
       sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
       moon: '<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4 6.8 6.8 0 0 0 20 14.5Z"/>',
-      pause: '<path d="M9 6v12M15 6v12"/>',
-      play: '<path d="M8 6l11 6-11 6V6Z"/>',
       scale: '<path d="M12 4v16M5 8h14M6 8l-2 6h4l-2-6Zm12 0-2 6h4l-2-6ZM8 20h8"/>',
       calculator: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/>',
       divide: '<path d="M5 12h14"/><circle cx="12" cy="7" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="17" r="1.3" fill="currentColor" stroke="none"/>',
@@ -3664,48 +3601,6 @@
       applyTheme(rootEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     });
 
-    const motionBtn = document.getElementById('motionBtn');
-    const motionIcon = document.getElementById('motionIcon');
-    const marqueeBand = document.getElementById('marqueeBand');
-    const marqueeToggle = document.getElementById('marqueeToggle');
-    const marqueeIcon = document.getElementById('marqueeIcon');
-    const marqueeLabel = document.getElementById('marqueeLabel');
-
-    let motionPaused = false;
-    let marqueePaused = false;
-
-    function syncMotionControls() {
-      rootEl.classList.toggle('motion-paused', motionPaused);
-      motionBtn.setAttribute('aria-pressed', String(motionPaused));
-      motionBtn.setAttribute('aria-label', motionPaused ? 'Putar animasi halaman' : 'Jeda animasi halaman');
-      motionIcon.innerHTML = motionPaused ? ICONS.play : ICONS.pause;
-
-      const tickerStopped = motionPaused || marqueePaused;
-      marqueeBand.classList.toggle('paused', tickerStopped);
-      marqueeToggle.setAttribute('aria-pressed', String(tickerStopped));
-      marqueeToggle.setAttribute('aria-label', tickerStopped ? 'Putar pita modul' : 'Jeda pita modul');
-      marqueeIcon.innerHTML = tickerStopped ? ICONS.play : ICONS.pause;
-      marqueeLabel.textContent = tickerStopped ? 'Putar' : 'Jeda';
-    }
-
-    syncMotionControls();
-
-    motionBtn.addEventListener('click', () => {
-      motionPaused = !motionPaused;
-      if (!motionPaused) marqueePaused = false;
-      syncMotionControls();
-    });
-
-    marqueeToggle.addEventListener('click', () => {
-      if (motionPaused) {
-        motionPaused = false;
-        marqueePaused = false;
-      } else {
-        marqueePaused = !marqueePaused;
-      }
-      syncMotionControls();
-    });
-
     const roles = ['Math Education', 'Community Support Manager', 'crypto enthusiast', 'Tech and AI enthusiast'];
     const roleEl = document.getElementById('roleText');
     let roleIndex = 0;
@@ -3713,10 +3608,6 @@
     let deleting = true;
 
     function tickRole() {
-      if (motionPaused) {
-        setTimeout(tickRole, 400);
-        return;
-      }
       const word = roles[roleIndex];
       charPos += deleting ? -1 : 1;
       roleEl.textContent = word.slice(0, charPos);
@@ -4354,14 +4245,12 @@
     if (matchMedia('(pointer: fine)').matches) {
       const eduCard = document.getElementById('cvEduCard');
       eduCard.addEventListener('mousemove', (e) => {
-        if (motionPaused) return;
         const r = eduCard.getBoundingClientRect();
         eduCard.style.setProperty('--cx', `${Math.round(((e.clientX - r.left) / r.width) * 100)}%`);
         eduCard.style.setProperty('--cy', `${Math.round(((e.clientY - r.top) / r.height) * 100)}%`);
       }, { passive: true });
 
       cvSkillsGrid.addEventListener('mousemove', (e) => {
-        if (motionPaused) return;
         const card = e.target.closest('.cv-skill-card');
         if (!card) return;
         const r = card.getBoundingClientRect();
@@ -4375,10 +4264,6 @@
     function runGpaCounter() {
       if (gpaAnimated) return;
       gpaAnimated = true;
-      if (motionPaused) {
-        gpaEl.textContent = '4.00';
-        return;
-      }
       const start = performance.now();
       const duration = 900;
       function frame(now) {
@@ -4432,7 +4317,6 @@
     if (matchMedia('(pointer: fine)').matches) {
       const heroStage = document.getElementById('home');
       heroStage.addEventListener('mousemove', (e) => {
-        if (motionPaused) return;
         const rect = heroStage.getBoundingClientRect();
         heroStage.style.setProperty('--mx', ((e.clientX - rect.left) / rect.width - 0.5).toFixed(3));
         heroStage.style.setProperty('--my', ((e.clientY - rect.top) / rect.height - 0.5).toFixed(3));
@@ -4463,5 +4347,6 @@
       revealItems.forEach((el) => observer.observe(el));
     }
   </script>
+  <script src="assets/components/zenitsu-footer.js" defer></script>
 </body>
 </html>

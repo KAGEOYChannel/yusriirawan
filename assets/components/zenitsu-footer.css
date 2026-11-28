@@ -1,0 +1,250 @@
+footer.zf-footer,
+.zf-footer {
+  --zf-bg: #090B14;
+  --zf-bg-deep: #060810;
+  --zf-surface: rgba(18, 22, 38, 0.84);
+  --zf-ink: #F8FAFC;
+  --zf-muted: #CBD5E1;
+  --zf-gold: #FACC15;
+  --zf-amber: #F59E0B;
+  --zf-gold-ink: #090B14;
+  --zf-border: rgba(250, 204, 21, 0.28);
+  --zf-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(ellipse 85% 55% at 50% 100%, rgba(245, 158, 11, 0.24) 0%, rgba(245, 158, 11, 0.06) 48%, transparent 76%),
+    linear-gradient(180deg, var(--zf-bg-deep) 0%, var(--zf-bg) 55%, #161108 100%);
+  color: var(--zf-ink);
+  border: 0;
+  border-top: 2px solid var(--zf-gold);
+  box-shadow: 0 -14px 40px -18px rgba(250, 204, 21, 0.25);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  text-align: left;
+}
+
+.zf-seigaiha {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='32' viewBox='0 0 64 32'%3E%3Cg fill='none' stroke='%23FACC15' stroke-width='1.1'%3E%3Cpath d='M0 32a16 16 0 0 1 32 0M6 32a10 10 0 0 1 20 0M12 32a4 4 0 0 1 8 0M32 32a16 16 0 0 1 32 0M38 32a10 10 0 0 1 20 0M44 32a4 4 0 0 1 8 0M16 16a16 16 0 0 1 32 0M22 16a10 10 0 0 1 20 0M28 16a4 4 0 0 1 8 0M-16 16a16 16 0 0 1 32 0M48 16a16 16 0 0 1 32 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 64px 32px;
+}
+
+.zf-top-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 5;
+  pointer-events: none;
+  overflow: hidden;
+  background: linear-gradient(90deg, transparent 0%, rgba(250, 204, 21, 0.45) 50%, transparent 100%);
+}
+
+.zf-top-beam::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -35%;
+  width: 35%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #FFFBEB 50%, #FACC15 72%, transparent);
+  box-shadow: 0 0 18px #FACC15;
+  animation: zfBeamSweep 4.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes zfBeamSweep {
+  0% { transform: translateX(0); opacity: 0; }
+  12% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateX(410%); opacity: 0; }
+}
+
+.zf-fx-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Bottom artwork layer keeps Zenitsu and the crest clear of upper footer text. */
+.zf-art-wrap {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+  user-select: none;
+}
+
+.zf-art-img {
+  width: 100%;
+  max-width: 1560px;
+  height: auto;
+  aspect-ratio: 1024 / 576;
+  display: block;
+  object-fit: contain;
+  object-position: bottom center;
+  opacity: 0.94;
+  filter: drop-shadow(0 0 16px rgba(250, 204, 21, 0.28));
+  animation: zfArtPulse 4.6s ease-in-out infinite alternate;
+}
+
+@keyframes zfArtPulse {
+  0% { filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.22)) brightness(0.98); }
+  100% { filter: drop-shadow(0 0 24px rgba(250, 204, 21, 0.48)) brightness(1.06); }
+}
+
+.zf-readability-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(6, 8, 16, 0.72) 0%, rgba(9, 11, 20, 0.48) 54%, rgba(9, 11, 20, 0.08) 100%);
+}
+
+.zf-inner {
+  position: relative;
+  z-index: 4;
+  max-width: 1340px;
+  margin: 0 auto;
+}
+
+.zf-footer--full .zf-inner {
+  padding: clamp(52px, 6vw, 76px) clamp(16px, 4vw, 56px) clamp(176px, 22vw, 294px);
+}
+
+.zf-footer--compact .zf-inner {
+  padding: 44px clamp(16px, 4vw, 48px) clamp(180px, 26vw, 366px);
+}
+
+.zf-footer--full .footer-top {
+  border-bottom-color: rgba(250, 204, 21, 0.22);
+}
+
+.zf-footer--full .footer-heading {
+  color: var(--zf-ink);
+}
+
+.zf-footer--full .footer-lead,
+.zf-footer--full .footer-col-title {
+  color: var(--zf-muted);
+}
+
+.zf-footer--full .footer-bottom {
+  color: var(--zf-muted);
+  max-width: 720px;
+}
+
+.zf-footer--full .footer-nav-list a {
+  color: var(--zf-ink);
+}
+
+.zf-footer--full .footer-nav-list a:hover {
+  color: var(--zf-gold);
+}
+
+.zf-footer--full .email-copy-btn {
+  background: var(--zf-gold);
+  color: var(--zf-gold-ink);
+  border-color: #FFFBEB;
+  box-shadow: 0 10px 26px -10px rgba(250, 204, 21, 0.55);
+}
+
+.zf-footer--full .email-copy-btn:hover {
+  background: #FDE047;
+  box-shadow: 0 14px 32px -8px rgba(250, 204, 21, 0.7);
+}
+
+.zf-compact-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding: 18px 22px;
+  border-radius: 16px;
+  background: rgba(9, 11, 20, 0.72);
+  border: 1.5px solid rgba(250, 204, 21, 0.26);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.zf-compact-copy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  color: var(--zf-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.zf-compact-copy strong,
+.zf-compact-copy .brand-font {
+  color: var(--zf-gold);
+  font-weight: 800;
+}
+
+.zf-compact-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: var(--zf-gold);
+  color: var(--zf-gold-ink);
+  font-weight: 800;
+  font-size: 0.86rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.2s var(--zf-ease), background-color 0.2s ease;
+}
+
+.zf-compact-home:hover {
+  background: #FDE047;
+  transform: translateY(-2px);
+}
+
+.zf-compact-home:focus-visible {
+  outline: 3px solid #FFFBEB;
+  outline-offset: 3px;
+}
+
+@media (min-width: 900px) {
+  .zf-compact-bar {
+    max-width: min(860px, 68%);
+  }
+}
+
+@media (max-width: 760px) {
+  .zf-footer--full .zf-inner {
+    padding: 46px 16px clamp(132px, 34vw, 178px);
+  }
+
+  .zf-footer--compact .zf-inner {
+    padding: 32px 16px clamp(132px, 34vw, 176px);
+  }
+
+  .zf-compact-bar {
+    padding: 14px 16px;
+  }
+
+  .zf-art-img {
+    width: 100%;
+  }
+}
