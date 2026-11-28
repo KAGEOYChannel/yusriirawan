@@ -257,10 +257,10 @@
       right: 0;
       z-index: 160;
       height: var(--nav-height);
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      display: flex;
       align-items: center;
-      gap: 16px;
+      justify-content: space-between;
+      gap: 20px;
       padding: 0 clamp(16px, 4vw, 56px);
       border-bottom: 1px solid transparent;
       transition: background-color 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease;
@@ -346,12 +346,12 @@
     }
 
     .nav-search-pill {
-      justify-self: center;
       display: inline-flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      width: min(220px, 19vw);
+      flex: 0 1 230px;
+      min-width: 170px;
       min-height: 44px;
       padding: 0 18px;
       border-radius: var(--r-full);
@@ -1169,6 +1169,816 @@
 
     .marquee-toggle:hover {
       background: #E0A800;
+    }
+
+    .cv-section {
+      position: relative;
+    }
+
+    .cv-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 20px 32px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .cv-tablist {
+      position: relative;
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      padding: 6px;
+      border-radius: var(--r-md);
+      background: var(--surface);
+      border: 2px solid var(--border-strong);
+      box-shadow: var(--shadow-sticker);
+    }
+
+    .cv-tab-slider {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--yellow);
+      border: 1.5px solid var(--border-strong);
+      box-shadow: 0 6px 16px -6px var(--yellow-glow);
+      transition: transform 0.36s var(--ease-out-expo), width 0.36s var(--ease-out-expo), height 0.36s var(--ease-out-expo);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .cv-tab {
+      position: relative;
+      z-index: 1;
+      min-height: 44px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .cv-tab:hover {
+      color: var(--ink);
+    }
+
+    .cv-tab[aria-selected="true"] {
+      color: var(--yellow-ink);
+    }
+
+    .cv-tab-count {
+      font-size: 0.78rem;
+      opacity: 0.8;
+    }
+
+    .cv-overview-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+      gap: 22px;
+      margin-bottom: 28px;
+    }
+
+    .cv-summary-card,
+    .cv-edu-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 26px 28px;
+      box-shadow: var(--shadow-sticker);
+      transition: border-color 0.25s ease, transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease;
+    }
+
+    .cv-summary-card:hover,
+    .cv-edu-card:hover {
+      border-color: var(--yellow);
+      box-shadow: var(--shadow-float);
+    }
+
+    .cv-profile-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .cv-profile-id {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .cv-avatar-tile {
+      width: 58px;
+      height: 58px;
+      border-radius: 15px;
+      background: var(--logo-surface);
+      border: 2px solid var(--logo-border);
+      padding: 8px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 6px 14px rgba(20, 19, 17, 0.12);
+    }
+
+    .cv-avatar-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .cv-name {
+      font-family: var(--f-display);
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+
+    .cv-degree-sub {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--electric);
+      margin-top: 3px;
+    }
+
+    .cv-location-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--r-sm);
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .cv-summary-text {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.68;
+      margin-bottom: 18px;
+    }
+
+    .cv-meta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .cv-copy-chip {
+      min-height: 44px;
+      padding: 8px 14px;
+      border-radius: var(--r-md);
+      border: 1.5px solid var(--border-strong);
+      background: var(--surface-solid);
+      color: var(--ink);
+      font-size: 0.86rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s var(--ease-out-expo), background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .cv-copy-chip:hover {
+      transform: translateY(-2px);
+      border-color: var(--yellow);
+      background: var(--surface-subtle);
+    }
+
+    .cv-dob-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+      padding: 8px 12px;
+      border-radius: var(--r-md);
+      background: var(--surface-subtle);
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    .cv-edu-card {
+      --cx: 80%;
+      --cy: 20%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      border-color: var(--border-strong);
+      background:
+        radial-gradient(280px circle at var(--cx) var(--cy), rgba(245, 183, 0, 0.20), transparent 70%),
+        var(--surface);
+    }
+
+    .cv-edu-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .cv-edu-kicker {
+      font-family: var(--f-display);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--yellow-text);
+    }
+
+    .cv-edu-years {
+      font-family: var(--f-display);
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: var(--r-sm);
+      background: var(--yellow);
+      color: var(--yellow-ink);
+    }
+
+    .cv-gpa-block {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin: 4px 0;
+    }
+
+    .cv-gpa-value {
+      font-family: var(--f-display);
+      font-size: clamp(3rem, 5vw, 4.1rem);
+      font-weight: 800;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cv-gpa-scale {
+      font-family: var(--f-display);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--yellow-text);
+    }
+
+    .cv-edu-uni {
+      font-family: var(--f-display);
+      font-size: 1.28rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    .cv-edu-major {
+      font-size: 0.92rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .cv-panel[hidden] {
+      display: none;
+    }
+
+    .cv-panel.active {
+      animation: cvPanelIn 0.42s var(--ease-out-expo);
+    }
+
+    @keyframes cvPanelIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cv-exp-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .cv-exp-hint {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .cv-mode-btn {
+      min-height: 44px;
+      padding: 8px 16px;
+      border-radius: var(--r-md);
+      border: 1.5px solid var(--border-strong);
+      background: var(--surface-solid);
+      color: var(--ink);
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s var(--ease-out-expo), border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .cv-mode-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--yellow);
+      background: var(--surface-subtle);
+    }
+
+    .cv-mode-btn[aria-pressed="true"] {
+      background: var(--yellow);
+      color: var(--yellow-ink);
+    }
+
+    .cv-timeline-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.18fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .cv-timeline-rail {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding-left: 22px;
+    }
+
+    .cv-rail-track {
+      position: absolute;
+      left: 7px;
+      top: 14px;
+      bottom: 14px;
+      width: 3px;
+      border-radius: 3px;
+      background: var(--border);
+    }
+
+    .cv-rail-progress {
+      position: absolute;
+      left: 7px;
+      top: 14px;
+      width: 3px;
+      height: calc(100% - 28px);
+      border-radius: 3px;
+      background: var(--yellow);
+      transform-origin: top center;
+      transform: scaleY(0.2);
+      transition: transform 0.4s var(--ease-out-expo);
+    }
+
+    .cv-rail-item {
+      position: relative;
+      width: 100%;
+      text-align: left;
+      padding: 15px 18px;
+      min-height: 68px;
+      border-radius: var(--r-md);
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: transform 0.24s var(--ease-out-expo), border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.24s ease;
+    }
+
+    .cv-rail-item::before {
+      content: "";
+      position: absolute;
+      left: -21px;
+      top: 50%;
+      width: 13px;
+      height: 13px;
+      border-radius: var(--r-full);
+      background: var(--surface-solid);
+      border: 2.5px solid var(--border-strong);
+      transform: translateY(-50%);
+      transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.25s var(--ease-out-expo);
+    }
+
+    .cv-rail-item:hover {
+      transform: translateX(4px);
+      border-color: var(--yellow);
+    }
+
+    .cv-rail-item.active {
+      border-color: var(--border-strong);
+      background: var(--surface-solid);
+      box-shadow: var(--shadow-sticker);
+      transform: translateX(6px);
+    }
+
+    .cv-rail-item.active::before {
+      background: var(--yellow);
+      border-color: var(--border-strong);
+      transform: translateY(-50%) scale(1.22);
+    }
+
+    .cv-rail-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cv-rail-role {
+      font-family: var(--f-display);
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+
+    .cv-rail-period {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--surface-subtle);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .cv-rail-item.active .cv-rail-period {
+      background: var(--yellow);
+      color: var(--yellow-ink);
+    }
+
+    .cv-rail-org {
+      font-size: 0.84rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .cv-detail-stage {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+      border: 2px solid var(--border-strong);
+      border-radius: var(--r-lg);
+      padding: 28px 30px;
+      box-shadow: var(--shadow-float);
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .cv-detail-anim {
+      animation: cvDetailIn 0.38s var(--ease-out-expo);
+    }
+
+    @keyframes cvDetailIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cv-detail-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .cv-detail-index {
+      font-family: var(--f-display);
+      font-size: 0.86rem;
+      font-weight: 800;
+      color: var(--yellow-text);
+      letter-spacing: 0.06em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cv-detail-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cv-detail-badge {
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 11px;
+      border-radius: var(--r-sm);
+      background: var(--surface-subtle);
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+
+    .cv-detail-badge--accent {
+      background: var(--yellow);
+      color: var(--yellow-ink);
+      border-color: var(--border-strong);
+    }
+
+    .cv-detail-head-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .cv-detail-title {
+      font-family: var(--f-display);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+
+    .cv-detail-org {
+      margin-top: 6px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--electric);
+    }
+
+    .cv-detail-partner-logo {
+      height: 44px;
+      width: auto;
+      padding: 4px 8px;
+      border-radius: 10px;
+      background: var(--logo-surface);
+      border: 1.5px solid var(--logo-border);
+      object-fit: contain;
+    }
+
+    .cv-detail-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .cv-detail-points li {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      font-size: 0.95rem;
+      color: var(--ink);
+      line-height: 1.58;
+      animation: cvBulletIn 0.42s var(--ease-out-expo) calc(var(--bi, 0) * 0.06s) backwards;
+    }
+
+    @keyframes cvBulletIn {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .cv-point-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      background: var(--cat-math-bg);
+      color: var(--cat-math-fg);
+      font-family: var(--f-display);
+      font-size: 0.78rem;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      margin-top: 2px;
+    }
+
+    .cv-detail-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .cv-step-btn {
+      min-height: 44px;
+      padding: 8px 16px;
+      border-radius: var(--r-md);
+      border: 1.5px solid var(--border-strong);
+      background: var(--surface-solid);
+      color: var(--ink);
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s var(--ease-out-expo), background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .cv-step-btn:hover {
+      background: var(--yellow);
+      color: var(--yellow-ink);
+      transform: translateY(-2px);
+    }
+
+    .cv-all-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .cv-all-list[hidden],
+    .cv-timeline-layout[hidden] {
+      display: none;
+    }
+
+    .cv-all-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-sticker);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform 0.28s var(--ease-out-expo), border-color 0.2s ease;
+    }
+
+    .cv-all-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--yellow);
+    }
+
+    .cv-all-card:first-child {
+      grid-column: span 2;
+      border-color: var(--border-strong);
+    }
+
+    .cv-skills-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .cv-skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .cv-skill-card {
+      --sx: 50%;
+      --sy: 50%;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(180px circle at var(--sx) var(--sy), rgba(245, 183, 0, 0.22), transparent 68%),
+        var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 132px;
+      box-shadow: var(--shadow-sticker);
+      transition: transform 0.28s var(--ease-out-expo), border-color 0.2s ease, box-shadow 0.28s ease;
+    }
+
+    .cv-skill-card:hover {
+      transform: translateY(-5px) rotate(-0.6deg);
+      border-color: var(--yellow);
+      box-shadow: var(--shadow-float);
+    }
+
+    .cv-skill-card[hidden] {
+      display: none;
+    }
+
+    .cv-skill-domain {
+      align-self: flex-start;
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 7px;
+      background: var(--surface-subtle);
+      color: var(--muted);
+    }
+
+    .cv-skill-name {
+      font-family: var(--f-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      line-height: 1.24;
+      color: var(--ink);
+    }
+
+    .cv-creds-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .cv-cred-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow-sticker);
+      transition: transform 0.3s var(--ease-out-expo), border-color 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .cv-cred-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -85%;
+      width: 55%;
+      height: 100%;
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.24), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.65s ease;
+      pointer-events: none;
+    }
+
+    .cv-cred-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--yellow);
+      box-shadow: var(--shadow-float);
+    }
+
+    .cv-cred-card:hover::before {
+      left: 135%;
+    }
+
+    .cv-cred-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .cv-cred-type {
+      font-size: 0.76rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 7px;
+      background: var(--cat-math-bg);
+      color: var(--cat-math-fg);
+    }
+
+    .cv-cred-type--act {
+      background: var(--cat-tik-bg);
+      color: var(--cat-tik-fg);
+    }
+
+    .cv-cred-date {
+      font-family: var(--f-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .cv-cred-title {
+      font-family: var(--f-display);
+      font-size: 1.28rem;
+      font-weight: 800;
+      line-height: 1.24;
+      color: var(--ink);
+    }
+
+    .cv-cred-org {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.58;
     }
 
     .section-shell {
@@ -2058,11 +2868,7 @@
       transform: none;
     }
 
-    @media (max-width: 1220px) {
-      .topbar {
-        grid-template-columns: 1fr auto;
-      }
-
+    @media (max-width: 1260px) {
       .nav-search-pill {
         display: none;
       }
@@ -2084,12 +2890,33 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .cv-skills-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cv-creds-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .about-split {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 920px) {
+      .cv-overview-grid,
+      .cv-timeline-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .cv-all-list {
+        grid-template-columns: 1fr;
+      }
+
+      .cv-all-card:first-child {
+        grid-column: span 1;
+      }
+
       .clock-widget {
         display: none;
       }
@@ -2191,6 +3018,28 @@
         grid-template-columns: 1fr;
       }
 
+      .cv-tablist {
+        width: 100%;
+      }
+
+      .cv-tab {
+        flex: 1 1 auto;
+        justify-content: center;
+        padding: 8px 12px;
+        font-size: 0.86rem;
+      }
+
+      .cv-skills-grid,
+      .cv-creds-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cv-summary-card,
+      .cv-edu-card,
+      .cv-detail-stage {
+        padding: 20px;
+      }
+
       .discipline-list {
         padding: 0 18px;
       }
@@ -2236,6 +3085,7 @@
 
       <nav class="nav-desktop" aria-label="Navigasi utama">
         <a href="#home" class="nav-link active" data-nav="home">Beranda</a>
+        <a href="#cv" class="nav-link" data-nav="cv">CV</a>
         <a href="#gallery" class="nav-link" data-nav="gallery">Media Belajar</a>
         <a href="#about" class="nav-link" data-nav="about">Tentang</a>
         <a href="#contact" class="nav-link" data-nav="contact">Kontak</a>
@@ -2278,6 +3128,7 @@
   <nav class="mobile-drawer" id="mobileDrawer" aria-label="Navigasi seluler">
     <ul class="mobile-drawer-list">
       <li><a href="#home" class="active" data-nav="home">Beranda</a></li>
+      <li><a href="#cv" data-nav="cv">CV</a></li>
       <li><a href="#gallery" data-nav="gallery">Media Belajar</a></li>
       <li><a href="#about" data-nav="about">Tentang</a></li>
       <li><a href="#contact" data-nav="contact">Kontak</a></li>
@@ -2391,6 +3242,102 @@
         <span id="marqueeLabel">Jeda</span>
       </button>
     </div>
+
+    <section class="section-shell cv-section" id="cv">
+      <div class="cv-header-bar reveal">
+        <div>
+          <p class="section-eyebrow">Curriculum Vitae</p>
+          <h2 class="section-title">Rekam Jejak &amp;<br /><em>Pengalaman</em></h2>
+        </div>
+
+        <div class="cv-tablist" id="cvTablist" role="tablist" aria-label="Bagian Curriculum Vitae">
+          <span class="cv-tab-slider" id="cvTabSlider" aria-hidden="true"></span>
+          <button type="button" class="cv-tab" role="tab" id="tab-exp" aria-selected="true" aria-controls="panel-exp" data-cv-tab="exp">
+            Pengalaman <span class="cv-tab-count">(6)</span>
+          </button>
+          <button type="button" class="cv-tab" role="tab" id="tab-skills" aria-selected="false" aria-controls="panel-skills" tabindex="-1" data-cv-tab="skills">
+            Keahlian <span class="cv-tab-count">(8)</span>
+          </button>
+          <button type="button" class="cv-tab" role="tab" id="tab-creds" aria-selected="false" aria-controls="panel-creds" tabindex="-1" data-cv-tab="creds">
+            Sertifikat &amp; Aktivitas <span class="cv-tab-count">(3)</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="cv-overview-grid reveal">
+        <article class="cv-summary-card">
+          <div class="cv-profile-top">
+            <div class="cv-profile-id">
+              <div class="cv-avatar-tile">
+                <img src="awan.png" alt="Logo AWAN" width="500" height="500" loading="lazy" />
+              </div>
+              <div>
+                <h3 class="cv-name">Yusri Irawan</h3>
+                <p class="cv-degree-sub">Bachelor of Mathematics Education</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="cv-summary-text">
+            A Mathematics Education graduate with strong analytical thinking, problem-solving skills, and effective communication abilities. Capable of working independently or in a team, highly adaptable, and eager to learn. Committed to contributing positively in a professional environment.
+          </p>
+
+          <div class="cv-meta-actions">
+            <button type="button" class="cv-copy-chip" data-copy="yusriirawan21@gmail.com" data-copy-label="Email CV">
+              <svg class="icon icon--sm" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="m3 7 9 6 9-6" />
+              </svg>
+              <span>yusriirawan21@gmail.com</span>
+            </button>
+          </div>
+        </article>
+
+        <article class="cv-edu-card" id="cvEduCard">
+          <div class="cv-edu-top">
+            <span class="cv-edu-kicker">Education</span>
+            <span class="cv-edu-years">2021 - 2025</span>
+          </div>
+          <div class="cv-gpa-block">
+            <span class="cv-gpa-value" id="cvGpaCounter">4.00</span>
+            <span class="cv-gpa-scale">/ 4.00 GPA</span>
+          </div>
+          <div>
+            <h3 class="cv-edu-uni">Sriwijaya University</h3>
+            <p class="cv-edu-major">Bachelor of Mathematics Education</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="cv-panel active" id="panel-exp" role="tabpanel" aria-labelledby="tab-exp">
+        <div class="cv-exp-controls">
+          <span class="cv-exp-hint">Pilih peran pada linimasa untuk melihat detail kontribusi.</span>
+          <button type="button" class="cv-mode-btn" id="cvViewModeBtn" aria-pressed="false">
+            <span id="cvViewModeLabel">Lihat Semua (6)</span>
+          </button>
+        </div>
+
+        <div class="cv-timeline-layout" id="cvTimelineLayout">
+          <div class="cv-timeline-rail" id="cvTimelineRail" role="listbox" aria-label="Daftar pengalaman kerja dan organisasi">
+            <span class="cv-rail-track" aria-hidden="true"></span>
+            <span class="cv-rail-progress" id="cvRailProgress" aria-hidden="true"></span>
+          </div>
+
+          <div class="cv-detail-stage" id="cvDetailStage" aria-live="polite"></div>
+        </div>
+
+        <div class="cv-all-list" id="cvAllList" hidden></div>
+      </div>
+
+      <div class="cv-panel" id="panel-skills" role="tabpanel" aria-labelledby="tab-skills" hidden>
+        <div class="cv-skills-toolbar" id="cvSkillsFilter" role="group" aria-label="Filter bidang keahlian"></div>
+        <div class="cv-skills-grid" id="cvSkillsGrid"></div>
+      </div>
+
+      <div class="cv-panel" id="panel-creds" role="tabpanel" aria-labelledby="tab-creds" hidden>
+        <div class="cv-creds-grid" id="cvCredsGrid"></div>
+      </div>
+    </section>
 
     <section class="section-shell" id="gallery">
       <div class="section-header reveal">
@@ -2519,6 +3466,7 @@
             <p class="footer-col-title">Navigasi</p>
             <ul class="footer-nav-list">
               <li><a href="#home">Beranda</a></li>
+              <li><a href="#cv">CV</a></li>
               <li><a href="#gallery">Media Belajar</a></li>
               <li><a href="#about">Tentang</a></li>
               <li><a href="guru.html">Portal Guru</a></li>
@@ -3081,10 +4029,382 @@
       }
     });
 
+    const CV_EXPERIENCES = [
+      {
+        role: 'Teacher',
+        org: 'Private Integrated School',
+        period: 'June 2025 - Present',
+        category: 'Education',
+        points: [
+          'Delivered structured, interactive classroom instruction and day-to-day student learning support.',
+          'Managed academic records and maintained digital education platforms (e.g., Dapodik and internal systems).',
+          'Ensured data accuracy, student assessment tracking, and timely academic reporting.'
+        ]
+      },
+      {
+        role: 'Private Mathematics Tutor',
+        org: 'Independent Tutoring',
+        period: 'Ongoing',
+        category: 'Tutoring',
+        points: [
+          'Delivered personalized one-on-one and small-group mathematics tutoring tailored to each student learning pace.',
+          'Guided students through foundational concepts, problem-solving strategies, and exam preparation.',
+          'Designed visual exercises and interactive practice materials to build confidence in mathematics.'
+        ]
+      },
+      {
+        role: 'Internship (Teaching Practice)',
+        org: 'SMPN 02 Indralaya Selatan',
+        period: '2024',
+        category: 'Teaching',
+        points: [
+          'Participated in teaching and learning activities in a school environment.',
+          'Collaborated with teachers and staff to support effective learning processes.',
+          'Gained hands-on experience in classroom management and student engagement.'
+        ]
+      },
+      {
+        role: 'Field Experience Program (PLP)',
+        org: 'Mathematics Education Program',
+        period: '2024',
+        category: 'Curriculum',
+        points: [
+          'Collaborated with teachers in designing structured lesson plans.',
+          'Developed effective teaching strategies to improve student understanding.'
+        ]
+      },
+      {
+        role: 'Discord Community Moderator',
+        org: 'Puzzle Fantasy (Powered by Biskit Protocol)',
+        period: 'Feb - July 2023',
+        category: 'Community',
+        logo: 'pf_logo2.png',
+        points: [
+          'Moderated community discussions and ensured adherence to platform rules.',
+          'Assisted users and resolved community issues in real-time.'
+        ]
+      },
+      {
+        role: 'Head of Religious Division (HIMMA)',
+        org: 'Mathematics Education Student Association',
+        period: '2023/2024',
+        category: 'Leadership',
+        points: [
+          'Led the religious division in planning, organizing, and executing various programs.',
+          'Managed team coordination and ensured program effectiveness.'
+        ]
+      }
+    ];
+
+    const CV_SKILLS = [
+      { name: 'Educational Content Creation', domain: 'edu', label: 'Education' },
+      { name: 'Digital Learning Tools', domain: 'edu', label: 'Education' },
+      { name: 'Student Assessment & Evaluation', domain: 'edu', label: 'Education' },
+      { name: 'Data Analysis', domain: 'tech', label: 'Analysis & Office' },
+      { name: 'Microsoft Office', domain: 'tech', label: 'Analysis & Office' },
+      { name: 'Leadership', domain: 'lead', label: 'Leadership & Team' },
+      { name: 'Communication', domain: 'lead', label: 'Leadership & Team' },
+      { name: 'Teamwork', domain: 'lead', label: 'Leadership & Team' }
+    ];
+
+    const CV_CREDENTIALS = [
+      {
+        kind: 'cert',
+        badge: 'Sertifikat · Presenter',
+        date: 'Seminar Nasional',
+        title: 'Presenter in Mathematics Seminar II',
+        org: 'Organized by the Mathematics Education Study Program, Timor University.'
+      },
+      {
+        kind: 'cert',
+        badge: 'Sertifikat · Pelatihan',
+        date: 'July 7-9, 2025',
+        title: 'Teacher and Staff Training Program',
+        org: 'Educator & Staff Professional Development Program.'
+      },
+      {
+        kind: 'act',
+        badge: 'Aktivitas · Kepanitiaan',
+        date: '2023',
+        title: 'Committee Member, Mathematics Olympiad Team (Junior/Senior High School)',
+        org: 'Mathematics Education Fair 2023.'
+      }
+    ];
+
+    const cvTablist = document.getElementById('cvTablist');
+    const cvTabSlider = document.getElementById('cvTabSlider');
+    const cvTabs = [...cvTablist.querySelectorAll('.cv-tab')];
+    const cvPanels = {
+      exp: document.getElementById('panel-exp'),
+      skills: document.getElementById('panel-skills'),
+      creds: document.getElementById('panel-creds')
+    };
+
+    function moveTabSlider(activeTab) {
+      if (!activeTab) return;
+      cvTabSlider.style.width = `${activeTab.offsetWidth}px`;
+      cvTabSlider.style.height = `${activeTab.offsetHeight}px`;
+      cvTabSlider.style.transform = `translate(${activeTab.offsetLeft - 6}px, ${activeTab.offsetTop - 6}px)`;
+    }
+
+    function activateCvTab(tabKey) {
+      let targetTab = null;
+      cvTabs.forEach((tab) => {
+        const selected = tab.dataset.cvTab === tabKey;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        if (selected) targetTab = tab;
+      });
+      Object.entries(cvPanels).forEach(([key, panel]) => {
+        const show = key === tabKey;
+        panel.hidden = !show;
+        panel.classList.toggle('active', show);
+      });
+      moveTabSlider(targetTab);
+    }
+
+    cvTablist.addEventListener('click', (e) => {
+      const tab = e.target.closest('.cv-tab');
+      if (tab) activateCvTab(tab.dataset.cvTab);
+    });
+
+    cvTablist.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const idx = cvTabs.indexOf(document.activeElement);
+      if (idx === -1) return;
+      e.preventDefault();
+      const next = (idx + (e.key === 'ArrowRight' ? 1 : -1) + cvTabs.length) % cvTabs.length;
+      cvTabs[next].focus();
+      activateCvTab(cvTabs[next].dataset.cvTab);
+    });
+
+    requestAnimationFrame(() => moveTabSlider(cvTabs[0]));
+    window.addEventListener('resize', () => {
+      const current = cvTabs.find((t) => t.getAttribute('aria-selected') === 'true');
+      moveTabSlider(current);
+    });
+
+    const cvTimelineRail = document.getElementById('cvTimelineRail');
+    const cvRailProgress = document.getElementById('cvRailProgress');
+    const cvDetailStage = document.getElementById('cvDetailStage');
+    const cvAllList = document.getElementById('cvAllList');
+    const cvTimelineLayout = document.getElementById('cvTimelineLayout');
+    const cvViewModeBtn = document.getElementById('cvViewModeBtn');
+    const cvViewModeLabel = document.getElementById('cvViewModeLabel');
+
+    let activeExpIndex = 0;
+
+    CV_EXPERIENCES.forEach((exp, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = `cv-rail-item${idx === 0 ? ' active' : ''}`;
+      btn.setAttribute('role', 'option');
+      btn.setAttribute('aria-selected', String(idx === 0));
+      btn.dataset.expIndex = String(idx);
+      btn.innerHTML = `
+        <span class="cv-rail-top">
+          <span class="cv-rail-role">${exp.role}</span>
+          <span class="cv-rail-period">${exp.period}</span>
+        </span>
+        <span class="cv-rail-org">${exp.org}</span>
+      `;
+      cvTimelineRail.appendChild(btn);
+    });
+
+    cvAllList.innerHTML = CV_EXPERIENCES.map((exp, idx) => `
+      <article class="cv-all-card">
+        <div class="cv-detail-meta">
+          <span class="cv-detail-index">0${idx + 1} / 0${CV_EXPERIENCES.length}</span>
+          <div class="cv-detail-badges">
+            <span class="cv-detail-badge">${exp.category}</span>
+            <span class="cv-detail-badge cv-detail-badge--accent">${exp.period}</span>
+          </div>
+        </div>
+        <div class="cv-detail-head-row">
+          <div>
+            <h4 class="cv-detail-title">${exp.role}</h4>
+            <p class="cv-detail-org">${exp.org}</p>
+          </div>
+          ${exp.logo ? `<img src="${exp.logo}" alt="Logo ${exp.org}" class="cv-detail-partner-logo" width="612" height="356" loading="lazy" />` : ''}
+        </div>
+        <ul class="cv-detail-points">
+          ${exp.points.map((pt, i) => `<li style="--bi:${i}"><span class="cv-point-num">${i + 1}</span><span>${pt}</span></li>`).join('')}
+        </ul>
+      </article>
+    `).join('');
+
+    function renderExperienceDetail(idx) {
+      activeExpIndex = idx;
+      const exp = CV_EXPERIENCES[idx];
+      const items = [...cvTimelineRail.querySelectorAll('.cv-rail-item')];
+      items.forEach((item, i) => {
+        const active = i === idx;
+        item.classList.toggle('active', active);
+        item.setAttribute('aria-selected', String(active));
+      });
+      const ratio = (idx + 1) / CV_EXPERIENCES.length;
+      cvRailProgress.style.transform = `scaleY(${ratio.toFixed(3)})`;
+
+      cvDetailStage.innerHTML = `
+        <div class="cv-detail-anim">
+          <div class="cv-detail-meta">
+            <span class="cv-detail-index">0${idx + 1} / 0${CV_EXPERIENCES.length}</span>
+            <div class="cv-detail-badges">
+              <span class="cv-detail-badge">${exp.category}</span>
+              <span class="cv-detail-badge cv-detail-badge--accent">${exp.period}</span>
+            </div>
+          </div>
+          <div class="cv-detail-head-row">
+            <div>
+              <h4 class="cv-detail-title">${exp.role}</h4>
+              <p class="cv-detail-org">${exp.org}</p>
+            </div>
+            ${exp.logo ? `<img src="${exp.logo}" alt="Logo ${exp.org}" class="cv-detail-partner-logo" width="612" height="356" loading="lazy" />` : ''}
+          </div>
+          <ul class="cv-detail-points">
+            ${exp.points.map((pt, i) => `<li style="--bi:${i}"><span class="cv-point-num">${i + 1}</span><span>${pt}</span></li>`).join('')}
+          </ul>
+        </div>
+        <div class="cv-detail-nav">
+          <button type="button" class="cv-step-btn" id="cvPrevBtn">Sebelumnya</button>
+          <button type="button" class="cv-step-btn" id="cvNextBtn">Berikutnya</button>
+        </div>
+      `;
+
+      document.getElementById('cvPrevBtn').addEventListener('click', () => {
+        renderExperienceDetail((activeExpIndex - 1 + CV_EXPERIENCES.length) % CV_EXPERIENCES.length);
+      });
+      document.getElementById('cvNextBtn').addEventListener('click', () => {
+        renderExperienceDetail((activeExpIndex + 1) % CV_EXPERIENCES.length);
+      });
+    }
+
+    renderExperienceDetail(0);
+
+    cvTimelineRail.addEventListener('click', (e) => {
+      const item = e.target.closest('.cv-rail-item');
+      if (item) renderExperienceDetail(Number(item.dataset.expIndex));
+    });
+
+    cvViewModeBtn.addEventListener('click', () => {
+      const showAll = cvViewModeBtn.getAttribute('aria-pressed') !== 'true';
+      cvViewModeBtn.setAttribute('aria-pressed', String(showAll));
+      cvViewModeLabel.textContent = showAll ? 'Mode Fokus' : `Lihat Semua (${CV_EXPERIENCES.length})`;
+      cvTimelineLayout.hidden = showAll;
+      cvAllList.hidden = !showAll;
+    });
+
+    const SKILL_DOMAINS = {
+      all: 'Semua',
+      edu: 'Education',
+      tech: 'Analysis & Office',
+      lead: 'Leadership & Team'
+    };
+
+    const cvSkillsFilter = document.getElementById('cvSkillsFilter');
+    const cvSkillsGrid = document.getElementById('cvSkillsGrid');
+
+    cvSkillsFilter.innerHTML = Object.entries(SKILL_DOMAINS).map(([key, label]) => {
+      const count = key === 'all' ? CV_SKILLS.length : CV_SKILLS.filter((s) => s.domain === key).length;
+      return `<button type="button" class="filter-btn" data-skill-domain="${key}" aria-pressed="${key === 'all'}">${label} <span class="filter-count">(${count})</span></button>`;
+    }).join('');
+
+    cvSkillsGrid.innerHTML = CV_SKILLS.map((s) => `
+      <article class="cv-skill-card" data-domain="${s.domain}">
+        <span class="cv-skill-domain">${s.label}</span>
+        <h4 class="cv-skill-name">${s.name}</h4>
+      </article>
+    `).join('');
+
+    cvSkillsFilter.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      const domain = btn.dataset.skillDomain;
+      cvSkillsFilter.querySelectorAll('.filter-btn').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      cvSkillsGrid.querySelectorAll('.cv-skill-card').forEach((card) => {
+        card.hidden = domain !== 'all' && card.dataset.domain !== domain;
+      });
+    });
+
+    document.getElementById('cvCredsGrid').innerHTML = CV_CREDENTIALS.map((c) => `
+      <article class="cv-cred-card">
+        <div class="cv-cred-top">
+          <span class="cv-cred-type ${c.kind === 'act' ? 'cv-cred-type--act' : ''}">${c.badge}</span>
+          <span class="cv-cred-date">${c.date}</span>
+        </div>
+        <h4 class="cv-cred-title">${c.title}</h4>
+        <p class="cv-cred-org">${c.org}</p>
+      </article>
+    `).join('');
+
+    document.querySelectorAll('.cv-copy-chip').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const value = btn.dataset.copy;
+        const label = btn.dataset.copyLabel;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(value)
+            .then(() => showToast(`${label} disalin: ${value}`))
+            .catch(() => showToast(`Salin manual: ${value}`));
+        } else {
+          showToast(`Salin manual: ${value}`);
+        }
+      });
+    });
+
+    if (matchMedia('(pointer: fine)').matches) {
+      const eduCard = document.getElementById('cvEduCard');
+      eduCard.addEventListener('mousemove', (e) => {
+        if (motionPaused) return;
+        const r = eduCard.getBoundingClientRect();
+        eduCard.style.setProperty('--cx', `${Math.round(((e.clientX - r.left) / r.width) * 100)}%`);
+        eduCard.style.setProperty('--cy', `${Math.round(((e.clientY - r.top) / r.height) * 100)}%`);
+      }, { passive: true });
+
+      cvSkillsGrid.addEventListener('mousemove', (e) => {
+        if (motionPaused) return;
+        const card = e.target.closest('.cv-skill-card');
+        if (!card) return;
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--sx', `${Math.round(((e.clientX - r.left) / r.width) * 100)}%`);
+        card.style.setProperty('--sy', `${Math.round(((e.clientY - r.top) / r.height) * 100)}%`);
+      }, { passive: true });
+    }
+
+    const gpaEl = document.getElementById('cvGpaCounter');
+    let gpaAnimated = false;
+    function runGpaCounter() {
+      if (gpaAnimated) return;
+      gpaAnimated = true;
+      if (motionPaused) {
+        gpaEl.textContent = '4.00';
+        return;
+      }
+      const start = performance.now();
+      const duration = 900;
+      function frame(now) {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(2, -10 * t);
+        gpaEl.textContent = (4 * eased).toFixed(2);
+        if (t < 1) requestAnimationFrame(frame);
+        else gpaEl.textContent = '4.00';
+      }
+      requestAnimationFrame(frame);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const gpaObserver = new IntersectionObserver((entries) => {
+        if (entries.some((en) => en.isIntersecting)) {
+          runGpaCounter();
+          gpaObserver.disconnect();
+        }
+      }, { threshold: 0.35 });
+      gpaObserver.observe(gpaEl);
+    }
+
     const topbar = document.getElementById('topbar');
     const scrollProgress = document.getElementById('scrollProgress');
     const navLinks = [...document.querySelectorAll('[data-nav]')];
-    const trackedSections = ['home', 'gallery', 'about', 'contact']
+    const trackedSections = ['home', 'cv', 'gallery', 'about', 'contact']
       .map((id) => document.getElementById(id))
       .filter(Boolean);
 
